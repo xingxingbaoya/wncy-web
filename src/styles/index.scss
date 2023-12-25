@@ -1,0 +1,130 @@
+@import './variables.scss';
+@import './mixin.scss';
+@import './transition.scss';
+@import './element-ui.scss';
+@import './sidebar.scss';
+
+
+body {
+  height: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: PingFang SC, Microsoft YaHei, sans-serif;
+}
+
+label {
+  font-weight: 700;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+span {
+  user-select: none;
+}
+
+#app {
+  height: 100%;
+  min-width: 1245px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+a:focus,
+a:active {
+  outline: none;
+}
+
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  text-decoration: none;
+}
+
+div:focus {
+  outline: none;
+}
+
+.clearfix {
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+
+// main-container global css
+.app-container {
+  padding: 20px;
+}
+
+.clear-margin {
+  margin-right: 0 !important;
+}
+
+.clear-padding {
+  padding-right: 0 !important;
+}
+
+.el-main {
+  // padding-top: 18px;
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  //display: none;
+}
+
+::-webkit-scrollbar-track-piece {
+  background: #d3dce6;
+  //background: #4D6DDA;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4D6DDA;
+  //background: #99a9bf;
+  border-radius: 20px;
+  height: 172px;
+}
+
+
+
+// .main-container .el-scrollbar__wrap{ overflow: scroll; width: 100%; height: 100%;}
+.main-container .el-scrollbar__wrap{ overflow: visible ; width: 100%; height: 100%;}
+
+.main-container .el-scrollbar {
+  height: 100%;
+}
+
+.p-ft {
+  color: #333333;
+  font-weight: 500;
+}
+
+.el-tooltip__popper {
+  font-size: 16px;
+}
+.el-tooltip__popper .popper__arrow {
+  display: none;
+}
+
+@function pxToVW($px){
+  @return ($px/1920)*100vw;
+}

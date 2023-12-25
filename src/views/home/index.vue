@@ -1,0 +1,3701 @@
+<template>
+  <el-main v-loading="loading">
+    <div class="home-main">
+      <img src="~img/home/banner.png" />
+    </div>
+    <div class="home-companyintro">
+      <div class="theme-box">
+        <span>公司介绍</span>
+        <b></b>
+      </div>
+      <div class="home-companyintro-content">
+        <div class="home-companyintro-content-nav">
+          <div
+            v-for="item in companyintroList"
+            :key="item.id + 'companyinto'"
+            class="home-companyintro-content-nav-item"
+            :class="activeIntro == item.id ? 'active' : ''"
+            @click="activeIntro = item.id"
+          >
+            <div class="home-companyintro-content-nav-item-title">
+              <img :src="item.iconUrl" />{{ item.title }}
+            </div>
+          </div>
+        </div>
+        <div class="home-companyintro-content-pic">
+          <img :src="companyintroList[activeIntro].imgUrl" />
+          <div class="home-companyintro-content-pic-intro">
+            <div>{{ companyintroList[activeIntro].introInfo }}</div>
+            <div>{{ companyintroList[activeIntro].detail }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="home-companyintro-detail">
+        <div>
+          北京中关村微纳能源投资有限公司是一个科创服务平台，致力于为科学家、企业家和政府提供全面的科创服务。
+        </div>
+        将各种创新要素聚集在一起，促进创新资源的共享和优化配置，构建一个有利于创新创业的生态系统。
+      </div>
+    </div>
+    <div class="home-platformservices">
+      <div class="theme-box">
+        <span>平台服务</span>
+        <b class="hasBakpic"></b>
+      </div>
+      <div class="home-platformservices-info">
+        产研对接数字服务平台是北京中关村微纳能源投资有限公司的核心业务之一，该平台将科技成果库和企业需求库的资源进行全面整合，利用现代信息技术，打造一个高效、便捷、安全的科技创新服务平台。
+      </div>
+      <div class="home-platformservices-feature">
+        <div>
+          <img src="~img/home/platformServices-1.png" />
+          <p>高效</p>
+        </div>
+        <div>
+          <img src="~img/home/platformServices-2.png" />
+          <p>便捷</p>
+        </div>
+        <div>
+          <img src="~img/home/platformServices-3.png" />
+          <p>安全</p>
+        </div>
+      </div>
+      <div class="home-platformservices-featuretext">
+        <div style="font-size: 26px; margin-bottom: 30px">
+          产研对接数字服务平台的特点：
+        </div>
+        <div style="font-size: 22px">
+          {{ platformFeature[activeFeature].description }}
+        </div>
+      </div>
+      <div class="home-platformservices-featurepic">
+        <div
+          v-for="item in platformFeature"
+          :key="item.id + 'featurepic'"
+          class="home-platformservices-featurepic-item"
+          @click="activeFeature = item.id"
+        >
+          <img :src="item.imgUrl" />
+          <div class="cover" :class="activeFeature == item.id ? 'active' : ''">
+            <img :src="item.icons" />
+            <p style="font-size: 40px">{{ item.feature }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="home-companies">
+      <div class="theme-box">
+        <span>合作伙伴</span>
+        <b></b>
+      </div>
+      <div class="home-companies-oprate">
+        <img src="~img/home/companies-leftarrow.png"/>
+        <img src="~img/home/companies-rightarrow.png"/>
+      </div>
+      <div>
+        <img src="~img/home/companies.png" style="width:80vw"/>
+        <div class="home-companies-group">
+          <div v-for="(item,index) in companiesList" :key="index + 'companies'" class="home-companies-group-item">
+            <img :src="item"/>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="home-freeregister">
+      <div>打造国际一流的创新生态集成服务商</div>
+      <el-button round>免费注册</el-button>
+    </div>
+
+    <div class="home-fourth">
+      <div class="fouth-content">
+        <h2>优质项目</h2>
+        <el-row class="search-area" justify="center" type="flex">
+          <el-button
+            type="primary"
+            icon="el-icon-s-promotion"
+            class="publish-button"
+            @click="gopost(1)"
+            >发布项目</el-button
+          >
+          <el-input
+            v-model="fouthQuery"
+            placeholder="输入关键词，进行搜索"
+            class="input-search"
+          >
+            <el-button
+              slot="append"
+              @click="
+                getProjectTab(
+                  industryOneDict[activeFouthTab].dictValue,
+                  activeFouthTab
+                )
+              "
+            >
+              <i class="el-icon-search" />
+              <span class="icon-text_cw">点击搜索</span>
+            </el-button>
+          </el-input>
+        </el-row>
+        <el-row class="search-list">
+          <div class="project-list">
+            <div
+              class="p-box"
+              v-for="(item, index) in industryOneDictFifth"
+              :class="{
+                active: index == activeFouthTab,
+                nearBg: index == activeFouthTab + 1,
+              }"
+              @click="
+                () => {
+                  getProjectTab(item.dictValue, index);
+                }
+              "
+            >
+              <div class="line">{{ "0" + (index + 1) }}</div>
+              <div class="type">
+                <p class="type-t">{{ item.dictLabel }}</p>
+                <p class="type-b">{{ industryOneDictText[index] }}</p>
+              </div>
+              <div class="arrow">
+                <img
+                  :src="`${imgUrl}/p-arrow-active.png`"
+                  alt="arrow"
+                  class="image"
+                  v-if="item == 1"
+                />
+                <img
+                  :src="`${imgUrl}/p-arrow.png`"
+                  alt="arrow"
+                  class="image"
+                  v-else
+                />
+              </div>
+            </div>
+            <div class="p-box" @click="gomorefouth('project')">
+              <div class="line"></div>
+              <div class="type">
+                <p class="type-t">更多分类</p>
+                <p class="type-b">点击查看</p>
+              </div>
+              <div class="arrow">
+                <img
+                  :src="`${imgUrl}/p-arrow-active.png`"
+                  alt="arrow"
+                  class="image"
+                  v-if="item == 1"
+                />
+                <img
+                  :src="`${imgUrl}/p-arrow.png`"
+                  alt="arrow"
+                  class="image"
+                  v-else
+                />
+              </div>
+            </div>
+          </div>
+          <div class="project-goods">
+            <el-row>
+              <el-col :span="12" v-for="item in projectList">
+                <div class="card-cont">
+                  <el-card
+                    class="box-card"
+                    :body-style="{ padding: '12px 36px 12px 36px' }"
+                    @click.native="goproject(item, 'project')"
+                    shadow="hover"
+                  >
+                    <div class="header_cw">
+                      <div class="header_img">
+                        <img
+                          v-real-img="item.logo"
+                          :src="`${imgUrl}/newproject.jpg`"
+                          :alt="item.logo"
+                        />
+                      </div>
+                      <div class="header-price">
+                        <span v-if="item.faceFlag == 1" class="bold-price"
+                          >面议</span
+                        >
+                        <span v-else class="bold-price"
+                          >{{ item.proIntentionPrice }}万</span
+                        >
+                      </div>
+                    </div>
+                    <div class="title_cw">
+                      {{ item.title }}
+                    </div>
+                    <div class="description_cw">
+                      {{ item.description }}
+                    </div>
+                    <div class="from_time_cw">
+                      <span class="top-time"
+                        >发布时间：{{ item.createTime | formatDate }}</span
+                      >
+                      <span class="top-title"
+                        >来源地：{{ item.provinceName }} {{ item.cityName }}
+                        {{ item.areaName }}</span
+                      >
+                    </div>
+                  </el-card>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
+        </el-row>
+      </div>
+    </div>
+    <div class="home-fifth">
+      <div class="fouth-content">
+        <h2>优质需求</h2>
+        <el-row class="search-area" justify="center" type="flex">
+          <el-button
+            type="primary"
+            icon="el-icon-s-promotion"
+            class="publish-button"
+            @click="gopost(2)"
+            >发布需求</el-button
+          >
+          <el-input
+            v-model="fifthQuery"
+            placeholder="输入关键词，进行搜索"
+            class="input-search"
+          >
+            <el-button
+              slot="append"
+              @click="
+                getDemandTab(
+                  industryOneDict[activeFifthTab].dictValue,
+                  activeFifthTab
+                )
+              "
+            >
+              <i class="el-icon-search" />
+              <span class="icon-text_cw">点击搜索</span>
+            </el-button>
+          </el-input>
+        </el-row>
+        <el-row class="search-list">
+          <div class="project-list">
+            <div
+              class="p-box"
+              v-for="(item, index) in industryOneDictFifth"
+              :class="{
+                active: index == activeFifthTab,
+                nearBg: index == activeFifthTab + 1,
+              }"
+              @click="
+                () => {
+                  getDemandTab(item.dictValue, index);
+                }
+              "
+            >
+              <div class="line">{{ "0" + (index + 1) }}</div>
+              <div class="type">
+                <p class="type-t">{{ item.dictLabel }}</p>
+                <p class="type-b">{{ industryOneDictText[index] }}</p>
+              </div>
+              <div class="arrow">
+                <img
+                  :src="`${imgUrl}/p-arrow-active.png`"
+                  alt="arrow"
+                  class="image"
+                  v-if="item == 1"
+                />
+                <img
+                  :src="`${imgUrl}/p-arrow.png`"
+                  alt="arrow"
+                  class="image"
+                  v-else
+                />
+              </div>
+            </div>
+            <div class="p-box" @click="gomorefouth('demand')">
+              <div class="line"></div>
+              <div class="type">
+                <p class="type-t">更多分类</p>
+                <p class="type-b">点击查看</p>
+              </div>
+              <div class="arrow">
+                <img
+                  :src="`${imgUrl}/p-arrow-active.png`"
+                  alt="arrow"
+                  class="image"
+                  v-if="item == 1"
+                />
+                <img
+                  :src="`${imgUrl}/p-arrow.png`"
+                  alt="arrow"
+                  class="image"
+                  v-else
+                />
+              </div>
+            </div>
+          </div>
+          <div class="project-goods">
+            <div class="goods-list">
+              <el-col :span="24" v-for="item in demandList">
+                <div class="card-cont">
+                  <el-card
+                    class="box-card"
+                    :body-style="{ padding: '20px 20px 20px 20px' }"
+                    @click.native="goproject(item, 'demand')"
+                    shadow="hover"
+                  >
+                    <div class="header_cw">
+                      <div class="header_img">
+                        <img
+                          v-real-img="item.cover"
+                          :src="`${imgUrl}/newdemand.jpg`"
+                          :alt="item.logo"
+                        />
+                      </div>
+
+                      <div class="mid-content">
+                        <div class="mid-header">
+                          <div class="header-price">
+                            <span v-if="item.faceFlag == 1" class="bold-price"
+                              >面议</span
+                            >
+                            <span v-else class="bold-price"
+                              >{{ item.capital }}万</span
+                            >
+                          </div>
+                          <div class="title_cw">
+                            <h4>{{ item.name }}</h4>
+                          </div>
+                        </div>
+
+                        <div class="description_cw">
+                          <p>{{ item.briefDescText }}</p>
+                        </div>
+                        <div class="from_time_cw">
+                          <span class="top-time"
+                            >发布时间：{{ item.createTime | formatDate }}</span
+                          >
+                          <span class="top-title"
+                            >来源地：{{
+                              item.province | MapName(item.city, item.county)
+                            }}</span
+                          >
+                        </div>
+                      </div>
+
+                      <div class="btns">
+                        <div class="list-btn">
+                          <span class="more">了解更多</span
+                          ><i class="el-icon-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </el-card>
+                </div>
+              </el-col>
+            </div>
+          </div>
+        </el-row>
+      </div>
+    </div>
+    <div class="home-seven">
+      <div class="seven-content">
+        <h2>服务机构</h2>
+        <el-row class="se-wrap">
+          <el-col class="inner-left" :span="10">
+            <div class="seven-title">
+              <h3>科技成果转化优质服务机构</h3>
+            </div>
+            <div class="gomore" @click="goOrg">查看全部机构</div>
+            <div class="arrow">
+              <img :src="`${imgUrl}/upar.png`" alt="" class="arrowdown" />
+              <img :src="`${imgUrl}/downar.png`" alt="" class="arrowup" />
+            </div>
+          </el-col>
+          <el-col :span="14" class="inner-right">
+            <swiper class="orgSwiper" :options="rankOptions">
+              <swiper-slide v-for="item in mangerList">
+                <el-row class="inner-list">
+                  <el-col
+                    :span="11"
+                    class="inner-box"
+                    v-for="it in item"
+                    @click.native="goOrgDetail(it)"
+                  >
+                    <div class="left">
+                      <img
+                        :src="`${imgUrl}/org.jpg`"
+                        alt=""
+                        class="image"
+                        v-real-img="it.avatar"
+                      />
+                    </div>
+                    <div class="right">
+                      <span class="desc">{{ it.nickName }}</span>
+                    </div>
+                  </el-col>
+                </el-row>
+              </swiper-slide>
+            </swiper>
+          </el-col>
+        </el-row>
+      </div>
+    </div>
+
+    <div class="home-eight">
+      <div class="eight-content">
+        <h2>产业/服务/政策</h2>
+        <el-row class="eight-nav" :gutter="10">
+          <el-col
+            :span="index == navIndex ? 10 : 7"
+            v-for="(item, index) in industryTypeList"
+            class="outer-wrap"
+            @click.native="navIndex = index"
+          >
+            <div class="wrap" :class="{ active: index == navIndex }">
+              <div class="w-right">
+                <h5 class="f-title">{{ item.title }}</h5>
+                <p class="f-desc">{{ item.desc }}</p>
+              </div>
+              <div class="w-left">
+                <img
+                  :src="`${imgUrl}/org.jpg`"
+                  v-real-img="`${imgUrl}/${item.active}`"
+                  alt="eh1"
+                  class="image"
+                  v-if="index == navIndex"
+                />
+                <img
+                  :src="`${imgUrl}/org.jpg`"
+                  v-real-img="`${imgUrl}/${item.icon}`"
+                  alt="eh1"
+                  class="image"
+                  v-else
+                />
+              </div>
+            </div>
+          </el-col>
+        </el-row>
+        <div v-if="navIndex == 0">
+          <el-row class="row-wrap">
+            <div class="first-left">
+              <div class="inner-left">
+                <div class="s-box">
+                  <div class="s-header one">共性技术服务 6</div>
+                  <p
+                    class="s-list"
+                    v-for="(item, index) in industryMap['info']"
+                    :class="{ active: index == activeIndex }"
+                    @click="swapCyImg(index)"
+                  >
+                    {{ item.text }}
+                  </p>
+                </div>
+                <div class="s-box">
+                  <div class="s-header two">大健康 3</div>
+                  <p
+                    class="s-list"
+                    v-for="(item, index) in industryMap['health']"
+                    :class="{ active: index == activeIndex - 6 }"
+                    @click="swapCyImg(index + 6)"
+                  >
+                    {{ item.text }}
+                  </p>
+                </div>
+                <div class="s-box">
+                  <div class="s-header three">大制造 3</div>
+                  <p
+                    class="s-list"
+                    v-for="(item, index) in industryMap['make']"
+                    :class="{ active: index == activeIndex - 9 }"
+                    @click="swapCyImg(index + 9)"
+                  >
+                    {{ item.text }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="first-right">
+              <el-carousel
+                ref="carouse"
+                height="561px"
+                :autoplay="false"
+                indicator-position="none"
+                arrow="never"
+              >
+                <el-carousel-item
+                  v-for="(item, index) in industryImgList"
+                  :key="index"
+                >
+                  <img
+                    v-real-img="`${imgUrl}/${item}`"
+                    :src="`${imgUrl}/activity1.jpg`"
+                    class="image"
+                  />
+                </el-carousel-item>
+              </el-carousel>
+            </div>
+          </el-row>
+        </div>
+        <div v-if="navIndex == 1">
+          <el-row class="wrap-row">
+            <el-col
+              :span="12"
+              class="iwidth"
+              v-for="(item, index) in techTypeList"
+              :class="{ mr10: index % 2 == 0 }"
+            >
+              <div class="wrap-box" @click="goTechDetail(index)">
+                <div class="left">
+                  <p class="title">{{ item.title }}</p>
+                  <p class="desc">{{ item.desc }}</p>
+                </div>
+                <div class="right-hold">
+                  <img
+                    :src="`${imgUrl}/org.jpg`"
+                    v-real-img="`${imgUrl}/${item.cover}`"
+                    alt="cbj1"
+                    class="image"
+                  />
+                </div>
+              </div>
+            </el-col>
+          </el-row>
+        </div>
+        <div v-if="navIndex == 2">
+          <el-row class="search-content">
+            <el-row class="search-query query-line">
+              <el-col :span="22">
+                <span class="select-title">行业方向：</span>
+                <el-radio-group
+                  v-model="serviceQuery.supportInd"
+                  :class="{ 'show-more': isShowFir }"
+                  class="select-scope"
+                  @change="
+                    () => {
+                      this.pager.pageNum = 1;
+                      this.getService();
+                    }
+                  "
+                >
+                  <el-radio-button label="">不限</el-radio-button>
+                  <template v-for="item in supportIndDict">
+                    <el-radio-button :label="item.dictValue">{{
+                      item.dictLabel
+                    }}</el-radio-button>
+                  </template>
+                </el-radio-group>
+              </el-col>
+              <el-col :span="2" class="more-layout">
+                <span class="select-more" @click="isShowFir = !isShowFir">
+                  展开<i v-if="!isShowFir" class="el-icon-arrow-down"></i>
+                  <i v-if="isShowFir" class="el-icon-arrow-up"></i>
+                </span>
+              </el-col>
+            </el-row>
+            <el-row class="search-query">
+              <el-col :span="22" class="search-left">
+                <span class="select-title mt0">支持方向：</span>
+                <el-radio-group
+                  v-model="serviceQuery.policyType"
+                  class="select-scope"
+                  @change="
+                    () => {
+                      this.pager.pageNum = 1;
+                      this.getService();
+                    }
+                  "
+                >
+                  <el-radio-button label="">不限</el-radio-button>
+                  <template v-for="item in policyTypeDict">
+                    <el-radio-button :label="item.dictValue">{{
+                      item.dictLabel
+                    }}</el-radio-button>
+                  </template>
+                </el-radio-group>
+              </el-col>
+              <el-col :span="2" />
+            </el-row>
+
+            <el-row class="search-query">
+              <el-col :span="22" class="search-left">
+                <span class="select-title mt0">申报状态：</span>
+                <el-radio-group
+                  v-model="serviceQuery.policyState"
+                  class="select-scope"
+                  @change="
+                    () => {
+                      this.pager.pageNum = 1;
+                      this.getService();
+                    }
+                  "
+                >
+                  <el-radio-button label="">不限</el-radio-button>
+                  <template v-for="item in policyStateDict">
+                    <el-radio-button :label="item.dictValue">{{
+                      item.dictLabel
+                    }}</el-radio-button>
+                  </template>
+                </el-radio-group>
+              </el-col>
+              <el-col :span="2" />
+            </el-row>
+
+            <el-row class="search-query">
+              <el-col :span="22" class="search-left">
+                <span class="select-title pr20 mt0">其他要求：</span>
+                <span class="select-ftitle">年份：</span>
+                <el-date-picker
+                  :append-to-body="false"
+                  v-model="serviceQuery.supportLimit"
+                  type="year"
+                  value-format="yyyy"
+                  class="pr20"
+                  @change="
+                    () => {
+                      this.pager.pageNum = 1;
+                      this.getService();
+                    }
+                  "
+                  placeholder="请选择"
+                >
+                </el-date-picker>
+
+                <span class="select-ftitle">选择区域：</span>
+                <el-select
+                  v-model="serviceQuery.area"
+                  placeholder="请选择"
+                  class="sel-layout"
+                  @change="
+                    () => {
+                      this.pager.pageNum = 1;
+                      this.getService();
+                    }
+                  "
+                  :popper-append-to-body="false"
+                >
+                  <el-option
+                    v-for="item in cityList"
+                    :key="item.code"
+                    :label="item.name"
+                    :value="item.name"
+                  >
+                  </el-option>
+                </el-select>
+              </el-col>
+              <el-col :span="2" />
+            </el-row>
+          </el-row>
+          <el-row class="search-list" v-infinite-scroll="pageService">
+            <el-col
+              v-for="item in serviceList"
+              :span="24"
+              class="search-layout"
+            >
+              <el-row class="search-box">
+                <el-col class="h-left" :span="20">
+                  <p class="m-title" @click="goservice(item)">
+                    {{ item.title }}
+                  </p>
+                  <div class="m-desc">
+                    <span class="d-tit">截止时间：</span
+                    ><span class="d-desc">{{
+                      item.applyEndTime | formatDate
+                    }}</span>
+                    <span class="d-tit ml20">适用地区：</span
+                    ><span class="d-desc">{{ item.area }}</span>
+                  </div>
+                </el-col>
+                <el-col :span="2" :offset="1">
+                  <el-button
+                    class="h-right"
+                    type="text"
+                    @click="goDeclare(item)"
+                    >我要申报</el-button
+                  >
+                </el-col>
+              </el-row>
+            </el-col>
+          </el-row>
+        </div>
+      </div>
+    </div>
+    <div class="home-nine">
+      <div class="nine-content">
+        <h2>国际合作</h2>
+        <el-row class="wrap">
+          <el-col :span="12" class="wrap-l">
+            <swiper ref="interSwiper" :options="newsOptions">
+              <swiper-slide
+                v-for="it in interList.filter((i) => i.topFlag == 1)"
+                :key="it"
+              >
+                <div class="news-wrap">
+                  <img
+                    v-real-img="it.actCover"
+                    :src="`${imgUrl}/activity1.jpg`"
+                    class="image"
+                    @click="goNewsDetail(it)"
+                  />
+                </div>
+                <div class="news-title">
+                  <p>{{ it.actName }}</p>
+                </div>
+              </swiper-slide>
+              <div slot="pagination" class="swiper-pagination" />
+            </swiper>
+          </el-col>
+          <el-col :span="11" class="wrap-r">
+            <el-row class="interlist">
+              <el-col
+                :span="24"
+                class="inter-box"
+                v-for="item in interList"
+                @click.native="goNewsDetail(item)"
+              >
+                <div class="circle"></div>
+                <p class="desc">{{ item.actName }}</p>
+              </el-col>
+            </el-row>
+          </el-col>
+        </el-row>
+      </div>
+      <el-row class="six-layout">
+        <a class="img-wrap" :style="{ left: 0 }">
+          <img :src="`${imgUrl}/in1.png`" />
+          <p class="city">美国</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 335 + 'px' }">
+          <img :src="`${imgUrl}/in2.png`" />
+          <p class="city">俄罗斯</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 2 * 335 + 'px' }">
+          <img :src="`${imgUrl}/in3.png`" />
+          <p class="city">加拿大</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 3 * 335 + 'px' }">
+          <img :src="`${imgUrl}/in4.png`" />
+          <p class="city">德国</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 4 * 335 + 'px' }">
+          <img :src="`${imgUrl}/in5.png`" />
+          <p class="city">英国</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 5 * 335 + 'px' }">
+          <img :src="`${imgUrl}/in6.png`" />
+          <p class="city">法国</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 6 * 335 + 'px' }">
+          <img :src="`${imgUrl}/in1.png`" />
+          <p class="city">美国</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 7 * 335 + 'px' }">
+          <img :src="`${imgUrl}/in2.png`" />
+          <p class="city">俄罗斯</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 8 * 335 + 'px' }">
+          <img :src="`${imgUrl}/in3.png`" />
+          <p class="city">加拿大</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 9 * 335 + 'px' }">
+          <img :src="`${imgUrl}/in4.png`" />
+          <p class="city">德国</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 10 * 335 + 'px' }">
+          <img :src="`${imgUrl}/in5.png`" />
+          <p class="city">英国</p>
+        </a>
+        <a class="img-wrap" :style="{ left: 11 * 335 + 'px' }">
+          <img :src="`${imgUrl}/in6.png`" />
+          <p class="city">法国</p>
+        </a>
+      </el-row>
+    </div>
+
+    <el-dialog width="25%" :visible.sync="isPerfectVisible">
+      <div class="isPerCont">
+        <p class="tip-desc">
+          如果您对我们的平台感兴趣，请您完善您的个人信息，以便我们能够为您提供更加精准的服务。点击下方链接，即可完善。
+        </p>
+        <el-button type="plain" class="resolve-btn" @click="goedit"
+          >完善信息</el-button
+        >
+      </div>
+    </el-dialog>
+  </el-main>
+</template>
+
+<script>
+import countTo from "vue-count-to";
+import "swiper/dist/css/swiper.css";
+import { swiper, swiperSlide } from "vue-awesome-swiper";
+import {
+  findAll,
+  findPolicyService,
+  getBanners,
+  getCongresss,
+  getIndustry,
+  getInterList,
+  getLiving,
+  getPreview,
+  getTwoAll,
+  getUserList,
+} from "@/api/home";
+import common from "@/mixin/common";
+import { getProjectList } from "@/api/projecthall";
+import { getDemandList } from "@/api/demandhall";
+import { getOrganization } from "@/api/dict";
+import { getToken } from "@/utils/auth";
+import { getBLen } from "@/utils";
+import {
+  getConferenceList,
+  getMeetingAgendaGroup,
+  getMeetingGrop,
+  getmeetLists,
+  getmeetZhibo,
+} from "@/api/meet";
+import { getZgcActivityList } from "@/api/activitieshall";
+
+import companyinto1 from "@/assets/img/home/companyintro-1.png";
+import companyinto2 from "@/assets/img/home/companyintro-2.png";
+import companyinto3 from "@/assets/img/home/companyintro-3.png";
+import companyinto4 from "@/assets/img/home/companyintro-4.png";
+import companyinto5 from "@/assets/img/home/companyintro-5.png";
+import companyintropic1 from "@/assets/img/home/companyintro-pic1.png";
+
+import featurePic4 from "@/assets/img/home/feature-pic4.png"
+import featurePic6 from "@/assets/img/home/feature-pic6.png"
+import featurePic7 from "@/assets/img/home/feature-pic7.png"
+import featurePic8 from "@/assets/img/home/feature-pic8.png"
+import featurePic9 from "@/assets/img/home/feature-pic9.png"
+
+import featureZiyuan from "@/assets/img/home/feature-ziyuan.png"
+import featurePipei from "@/assets/img/home/feature-pipei.png"
+import featureShichang from "@/assets/img/home/feature-shichang.png"
+import featureXin from "@/assets/img/home/feature-xin.png"
+import featureBen from "@/assets/img/home/feature-ben.png"
+
+import companies1 from "@/assets/img/home/companies-1.png"
+import companies2 from "@/assets/img/home/companies-2.png"
+import companies3 from "@/assets/img/home/companies-3.png"
+import companies4 from "@/assets/img/home/companies-4.png"
+import companies5 from "@/assets/img/home/companies-5.png"
+import companies6 from "@/assets/img/home/companies-6.png"
+
+
+export default {
+  name: "Home",
+  components: {
+    countTo,
+    swiper,
+    swiperSlide,
+  },
+  mixins: [common],
+  data() {
+    return {
+      bannerList: [],
+      meetList: [],
+      meetThemeList: [],
+      meetTimeList: [],
+      meetSubList: [],
+      activeSecondTab: 0,
+      firstLive: {},
+      secondLive: {},
+      thirdLive: {},
+      previewList: [],
+      projectList: [],
+      demandList: [],
+      activeFouthTab: 0,
+      activeFifthTab: 0,
+      fouthLoading: false,
+      fouthQuery: "",
+      fifthQuery: "",
+      mangerList: [],
+      activeCyTab: "info",
+      pageMap: {
+        info: 0,
+        health: 6,
+        make: 9,
+      },
+      activeIndex: 0,
+      industryImgList: [
+        "cy1.jpg",
+        "cy2.jpg",
+        "cy3.jpg",
+        "cy4.jpg",
+        "cy5.jpg",
+        "cy6.jpg",
+        "cy7.jpg",
+        "cy8.jpg",
+        "cy9.jpg",
+        "cy10.jpg",
+        "cy11.jpg",
+        "cy12.jpg",
+      ],
+      industryBtnList: [],
+      industryMap: {
+        info: [
+          {
+            text: "集成电路",
+            icon: "cr1",
+            active: "ca1",
+          },
+          {
+            text: "云计算",
+            icon: "cr2",
+            active: "ca2",
+          },
+          {
+            text: "大数据",
+            icon: "cr3",
+            active: "ca3",
+          },
+          {
+            text: "工业互联网",
+            icon: "cr4",
+            active: "ca4",
+          },
+          {
+            text: "5G",
+            icon: "cr5",
+            active: "ca5",
+          },
+          {
+            text: "人工智能",
+            icon: "cr6",
+            active: "ca6",
+          },
+        ],
+        health: [
+          {
+            text: "生物医疗",
+            icon: "cr7",
+            active: "ca7",
+          },
+          {
+            text: "医疗器械",
+            icon: "cr8",
+            active: "ca8",
+          },
+          {
+            text: "精准医疗",
+            icon: "cr9",
+            active: "ca9",
+          },
+        ],
+        make: [
+          {
+            text: "智能装备",
+            icon: "cr10",
+            active: "ca10",
+          },
+          {
+            text: "新材料",
+            icon: "cr11",
+            active: "ca11",
+          },
+          {
+            text: "智能交通",
+            icon: "cr12",
+            active: "ca12",
+          },
+        ],
+      },
+      fifthTabLoading: false,
+      dataPersentResult: {
+        project: 0,
+        requirement: 0,
+        amount: 0,
+        organization: 0,
+        business: 0,
+      },
+      serviceLoading: false,
+      serviceList: [],
+      interList: [],
+      interListNews: [],
+      interListNewsTree2: [],
+      newsTree2Active: 0,
+      interListNewsTree3: [],
+      innterNs: [],
+      industryOneDictText: [
+        "PLC、LED、FPGA、EDA",
+        "创新药、基因组检测、医疗器械、高分子",
+        "推进器、通信卫星、运载火箭、发射台",
+        "温控材料、纳米材料、生物材料、复合材料",
+        "数字孪生城市、工程技术与规划管理、网络安全",
+      ],
+      industryOneDictFifth: [
+        {
+          dictCode: 299,
+          dictSort: 1,
+          dictLabel: "电子信息技术",
+          dictValue: "A",
+          dictType: "p_industry_one",
+          cssClass: null,
+          listClass: "default",
+          isDefault: "Y",
+          status: "0",
+        },
+        {
+          dictCode: 300,
+          dictSort: 2,
+          dictLabel: "生物与新医药技术",
+          dictValue: "B",
+          dictType: "p_industry_one",
+          cssClass: null,
+          listClass: "default",
+          isDefault: "Y",
+          status: "0",
+        },
+        {
+          dictCode: 301,
+          dictSort: 3,
+          dictLabel: "航空航天技术",
+          dictValue: "C",
+          dictType: "p_industry_one",
+          cssClass: null,
+          listClass: "default",
+          isDefault: "N",
+          status: "0",
+        },
+        {
+          dictCode: 302,
+          dictSort: 4,
+          dictLabel: "新材料技术",
+          dictValue: "D",
+          dictType: "p_industry_one",
+          cssClass: null,
+          listClass: "default",
+          isDefault: "N",
+          status: "0",
+        },
+        {
+          dictCode: 304,
+          dictSort: 6,
+          dictLabel: "新能源及节能技术",
+          dictValue: "F",
+          dictType: "p_industry_one",
+          cssClass: null,
+          listClass: "default",
+          isDefault: "N",
+          status: "0",
+        },
+      ],
+      serviceQuery: {
+        policyState: "",
+        supportInd: "",
+        policyType: "",
+        supportLimit: "",
+        area: "",
+      },
+      rangDate: "",
+      createOrganizationOps: [],
+      currentIndex: 0,
+      isPerfectVisible: false,
+      navIndex: 0,
+      swiperIndex: 0,
+      swiperOptions: {
+        slidesPerView: 5,
+        spaceBetween: 30,
+        initialSlide: 0,
+        grabCursor: true,
+        navigation: {
+          nextEl: ".left-rank",
+          prevEl: ".right-rank",
+        },
+      },
+      meetOptions: {
+        slidesPerView: 3,
+        spaceBetween: 10,
+        grabCursor: true,
+      },
+      rankOptions: {
+        direction: "vertical",
+        slidesPerView: 5,
+        spaceBetween: 0,
+        grabCursor: true,
+        navigation: {
+          nextEl: ".arrowup",
+          prevEl: ".arrowdown",
+        },
+        on: {
+          slideChangeTransitionStart() {
+            console.log(this.realIndex); // 获取轮播图片下标索引；这里有一个坑，之前网上找到的是用activeIndex，但后来网上说的是这个realIndex，原来activeIndex是swiper2.0的；而realIndex是swiper3.0的，（使用realIndex才实现了下标索引）
+          },
+        },
+      },
+      newsOptions: {
+        slidesPerView: 1,
+        grabCursor: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      },
+      isShowFir: false,
+      industryTypeList: [
+        {
+          title: "产业分析",
+          desc: "精准掌握科技成果转化、技术转移行业产业分析，提供产业一线分析情报",
+          icon: "ev1.png",
+          active: "ecv1.png",
+        },
+        {
+          title: "科技服务",
+          desc: "聚合成果转化高质量科技服务，解决全领域全行业科技提升痛点",
+          icon: "ev2.png",
+          active: "ecv2.png",
+        },
+        {
+          title: "政策服务",
+          desc: "汇集全国及中关村科技政策，提供行业领先的优质政策咨询服务",
+          icon: "ev3.png",
+          active: "ecv3.png",
+        },
+      ],
+      techTypeList: [
+        {
+          title: "综合科技服务",
+          desc: "知识产权服务、科技咨询服务、工程技术服务、科技金融服务、创业孵化服务、技术交易服务、人力资源服务、科技推广服务、企业基础服务等9个方向，共计113项服务；",
+          cover: "cbg2.png",
+        },
+        {
+          title: "共性技术服务",
+          desc: "集成电路、医疗器械、生物医药、智能制造、新材料、智能网联汽车及新一代信息技术等7个领域，共计74项服务；",
+          cover: "cbg1.png",
+        },
+        {
+          title: "数智信息服务",
+          desc: "云服务器、数据服务、建站服务、经营管理、评测认证等5项内容，共计40项服务；",
+          cover: "cbg3.png",
+        },
+        {
+          title: "创新社区服务",
+          desc: "中关村社区、园区建设服务、项目运营服务、项目招商服务和配套保障服务等5部分，共计24项服务;",
+          cover: "cbg4.png",
+        },
+      ],
+      rankId: -1,
+
+      // 新增
+      companyintroList: [
+        {
+          id: 0,
+          title: "科创服务",
+          iconUrl: companyinto1,
+          imgUrl: companyintropic1,
+          introInfo: "科创服务平台",
+          detail: "聚集创新要素",
+        },
+        {
+          id: 1,
+          title: "科技成果",
+          iconUrl: companyinto2,
+          imgUrl: companyintropic1,
+          introInfo: "科创服务平台",
+          detail: "聚集创新要素",
+        },
+        {
+          id: 2,
+          title: "企业需求",
+          iconUrl: companyinto3,
+          imgUrl: companyintropic1,
+          introInfo: "科创服务平台",
+          detail: "聚集创新要素",
+        },
+        {
+          id: 3,
+          title: "产研对接",
+          iconUrl: companyinto4,
+          imgUrl: companyintropic1,
+          introInfo: "科创服务平台",
+          detail: "聚集创新要素",
+        },
+        {
+          id: 4,
+          title: "区域协同",
+          iconUrl: companyinto5,
+          imgUrl: companyintropic1,
+          introInfo: "科创服务平台",
+          detail: "聚集创新要素",
+        },
+      ],
+      activeIntro: 0,
+      platformFeature: [
+        {
+          id: 0,
+          feature: "资源丰富",
+          description:
+            "资源丰富--产研对接数字服务平台拥有丰富的科技成果库和企业需求库资源，涵盖了多个领域和行业，为科学家、企业家和政府提供全面的科创服务。",
+          icons: featureZiyuan,
+          imgUrl: featurePic4,
+        },
+        {
+          id: 1,
+          feature: "高效匹配",
+          description:
+            "高效匹配--产研对接数字服务平台拥有丰富的科技成果库和企业需求库资源，涵盖了多个领域和行业，为科学家、企业家和政府提供全面的科创服务。",
+          icons: featurePipei,
+          imgUrl: featurePic6,
+        },
+        {
+          id: 2,
+          feature: "降低成本",
+          description:
+            "降低成本--产研对接数字服务平台拥有丰富的科技成果库和企业需求库资源，涵盖了多个领域和行业，为科学家、企业家和政府提供全面的科创服务。",
+          icons: featureBen,
+          imgUrl: featurePic7,
+        },
+        {
+          id: 3,
+          feature: "增强信任",
+          description:
+            "增强信任--产研对接数字服务平台拥有丰富的科技成果库和企业需求库资源，涵盖了多个领域和行业，为科学家、企业家和政府提供全面的科创服务。",
+          icons: featureXin,
+          imgUrl: featurePic8,
+        },
+        {
+          id: 4,
+          feature: "拓展市场",
+          description:
+            "拓展市场--产研对接数字服务平台拥有丰富的科技成果库和企业需求库资源，涵盖了多个领域和行业，为科学家、企业家和政府提供全面的科创服务。",
+          icons: featureShichang,
+          imgUrl: featurePic9,
+        },
+      ],
+      activeFeature: 0,
+      companiesList: [companies1, companies2, companies3, companies4, companies5, companies6]
+    };
+  },
+  computed: {
+    cheight() {
+      return this.$store.getters.wheight + "px";
+    },
+    isShowLabel() {
+      return (current) => {
+        return current == this.currentIndex;
+      };
+    },
+    isLogin() {
+      return _.isEmpty(getToken());
+    },
+    isProd() {
+      return process.env.VUE_APP_MODE == "prod";
+    },
+    actionStat: () => {
+      return (item) => {
+        if (item?.upType == "video") {
+          if (item?.actStatus == "started") {
+            return "直播中";
+          } else if (item?.actStatus == "end") {
+            return "回放";
+          } else {
+            return "未开始";
+          }
+        }
+      };
+    },
+    actionStatBtn: () => {
+      return (item) => {
+        if (item?.upType == "video") {
+          if (item?.actStatus == "started") {
+            return "观看直播";
+          } else if (item?.actStatus == "end") {
+            return "观看回放";
+          } else {
+            return "未开始";
+          }
+        }
+      };
+    },
+  },
+  mounted() {
+    if (!_.isEmpty(getToken()) && this.$store.getters.isPerfect == "0") {
+      this.isPerfectVisible = true;
+    }
+  },
+  methods: {
+    loadData() {
+      this.loading = true;
+      this.$store
+        .dispatch("dict/getDic", [
+          "p_industry_one",
+          "p_nature",
+          "p_tech_type",
+          "p_cooperation",
+          "p_patent_category",
+          "p_development",
+          "t_activity_kind",
+          "u_company_type",
+          "u_institutional_nature",
+          "u_degree",
+          "bbs_manuscript_status",
+          "policy_type",
+          "support_ind",
+          "policy_state",
+        ])
+        .then(() => {
+          this.loadHome();
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    loadHome() {
+      getBanners()
+        .then((res) => {
+          if (res.code == "0000") {
+            this.bannerList = res.obj;
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+
+      getmeetLists()
+        .then((res) => {
+          if (res.code == "0") {
+            this.meetList = res.rows;
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+
+      // getLiving()
+      //   .then((res) => {
+      //     if (res.code == "0000") {
+      //       this.firstLive = _.head(res.obj) ?? {};
+      //       this.secondLive = _.nth(res.obj, 1) ?? {};
+      //       this.thirdLive = _.last(res.obj) ?? {};
+      //     } else {
+      //       this.$message.warning(res.msg);
+      //     }
+      //   })
+      //   .finally(() => {
+      //     this.loading = false;
+      //   });
+
+      getPreview()
+        .then((res) => {
+          if (res.code == "0000") {
+            this.previewList = res.obj;
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+
+      this.getProjectTab();
+      this.getDemandTab();
+      this.remoteMethod();
+      this.getInterList(0);
+      this.getInterList(1);
+
+      const { pageNum } = this.pager;
+      const formpage = { pageNum, pageSize: 30 };
+      getUserList({ userType: 3, ...formpage })
+        .then((res) => {
+          if (res.code == "0000") {
+            this.mangerList = _.chunk(res.rows, 2);
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+
+      getConferenceList({ ...formpage })
+        .then((res) => {
+          if (res.code == "0") {
+            this.meetThemeList = res.rows;
+            this.getSubMeet(
+              res.rows?.[this.swiperIndex]?.conferenceId,
+              this.swiperIndex
+            );
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+
+      this.getDataPresent();
+
+      this.getService();
+
+      this.industryBtnList = this.industryMap[this.activeCyTab];
+    },
+    getProjectTab(industryone = "", index = 0) {
+      // this.fouthLoading = true
+      this.activeFouthTab = index;
+      const { pageNum } = this.pager;
+      const formpage = { pageNum, pageSize: 6 };
+      this.pager.pageSize = formpage.pageSize;
+
+      getProjectList({ title: this.fouthQuery, industryone, ...formpage })
+        .then((res) => {
+          if (res.code == "0000") {
+            this.projectList = res.rows;
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {
+          this.fouthLoading = false;
+        });
+    },
+    getDemandTab(industryone = "", index = 0) {
+      // this.fouthLoading = true
+      const { pageNum } = this.pager;
+      const formpage = { pageNum, pageSize: 4 };
+      this.activeFifthTab = index;
+      getDemandList({ name: this.fifthQuery, industryone, ...formpage })
+        .then((res) => {
+          if (res.code == "0000") {
+            this.demandList = res.rows;
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {
+          this.fouthLoading = false;
+        });
+    },
+    goOrgDetail({ id }) {
+      this.goBlank({
+        path: "/tradinghall/org-detail",
+        query: {
+          id,
+        },
+      });
+    },
+    goOrg() {
+      this.goBlank({
+        path: "/tradinghall/org",
+      });
+    },
+    goTechDetail(index) {
+      this.$router.push({
+        path: "/servicehall/serviceDetail",
+        query: {
+          index,
+        },
+      });
+    },
+
+    activeFouthTabChange(label) {
+      if (label == 1) {
+        this.getProjectTab();
+      } else {
+        this.getDemandTab();
+      }
+    },
+    activeCyTabChange(label) {
+      this.industryBtnList = this.industryMap[label];
+      this.activeIndex = 0;
+      this.$refs.carouse.setActiveItem(this.pageMap[this.activeCyTab]);
+    },
+    swapCyImg(index) {
+      this.activeIndex = index;
+      this.$refs.carouse.setActiveItem(this.pageMap[this.activeCyTab] + index);
+    },
+
+    getDataPresent() {
+      findAll()
+        .then((res) => {
+          if (res.code == "0000") {
+            this.dataPersentResult = _.merge(this.dataPersentResult, res.obj);
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {});
+    },
+    getSubMeet(conferenceId, index = 0) {
+      this.swiperIndex = index;
+      getMeetingAgendaGroup({ conferenceId })
+        .then((r) => {
+          if (r.code == "0000") {
+            this.meetTimeList = r.obj;
+          } else {
+            this.$message.warning(r.msg);
+          }
+        })
+        .finally(() => {
+          this.loading = false;
+        });
+    },
+    getInterList(domestic) {
+      this.fifthTabLoading = true;
+      const { pageNum } = this.pager;
+      const formpage = { pageNum, pageSize: 10 };
+      getInterList({
+        domestic,
+        ...formpage,
+      })
+        .then((res) => {
+          if (res.code == "0000") {
+            if (1 == domestic) {
+              this.interList = res.rows;
+            } else {
+              this.interListNews = res.rows;
+              this.interListNewsTree2 = res.rows.slice(0, 2);
+              this.interListNewsTree3 = res.rows.slice(2, 5);
+            }
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {
+          this.fifthTabLoading = false;
+        });
+      const fpage = { pageNum, pageSize: 4 };
+      getZgcActivityList({
+        actClassification: "ssb",
+        ...fpage,
+      })
+        .then((res) => {
+          if (res.code == "0000") {
+            this.innterNs = res.rows;
+            this.innterNs.length = 4;
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {
+          this.fifthTabLoading = false;
+        });
+    },
+
+    getService() {
+      this.fifthTabLoading = true;
+      const { pageNum } = this.pager;
+      const formpage = { pageNum, pageSize: 10 };
+      findPolicyService({
+        ...this.serviceQuery,
+        ...formpage,
+      })
+        .then((res) => {
+          if (res.code == "0000") {
+            if (pageNum > 1) {
+              this.serviceList = this.serviceList.concat(res.rows);
+            } else {
+              this.serviceList = res.rows;
+            }
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {
+          this.fifthTabLoading = false;
+        });
+    },
+    pageService() {
+      this.pager.pageNum++;
+      this.getService();
+    },
+    remoteMethod() {
+      getOrganization()
+        .then((res) => {
+          if (res.code == "0000") {
+            this.createOrganizationOps = res.obj;
+          } else {
+            this.$message.warning(res.msg);
+          }
+        })
+        .finally(() => {});
+    },
+    goproject({ id, industryOne }, type) {
+      if (type == "project") {
+        this.goBlank({
+          path: "/projecthall/detail",
+          query: {
+            id,
+            industryOne,
+          },
+        });
+      } else {
+        this.goBlank({
+          path: "/demandhall/detail",
+          query: {
+            id,
+            industryOne,
+          },
+        });
+      }
+    },
+    goDeclare({ policyId: id }) {
+      this.goBlank({
+        path: "/bbshall/toDeclare",
+        query: {
+          id,
+        },
+      });
+    },
+    gopost(act) {
+      if (act == 1) {
+        this.goBlank({
+          path: "/projecthall/post",
+        });
+      } else {
+        this.goBlank({
+          path: "/demandhall/post",
+        });
+      }
+    },
+    godetail({ redirectUrl = "" }) {
+      if (_.isEmpty(redirectUrl) || redirectUrl == "#") {
+        return false;
+      } else {
+        window.open(redirectUrl);
+      }
+    },
+    goaction({ newsId }) {
+      this.goBlank({
+        path: "/meethall/activityDetail",
+        query: {
+          newsId,
+        },
+      });
+    },
+    gomore(num) {
+      const actClassification = num == 1 ? "xwdt" : "ssb";
+      this.goBlank({
+        path: "/activitieshall/more",
+        query: {
+          actClassification,
+        },
+      });
+    },
+    goNewsMore() {
+      this.goBlank({
+        path: "/bbshall/newsList",
+      });
+    },
+
+    gomorefouth(activeFouthTab) {
+      if (activeFouthTab == "project") {
+        this.goBlank({
+          path: "/projecthall",
+        });
+      } else {
+        this.goBlank({
+          path: "/demandhall",
+        });
+      }
+    },
+    gomanger() {
+      this.goBlank({
+        path: "/talenthall/manager",
+      });
+    },
+    goaAtionDetail({ upType, actStatus, actId, signUpEnable }) {
+      if (upType == "video") {
+        if (actStatus == "started") {
+          this.golive(actId);
+        } else {
+          this.govideo(actId);
+        }
+      } else {
+        if (signUpEnable == "1") {
+          this.gosign(actId);
+        } else {
+          this.goarticle(actId);
+        }
+      }
+    },
+    govideo(id) {
+      this.goBlank({
+        path: "/activitieshall/video",
+        query: {
+          id,
+        },
+      });
+    },
+    golive(id) {
+      this.goBlank({
+        path: "/activitieshall/live",
+        query: {
+          id,
+        },
+      });
+    },
+    goarticle(id) {
+      this.goBlank({
+        path: "/activitieshall/article",
+        query: {
+          id,
+        },
+      });
+    },
+    gosign(id) {
+      this.goBlank({
+        path: "/activitieshall/signup",
+        query: {
+          id,
+        },
+      });
+    },
+    gomeet({ congressId }) {
+      this.goBlank({
+        path: "/meet",
+        query: {
+          congressId,
+        },
+      });
+    },
+    goservice({ policyId: id }) {
+      this.goBlank({
+        path: "/bbshall/PolicyDetail",
+        query: {
+          id,
+        },
+      });
+    },
+    goNewsDetail({ id }) {
+      this.$router.push({
+        path: "/bbshall/newDetal",
+        query: {
+          id,
+        },
+      });
+    },
+    swapChange(index) {
+      this.currentIndex = index;
+    },
+    goedit() {
+      this.$router.push({
+        path: "/personal/center/edit",
+      });
+    },
+    gopolicy({ id }) {
+      this.$router.push({
+        path: "/policy",
+        query: {
+          id,
+        },
+      });
+    },
+    getStrLen(str) {
+      return getBLen(str);
+    },
+    gopetail(id) {
+      this.goBlank({
+        path: "/rdetail",
+        query: { id },
+      });
+    },
+  },
+};
+</script>
+
+<style scoped lang="scss">
+@function pxToVW($px) {
+  @return ($px/1920) * 100vw;
+}
+.el-main {
+  padding-top: 0;
+}
+
+.theme-box {
+  width: 100%;
+  text-align: center;
+  font-size: 34px;
+  font-weight: bold;
+  color: #18181c;
+  margin-bottom: 48px;
+  span {
+    display: block;
+  }
+  b {
+    display: inline-block;
+    width: pxToVW(74);
+    height: 2px;
+    background: #2434af;
+  }
+  .hasBakpic {
+    background: #fff;
+  }
+}
+.home-main {
+  position: relative;
+  img {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.home-companyintro {
+  padding: 73px 0 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  &-content {
+    display: flex;
+    justify-content: center;
+    &-nav {
+      &-item {
+        height: 96px;
+        width: pxToVW(345);
+        color: #17181c;
+        margin-bottom: 22px;
+        cursor: pointer;
+        &.active {
+          color: #fff;
+          background-image: url("~img/home/blue-box.png");
+          background-repeat: no-repeat;
+          background-size: 100% auto;
+        }
+        &-title {
+          text-align: center;
+          height: 100%;
+          font-size: 26px;
+          line-height: 96px;
+          width: pxToVW(330);
+          display: flex;
+          justify-content: center;
+          img {
+            width: pxToVW(42);
+            object-fit: contain;
+            margin-right: 30px;
+            line-height: 96px;
+          }
+        }
+        &:not(.active) {
+          .home-companyintro-content-nav-item-title {
+            background-image: url("~img/home/white-box.png");
+          }
+        }
+      }
+    }
+    &-pic {
+      flex: 0;
+      width: pxToVW(1024);
+      height: 100%;
+      position: relative;
+      img: {
+        width: 100%;
+      }
+      &-intro {
+        position: absolute;
+        color: #fff;
+        bottom: 44px;
+        left: pxToVW(50);
+        font-size: 16px;
+        :first-child {
+          font-size: 26px;
+          margin-bottom: 11px;
+        }
+      }
+    }
+  }
+  &-detail {
+    width: pxToVW(1380);
+    overflow: hidden;
+
+    height: 190px;
+    background-image: url("~img/home/companyintro-back.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    font-size: 24px;
+    font-family: Source Han Sans CN;
+    font-weight: 400;
+    color: #09135e;
+    line-height: 42px;
+    text-align: center;
+    white-space: wrap;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+.home-platformservices {
+  width: 100%;
+  background-image: url("~img/home/platformServices.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  margin-top: 80px;
+  padding: 88px 0 0;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .theme-box {
+    span {
+      color: #fff;
+    }
+  }
+  &-info {
+    margin: 45px 0 119px;
+    width: pxToVW(816);
+    font-size: 16px;
+    text-align: center;
+    line-height: 32px;
+  }
+  &-feature {
+    width: pxToVW(1380);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 pxToVW(116);
+    border-bottom: 2px solid #fff;
+    margin-bottom: 44px;
+    img {
+      width: pxToVW(95);
+      object-fit: contain;
+    }
+    div {
+      text-align: center;
+    }
+  }
+  &-featuretext {
+    width: pxToVW(1380);
+  }
+  &-featurepic {
+    display: flex;
+    width: 100%;
+    margin-top: 70px;
+    &-item {
+      width: 20vw;
+      height: 670px;
+      // border: 1px solid #fff;
+      position: relative;
+      cursor: pointer;
+      >img {
+        width: 100%;
+      }
+      .cover:not(.active) {
+        display: none;
+      }
+      &:hover .cover,
+      .cover.active {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 2;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.3);
+        flex-direction: column;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: pxToVW(133);
+          object-fit: contain;
+        }
+      }
+    }
+  }
+}
+.home-companies {
+  width: 100%;
+  margin:200px 0 164px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &-oprate {
+    height: 43px;
+    width: pxToVW(1185);
+    display: flex;
+    justify-content: space-between;
+    margin: 47px 0 60px;
+    >img {
+      cursor: pointer;
+      width: pxToVW(25);
+      object-fit: contain;
+    }
+  }
+  &-group {
+    display: flex;
+    margin-top: 16px;
+    &-item {
+      width: pxToVW(185);
+      margin: 0 pxToVW(22);
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+.home-freeregister {
+  width: 100%;
+  background-image: url("~img/home/register-back.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: #fff;
+  padding: 106px 0 74px;
+  font-size: 45px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .el-button {
+    font-size: 26px;
+    margin-top: 40px;
+    height: 70px;
+    width: pxToVW(221);
+    background-color: #fff;
+    color: #001f99;
+  }
+}
+
+.home-third {
+  background-image: url($backgroundImgURL + "/homebg3.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 36px 0 0;
+  height: 1080px;
+  .third-content {
+    padding: 0 calc((100% - 1320px) / 2) 60px;
+    .third-inner-top {
+      height: 330px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 36px;
+    }
+    h5 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #999999;
+    }
+
+    .mt100 {
+      margin-top: 65px;
+    }
+
+    .header-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 35px;
+      .nav-left {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 24px;
+        font-weight: 600;
+        color: #333333;
+        .image {
+          width: 23px;
+          height: 23px;
+          margin-right: 15px;
+        }
+      }
+      .nav-right {
+        cursor: pointer;
+        font-size: 20px;
+        font-weight: 300;
+        color: #bbbbbb;
+      }
+    }
+
+    .left-content {
+      position: relative;
+      .image {
+        cursor: pointer;
+        width: 100%;
+        height: 363px;
+      }
+      .news-title {
+        width: 100%;
+        text-indent: 2em;
+        position: absolute;
+        text-align: left;
+        bottom: 5px;
+        left: 0;
+        z-index: 10;
+        height: 39px;
+        line-height: 39px;
+        padding-right: 20%;
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .swiper-pagination {
+        width: 20%;
+        bottom: 15px;
+        left: 80% !important;
+        z-index: 20;
+      }
+      ::v-deep .swiper-pagination-bullet {
+        background: #ffffff !important;
+        opacity: 1 !important;
+      }
+      ::v-deep .swiper-pagination-bullet-active {
+        background: #1e86f9 !important;
+      }
+
+      .news-wrap {
+        position: relative;
+      }
+    }
+
+    .mid-content {
+      height: 362px;
+      display: flex;
+      flex-direction: column;
+      padding: 0 10px;
+      //margin-right: 20px;
+      justify-content: space-between;
+      .mid-top,
+      .mid-bot {
+        cursor: pointer;
+        height: 48.5%;
+        background: #fff;
+        padding: 18px 30px;
+
+        .el-divider--horizontal {
+          margin: 0 0 12px 0;
+
+          background: #dddddd;
+        }
+        .title {
+          margin: 0;
+          font-size: 16px;
+          overflow: hidden; //超出文本隐藏
+          text-overflow: ellipsis; ///超出部分省略号显示
+          display: -webkit-box; //弹性盒模型
+          -webkit-box-orient: vertical; //上下垂直
+          -webkit-line-clamp: 1; //自定义行数
+          font-weight: 600;
+          color: #333333;
+        }
+
+        .desc {
+          font-size: 12px;
+          font-weight: 500;
+          color: #999999;
+          overflow: hidden; //超出文本隐藏
+          text-overflow: ellipsis; ///超出部分省略号显示
+          display: -webkit-box; //弹性盒模型
+          -webkit-box-orient: vertical; //上下垂直
+          -webkit-line-clamp: 2; //自定义行数
+          line-height: 22px;
+          min-height: 44px;
+        }
+
+        .t-bot {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .date {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .day {
+              font-size: 22px;
+              font-weight: 600;
+              color: #666666;
+            }
+
+            .month {
+              font-size: 14px;
+              font-weight: 300;
+              color: #999999;
+            }
+          }
+          .arrow {
+            img {
+              height: 30px;
+              width: 30px;
+            }
+          }
+        }
+      }
+
+      .mid-top:hover {
+        background-color: #1e86f9;
+        .title,
+        .desc {
+          color: #ffffff;
+        }
+        .el-divider--horizontal {
+          margin: 0 0 12px 0;
+
+          background: #fff;
+          opacity: 0.6;
+        }
+
+        .t-bot {
+          .date {
+            .day {
+              color: #ffffff;
+            }
+
+            .month {
+              color: #ffffff;
+            }
+          }
+        }
+      }
+
+      .image {
+        cursor: pointer;
+        width: 100%;
+        height: 162px;
+      }
+    }
+
+    .right-content {
+      height: 366px;
+      overflow: hidden;
+      .r-list {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .r-box {
+          padding: 0 34px;
+          height: 31%;
+          width: 100%;
+          background: #ffffff;
+          border-radius: 2px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          .date {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .day {
+              font-size: 22px;
+              font-weight: 600;
+              color: #666666;
+            }
+
+            .month {
+              font-size: 14px;
+              font-weight: 300;
+              color: #999999;
+            }
+            .el-divider--horizontal {
+              margin: 6px 0;
+              width: 30px;
+              background: #dddddd;
+            }
+          }
+
+          .line {
+            .el-divider--vertical {
+              margin: 0 20px;
+              height: 55px;
+              background: #eeeeee;
+            }
+          }
+
+          .f-title {
+            .title {
+              width: 255px;
+              font-size: 16px;
+              font-weight: 600;
+              color: #333333;
+              margin: 0 0 7px 0;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              line-height: 22px;
+            }
+
+            .arrow {
+              .image {
+                width: 16px;
+                height: 8px;
+                object-fit: contain;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+
+        .r-box:hover {
+          background-color: #1e86f9;
+          .title {
+            color: #ffffff;
+          }
+          .el-divider--horizontal {
+            margin: 0 0 12px 0;
+            background: #fff;
+            opacity: 0.6;
+          }
+
+          .date {
+            .day {
+              color: #ffffff;
+            }
+
+            .month {
+              color: #ffffff;
+            }
+          }
+        }
+      }
+    }
+
+    .inner_card {
+      position: relative;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      .inner-title {
+        font-size: 18px;
+        display: inline-block;
+        font-weight: 500;
+        width: 100%;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+      .inner-desc {
+        font-size: 16px;
+        font-weight: 500;
+        color: #999999;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .inner-btn {
+        text-align: center;
+      }
+      .inner-opera {
+        width: 132px;
+        height: 42px;
+        color: #ffffff;
+        background: #516fd2;
+        border-radius: 4px;
+      }
+      .image {
+        height: 170px;
+        width: 100%;
+      }
+
+      .el-tag--plain.el-tag--info {
+        position: absolute;
+        width: 64px;
+        text-align: center;
+        right: 11px;
+        top: 7px;
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 12px;
+        border: 1px solid #ffffff;
+      }
+    }
+  }
+
+  .third-ad {
+    img {
+      width: 100%;
+    }
+  }
+}
+
+.home-fourth {
+  background-image: url($backgroundImgURL + "/home-bg4.png");
+  background-size: cover;
+  background-repeat: repeat;
+  //height: 1092px;
+  padding: 58px 0;
+  .fouth-content {
+    padding: 0 calc((100% - 1320px) / 2) 60px;
+    .mr10 {
+      margin-right: 15px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+
+    .search-area {
+      align-items: center;
+      margin-bottom: 30px;
+      .publish-button {
+        width: 239px;
+        height: 67px;
+        background: #1e86f9;
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 28px;
+        margin-right: 30px;
+        ::v-deep .el-icon-s-promotion {
+          font-size: 24px;
+        }
+      }
+
+      .input-search {
+        width: 735px;
+        border-radius: 5px;
+        border: 1px solid #999999;
+        ::v-deep .el-input__inner {
+          height: 67px;
+          font-size: 18px;
+          border-right: none;
+          color: #999999;
+          background-color: transparent;
+          transition: none !important;
+        }
+
+        ::v-deep .el-button {
+          width: 166px;
+          color: #333333;
+          font-size: 22px;
+          font-weight: 300;
+          border-radius: 0 4px 4px 0;
+          border-left: 2px solid #999999;
+          padding: 4px 0;
+        }
+        ::v-deep .el-input.is-active .el-input__inner,
+        ::v-deep .el-input__inner:focus {
+          border: #333333;
+        }
+
+        ::v-deep .el-input__inner:hover {
+          border: #333333;
+        }
+
+        ::v-deep .el-input-group__append {
+          background-color: transparent;
+        }
+      }
+    }
+
+    .search-list {
+      display: flex;
+      justify-content: space-between;
+      .project-list {
+        .nearBg {
+          background-image: url($backgroundImgURL + "/f-bg.png");
+        }
+        .p-box {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          width: 365px;
+          height: 131px;
+          cursor: pointer;
+          //background: #F6F6F6;
+
+          .line {
+            width: 58px;
+            font-size: 48px;
+            letter-spacing: 3px;
+            font-weight: 400;
+            color: #999999;
+            line-height: 24px;
+          }
+
+          .type {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 176px;
+            height: 23px;
+            font-size: 24px;
+            font-weight: 400;
+            color: #999999;
+            line-height: 24px;
+            .type-t {
+              font-size: 20px;
+              font-weight: 600;
+              color: #666666;
+              line-height: 24px;
+              margin: 12px 0;
+            }
+            .type-b {
+              font-size: 16px;
+              font-weight: 400;
+              color: #999999;
+              line-height: 24px;
+              margin: 0;
+            }
+          }
+
+          .arrow {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .image {
+              width: 16px;
+              height: 14px;
+            }
+          }
+        }
+
+        .active {
+          background: linear-gradient(90deg, #1c75f2 0%, #329af7 100%);
+          .line {
+            color: #ffffff;
+          }
+
+          .type {
+            .type-t,
+            .type-b {
+              color: #ffffff;
+            }
+          }
+
+          .arrow {
+            background: #ffffff;
+            box-shadow: 0 0 12px 0 #1162d5;
+            border-radius: 50%;
+          }
+        }
+      }
+
+      .project-goods {
+        width: 875px;
+        .card-cont {
+          padding: 3px;
+        }
+        .box-card {
+          cursor: pointer;
+          //height: 250px;
+          .header_cw {
+            display: flex;
+            justify-content: space-between;
+            .header_img {
+              width: 139px;
+              height: 102px;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+            .header-price {
+              font-size: 20px;
+              font-weight: 600;
+              color: #1e86f9;
+              margin-top: 15px;
+              .bold-price {
+                font-size: 20px;
+                font-weight: 600;
+                color: #1e86f9;
+                line-height: 24px;
+              }
+            }
+          }
+
+          .title_cw {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333333;
+            margin: 10px 0;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 1; /*超出几行后省略号*/
+            overflow: hidden;
+          }
+          .description_cw {
+            font-size: 14px;
+            font-weight: 500;
+            height: 42px;
+            line-height: 1.5;
+            color: #999999;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
+          .from_time_cw {
+            margin-top: 17px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            color: #999999;
+            span:nth-child(2) {
+              margin: 10px 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.home-fifth {
+  width: 100%;
+  background-image: url($backgroundImgURL + "/fifth-bg.png");
+  background-size: cover;
+  background-repeat: repeat;
+  height: 1092px;
+  padding: 58px 0;
+  .fouth-content {
+    padding: 0 calc((100% - 1340px) / 2) 60px;
+    .mr10 {
+      margin-right: 15px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+
+    .search-area {
+      align-items: center;
+      margin-bottom: 30px;
+      .publish-button {
+        width: 239px;
+        height: 67px;
+        background: #1e86f9;
+        border-radius: 5px;
+        font-size: 20px;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 28px;
+        margin-right: 30px;
+        ::v-deep .el-icon-s-promotion {
+          font-size: 24px;
+        }
+      }
+
+      .input-search {
+        width: 735px;
+        border-radius: 5px;
+        border: 1px solid #999999;
+        ::v-deep .el-input__inner {
+          height: 67px;
+          font-size: 18px;
+          border-right: none;
+          color: #999999;
+          background-color: transparent;
+          transition: none !important;
+        }
+
+        ::v-deep .el-button {
+          width: 166px;
+          color: #333333;
+          font-size: 22px;
+          font-weight: 300;
+          border-radius: 0 4px 4px 0;
+          border-left: 2px solid #999999;
+          padding: 4px 0;
+        }
+        ::v-deep .el-input.is-active .el-input__inner,
+        ::v-deep .el-input__inner:focus {
+          border: #333333;
+        }
+
+        ::v-deep .el-input__inner:hover {
+          border: #333333;
+        }
+
+        ::v-deep .el-input-group__append {
+          background-color: transparent;
+        }
+      }
+    }
+
+    .search-list {
+      display: flex;
+      justify-content: space-between;
+      .project-list {
+        .nearBg {
+          background-image: url($backgroundImgURL + "/f-bg.png");
+        }
+        .p-box {
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          width: 365px;
+          height: 131px;
+          cursor: pointer;
+          //background: #F6F6F6;
+
+          .line {
+            width: 58px;
+            font-size: 48px;
+            letter-spacing: 3px;
+            font-weight: 400;
+            color: #999999;
+            line-height: 24px;
+          }
+
+          .type {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 176px;
+            height: 23px;
+            font-size: 24px;
+            font-weight: 400;
+            color: #999999;
+            line-height: 24px;
+            .type-t {
+              font-size: 20px;
+              font-weight: 600;
+              color: #666666;
+              line-height: 24px;
+              margin: 12px 0;
+            }
+            .type-b {
+              font-size: 16px;
+              font-weight: 400;
+              color: #999999;
+              line-height: 24px;
+              margin: 0;
+            }
+          }
+
+          .arrow {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .image {
+              width: 16px;
+              height: 14px;
+            }
+          }
+        }
+
+        .active {
+          background: linear-gradient(90deg, #1c75f2 0%, #329af7 100%);
+          .line {
+            color: #ffffff;
+          }
+
+          .type {
+            .type-t,
+            .type-b {
+              color: #ffffff;
+            }
+          }
+
+          .arrow {
+            background: #ffffff;
+            box-shadow: 0 0 12px 0 #1162d5;
+            border-radius: 50%;
+          }
+        }
+      }
+
+      .project-goods {
+        width: 875px;
+        .goods-list {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          height: 100%;
+        }
+        .card-cont {
+          margin-bottom: 20px;
+        }
+        .box-card {
+          cursor: pointer;
+          height: 185px;
+          background: #f7f7f7;
+          &:hover {
+            background: #ffffff;
+          }
+          .header_cw {
+            &:hover .list-btn {
+              background: #1e86f9;
+              color: #ffffff;
+            }
+
+            display: flex;
+            justify-content: space-between;
+            .header_img {
+              width: 189px;
+              height: 146px;
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+              }
+            }
+            .mid-content {
+              //margin-left: 25px;
+              //width: 208px;
+            }
+            .mid-header {
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+
+              .header-price {
+                margin-right: 15px;
+                font-size: 16px;
+                font-weight: 600;
+                color: #1e86f9;
+                line-height: 24px;
+                .bold-price {
+                  font-size: 16px;
+                  font-weight: bold;
+                  color: #1e86f9;
+                  line-height: 24px;
+                }
+              }
+              .title_cw {
+                width: 336px;
+                font-size: 16px;
+                color: #333333;
+                line-height: 24px;
+                font-weight: 600;
+                display: -webkit-box;
+                -webkit-box-orient: vertical;
+                -webkit-line-clamp: 1; /*超出几行后省略号*/
+                overflow: hidden;
+                h4 {
+                  margin: 0;
+                }
+              }
+            }
+          }
+
+          .description_cw {
+            width: 470px;
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 24px;
+            height: 62px;
+            color: #999999;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+          }
+          .from_time_cw {
+            margin-top: 17px;
+            font-size: 14px;
+            display: flex;
+            flex-direction: column;
+            color: #999999;
+            span:nth-child(2) {
+              margin: 10px 0;
+            }
+          }
+
+          .btns {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .list-btn {
+              //padding: 10px 15px;
+              width: 120px;
+              height: 35px;
+              background: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              color: #333333;
+              transition: all 0.6s;
+              .more {
+                font-size: 12px;
+                margin-right: 25px;
+              }
+              .el-icon-right {
+                font-size: 20px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.home-seven {
+  height: 1092px;
+  padding: 58px 0;
+  background-image: url($backgroundImgURL + "/sevenBg.png");
+  .seven-content {
+    padding: 0 calc((100% - 1320px) / 2) 60px;
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 0;
+      margin-bottom: 100px;
+    }
+
+    .se-wrap {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 770px;
+      background-image: url($backgroundImgURL + "/seven-ibg.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      .inner-left {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding-left: 120px;
+        position: relative;
+        .arrow {
+          position: absolute;
+          right: 25px;
+          bottom: -180px;
+          height: 110px;
+          width: 45px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          .arrowup,
+          .arrowdown {
+            width: 45px;
+            height: 45px;
+            cursor: pointer;
+          }
+        }
+        h3 {
+          font-size: 48px;
+          font-weight: 500;
+          line-height: 80px;
+          color: #ffffff;
+          margin: 0 0 60px 0;
+        }
+        .short {
+          font-size: 24px;
+          font-weight: 300;
+          color: #ffffff;
+          opacity: 0.66;
+          margin-bottom: 100px;
+        }
+
+        .gomore {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 277px;
+          height: 75px;
+          background: linear-gradient(90deg, #1c6fe2 0%, #3f8efd 100%);
+          border-radius: 3px;
+          font-size: 22px;
+          font-weight: 400;
+          color: #ffffff;
+          cursor: pointer;
+        }
+      }
+
+      .inner-right {
+        height: 108%;
+        //padding-right: 20px;
+        .orgSwiper {
+          height: 100%;
+        }
+        .inner-list {
+          height: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .inner-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 6px;
+            box-shadow: 0 0 20px 0 rgba(20, 64, 100, 0.06);
+            .left {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 147px;
+              height: 140px;
+              .image {
+                width: 100px;
+                height: 100px;
+                object-fit: contain;
+              }
+            }
+            .right {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              width: 205px;
+              height: 140px;
+              box-shadow: 0 2px 10px 2px rgba(29, 112, 227, 0.06);
+              text-align: center;
+              .desc {
+                width: 160px;
+                display: inline-block;
+                font-size: 18px;
+                font-weight: 400;
+                color: #333333;
+                text-align: left;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                line-height: 30px;
+              }
+            }
+            //TODO
+            //&:hover {
+            //  background: #1E86F9;
+            //  .desc {
+            //    color: #FFFFFF;
+            //  }
+            //}
+          }
+        }
+      }
+    }
+  }
+}
+
+.home-eight {
+  width: 100%;
+  background-image: url($backgroundImgURL + "/et8bg.png");
+  background-size: cover;
+  background-repeat: repeat;
+  height: 1092px;
+  padding: 58px 0;
+  .eight-content {
+    padding: 0 calc((100% - 1320px) / 2) 60px;
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+    .wrap-row {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 100%;
+      .iwidth {
+        width: 48% !important;
+        cursor: pointer;
+      }
+      .mr10 {
+        margin-right: 4%;
+      }
+    }
+
+    .wrap-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 215px;
+      background-color: #ffffff;
+      margin-top: 100px;
+      .left {
+        width: 324px;
+        padding: 48px 0 48px 48px;
+        .title {
+          font-size: 20px;
+          font-weight: 600;
+          color: #17193b;
+          line-height: 24px;
+        }
+
+        .desc {
+          font-size: 16px;
+          font-weight: 300;
+          color: #999999;
+          line-height: 26px;
+        }
+      }
+      .right-hold {
+        height: 274px;
+        width: 230px;
+        position: relative;
+        .image {
+          position: absolute;
+          bottom: 30px;
+          right: 20px;
+          width: 230px;
+          height: 274px;
+        }
+      }
+    }
+
+    .eight-nav {
+      margin-bottom: 56px;
+      .outer-wrap {
+        padding: 0 1px;
+        cursor: pointer;
+        transition: width 0.3s;
+      }
+      .wrap {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px 55px 20px 30px;
+        align-items: flex-start;
+        height: 176px;
+        background: #272d39;
+        border-radius: 3px;
+        cursor: pointer;
+        .w-left {
+          height: 129px;
+          display: flex;
+          justify-content: flex-end;
+          flex-direction: column;
+          align-items: center;
+          .image {
+            width: 67px;
+            height: 51px;
+            object-fit: contain;
+          }
+        }
+
+        .w-right {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: center;
+          .f-title {
+            font-size: 22px;
+            font-weight: 600;
+            color: #ffffff;
+            margin: 5px 10px 5px 0;
+          }
+
+          .f-desc {
+            width: 233px;
+            font-size: 18px;
+            font-weight: 300;
+            color: #ffffff;
+            line-height: 24px;
+            margin-top: 10px;
+          }
+        }
+      }
+
+      .active {
+        background: #1e86f9;
+        box-shadow: 0 10px 25px 5px rgba(39, 45, 57, 0.18);
+        border-radius: 3px;
+        .w-left {
+          .image {
+            width: 146px !important;
+            height: 129px !important;
+          }
+        }
+      }
+    }
+
+    .row-wrap {
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      margin-top: 10px;
+      .first-left {
+        width: 255px;
+        height: 625px;
+        margin-right: 30px;
+        .inner-left {
+          .s-box {
+            padding-left: 30px;
+            .s-header {
+              font-size: 20px;
+              font-weight: 400;
+              color: #333333;
+              line-height: 24px;
+              position: relative;
+              margin-bottom: 10px;
+              &::before {
+                position: absolute;
+                left: -25px;
+                top: 8px;
+                content: "";
+                display: block;
+                width: 13px;
+                height: 6px;
+                background: #ff7f81;
+                border-radius: 3px;
+              }
+            }
+
+            .two::before {
+              background: #40ddff;
+            }
+            .three::before {
+              background: #65ffad;
+            }
+
+            .s-list {
+              font-size: 18px;
+              font-weight: 400;
+              color: #666666;
+              padding: 10px 0;
+              margin: 0;
+              transition: all 0.6s;
+              cursor: pointer;
+              &:hover {
+                padding-left: 25px;
+                font-weight: 400;
+                color: #ffffff;
+                background: linear-gradient(
+                  90deg,
+                  #0284e9 0%,
+                  rgba(0, 77, 137, 0) 100%
+                );
+              }
+            }
+            .active {
+              padding-left: 25px;
+              font-size: 18px;
+              font-weight: 400;
+              color: #ffffff;
+              background: linear-gradient(
+                90deg,
+                #0284e9 0%,
+                rgba(0, 77, 137, 0) 100%
+              );
+            }
+          }
+        }
+      }
+      .first-right {
+        width: 988px;
+        height: 701px;
+        background: url($backgroundImgURL + "/swbg.png") no-repeat;
+        background-size: contain;
+        padding: 19px 26px 26px 26px;
+        .el-carousel {
+          .image {
+            width: 918px;
+            height: 561px;
+            border-radius: 30px;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+
+    .search-content {
+      background-color: transparent;
+      .search-query {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        .el-date-editor.el-input,
+        .el-date-editor.el-input__inner {
+          width: 150px;
+        }
+        ::v-deep .el-input__inner {
+          background-color: transparent !important;
+        }
+      }
+
+      .search-left {
+        display: flex;
+        align-items: center;
+      }
+
+      .select-title {
+        font-size: 18px;
+        font-weight: 400;
+        width: 100px;
+        display: inline-block;
+        vertical-align: top;
+        margin-top: 10px;
+        color: #999999;
+      }
+
+      .mt0 {
+        margin-top: 0;
+      }
+
+      .select-ftitle {
+        font-size: 16px;
+        font-weight: 600;
+        color: #606266;
+      }
+
+      .pr20 {
+        margin-right: 22px;
+      }
+
+      .select-scope {
+        transition: height 0.3s;
+        width: calc(100% - 120px);
+        display: inline-block;
+        height: 45px;
+        overflow: hidden;
+        ::v-deep .el-radio-button__inner {
+          background-color: transparent;
+        }
+      }
+      .sel-layout {
+        width: 15%;
+        border-radius: 3px;
+        ::v-deep .el-input,
+        ::v-deep .el-input__inner {
+          //background: #516FD2;
+          //color: #FFFFFF;
+        }
+
+        ::v-deep .el-input__inner {
+          height: 45px;
+          //font-size: 20px;
+          font-weight: 400;
+          //color: #FFFFFF;
+          line-height: 25px;
+          &::placeholder {
+            font-size: 18px;
+            font-weight: 400;
+            //color: #FFFFFF;
+          }
+        }
+
+        ::v-deep .el-input.is-focus .el-input__inner {
+          //border:0;
+        }
+
+        ::v-deep .el-input .el-select__caret {
+          //color:#fff;
+        }
+
+        ::v-deep .el-select-dropdown__item {
+          font-size: 18px;
+          font-weight: 500;
+          color: #999999;
+          &:hover {
+            //background: #EFEFEF;
+          }
+        }
+      }
+
+      .show-more {
+        height: auto;
+      }
+
+      .more-layout {
+        text-align: right;
+        height: 45px;
+        line-height: 45px;
+      }
+
+      .select-more {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 500;
+        color: #999999;
+        cursor: pointer;
+        height: auto;
+        i {
+          font-weight: 700;
+          font-size: 18px;
+          color: #606266;
+        }
+      }
+
+      ::v-deep .el-radio-button:first-child .el-radio-button__inner {
+        border: none;
+      }
+
+      ::v-deep .el-radio-button__inner {
+        border: none;
+        font-size: 18px;
+      }
+      ::v-deep .el-radio-button__orig-radio:checked + .el-radio-button__inner {
+        border: none;
+        color: #226fed;
+        box-shadow: none;
+        border-radius: 22px;
+      }
+
+      ::v-deep .el-radio-button__inner:hover {
+        color: #516fd2;
+      }
+
+      ::v-deep
+        .el-radio-button:focus:not(.is-focus):not(:active):not(.is-disabled) {
+        box-shadow: none;
+      }
+    }
+
+    .search-list {
+      height: 450px;
+      overflow-y: scroll;
+      margin-top: 30px;
+      padding-right: 15px;
+      &::-webkit-scrollbar-thumb {
+        background: #dddddd;
+      }
+
+      &::-webkit-scrollbar-track-piece {
+        background: transparent;
+      }
+      .search-layout {
+        cursor: pointer;
+
+        .search-box {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 1px solid #dddddd;
+
+          .h-left {
+            flex-direction: column;
+            display: flex;
+            justify-content: space-around;
+            .m-title {
+              font-size: 24px;
+              font-weight: 500;
+              margin-bottom: 12px;
+              color: #333333;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              display: -webkit-box;
+              -webkit-line-clamp: 1;
+              -webkit-box-orient: vertical;
+              &:hover {
+                color: #1e86f9;
+              }
+            }
+            .m-desc {
+              margin-bottom: 18px;
+            }
+
+            .ml20 {
+              margin-left: 30px;
+            }
+
+            .d-tit {
+              color: #999999;
+            }
+
+            .d-desc {
+              display: inline-block;
+              width: 120px;
+            }
+          }
+
+          .h-right {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 113px;
+            height: 32px;
+            background: #2a72e6;
+            color: #ffffff;
+            border-radius: 16px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.home-nine {
+  width: 100%;
+  background-image: url($backgroundImgURL + "/ninebg.png");
+  background-size: cover;
+  background-repeat: repeat;
+  //height: 1080px;
+  padding: 58px 0;
+  overflow-x: hidden;
+  .nine-content {
+    padding: 0 calc((100% - 1320px) / 2) 0;
+    h2 {
+      text-align: center;
+      font-size: 36px;
+      margin-top: 0;
+      margin-bottom: 40px;
+    }
+
+    .wrap {
+      //height: 586px;
+    }
+
+    .wrap-l {
+      position: relative;
+      height: 100%;
+      .image {
+        cursor: pointer;
+        object-fit: contain;
+        height: 456px;
+        width: 100%;
+      }
+      .news-title {
+        text-indent: 2em;
+        width: 100%;
+        position: absolute;
+        text-align: left;
+        bottom: 5px;
+        left: 0;
+        z-index: 10;
+        height: 49px;
+        line-height: 49px;
+        color: #ffffff;
+        background-color: rgba(0, 0, 0, 0.5);
+        p {
+          margin: 0;
+          width: 500px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+
+      .swiper-pagination {
+        width: 20%;
+        bottom: 20px;
+        left: 80% !important;
+        z-index: 20;
+      }
+      ::v-deep .swiper-pagination-bullet {
+        background: #ffffff !important;
+        opacity: 1 !important;
+      }
+      ::v-deep .swiper-pagination-bullet-active {
+        background: #1e86f9 !important;
+      }
+
+      .news-wrap {
+        position: relative;
+        //width: 667px;
+        width: 100%;
+        //height: 586px;
+      }
+    }
+
+    .wrap-r {
+      margin-left: 40px;
+      .r-ftitle {
+        font-size: 26px;
+        font-weight: 400;
+        color: #333333;
+        margin: 0;
+        margin-bottom: 20px;
+      }
+      .interlist {
+        .inter-box {
+          cursor: pointer;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          .circle {
+            width: 15px;
+            height: 15px;
+            background: #333333;
+            border-radius: 50%;
+            margin-bottom: 30px;
+          }
+
+          .desc {
+            margin-top: 0;
+            font-size: 18px;
+            font-weight: 400;
+            color: #333333;
+            width: 565px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            margin-bottom: 28px;
+            &:hover {
+              color: #1e86f9;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes rowup {
+    0% {
+      -webkit-transform: translate3d(0, 0, 0);
+      transform: translate3d(0, 0, 0);
+    }
+    100% {
+      -webkit-transform: translate3d(-1675px, 0, 0);
+      transform: translate3d(-1675px, 0, 0);
+    }
+  }
+
+  .six-layout {
+    height: 230px;
+    position: relative;
+    -webkit-animation: 30s rowup linear infinite normal;
+    animation: 30s rowup linear infinite normal;
+    .img-wrap {
+      position: absolute;
+      height: 100%;
+      top: 55px;
+      transition: all 0.3s;
+      transform: scale(0.9);
+      .city {
+        position: absolute;
+        bottom: 45px;
+        left: 50%;
+        margin-left: -30px;
+        font-size: 20px;
+        font-weight: 600;
+        color: #ffffff;
+      }
+      &:hover {
+        transform: scale(1);
+      }
+    }
+    img {
+      width: 432px;
+      height: 172px;
+    }
+  }
+}
+
+::v-deep .el-dialog__header {
+  padding: 0;
+}
+
+::v-deep .el-dialog__body {
+  background-image: url($backgroundImgURL + "/meet4.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.tip-desc {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ffffff;
+}
+::v-deep .el-dialog__body {
+  padding: 20px 15px;
+}
+
+::v-deep .el-dialog__headerbtn .el-dialog__close {
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+::v-deep .el-dialog__headerbtn {
+  font-size: 16px;
+}
+
+.resolve-btn {
+  //width: 207px;
+  //height: 56px;
+  border: 2px solid #516fd2;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #516fd2;
+}
+
+.isPerCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+</style>
