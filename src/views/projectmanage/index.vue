@@ -72,7 +72,12 @@
                         </div>
                     </div>
                     <div class="left-project">
-                        <div v-for="item in projectList" class="left-project-item" :key="item.id + project">
+                        <div
+                        v-for="item in projectList"
+                        class="left-project-item"
+                        :key="item.id + project"
+                        @click="getProjDetail(item)"
+                        >
                             <div class="left-content">
                                 <div class="title">{{ item.title }}</div>
                                 <div class="attach">
@@ -196,6 +201,9 @@ export default {
         handleCurrentChange(page) {
             this.pageConfig.currentPage = page
             this.pageValue = page
+        },
+        getProjDetail(proj) {
+            this.$router.push('/projectmanage/detail')
         }
     },
     mounted() {
