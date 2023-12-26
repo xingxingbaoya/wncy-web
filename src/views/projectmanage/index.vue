@@ -15,7 +15,53 @@
             <div class="project-manage-main-group-wrap">
                 <div class="left">
                     <div class="left-classify">
+                        <div class="left-classify-item">
+                            <div class="left-classify-item-title"> 技术类型： </div>
+                            <div v-for="tech in techTypeDict" :key="city">
+                                <div class="left-classify-item-option"
+                                :class="searchData.proPatentInfo == tech.id? 'active':''"
+                                @click="searchData.proPatentInfo = tech.id"
+                                >{{ tech.title }}</div>
+                            </div>
+                        </div>
+                        <div class="left-classify-item">
+                            <div class="left-classify-item-title"> 技术来源： </div>
+                            <div v-for="tech in techSourceDict" :key="city">
+                                <div class="left-classify-item-option"
+                                :class="searchData.proNature == tech.id? 'active':''"
+                                @click="searchData.proNature = tech.id"
+                                >{{ tech.title }}</div>
+                            </div>
+                        </div>
+                        <div class="left-classify-item">
+                            <div class="left-classify-item-title">来 源 地： </div>
+                            <div class="left-classify-item-city">
+                                <div v-for="(city,index) in cityList" :key="city">
+                                    <div class="left-classify-item-option"
+                                    :style="collapsed && index> firstLineProvince ? 'display:none': 'display:block'"
+                                    id="cityOption"
+                                    :class="searchData.province == city.code? 'active':''"
+                                    @click="searchData.province = city.code"
+                                    >{{ city.name }}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="left-classify-item">
+                            <div class="left-classify-item-title"> 其他要求： </div>
+                            <span>是否挂牌：</span>
+                            <el-select v-model="searchData.isListing" class="other">
+                                <el-option value="" label="不限" key="all"></el-option>
+                                <el-option value="0" label="是" key="0"></el-option>
+                                <el-option value="1" label="否" key="1"></el-option>
+                            </el-select>
 
+                            <span>项目地区：</span>
+                            <el-select v-model="searchData.isNotNational" class="other">
+                                <el-option value="" label="不限" key="all"></el-option>
+                                <el-option value="0" label="国内项目" key="0"></el-option>
+                                <el-option value="1" label="国外项目" key="1"></el-option>
+                            </el-select>
+                        </div>
                     </div>
                     <div class="left-project">
                         <div v-for="item in projectList" class="left-project-item" :key="item.id + project">
@@ -82,17 +128,24 @@
 import mainfen from "@/assets/img/projectManage/mianfei.png"
 import lindai from "@/assets/img/projectManage/lindai.png"
 import qianyuan from "@/assets/img/projectManage/qian-yuan-L.png"
+import city from '@/assets/city/city_code.json'
 
 export default {
     data() {
         return {
-            classifyList: [
-                {type: '技术类型：', typeContent: [{id:0, title:'不限'},{id:1,title:'技术项目'},{id:2,title:'专利项目'}]},
-                {type: '技术来源：', typeContent: [{id:0, title:'不限'},{id:1,title:'企业'},{id:2,title:'院校'},{id:3, title: '研究机构（实验室/研究院）'},
-                    {id:4, title: '协会团体'}, {id:5, title: '个人'}]},
-                {type: '来 源 地：', typeContent: [{id:0, title:'不限'},{id:1,title:''},{id:2,title:''}]},
-                {type: '其它要求：', typeContent: [{id:0, title:'不限'},{id:1,title:''},{id:2,title:''}]},
+            techTypeDict: [
+            {id:0, title:'不限'},
+            {id:1,title:'技术项目'},
+            {id:2,title:'专利项目'}
+            ],
 
+            techSourceDict: [
+            {id:0, title:'不限'},
+            {id:1,title:'企业'}, 
+            {id:2,title:'院校'}, 
+            {id:3, title: '研究机构（实验室/研究院）'},
+            {id:4, title: '协会团体'},
+            {id:5, title: '个人'}
             ],
             projectList: [
                 {id: 0, title: '【商业贸易】跨境平台综合服务开发', address: '广西壮族自治区 南宁市 江南区', time: '2023.12.07', count: '100万元以上'},
@@ -111,16 +164,39 @@ export default {
                 {title: '专业服务', detail: '用户实名认证，雇主放心交易', icons: lindai},
                 {title: '专业服务', detail: '资金托管，全程跟踪有保障', icons: qianyuan},
                 {title: '免费发布', detail: '所有类型项目，免费发布', icons: mainfen},
-            ]
+            ],
+            searchData: {
+                title: '',
+                industryone: '',
+                province: 0,
+                proPatentInfo: 0,
+                proNature: 0,
+                isNotNational: '',
+                isListing: ''
+            },
+            firstLineProvince: 34,
+            collapsed: true,
             
+        }
+    },
+    computed: {
+        cityList () {
+            return [{"name": "全部", code: 0}, ...city]
         }
     },
     methods: {
         handleCurrentChange(page) {
-            console.log('当前页',page)
             this.pageConfig.currentPage = page
             this.pageValue = page
         }
+    },
+    mounted() {
+        setTimeout(() => {
+            const cityoption = document.querySelectorAll('#cityOption')
+            const list = Array.from(cityoption).map(item => item.offsetTop)
+            this.firstLineProvince = list.lastIndexOf(list[0])
+            console.log(list, this.firstLineProvince)
+        }, 500)
     }
 }
 </script>
@@ -187,6 +263,48 @@ export default {
                         padding: 36px 28px;
                         background-color: #fff;
                         border-radius: 16px;
+                        &-item {
+                            display: flex;
+                            align-items: center;
+                            margin-bottom: 30px;
+                            color: #3C3C41;
+                            font-weight: 400;
+                           &-title {
+                                min-width: 80px;
+                                padding-top: 8px;
+                                align-self: start;
+                            }
+                            &-option {
+                                padding:8px 13px;
+                                margin: 0 10px;
+                                cursor:pointer;
+                                border: 1px solid rgba(0,0,0,0);
+
+                                &.active {
+                                    background: #FFE5E5;
+                                    border: 1px solid #EE6868;
+                                    border-radius: 6px;
+                                    color:#EC4646;
+                                }
+
+                            }
+                            &-city {
+                                display: flex;
+                                flex-wrap: wrap;
+                            }
+                            .other {
+                                span{
+                                    font-size: 14px;
+                                }
+                                width: pxToVW(132);
+                                // border: 1px solid #EE6868;
+                                border-radius: 6px;
+                                margin-right: pxToVW(42);
+                                // :deep(.el-select .el-input.is-focus .el-input__inner) {
+                                //     border-color: #2434AF;
+                                // }
+                            }
+                        }
                     }
                     &-project {
                         margin-top: 20px;
@@ -223,6 +341,7 @@ export default {
                                 color: #EC4646;
                                 font-size: 20px;
                             }
+                        
                         }
                     }
                     .pagination-box {
