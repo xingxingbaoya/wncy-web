@@ -225,20 +225,10 @@ export const constantRoutes = [
     children: [
       {
         path: '',
-        name: 'Activitiesdisplay',
-        component: () => import('@/views/activitiesdisplay/index'),
-        meta: {
-          title: '活动展示', activeMenu: '/activitiesdisplay',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      },
-      {
-        path: '',
         name: 'Activitieshall',
         component: () => import('@/views/activitieshall/index'),
-        hidden: true,
         meta: {
-          title: '活动大厅', activeMenu: '/activitieshall',
+          title: '活动展示', activeMenu: '/activitieshall',
           roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
         }
       },
