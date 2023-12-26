@@ -1,68 +1,157 @@
 <template>
   <div>
-    <el-row v-show="isService"
-            class="s-img">
-      <img :src="`${imgUrl}/service-bg1.png`"
-           alt="text-content"
-           class="image">
-    </el-row>
     <div class="footbar">
-      <div class="foot_left">
-        <div class="left_top">
-          <img src="../../assets/img/logo.png"
-               alt="">
+      <div class="foot_top">
+        <div class="foot_left">
+          <el-row :gutter="20">
+            <el-col
+              :span="24 / navList.length"
+              v-for="item in navList"
+              :key="item.key"
+            >
+              <div class="title">{{ item.name }}</div>
+              <div class="nav-link" v-for="i in item.children" :key="i.key">
+                <el-link :underline="false">{{ i.name }}</el-link>
+              </div>
+            </el-col>
+          </el-row>
         </div>
-        <div class="left_bot">
-          <span>京ICP备 09093569号 </span>
-          <a target="_blank"
-             href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802032617">京公网安备 11010802032617号</a>
+        <div class="foot_middle"></div>
+        <div class="foot_right">
+          <div class="foot_right_connect_phone">
+            <img
+              width="45px"
+              height="45px"
+              src="../../assets/img/foot_phone.png"
+              alt=""
+            />
+            <div class="foot_right_connect_phone_item">
+              <div class="foot_right_connect_phone_item_name">客户电话</div>
+              <div class="foot_right_connect_phone_item_num">400-888-8888</div>
+            </div>
+          </div>
+          <div class="foot_right_connect_wx">
+            <div>
+              <img
+                style="margin-left: 50px"
+                width="35px"
+                height="29px"
+                src="../../assets/img/weixin.png"
+                alt=""
+              />
+
+              <div class="qr_code_1">
+                <img width="100px" src="../../assets/img/foot_qr.png" alt="" />
+              </div>
+            </div>
+            <div>
+              <img
+                style="margin-left: 100px"
+                width="28px"
+                height="33px"
+                src="../../assets/img/douyin.png"
+                alt=""
+              />
+              <div class="qr_code_2">
+                <img width="100px" src="../../assets/img/foot_qr.png" alt="" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="midile">
-        <el-link :underline="false" class="first-link">友情链接</el-link>
-        <el-link :underline="false" class="s-link"
-                 href="http://kw.beijing.gov.cn/ "
-                 target="_blank">北京市科委/中关村管委会官网</el-link>
-        <el-link :underline="false" class="c-link"
-                 href="http://www.zgcgroup.com.cn/zgcadmin/home/index/index"
-                 target="_blank">中关村发展集团</el-link>
-      </div>
-      <div class="foot_right">
+      <div class="foot_bottom">
+        <div>官方运营机构</div>
+        <div>北京市海淀区北四环西路50号6层</div>
+        <div class="vertical_line"></div>
         <div>
-          官方运营机构
+          Copyright c 2018-2021 weina.com 北京中关村微纳能源投资有限公司 京ICP备
+          15018214号
         </div>
-        <el-link :underline="false" class="d-link"
-                 href="http://zgcts.com.cn/ "
-                 target="_blank">北京中关村科技服务有限公司</el-link>
       </div>
     </div>
-    <!-- <div class="footbar">
-      <div class="foot-left">
-        <div class="friend-link">
-          <el-link class="first-link">友情链接</el-link>
-          <el-link class="f-link" href="http://kw.beijing.gov.cn/ " target="_blank">北京市科委/中关村管委会官网</el-link>
-          <el-link class="f-link" href="http://www.zgcgroup.com.cn/zgcadmin/home/index/index" target="_blank">中关村发展集团</el-link>
-        </div>
-        <div>官方运营机构：北京中关村科技服务有限公司</div>
-        <div style="margin-bottom: 0">京ICP备 09093569号 | 京公网安备 <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010802032617">11010802032617号</a></div>
-      </div>
-    </div> -->
   </div>
-
 </template>
 
 <script>
-
-import common from '@/mixin/common'
+import common from "@/mixin/common";
 
 export default {
   mixins: [common],
+  data: () => {
+    return {
+      navList: [
+        {
+          name: "首页",
+          key: 1,
+          children: [
+            {
+              name: "公司介绍",
+              key: 1,
+              url: "",
+            },
+            {
+              name: "平台服务",
+              key: 2,
+              url: "",
+            },
+          ],
+        },
+        {
+          name: "项目管理",
+          key: 2,
+          children: [
+            {
+              name: "发布项目",
+              key: 1,
+              url: "",
+            },
+            {
+              name: "项目清单",
+              key: 2,
+              url: "",
+            },
+            {
+              name: "筛选项目",
+              key: 3,
+              url: "",
+            },
+            {
+              name: "项目详情",
+              key: 4,
+              url: "",
+            },
+          ],
+        },
+        {
+          name: "活动展示",
+          key: 3,
+          children: [
+            {
+              name: "活动清单",
+              key: 1,
+              url: "",
+            },
+            {
+              name: "活动详情",
+              key: 2,
+              url: "",
+            },
+            {
+              name: "我要报名",
+              key: 3,
+              url: "",
+            },
+          ],
+        },
+      ],
+    };
+  },
   computed: {
-    isService () {
-      return this.$route.name=='Servicehalldetail'
-    }
-  }
-}
+    isService() {
+      return this.$route.name == "Servicehalldetail";
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -76,146 +165,113 @@ export default {
   }
 }
 .footbar {
-  padding: 0 calc((100% - 1320px) / 2);
-  display: flex;
-  justify-content: space-between;
-  height: 235px;
+  padding: 0 calc((100% - 1380px) / 2);
+  height: 450px;
   color: #ffffff;
-  background: #191F2E;
+  background: #191f2e;
   overflow: hidden;
-  .foot_left{
+  .foot_top {
+    display: flex;
+    justify-content: space-between;
+  }
+  .foot_bottom {
+    margin-top: 20px;
+    &>div{
+      line-height: 32px;
+    }
+    .vertical_line{
+      height: 2px;
+      background: #ffffff;
+      width: 100%;
+      margin-top: 20px;
+    }
+  }
+  .title {
+    font-size: 18px;
+    font-family: Source Han Sans CN;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 32px;
+    margin-bottom: 20px;
+  }
+  .foot_left {
     margin-top: 67px;
-    .left_top{
-      width:449px;
-      height: 34px;
-      margin-bottom: 36px;
-      img{
-        width: 100%;
-        height: 100%;
+    flex: 3.5;
+    position: relative;
+    .nav-link {
+      font-size: 16px;
+      font-family: Source Han Sans CN;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 32px;
+      margin-bottom: 10px;
+      user-select: none;
+      .el-link {
+        color: #ffffff;
       }
     }
-    .left_bot{
-      display: flex;
-      flex-direction: column;
-      span{
-        margin-bottom: 5px;
-      }
+    &::after {
+      content: "";
+      display: block;
+      width: 1px;
+      background: #ffffff;
+      position: absolute;
+      right: 10%;
+      height: 60%;
+      top: 10px;
     }
   }
-  .midile{
-    margin-top: 64px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    .first-link{
-      font-size: 16px;
-      font-weight: normal;
-      color: #FFFFFF;
-      text-align: left;
-      margin-bottom: 26px;
-      text-decoration:none;
-      cursor:none
-    }
-    // .first-link:hover{
-    //  font-size: 16px;
-    //  font-family: Adobe Heiti Std;
-    //  font-weight: normal;
-    //  color: #1E86F9;
-    //  text-align: left;
-    //  margin-bottom: 26px;
-    //  text-decoration:none;
-    //}
-
-    .s-link{
-      font-size: 16px;
-      height: 34px;
-      font-weight: 500;
-      color: #FFFFFF;
-      text-align: left;
-      margin-bottom: 13px;
-      text-decoration:none
-    }
-    .s-link:hover{
-      color: #1E86F9;
-      text-align: left;
-      margin-bottom: 13px;
-    }
-    .c-link{
-      // font-size: 14px;
-      font-size: 16px;
-
-      font-weight: 500;
-      color: #FFFFFF;
-      text-align: left;
-      text-decoration:none
-    }
-     .c-link:hover{
-      // font-size: 14px;
-      font-size: 16px;
-
-      font-weight: 500;
-      color: #1E86F9;
-      text-align: left;
-    }
-  }
-  .foot_right{
+  .foot_right {
+    flex: 1.5;
     margin-top: 64px;
     display: flex;
     flex-direction: column;
     height: 100%;
-    div:nth-child(1){
-      font-size: 16px;
-      font-weight: normal;
-      color: #FFFFFF;
-      margin-bottom: 35px;
-    }
-    .d-link{
-      font-size: 16px;
-      font-weight: 500;
-      color: #FFFFFF;
-      &:hover{
+    .foot_right_connect_phone {
+      display: flex;
+      padding-left: 50px;
+      img {
+        margin-right: 20px;
+        margin-top: 10px;
+      }
+      .foot_right_connect_phone_item_name {
         font-size: 16px;
-        font-weight: 500;
-        color: #1E86F9;
-        text-align: left;
-      }
-    }
-  }
-
-  .foot-left1 {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    height: 100%;
-    img {
-      margin-bottom: 30px;
-      width: 644px;
-      height: 59px;
-    }
-    .friend-link {
-      display: flex;
-      justify-content: space-between;
-
-      .el-link.is-underline:hover:after {
-        border-bottom-width: 2px;
-        border-bottom-color: #ffffff;
-        bottom: -5px;
-      }
-      .first-link {
-        font-size: 20px;
-        font-weight: 600;
-        margin-right: 36px;
-      }
-
-      .f-link {
-        font-size: 18px;
+        font-family: Source Han Sans CN;
         font-weight: 400;
-        margin-right: 36px;
+        color: #ffffff;
+        line-height: 32px;
+      }
+      .foot_right_connect_phone_item_num {
+        font-size: 38px;
+        font-family: Source Han Sans CN;
+        font-weight: 400;
+        color: #ffffff;
+        line-height: 75px;
       }
     }
-    div {
-      margin-bottom: 20px;
-      font-size: 18px;
+    .foot_right_connect_wx {
+      display: flex;
+      img {
+        cursor: pointer;
+      }
+      .qr_code_1,
+      .qr_code_2 {
+        display: none;
+      }
+      img:first {
+        &:hover {
+          .qr_code_1 {
+            display: block;
+          }
+        }
+      }
+      img:last {
+        &:hover {
+          .qr_code_1 {
+            display: block;
+          }
+        }
+      }
     }
   }
 }
