@@ -49,7 +49,29 @@
                     </div>
                 </div>
                 
-                <div class="right"></div>
+                <div class="right">
+                    <div class="right-fab">
+                        <img src="~img/projectManage/projmanage-fab.png"/>
+                        <div class="right-fab-content">
+                            <el-select>
+                                <span slot="prefix">我需要</span>
+                            </el-select>
+                            <el-button type="primary" style="width: 100%;">立即发布</el-button>
+                        </div>
+                    </div>
+                    <div class="right-select">
+                        <img src="~img/projectManage/selectwn.png"/>
+                        <div class="right-select-content">
+                            <div v-for="item in extractInfo" class="right-select-content-item">
+                                <img :src="item.icons"/>
+                                <div>
+                                    <span class="title">{{ item.title }}</span>
+                                    <span>{{ item.detail }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -57,6 +79,10 @@
 </template>
 
 <script>
+import mainfen from "@/assets/img/projectManage/mianfei.png"
+import lindai from "@/assets/img/projectManage/lindai.png"
+import qianyuan from "@/assets/img/projectManage/qian-yuan-L.png"
+
 export default {
     data() {
         return {
@@ -81,6 +107,11 @@ export default {
                 total: 100,
             },
             pageValue: 1,
+            extractInfo: [
+                {title: '专业服务', detail: '用户实名认证，雇主放心交易', icons: lindai},
+                {title: '专业服务', detail: '资金托管，全程跟踪有保障', icons: qianyuan},
+                {title: '免费发布', detail: '所有类型项目，免费发布', icons: mainfen},
+            ]
             
         }
     },
@@ -217,9 +248,53 @@ export default {
                 }
                 .right {
                     flex:1;
-                    height: 345px;
-                    background: #FFFFFF;
-                    border-radius: 16px;
+                    &-fab{
+                        background: #FFFFFF;
+                        border-radius: 16px;
+                        &-content {
+                            padding: 26px pxToVW(28) 40px;
+                            :deep(.el-input__prefix) {
+                                line-height: 40px;
+                            }
+                            :deep(.el-input--prefix .el-input__inner) {
+                                text-align: center;
+                                color: #19191C;
+                            }
+                            .el-button {
+                                margin-top: 20px;
+                                background-color: #2434AF;
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                    &-select {
+                        background: #FFFFFF;
+                        border-radius: 16px;
+                        margin-top: 20px;
+                        &-content {
+                            padding: 30px pxToVW(20);
+                            &-item {
+                                img {
+                                    width: pxToVW(64);
+                                    object-fit: contain;
+                                    margin-right: 10px;
+                                }
+                                display: flex;
+                                align-items: center;
+                                margin-bottom: 30px;
+                                span {
+                                    display: block;
+                                    color: #999999;
+                                }
+                                span.title {
+                                    color: #19191C;
+                                    margin-bottom: 10px;
+                                    font-size: 20px;
+                                    font-weight: bold;
+                                }
+                            }
+                        }
+                    }
                 }
 
             }
