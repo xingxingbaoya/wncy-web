@@ -45,6 +45,7 @@
                                     >{{ city.name }}</div>
                                 </div>
                             </div>
+                            <div @click="collapsed = !collapsed">展开</div>
                         </div>
                         <div class="left-classify-item">
                             <div class="left-classify-item-title"> 其他要求： </div>
