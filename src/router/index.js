@@ -150,7 +150,7 @@ export const constantRoutes = [
       {
         path: '',
         name: 'Projecthall',
-        hidden: true,
+        // hidden: true,
         component: () => import('@/views/projecthall/index'),
         meta: {
           title: '项目大厅', activeMenu: '/projecthall',
