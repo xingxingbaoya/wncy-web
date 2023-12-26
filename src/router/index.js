@@ -135,7 +135,7 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/projecthall',
+    path: '/projectmanage',
     component: Layout,
     children: [
       {
@@ -147,10 +147,15 @@ export const constantRoutes = [
           roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
         }
       },
+    ]
+  },
+  {
+    path: '/projecthall',
+    component: Layout,
+    children: [
       {
         path: '',
         name: 'Projecthall',
-        // hidden: true,
         component: () => import('@/views/projecthall/index'),
         meta: {
           title: '项目大厅', activeMenu: '/projecthall',

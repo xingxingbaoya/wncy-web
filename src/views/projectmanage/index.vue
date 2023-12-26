@@ -32,6 +32,21 @@
 
                         </div>
                     </div>
+
+                    <div class="pagination-box">
+                        <div class="pagination-box-currentpage" key="1">{{ pageConfig.currentPage}} / {{ pageConfig.total }}</div>
+                        <el-pagination
+                            :current-page="pageConfig.currentPage"
+                            :page-size="pageConfig.pageSize"
+                            @current-change="handleCurrentChange"
+                            background
+                            layout="prev, pager, next"
+                            :total="pageConfig.total">
+                        </el-pagination>
+                        <el-input v-model="pageValue" style="width: 3vw;margin: 0 12px 0 40px;color: #1919c1;" oninput="value=value.replace(/[^\d]/g,'')"></el-input>
+                        <div class="pagination-box-currentpage" style="cursor: pointer;" @click="handleCurrentChange(pageValue)">跳转</div>
+
+                    </div>
                 </div>
                 
                 <div class="right"></div>
@@ -59,7 +74,21 @@ export default {
                 {id: 0, title: '【商业贸易】跨境平台综合服务开发', address: '广西壮族自治区 南宁市 江南区', time: '2023.12.07', count: '100万元以上'},
                 {id: 0, title: '【商业贸易】跨境平台综合服务开发', address: '广西壮族自治区 南宁市 江南区', time: '2023.12.07', count: '100万元以上'},
                 {id: 0, title: '【商业贸易】跨境平台综合服务开发', address: '广西壮族自治区 南宁市 江南区', time: '2023.12.07', count: '100万元以上'},                
-            ]
+            ],
+            pageConfig: {
+                currentPage: 1,
+                pageSize: 20,
+                total: 100,
+            },
+            pageValue: 1,
+            
+        }
+    },
+    methods: {
+        handleCurrentChange(page) {
+            console.log('当前页',page)
+            this.pageConfig.currentPage = page
+            this.pageValue = page
         }
     }
 }
@@ -139,6 +168,7 @@ export default {
                             display: flex;
                             justify-content: space-between;
                             align-items: center;
+                            cursor: pointer;
                             .title {
                                 font-size: 18px;
                                 font-weight: 400;
@@ -163,7 +193,26 @@ export default {
                                 font-size: 20px;
                             }
                         }
-
+                    }
+                    .pagination-box {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin: 50px 27px 64px 0;
+                        &-currentpage {
+                            background-color: #fff;
+                            padding: 10px 23px;
+                            font-weight: 400;
+                            color: #19191C;
+                            border: 1px solid #CCCCCC;
+                            border-radius: 6px;
+                        }
+                        :deep(.el-input__inner) {
+                            text-align: center;
+                            color:#19191C;
+                            font-size: 16px;
+                            font-weight: 400;
+                        }
                     }
                 }
                 .right {
