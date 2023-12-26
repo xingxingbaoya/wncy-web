@@ -147,6 +147,26 @@ export const constantRoutes = [
           roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
         }
       },
+      {
+        path: 'detail',
+        name: 'Projectmanagedetail',
+        component: () => import('@/views/projectmanage/detail'),
+        hidden: true,
+        meta: {
+          title: '项目详情', activeMenu: '/projectmanage',
+          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
+        }
+      },
+      {
+        path: 'publish',
+        name: 'Projectmanagepublish',
+        component: () => import('@/views/projectmanage/publish'),
+        hidden: true,
+        meta: {
+          title: '项目发布', activeMenu: '/projectmanage',
+          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
+        }
+      },
     ]
   },
   {
