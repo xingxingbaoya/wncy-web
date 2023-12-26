@@ -38,14 +38,21 @@
                             <div class="left-classify-item-city">
                                 <div v-for="(city,index) in cityList" :key="city">
                                     <div class="left-classify-item-option"
-                                    :style="collapsed && index> firstLineProvince ? 'display:none': 'display:block'"
+                                    :style="collapsed && index+1> firstLineProvince ? 'display:none': 'display:block'"
                                     id="cityOption"
                                     :class="searchData.province == city.code? 'active':''"
                                     @click="searchData.province = city.code"
                                     >{{ city.name }}</div>
                                 </div>
                             </div>
-                            <div @click="collapsed = !collapsed">展开</div>
+                            <div @click="collapsed = !collapsed" class="left-classify-item-more">
+                                <template v-if="collapsed">
+                                    {{ '更多' }} <i class="el-icon-arrow-up"></i>
+                                </template>
+                                <template v-else>
+                                    {{ '收起' }} <i class="el-icon-arrow-down"></i>
+                                </template>                               
+                            </div>
                         </div>
                         <div class="left-classify-item">
                             <div class="left-classify-item-title"> 其他要求： </div>
@@ -216,6 +223,9 @@ export default {
         background-image: url("~img/projectManage/banner.png");
         background-size: 100%;
         background-repeat: no-repeat;
+        :deep(.el-input__suffix) {
+            top: 4px;
+        }
         &-theme {
             background: linear-gradient(0deg, #008AFF 0.1220703125%, #001196 100%);
             -webkit-background-clip: text;
@@ -304,6 +314,13 @@ export default {
                                 // :deep(.el-select .el-input.is-focus .el-input__inner) {
                                 //     border-color: #2434AF;
                                 // }
+                            }
+                            &-more {
+                                min-width: 60px;
+                                padding-top: 8px;
+                                align-self: start;
+                                cursor: pointer;
+                                color: #0E1E9C;
                             }
                         }
                     }
