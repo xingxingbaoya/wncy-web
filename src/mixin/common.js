@@ -315,6 +315,18 @@ export default {
     policyStateDict: () => {
       return JSON.parse(localStorage.getItem('dic-policy_state'))
     },
-
+    academyStateDict: () => {
+      return JSON.parse(localStorage.getItem('dic-project_academy'))
+    },
+    topTenStateDict: () => {
+      return JSON.parse(localStorage.getItem('dic-top_10_hg_category'))
+    },
+    zgckjyStateDict: () => {
+      return JSON.parse(localStorage.getItem('dic-zgckjy_241_category'))
+    },
+    bjStateDict: () => {
+      return JSON.parse(localStorage.getItem('dic-bj_2441_category'))
+    },
+    
   }
 }

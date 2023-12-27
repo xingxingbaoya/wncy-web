@@ -207,15 +207,17 @@ import lindai from "@/assets/img/projectManage/lindai.png";
 import qianyuan from "@/assets/img/projectManage/qian-yuan-L.png";
 import city from "@/assets/city/city_code.json";
 import { getProjectList } from "@/api/projecthall";
+import common from "@/mixin/common";
 
 export default {
+  mixins: [common],
   data() {
     return {
-      techTypeDict: [
-        { id: 0, title: "不限" },
-        { id: 1, title: "技术项目" },
-        { id: 2, title: "专利项目" },
-      ],
+      // techTypeDict: [
+      // {id:0, title:'不限'},
+      // {id:1,title:'技术项目'},
+      // {id:2,title:'专利项目'}
+      // ],
       techSourceDict: [
         { id: 0, title: "不限" },
         { id: 1, title: "企业" },

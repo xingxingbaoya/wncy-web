@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getDict(dictType) {
   return request({
-    url: `/user/dict/${dictType}`,
+    url: `/user/user/dict/${dictType}`,
     method: 'post'
   })
 }

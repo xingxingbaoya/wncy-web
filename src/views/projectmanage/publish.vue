@@ -5,22 +5,30 @@
         <div class="project-publish-wrap">
             <div class="project-publish-wrap-left">
                 <!-- <div class="project-wrap"> -->
-                <el-form ref="formDataRef" :model="formData" :rules="rules" label-position="right" label-width="120px">
+                <el-form ref="formDataRef" :model="formData" :rules="rules" label-position="right" label-width="150px">
                     <el-row class="project-wrap">
                         <el-col :span="16">
-                            <el-form-item label="项目权属方" prop="proName">
-                                <el-input v-model="formData.proName" placeholder="项目权属方" />
+                            <el-form-item label="项目名称" prop="proName">
+                                <el-input v-model="formData.proName" placeholder="项目名称" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="16">
-                            <el-form-item label="项目分类" prop="industryone">
+                            <el-form-item label="所在院所" prop="proName">
+                                <el-select v-model="formData.industryone" :popper-append-to-body="false" placeholder="项目分类">
+                                    <el-option v-for="item in academyStateDict" :label="item.dictLabel" :key="item.dictValue"
+                                        :value="item.dictValue" />
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16">
+                            <el-form-item label="项目类别" prop="industryone">
                                 <el-select v-model="formData.industryone" :popper-append-to-body="false" placeholder="项目分类">
                                     <el-option v-for="item in industryOneDict" :label="item.dictLabel" :key="item.dictValue"
                                         :value="item.dictValue" />
                                 </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="16">
+                        <!-- <el-col :span="16">
                             <el-form-item label="技术类型" prop="proPatentInfo">
                                 <el-select v-model="formData.proPatentInfo" :popper-append-to-body="false"
                                     placeholder="技术类型">
@@ -28,27 +36,64 @@
                                         :value="item.dictValue" />
                                 </el-select>
                             </el-form-item>
+                        </el-col> -->
+                        <el-col :span="16">
+                            <el-form-item label="应用场景" prop="proName">
+                                <el-input v-model="formData.proName" placeholder="应用场景" />
+                            </el-form-item>
                         </el-col>
                         <el-col :span="16">
+                            <el-form-item label="合作意向" :popper-append-to-body="false" prop="cooperation">
+                                <el-select v-model="formData.cooperation" :popper-append-to-body="false" placeholder="合作意向">
+                                    <el-option v-for="item in cooperationDict" :label="item.dictLabel"
+                                        :value="item.dictValue" />
+                                </el-select>
+                                <!-- <el-checkbox-group v-model="formData.cooperation">
+                                    <el-checkbox-button v-for="item in cooperationDict" :label="item.dictLabel"
+                                        :key="item.dictLabel" :value="item.dictValue"></el-checkbox-button>
+                                </el-checkbox-group> -->
+                            </el-form-item>
+                        </el-col>
+                        <!-- <el-col :span="16">
                             <el-form-item label="技术来源" prop="proNature">
                                 <el-select v-model="formData.proNature" :popper-append-to-body="false" placeholder="技术来源">
                                     <el-option v-for="item in proNatureDict" :label="item.dictLabel"
                                         :value="item.dictValue" />
                                 </el-select>
                             </el-form-item>
-                        </el-col>
+                        </el-col> -->
                     </el-row>
 
                     <el-row class="project-wrap">
                         <el-col :span="16">
-                            <el-form-item label="合作方式" :popper-append-to-body="false" prop="cooperation">
-                                <el-checkbox-group v-model="formData.cooperation">
-                                    <el-checkbox-button v-for="item in cooperationDict" :label="item.dictLabel"
-                                        :key="item.dictLabel" :value="item.dictValue"></el-checkbox-button>
-                                </el-checkbox-group>
+                            <el-form-item label="十大高精尖产业" prop="proDevelopment">
+                                <el-select v-model="formData.proDevelopment" :popper-append-to-body="false"
+                                    placeholder="十大高精尖产业">
+                                    <el-option v-for="item in topTenStateDict" :key="item.dictValue" :label="item.dictLabel"
+                                        :value="item.dictValue" />
+                                </el-select>
                             </el-form-item>
                         </el-col>
-                        <el-col :span="10">
+                        <el-col :span="16">
+                            <el-form-item label="北京2411产业" prop="proDevelopment">
+                                <el-select v-model="formData.proDevelopment" :popper-append-to-body="false"
+                                    placeholder="北京2411产业">
+                                    <el-option v-for="item in bjStateDict" :key="item.dictValue" :label="item.dictLabel"
+                                        :value="item.dictValue" />
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                        <el-col :span="16">
+                            <el-form-item label="中关村科技园区管理委员会241产业分类" prop="proDevelopment">
+                                <el-select v-model="formData.proDevelopment" :popper-append-to-body="false"
+                                    placeholder="中关村科技园区管理委员会241产业分类">
+                                    <el-option v-for="item in zgckjyStateDict" :key="item.dictValue" :label="item.dictLabel"
+                                        :value="item.dictValue" />
+                                </el-select>
+                            </el-form-item>
+                        </el-col>
+                        
+                        <!-- <el-col :span="10">
 
                             <el-form-item label="意向资金(万)" prop="proIntentionPrice">
                                 <el-input v-model="formData.proIntentionPrice" placeholder="意向资金"
@@ -72,11 +117,11 @@
                                         :value="item.dictValue" />
                                 </el-select>
                             </el-form-item>
-                        </el-col>
+                        </el-col> -->
                         <el-col :span="23">
-                            <el-form-item label="项目描述" prop="proIntroduct">
+                            <el-form-item label="项目简介" prop="proIntroduct">
                                 <el-input v-model="formData.proIntroduct" type="textarea" :rows="5" resize="none"
-                                    placeholder="项目描述" />
+                                    placeholder="项目简介" />
                             </el-form-item>
                         </el-col>
                         <el-col>
@@ -113,12 +158,12 @@
                         </el-row>
                         <el-row>
                             <el-col :span="10">
-                                <el-form-item label="手机号" prop="phone">
-                                    <el-input v-model="formData.phone" placeholder="手机号" />
+                                <el-form-item label="联系电话" prop="phone">
+                                    <el-input v-model="formData.phone" placeholder="联系电话" />
                                 </el-form-item>
                             </el-col>
                         </el-row>
-                        <el-row>
+                        <!-- <el-row>
                             <el-col :span="10">
                                 <el-form-item label="邮箱" prop="email">
                                     <el-input v-model="formData.email" placeholder="邮箱" />
@@ -170,7 +215,7 @@
 
                                 </el-form-item>
                             </el-col>
-                        </el-row>
+                        </el-row> -->
                         <div style="text-align: center;">
                             <el-button type="primary" style="width:9vw" @click="doPublishProject">立即发布</el-button>
                         </div>
@@ -207,9 +252,10 @@
 <script>
 import city from '@/assets/city/city_code.json'
 import { addProjectDetail } from '@/api/projecthall'
+import common from '@/mixin/common'
 
 export default {
-
+    mixins: [common],
     data() {
         const validateproIntentionPrice = (rule, value, callback) => {
             if (value == '' && this.formData.faceFlag == 0) {
