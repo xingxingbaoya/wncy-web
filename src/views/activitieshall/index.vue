@@ -962,7 +962,14 @@ export default {
     margin: 0 auto;
     background: transparent;
     position: absolute;
-    bottom: -580px;
+    bottom: -100px;
+    .filter-box-content {
+      background: #fff;
+      height: 206px;
+      background: #ffffff;
+      box-shadow: 0px 0px 46px 0px #d8e0f0;
+      border-radius: 16px;
+    }
   }
 }
 ::v-deep .image {
