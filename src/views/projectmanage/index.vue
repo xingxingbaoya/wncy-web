@@ -17,7 +17,7 @@
                     <div class="left-classify">
                         <div class="left-classify-item">
                             <div class="left-classify-item-title"> 技术类型： </div>
-                            <div v-for="tech in techTypeDict" :key="city">
+                            <div v-for="tech in techTypeDict" :key="tech">
                                 <div class="left-classify-item-option"
                                 :class="searchData.proPatentInfo == tech.id? 'active':''"
                                 @click="searchData.proPatentInfo = tech.id"
@@ -26,7 +26,7 @@
                         </div>
                         <div class="left-classify-item">
                             <div class="left-classify-item-title"> 技术来源： </div>
-                            <div v-for="tech in techSourceDict" :key="city">
+                            <div v-for="tech in techSourceDict" :key="tech">
                                 <div class="left-classify-item-option"
                                 :class="searchData.proNature == tech.id? 'active':''"
                                 @click="searchData.proNature = tech.id"
