@@ -12,51 +12,51 @@
           <span class="icon-text-cw">搜索</span>
         </el-button>
       </el-input>
-    </el-row>
-    <div class="filter-box">
-      <img src="~img/projectManage/project-search.png" />
-      <p>当前位置：首页 > 所有项目</p>
-      <div class="filter-box-content">
-        <div class="left-classify">
-          <div class="left-classify-item">
-            <div class="left-classify-item-title">活动类型：</div>
-            <div v-for="tech in activityTypeDict" :key="tech.id">
-              <div
-                class="left-classify-item-option"
-                :class="searchData.proPatentInfo == tech.id ? 'active' : ''"
-                @click="searchData.proPatentInfo = tech.id"
-              >
-                {{ tech.title }}
+      <div class="filter-box">
+        <img src="~img/projectManage/project-search.png" />
+        <p>当前位置：首页 > 所有项目</p>
+        <div class="filter-box-content">
+          <div class="left-classify">
+            <div class="left-classify-item">
+              <div class="left-classify-item-title">活动类型：</div>
+              <div v-for="tech in activityTypeDict" :key="tech.id">
+                <div
+                  class="left-classify-item-option"
+                  :class="searchData.proPatentInfo == tech.id ? 'active' : ''"
+                  @click="searchData.proPatentInfo = tech.id"
+                >
+                  {{ tech.title }}
+                </div>
               </div>
             </div>
-          </div>
-          <div class="left-classify-item">
-            <div class="left-classify-item-title">活动状态：</div>
-            <div v-for="tech in activityStatusDict" :key="tech.id">
-              <div
-                class="left-classify-item-option"
-                :class="searchData.proNature == tech.id ? 'active' : ''"
-                @click="searchData.proNature = tech.id"
-              >
-                {{ tech.title }}
+            <div class="left-classify-item">
+              <div class="left-classify-item-title">活动状态：</div>
+              <div v-for="tech in activityStatusDict" :key="tech.id">
+                <div
+                  class="left-classify-item-option"
+                  :class="searchData.proNature == tech.id ? 'active' : ''"
+                  @click="searchData.proNature = tech.id"
+                >
+                  {{ tech.title }}
+                </div>
               </div>
             </div>
-          </div>
-          <div class="left-classify-item">
-            <div class="left-classify-item-title">活动日期：</div>
-            <div v-for="tech in activityStatusDict" :key="tech.id">
-              <div
-                class="left-classify-item-option"
-                :class="searchData.proNature == tech.id ? 'active' : ''"
-                @click="searchData.proNature = tech.id"
-              >
-                {{ tech.title }}
+            <div class="left-classify-item">
+              <div class="left-classify-item-title">活动日期：</div>
+              <div v-for="tech in activityStatusDict" :key="tech.id">
+                <div
+                  class="left-classify-item-option"
+                  :class="searchData.proNature == tech.id ? 'active' : ''"
+                  @click="searchData.proNature = tech.id"
+                >
+                  {{ tech.title }}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </el-row>
     <div class="content">
       <el-row class="outer-card">
         <div class="header-cw">
@@ -513,7 +513,7 @@ export default {
       this.loading = true;
       getActivityhome()
         .then((res) => {
-          debugger
+          debugger;
           if (res.code == "0000") {
             _.forEach(res.obj, (list, key) => {
               this.$set(this.listData, key, list);
@@ -693,13 +693,6 @@ export default {
 .zhibo {
   width: 620px;
   height: 360px;
-}
-.filter-box {
-  width: pxToVW(1381);
-  margin: 0 auto;
-  background: transparent;
-  position: absolute;
-  bottom: -580px;
 }
 .header-cw {
   display: flex;
@@ -946,7 +939,7 @@ export default {
 }
 .search-area {
   background-color: #ffffff;
-  // padding: 26px 34px;
+  margin-bottom: 100px;
   height: 640px;
   display: flex;
   // justify-content: center;
@@ -956,11 +949,20 @@ export default {
     0px;
   background-position: center 0px;
   background-size: cover;
+  position: relative;
   .icon-text-cw {
     margin-left: 15px;
     font-size: 22px;
     font-family: PingFang SC;
     font-weight: 300;
+  }
+
+  .filter-box {
+    width: pxToVW(1381);
+    margin: 0 auto;
+    background: transparent;
+    position: absolute;
+    bottom: -580px;
   }
 }
 ::v-deep .image {
