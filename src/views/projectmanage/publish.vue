@@ -81,8 +81,8 @@
                         </el-col>
                         <el-col>
                             <el-form-item label=" " prop="pic_file" :class="isShowUpload">
-                                <el-upload action="#" limit=1 :file-list="pic_file_list" :on-change="handleImgChange"
-                                    :auto-upload="false">
+                                <el-upload action="#" :limit='5' :file-list="pic_file_list" :on-change="handleImgChange" list-type="picture" multiple
+                                    :auto-upload="false"  class="upload-wrap">
                                     <el-button slot="default" type="primary">上传图片</el-button>
                                     <span slot="tip" style="color: #C1BFC5;">&nbsp;&nbsp;最多添加5个图片，每个图片大小不超过2MB</span>
                                     <div slot="file" slot-scope="{file}" class="img-wrapper">
@@ -311,12 +311,13 @@ export default {
             const isIMG = file.raw.type.includes('image')
             const isLt2M = file.size / 1024 / 1024 < 2
             this.$refs.formDataRef.clearValidate('pic_file')
+            
             if (!isIMG) {
-                this.pic_file_list.pop()
+                // this.pic_file_list.pop()
                 return this.$message.warning('只能上传图片!')
             }
             if (!isLt2M) {
-                this.pic_file_list.pop()
+                // this.pic_file_list.pop()
                 return this.$message.warning('上传图片大小不能超过 2MB!')
             }
             this.formDataRef.pic_file = file.raw
@@ -409,6 +410,16 @@ export default {
                     }
                     
                 }
+
+                .upload-wrap{
+                    :deep(.el-upload-list__item-thumbnail ){
+                        width: 18px;
+                        height: 18px;
+                    }
+                    :deep(.el-upload-list__item) {
+                        height: 20px;
+                    }
+                } 
             }
 
         }
