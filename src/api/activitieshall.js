@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getActivityhome(params) {
   return request({
-    url: 'hall/activity/home',
+    url: 'activity/home',
     method: 'get',
     params
   })
@@ -10,7 +10,7 @@ export function getActivityhome(params) {
 
 export function getActivityDetail(params) {
   return request({
-    url: `hall/activity/detail`,
+    url: `activity/detail`,
     method: 'get',
     params
   })
@@ -18,7 +18,7 @@ export function getActivityDetail(params) {
 
 export function signUpActivity(data) {
   return request({
-    url: 'hall/activity/signUp',
+    url: 'activity/signUp',
     method: 'post',
     data
   })
@@ -26,7 +26,7 @@ export function signUpActivity(data) {
 
 export function getActivityList(params) {
   return request({
-    url: 'hall/activity/search',
+    url: 'activity/search',
     method: 'get',
     params
   })
@@ -34,7 +34,7 @@ export function getActivityList(params) {
 
 export function getMySingUpInfo(data) {
   return request({
-    url: 'hall/activity/singUpInfo',
+    url: 'activity/singUpInfo',
     method: 'get',
     data
   })
@@ -42,7 +42,7 @@ export function getMySingUpInfo(data) {
 
 export function getsignUpDetail(id) {
   return request({
-    url: `hall/activity/signUpDetail/${id}`,
+    url: `activity/signUpDetail/${id}`,
     method: 'get'
   })
 }
