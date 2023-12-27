@@ -1316,7 +1316,7 @@ export default {
 .home-freeregister {
   width: 100%;
   background-image: url("~img/home/register-back.png");
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
   padding: 106px 0 74px;
