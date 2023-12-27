@@ -1,8 +1,7 @@
 <template>
   <el-main v-loading="loading">
     <el-row class="search-area">
-      <span class="search-left_cw">活动大厅</span>
-      <span class="search-left_detail_cw">技术转移行业中关村科技活动发布大厅</span>
+      <span class="search-left_cw">技术转移行业活动发布大厅</span>
       <el-input v-model="searchData.title"
                 placeholder="输入咨询关键词，进行搜索"
                 class="input-search">
@@ -758,13 +757,20 @@ export default {
 .input-search {
   max-width: 800px;
   margin-top: 27px;
+  width: 573px;
+  height: 48px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 46px 0px rgba(131,176,235,0.39);
+  border-radius: 48px;
   ::v-deep .el-input__inner {
     height: 56px;
-    font-size: 18px;
-    // border-color: #516fd2;
     border-right: none;
-    background-color: rgba(0, 0, 0, 0.1);
-    color: #fff;
+    background-color: transparent;
+    font-size: 14px;
+    font-family: Source Han Sans CN;
+    font-weight: 400;
+    color: #818289;
+    line-height: 74px;
   }
 
   ::v-deep .el-button {
@@ -784,18 +790,14 @@ export default {
   }
 }
 .search-left_cw {
-  font-size: 32px;
-  font-family: PingFang SC;
-  font-weight: 400;
-  color: #ffffff;
-  margin-top: 164px;
-}
-.search-left_detail_cw {
-  margin-top: 26px;
-  font-size: 18px;
-  font-family: PingFang SC;
-  font-weight: 300;
-  color: #ffffff;
+  margin-top: 100px;
+  font-size: 72px;
+  font-family: Source Han Sans CN;
+  font-weight: bold;
+  line-height: 280px;
+  background: linear-gradient(0deg, #008AFF 0.1220703125%, #001196 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .content {
   padding: 30px calc((100% - 1245px) / 2) 0;
@@ -804,12 +806,12 @@ export default {
 .search-area {
   background-color: #ffffff;
   // padding: 26px 34px;
-  height: 424px;
+  height: 640px;
   display: flex;
   // justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: url("../../assets/img/hddtbg.png") no-repeat center 0px;
+  background: url("../../assets/img/activityManage/banner.png") no-repeat center 0px;
   background-position: center 0px;
   background-size: cover;
   .icon-text_cw {

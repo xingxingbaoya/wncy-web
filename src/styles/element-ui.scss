@@ -61,14 +61,14 @@
 }
 
 .el-date-table td.end-date span, .el-date-table td.start-date span {
-  background-color: #516FD2;
+  background-color: #2434AF;
 }
 
 .el-date-table td.today span{
-  color: #516FD2;
+  color: #2434AF;
 }
 .el-date-table td.available:hover {
-  color: #516FD2;
+  color: #2434AF;
 }
 
 .el-date-table {
@@ -88,12 +88,12 @@
 }
 
 .el-pagination.is-background .el-pager li:not(.disabled).active {
-  background: #516FD2;
+  background: #2434AF;
   color: #FFFFFF;
 }
 
 .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
-  color: #516FD2;
+  color: #19191C;
   background: #FFFFFF;
   line-height: 45px;
   min-width: 52px;
@@ -105,29 +105,29 @@
 }
 .el-pagination.is-background .el-pager li:not(.disabled):hover {
   color: #FFFFFF;
-  background: #516FD2;
+  background: #2434AF !important;
 }
 
 .el-select-dropdown__item.selected {
-  color: #516FD2;
+  color: #2434AF;
 }
 .el-select .el-input.is-focus .el-input__inner {
-  border-color: #516FD2;
+  border-color: #2434AF;
 }
 
 .el-select .el-input__inner:focus {
-  border-color: #516FD2;
+  border-color: #2434AF;
 }
 .el-input.is-active .el-input__inner, .el-input__inner:focus {
-  border-color: #516FD2;
+  border-color: #2434AF;
 }
 
 .el-cascader .el-input .el-input__inner:focus, .el-cascader .el-input.is-focus .el-input__inner {
-  border-color: #516FD2;
+  border-color: #2434AF;
 }
 
 .el-cascader-node.in-active-path, .el-cascader-node.is-active, .el-cascader-node.is-selectable.in-checked-path {
-  color: #516FD2;
+  color: #2434AF;
 }
 
 .el-upload-list--picture-card .el-upload-list__item,.img-wrapper, .el-upload--picture-card {
@@ -145,7 +145,7 @@
 }
 
 .el-textarea__inner:focus {
-  border-color: #516FD2;
+  border-color: #2434AF;
 }
 
 .el-textarea__inner {
@@ -154,8 +154,8 @@
 }
 
 .el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner {
-  background-color: #516FD2;
-  border-color: #516FD2;
+  background-color: #2434AF;
+  border-color: #2434AF;
 }
 
 
@@ -163,13 +163,13 @@
 
   color: #AAAAAA;
   .clause-text {
-    color: #516FD2;
+    color: #2434AF;
   }
 }
 
 
 .el-date-table td.current:not(.disabled) span {
-  background-color: #516FD2;
+  background-color: #2434AF;
 }
 
 .el-message__content {
@@ -194,13 +194,13 @@
   //}
 
   .el-button--primary {
-    background-color: #516FD2;
+    background-color: #2434AF !important;
   }
 
   .el-button:focus, .el-button:hover {
     color: #FFFFFF;
     //border-color: #c6e2ff;
-    background-color: #516FD2;
+    background-color: #2434AF;
   }
 }
 
@@ -218,14 +218,14 @@
 }
 
 .el-year-table td .cell:hover, .el-year-table td.current:not(.disabled) .cell {
-  color: #516FD2;
+  color: #2434AF;
 }
 
 .el-year-table td.today .cell {
-  //color: #516FD2;
+  //color: #2434AF;
 }
 .el-year-table .available.disabled {
-  //color: #516FD2;
+  //color: #2434AF;
   visibility: hidden;
   //display: none;
 }

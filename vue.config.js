@@ -120,7 +120,7 @@ module.exports = {
     },
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
-        target: `http://192.168.55.39:1011`,
+        target: `http://119.57.175.177:1213`,
         changeOrigin: true,
         secure: false,
         // logLevel: 'debug',

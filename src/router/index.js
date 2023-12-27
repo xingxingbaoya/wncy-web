@@ -135,7 +135,7 @@ export const constantRoutes = [
     ]
   },
   {
-    path: '/projecthall',
+    path: '/projectmanage',
     component: Layout,
     children: [
       {
@@ -148,9 +148,34 @@ export const constantRoutes = [
         }
       },
       {
+        path: 'detail',
+        name: 'Projectmanagedetail',
+        component: () => import('@/views/projectmanage/detail'),
+        hidden: true,
+        meta: {
+          title: '项目详情', activeMenu: '/projectmanage',
+          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
+        }
+      },
+      {
+        path: 'publish',
+        name: 'Projectmanagepublish',
+        component: () => import('@/views/projectmanage/publish'),
+        hidden: true,
+        meta: {
+          title: '项目发布', activeMenu: '/projectmanage',
+          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
+        }
+      },
+    ]
+  },
+  {
+    path: '/projecthall',
+    component: Layout,
+    children: [
+      {
         path: '',
         name: 'Projecthall',
-        // hidden: true,
         component: () => import('@/views/projecthall/index'),
         meta: {
           title: '项目大厅', activeMenu: '/projecthall',
@@ -220,20 +245,10 @@ export const constantRoutes = [
     children: [
       {
         path: '',
-        name: 'Activitiesdisplay',
-        component: () => import('@/views/activitiesdisplay/index'),
-        meta: {
-          title: '活动展示', activeMenu: '/activitiesdisplay',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      },
-      {
-        path: '',
         name: 'Activitieshall',
         component: () => import('@/views/activitieshall/index'),
-        hidden: true,
         meta: {
-          title: '活动大厅', activeMenu: '/activitieshall',
+          title: '活动展示', activeMenu: '/activitieshall',
           roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
         }
       },
