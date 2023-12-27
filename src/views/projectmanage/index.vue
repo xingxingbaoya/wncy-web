@@ -3,10 +3,10 @@
     <div class="project-manage-main">
         <div class="project-manage-main-theme">集结行业最优科技成果转化项目</div>
         <div class="project-manage-main-attach">技术持有者可自有发布行业顶尖成果</div>
-        <el-input placeholder="输入项目关键词进行搜索" class="project-manage-main-search">
+        <el-input placeholder="输入项目关键词进行搜索" class="project-manage-main-search" v-model="searchData.title">
             <i slot="prefix" class="el-input__icon el-icon-search"></i>
             <i slot="suffix">
-                <img src="~img/projectManage/search.png"/>
+                <img src="~img/projectManage/search.png" style="cursor: pointer;"/>
             </i>
         </el-input>
         <div class="project-manage-main-group">
@@ -20,7 +20,7 @@
                             <div v-for="tech in techTypeDict" :key="tech">
                                 <div class="left-classify-item-option"
                                 :class="searchData.proPatentInfo == tech.id? 'active':''"
-                                @click="searchData.proPatentInfo = tech.id"
+                                @click="handleSearchDataChange('proPatentInfo', tech.id)"
                                 >{{ tech.title }}</div>
                             </div>
                         </div>
@@ -29,7 +29,7 @@
                             <div v-for="tech in techSourceDict" :key="tech">
                                 <div class="left-classify-item-option"
                                 :class="searchData.proNature == tech.id? 'active':''"
-                                @click="searchData.proNature = tech.id"
+                                @click="handleSearchDataChange('proNature', tech.id)"
                                 >{{ tech.title }}</div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                                     :style="collapsed && index+1> firstLineProvince ? 'display:none': 'display:block'"
                                     id="cityOption"
                                     :class="searchData.province == city.code? 'active':''"
-                                    @click="searchData.province = city.code"
+                                    @click="handleSearchDataChange('province', city.code)"
                                     >{{ city.name }}</div>
                                 </div>
                             </div>
@@ -57,14 +57,14 @@
                         <div class="left-classify-item">
                             <div class="left-classify-item-title"> 其他要求： </div>
                             <span>是否挂牌：</span>
-                            <el-select v-model="searchData.isListing" class="other">
+                            <el-select v-model="searchData.isListing" class="other" @change="value => handleSearchDataChange('isListing', value)">
                                 <el-option value="" label="不限" key="all"></el-option>
                                 <el-option value="0" label="是" key="0"></el-option>
                                 <el-option value="1" label="否" key="1"></el-option>
                             </el-select>
 
                             <span>项目地区：</span>
-                            <el-select v-model="searchData.isNotNational" class="other">
+                            <el-select v-model="searchData.isNotNational" class="other" @change="value => handleSearchDataChange('isNotNational', value)">
                                 <el-option value="" label="不限" key="all"></el-option>
                                 <el-option value="0" label="国内项目" key="0"></el-option>
                                 <el-option value="1" label="国外项目" key="1"></el-option>
@@ -81,15 +81,16 @@
                             <div class="left-content">
                                 <div class="title">{{ item.title }}</div>
                                 <div class="attach">
-                                    <img src="~img/projectManage/address.png"/> <span class="attach-address">{{ item.address }}</span>
-                                    <img src="~img/projectManage/time.png"/> {{ item.time }}
+                                    <img src="~img/projectManage/address.png"/> <span class="attach-address">{{ item.provinceName }} {{ item.cityName }} {{ item.areaName }}</span>
+                                    <img src="~img/projectManage/time.png"/> {{ item.createTime }}
                                 </div>
                             </div>
                             <div class="right-content">
-                                <span>{{ item.count }}</span>
+                                <span>{{ item.faceFlag == '1'|| item.proIntentionPrice == 0 ? '面议' : item.proIntentionPrice + `万元`}}</span>
                             </div>
 
                         </div>
+                        <Empty v-show="!projectList.length" />
                     </div>
 
                     <div class="pagination-box">
@@ -161,11 +162,11 @@ export default {
             {id:5, title: '个人'}
             ],
             projectList: [
-                {id: 0, title: '【商业贸易】跨境平台综合服务开发', address: '广西壮族自治区 南宁市 江南区', time: '2023.12.07', count: '100万元以上'},
-                {id: 0, title: '【商业贸易】跨境平台综合服务开发', address: '广西壮族自治区 南宁市 江南区', time: '2023.12.07', count: '100万元以上'},
-                {id: 0, title: '【商业贸易】跨境平台综合服务开发', address: '广西壮族自治区 南宁市 江南区', time: '2023.12.07', count: '100万元以上'},
-                {id: 0, title: '【商业贸易】跨境平台综合服务开发', address: '广西壮族自治区 南宁市 江南区', time: '2023.12.07', count: '100万元以上'},
-                {id: 0, title: '【商业贸易】跨境平台综合服务开发', address: '广西壮族自治区 南宁市 江南区', time: '2023.12.07', count: '100万元以上'},                
+                {id: 0, title: '【商业贸易】跨境平台综合服务开发', provinceName: '广西壮族自治区', cityName: '南宁市', areaName: '江南区', createTime: '2023.12.07', proIntentionPrice: '100', faceFlag: '0'},
+                {id: 0, title: '【商业贸易】跨境平台综合服务开发', provinceName: '广西壮族自治区', cityName: '南宁市', areaName: '江南区', createTime: '2023.12.07', proIntentionPrice: '100', faceFlag: '0'},
+                {id: 0, title: '【商业贸易】跨境平台综合服务开发', provinceName: '广西壮族自治区', cityName: '南宁市', areaName: '江南区', createTime: '2023.12.07', proIntentionPrice: '100', faceFlag: '1'},
+                {id: 0, title: '【商业贸易】跨境平台综合服务开发', provinceName: '广西壮族自治区', cityName: '南宁市', areaName: '江南区', createTime: '2023.12.07', proIntentionPrice: 0, faceFlag: '0'},
+                {id: 0, title: '【商业贸易】跨境平台综合服务开发', provinceName: '广西壮族自治区', cityName: '南宁市', areaName: '江南区', createTime: '2023.12.07', proIntentionPrice: 100, faceFlag: '0'},                
             ],
             pageConfig: {
                 currentPage: 1,
@@ -197,13 +198,34 @@ export default {
             return [{"name": "全部", code: 0}, ...city]
         }
     },
+    created() {
+        loadData()
+    },
     methods: {
+        loadData () {
+            this.loading=true
+            getProjectList({ ...this.pageConfig,...this.searchData }).then(res => {
+                if(res.code=='0000') {
+                this.projectList=res.rows
+                this.$set(this.pager,'total',res.total)
+                } else {
+                this.$message.error(res.msg)
+                }
+            }).finally(() => {
+                this.loading=false
+            })
+        },
         handleCurrentChange(page) {
             this.pageConfig.currentPage = page
             this.pageValue = page
+            this.loadData()
         },
         getProjDetail(proj) {
             this.$router.push('/projectmanage/detail')
+        },
+        handleSearchDataChange(type, value) {
+            this.searchData[type] = value
+            this.loadData()
         }
     },
     mounted() {
@@ -290,7 +312,7 @@ export default {
                             font-weight: 400;
                            &-title {
                                 min-width: 80px;
-                                padding-top: 8px;
+                                padding-top: 10px;
                                 align-self: start;
                             }
                             &-option {
