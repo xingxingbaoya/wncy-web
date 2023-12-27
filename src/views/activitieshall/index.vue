@@ -2,15 +2,16 @@
   <el-main v-loading="false">
     <el-row class="search-area">
       <span class="search-text-cw">技术转移行业活动发布大厅</span>
+
       <el-input
-        v-model="searchData.title"
-        prefix-icon="el-icon-search"
         placeholder="输入咨询关键词，进行搜索"
-        class="input-search"
+        class="activity-manage-main-search"
+        v-model="searchData.title"
       >
-        <el-button class="search-btn" slot="append" @click="gomore()">
-          <span class="icon-text-cw">搜索</span>
-        </el-button>
+        <i slot="prefix" class="el-input__icon el-icon-search"></i>
+        <i slot="suffix">
+          <img src="~img/projectManage/search.png" style="cursor: pointer" />
+        </i>
       </el-input>
       <div class="filter-box">
         <img src="~img/projectManage/project-search.png" />
@@ -19,11 +20,13 @@
           <div class="left-classify">
             <div class="left-classify-item">
               <div class="left-classify-item-title">活动类型：</div>
-              <div v-for="tech in activityTypeDict" :key="tech.id">
+              <div v-for="tech in activityTypeDict" :key="tech.key">
                 <div
                   class="left-classify-item-option"
-                  :class="searchData.proPatentInfo == tech.id ? 'active' : ''"
-                  @click="searchData.proPatentInfo = tech.id"
+                  :class="
+                    searchData.actClassification == tech.key ? 'active' : ''
+                  "
+                  @click="searchData.actClassification = tech.key"
                 >
                   {{ tech.title }}
                 </div>
@@ -31,11 +34,11 @@
             </div>
             <div class="left-classify-item">
               <div class="left-classify-item-title">活动状态：</div>
-              <div v-for="tech in activityStatusDict" :key="tech.id">
+              <div v-for="tech in activityStatusDict" :key="tech.key">
                 <div
                   class="left-classify-item-option"
-                  :class="searchData.proNature == tech.id ? 'active' : ''"
-                  @click="searchData.proNature = tech.id"
+                  :class="searchData.actStatus == tech.key ? 'active' : ''"
+                  @click="searchData.actStatus = tech.key"
                 >
                   {{ tech.title }}
                 </div>
@@ -43,14 +46,25 @@
             </div>
             <div class="left-classify-item">
               <div class="left-classify-item-title">活动日期：</div>
-              <div v-for="tech in activityStatusDict" :key="tech.id">
-                <div
-                  class="left-classify-item-option"
-                  :class="searchData.proNature == tech.id ? 'active' : ''"
-                  @click="searchData.proNature = tech.id"
+              <div>
+                <span style="margin: 0 20px 0 10px">输入时间</span>
+                <el-date-picker
+                  v-model="searchData.startTime"
+                  type="date"
+                  placeholder="开始"
+                  size="mini"
+                  style="width: 140px"
                 >
-                  {{ tech.title }}
-                </div>
+                </el-date-picker>
+                <span style="margin: 0 10px">-</span>
+                <el-date-picker
+                  v-model="searchData.endTime"
+                  type="date"
+                  placeholder="结束"
+                  size="mini"
+                  style="width: 140px"
+                >
+                </el-date-picker>
               </div>
             </div>
           </div>
@@ -59,84 +73,7 @@
     </el-row>
     <div class="content">
       <el-row class="outer-card">
-        <div class="header-cw">
-          <div class="text-cw">
-            <div class="title-cw">活动直播</div>
-            <div class="zhibo" v-if="meetLiveLit.upType == 'video'">
-              <iframe
-                v-if="meetLiveLit.videoType == '0'"
-                height="310"
-                width="620"
-                :src="meetLiveLit.videoUrl ? meetLiveLit.videoUrl : ''"
-                frameborder="0"
-                allowfullscreen
-              />
-              <!-- <video-player v-else
-                      ref="videoPlayer"
-                      class="video-player vjs-custom-skin"
-                      :playsinline="true"
-                      :options="playerOptions" /> -->
-              <VTcPlayer
-                v-if="isVideo && meetLiveLit.videoType == '1'"
-                ref="tcPlayer"
-                :options="options"
-              />
-            </div>
-            <div class="zhibo" v-if="meetLiveLit.upType == 'article'">
-              <img class="zhanweiimg" :src="meetLiveLit.actCover" alt="" />
-            </div>
-          </div>
-          <div class="right-cw">
-            <div class="header_right-cw">
-              <div class="title-cw">最新动态</div>
-              <div class="more" @click="gomore(listsData[0].actClassification)">
-                查看更多
-              </div>
-            </div>
-            <div class="listdata">
-              <div
-                class="lists-cw"
-                v-for="(item, index) in listsData"
-                @click="goaction(item)"
-                :key="index"
-              >
-                <div>
-                  {{ item && item.actName ? item.actName : "" }}
-                </div>
-                <div class="time_list">
-                  {{ item && item.createTime.substring(0, 10) }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </el-row>
-      <el-row class="outer-card">
         <el-card shadow="never" :body-style="{ paddingRight: '10px' }">
-          <div slot="header" class="clearfix-cw">
-            <div class="tabs-cw">
-              <span class="title">论坛活动</span>
-              <div
-                v-for="(item, index) in statusLT"
-                :key="index"
-                @click="loadDataZXDT(1, item, index)"
-              >
-                <div v-if="item.check" class="ischeck">
-                  {{ item.t }}
-                </div>
-                <div v-else class="check">
-                  {{ item.t }}
-                </div>
-              </div>
-            </div>
-            <el-button
-              v-show="hasmore(listData.startSignBBS)"
-              class="more"
-              type="text"
-              @click="gomore(listData.startSignBBS[0].actClassification)"
-              >查看更多<i class="el-icon-arrow-right"
-            /></el-button>
-          </div>
           <el-row>
             <el-col
               v-for="(o, index) in listData.startSignBBS"
@@ -191,178 +128,6 @@
           </el-row>
         </el-card>
       </el-row>
-      <el-row class="outer-card">
-        <el-card shadow="never" :body-style="{ paddingRight: '10px' }">
-          <!-- <div slot="header"
-               class="clearfix">
-            <span class="title">成果发布</span>
-            <el-button v-show="hasmore(listData.release)"
-                       class="more"
-                       type="text"
-                       @click="gomore(listData.release[0].actClassification)">查看更多<i class="el-icon-arrow-right" /></el-button>
-          </div> -->
-          <div slot="header" class="clearfix-cw">
-            <div class="tabs-cw">
-              <span class="title">成果发布</span>
-              <div
-                v-for="(item, index) in statusCG"
-                :key="index"
-                @click="loadDataZXDT(2, item, index)"
-              >
-                <div v-if="item.check" class="ischeck">
-                  {{ item.t }}
-                </div>
-                <div v-else class="check">
-                  {{ item.t }}
-                </div>
-              </div>
-            </div>
-            <el-button
-              v-show="hasmore(listData.release)"
-              class="more"
-              type="text"
-              @click="gomore(listData.release[0].actClassification)"
-              >查看更多<i class="el-icon-arrow-right"
-            /></el-button>
-          </div>
-          <el-row>
-            <el-col
-              v-for="(o, index) in listData.release"
-              :key="o.actId"
-              :span="8"
-            >
-              <el-card
-                :body-style="{ padding: '0px' }"
-                class="inner_card"
-                shadow="hover"
-                @click.native="goaction(o)"
-              >
-                <img
-                  v-real-img="o.actCover"
-                  :src="`${imgUrl}/activity2.jpg`"
-                  class="image"
-                />
-                <el-tag
-                  v-show="o.upType == 'video'"
-                  effect="plain"
-                  type="info"
-                  size="small"
-                  :class="{ status: o.actStatus == 'started' }"
-                >
-                  {{ actionStat(o) }}
-                </el-tag>
-                <img
-                  v-show="o.upType == 'video'"
-                  :src="`${imgUrl}/play.png`"
-                  class="play"
-                />
-                <div style="padding: 14px">
-                  <span class="inner-title">{{
-                    o && o.actName ? o.actName : ""
-                  }}</span>
-                  <!-- <p class="inner-desc">{{ o.actIntroduction }}</p>
-                  <div class="inner-btn clearfix">
-                    <el-button type="text"
-                               class="inner-opera"
-                               @click="goaction(o)">{{ actionBtn(o) }}</el-button>
-                  </div> -->
-                </div>
-                <div class="timedanwei-cw">
-                  <div>活动时间：{{ o.startTime.substring(0, 16) }}</div>
-                  <div>发布单位：{{ o.orgBelong }}</div>
-                </div>
-              </el-card>
-            </el-col>
-            <Empty v-show="listData.release && !listData.release.length" />
-          </el-row>
-        </el-card>
-      </el-row>
-      <el-row class="outer-card">
-        <el-card shadow="never" :body-style="{ paddingRight: '10px' }">
-          <!-- <div slot="header"
-               class="clearfix">
-            <span class="title">项目路演</span>
-            <el-button v-show="hasmore(listData.launch)"
-                       class="more"
-                       type="text"
-                       @click="gomore(listData.launch[0].actClassification)">查看更多<i class="el-icon-arrow-right" /></el-button>
-          </div> -->
-          <div slot="header" class="clearfix-cw">
-            <div class="tabs-cw">
-              <span class="title">项目路演</span>
-              <div
-                v-for="(item, index) in statusLY"
-                :key="index"
-                @click="loadDataZXDT(3, item, index)"
-              >
-                <div v-if="item.check" class="ischeck">
-                  {{ item.t }}
-                </div>
-                <div v-else class="check">
-                  {{ item.t }}
-                </div>
-              </div>
-            </div>
-            <el-button
-              v-show="hasmore(listData.launch)"
-              class="more"
-              type="text"
-              @click="gomore(listData.launch[0].actClassification)"
-              >查看更多<i class="el-icon-arrow-right"
-            /></el-button>
-          </div>
-          <el-row>
-            <el-col
-              v-for="(o, index) in listData.launch"
-              :key="o.actId"
-              :span="8"
-            >
-              <el-card
-                :body-style="{ padding: '0px' }"
-                class="inner_card"
-                shadow="hover"
-                @click.native="goaction(o)"
-              >
-                <img
-                  v-real-img="o.actCover"
-                  :src="`${imgUrl}/activity3.jpg`"
-                  class="image"
-                />
-                <el-tag
-                  v-show="o.upType == 'video'"
-                  effect="plain"
-                  type="info"
-                  size="small"
-                  :class="{ status: o.actStatus == 'started' }"
-                >
-                  {{ actionStat(o) }}
-                </el-tag>
-                <img
-                  v-show="o.upType == 'video'"
-                  :src="`${imgUrl}/play.png`"
-                  class="play"
-                />
-                <div style="padding: 14px">
-                  <span class="inner-title">{{
-                    o && o.actName ? o.actName : ""
-                  }}</span>
-                  <!-- <p class="inner-desc">{{ o.actIntroduction }}</p>
-                  <div class="inner-btn clearfix">
-                    <el-button type="text"
-                               class="inner-opera"
-                               @click="goaction(o)">{{ actionBtn(o) }}</el-button>
-                  </div> -->
-                </div>
-                <div class="timedanwei-cw">
-                  <div>活动时间：{{ o.startTime.substring(0, 16) }}</div>
-                  <div>发布单位：{{ o.orgBelong }}</div>
-                </div>
-              </el-card>
-            </el-col>
-            <Empty v-show="listData.launch && !listData.launch.length" />
-          </el-row>
-        </el-card>
-      </el-row>
     </div>
   </el-main>
 </template>
@@ -391,22 +156,24 @@ export default {
       meetLiveLit: [],
       listData: {},
       activityTypeDict: [
-        { id: 0, title: "不限" },
-        { id: 1, title: "论坛活动" },
-        { id: 2, title: "成果发布" },
-        { id: 2, title: "项目路演" },
+        { id: 0, title: "不限", key: "" },
+        { id: 1, title: "论坛活动", key: "ssb" },
+        { id: 2, title: "成果发布", key: "release" },
+        { id: 2, title: "项目路演", key: "launch" },
       ],
 
       activityStatusDict: [
-        { id: 0, title: "不限" },
-        { id: 1, title: "已开始" },
-        { id: 2, title: "未开始" },
-        { id: 3, title: "已结束" },
+        { id: 0, title: "不限", key: "" },
+        { id: 1, title: "已开始", key: "started" },
+        { id: 2, title: "未开始", key: "notstart" },
+        { id: 3, title: "已结束", key: "end" },
       ],
       searchData: {
-        actClassification: "",
+        actName: "",
         actStatus: 0,
-        title: "",
+        actClassification: "",
+        startTime: "",
+        endTime: "",
         pageSize: 6,
         pageNum: 1,
       },
@@ -444,24 +211,6 @@ export default {
         },
       },
       item: {},
-      statusLT: [
-        { t: "全部", s: "", check: true },
-        { t: "已开始", s: "started", check: false },
-        { t: "未开始", s: "nostart", check: false },
-        { t: "已结束", s: "end", check: false },
-      ],
-      statusCG: [
-        { t: "全部", s: "", check: true },
-        { t: "已开始", s: "started", check: false },
-        { t: "未开始", s: "nostart", check: false },
-        { t: "已结束", s: "end", check: false },
-      ],
-      statusLY: [
-        { t: "全部", s: "", check: true },
-        { t: "已开始", s: "started", check: false },
-        { t: "未开始", s: "nostart", check: false },
-        { t: "已结束", s: "end", check: false },
-      ],
       isIfm: false,
     };
   },
@@ -513,7 +262,6 @@ export default {
       this.loading = true;
       getActivityhome()
         .then((res) => {
-          debugger;
           if (res.code == "0000") {
             _.forEach(res.obj, (list, key) => {
               this.$set(this.listData, key, list);
@@ -834,49 +582,6 @@ export default {
       font-weight: 600;
     }
   }
-  .tabs-cw {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    .check {
-      cursor: pointer;
-      width: 110px;
-      height: 32px;
-      background: #fff;
-      border-radius: 16px;
-      text-align: center;
-      line-height: 32px;
-      font-size: 20px;
-      font-family: PingFang SC;
-      font-weight: 300;
-      color: #333333;
-      margin-right: 5px;
-    }
-    .check:hover {
-      cursor: pointer;
-      width: 110px;
-      height: 32px;
-      border: 1px solid #1e86f9;
-      border-radius: 16px;
-      text-align: center;
-      line-height: 32px;
-      font-size: 20px;
-      font-family: PingFang SC;
-      font-weight: 300;
-      color: #333333;
-      margin-right: 5px;
-    }
-    .ischeck {
-      height: 32px;
-      background: #1e86f9;
-      border-radius: 16px;
-      line-height: 32px;
-      width: 110px;
-      color: #fff;
-      text-align: center;
-      margin-right: 5px;
-    }
-  }
 }
 .input-search {
   max-width: 800px;
@@ -923,16 +628,6 @@ export default {
     background-color: rgba(0, 0, 0, 0.1);
   }
 }
-.search-text-cw {
-  margin-top: 100px;
-  font-size: 72px;
-  font-family: Source Han Sans CN;
-  font-weight: bold;
-  line-height: 280px;
-  background: linear-gradient(0deg, #008aff 0.1220703125%, #001196 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
 .content {
   padding: 30px calc((100% - 1245px) / 2) 0;
   background: #fff;
@@ -950,11 +645,30 @@ export default {
   background-position: center 0px;
   background-size: cover;
   position: relative;
-  .icon-text-cw {
-    margin-left: 15px;
-    font-size: 22px;
-    font-family: PingFang SC;
-    font-weight: 300;
+  .search-text-cw {
+    margin-top: 100px;
+    font-size: 72px;
+    font-family: Source Han Sans CN;
+    font-weight: bold;
+    line-height: 200px;
+    background: linear-gradient(0deg, #008aff 0.1220703125%, #001196 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .activity-manage-main-search {
+    width: pxToVW(665);
+    :deep(.el-input__inner) {
+      border-radius: 48px;
+      height: 48px;
+      line-height: 48px;
+    }
+    :deep(.el-input__prefix) {
+      line-height: 48px;
+    }
+    :deep(.el-input__suffix) {
+      line-height: 48px;
+      padding-top: 4px;
+    }
   }
 
   .filter-box {
@@ -969,6 +683,59 @@ export default {
       background: #ffffff;
       box-shadow: 0px 0px 46px 0px #d8e0f0;
       border-radius: 16px;
+      .left-classify {
+        width: 100%;
+        padding: 36px 28px;
+        background-color: #fff;
+        border-radius: 16px;
+        &-item {
+          display: flex;
+          align-items: center;
+          margin-bottom: 30px;
+          color: #3c3c41;
+          font-weight: 400;
+          &-title {
+            min-width: 80px;
+            align-self: center;
+          }
+          &-option {
+            padding: 8px 13px;
+            margin: 0 10px;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0);
+
+            &.active {
+              background: #ffe5e5;
+              border: 1px solid #ee6868;
+              border-radius: 6px;
+              color: #ec4646;
+            }
+          }
+          &-city {
+            display: flex;
+            flex-wrap: wrap;
+          }
+          .other {
+            span {
+              font-size: 14px;
+            }
+            width: pxToVW(132);
+            // border: 1px solid #EE6868;
+            border-radius: 6px;
+            margin-right: pxToVW(42);
+            // :deep(.el-select .el-input.is-focus .el-input__inner) {
+            //     border-color: #2434AF;
+            // }
+          }
+          &-more {
+            min-width: 60px;
+            padding-top: 8px;
+            align-self: start;
+            cursor: pointer;
+            color: #0e1e9c;
+          }
+        }
+      }
     }
   }
 }

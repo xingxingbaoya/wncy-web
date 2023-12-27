@@ -121,7 +121,7 @@ module.exports = {
     proxy: {
       [process.env.VUE_APP_BASE_API]: {
         // target: `http://119.57.175.177:8088/`,
-        target: `http://119.57.175.177:1213/`,
+        target: `http://zgcgroup.pipix.ltd/api/`,
         changeOrigin: true,
         secure: false,
         // logLevel: 'debug',

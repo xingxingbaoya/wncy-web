@@ -143,7 +143,7 @@ export const constantRoutes = [
         name: 'Projectmanage',
         component: () => import('@/views/projectmanage/index'),
         meta: {
-          title: '项目管理', activeMenu: '/projectmanage',
+          title: '科技成本', activeMenu: '/projectmanage',
           roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
         }
       },
@@ -169,41 +169,41 @@ export const constantRoutes = [
       },
     ]
   },
-  {
-    path: '/projecthall',
-    component: Layout,
-    children: [
-      {
-        path: '',
-        name: 'Projecthall',
-        component: () => import('@/views/projecthall/index'),
-        meta: {
-          title: '项目大厅', activeMenu: '/projecthall',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      },
-      {
-        path: 'detail',
-        name: 'Projecthalldetail',
-        hidden: true,
-        component: () => import('@/views/projecthall/detail'),
-        meta: {
-          title: '项目详情', activeMenu: '/projecthall',
-          roles: ['user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      },
-      {
-        path: 'post',
-        name: 'Projecthallpost',
-        hidden: true,
-        component: () => import('@/views/projecthall/post'),
-        meta: {
-          title: '发布项目', activeMenu: '/projecthall',
-          roles: ['enterprise', 'organization', 'manager']
-        }
-      }
-    ]
-  },
+  // {
+  //   path: '/projecthall',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: '',
+  //       name: 'Projecthall',
+  //       component: () => import('@/views/projecthall/index'),
+  //       meta: {
+  //         title: '项目大厅', activeMenu: '/projecthall',
+  //         roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
+  //       }
+  //     },
+  //     {
+  //       path: 'detail',
+  //       name: 'Projecthalldetail',
+  //       hidden: true,
+  //       component: () => import('@/views/projecthall/detail'),
+  //       meta: {
+  //         title: '项目详情', activeMenu: '/projecthall',
+  //         roles: ['user', 'enterprise', 'organization', 'expert', 'manager']
+  //       }
+  //     },
+  //     {
+  //       path: 'post',
+  //       name: 'Projecthallpost',
+  //       hidden: true,
+  //       component: () => import('@/views/projecthall/post'),
+  //       meta: {
+  //         title: '发布项目', activeMenu: '/projecthall',
+  //         roles: ['enterprise', 'organization', 'manager']
+  //       }
+  //     }
+  //   ]
+  // },
   // {
   //   path: '/demandhall',
   //   component: Layout,
@@ -248,7 +248,7 @@ export const constantRoutes = [
         name: 'Activitieshall',
         component: () => import('@/views/activitieshall/index'),
         meta: {
-          title: '活动展示', activeMenu: '/activitieshall',
+          title: '产研对接', activeMenu: '/activitieshall',
           roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
         }
       },
