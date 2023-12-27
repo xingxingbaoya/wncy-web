@@ -1,5 +1,5 @@
 <template>
-  <el-main v-loading="false">
+  <el-main v-loading="false" style="background-color: #fff">
     <el-row class="search-area">
       <span class="search-text-cw">技术转移行业活动发布大厅</span>
 
@@ -73,61 +73,59 @@
     </el-row>
     <div class="content">
       <el-row class="outer-card">
-        <el-card shadow="never" :body-style="{ paddingRight: '10px' }">
-          <el-row>
-            <el-col
-              v-for="(o, index) in listData.startSignBBS"
-              :key="o.actId"
-              :span="8"
-            >
-              <el-card
-                :body-style="{ padding: '0px' }"
-                class="inner_card"
-                shadow="hover"
-                @click.native="goaction(o)"
-              >
-                <img
-                  v-real-img="o.actCover"
-                  :src="`${imgUrl}/activity1.jpg`"
-                  class="image"
-                />
-                <el-tag
-                  v-show="o.upType == 'video'"
-                  effect="plain"
-                  type="info"
-                  size="small"
-                  :class="{ status: o.actStatus == 'started' }"
-                >
-                  {{ actionStat(o) }}
-                </el-tag>
-                <img
-                  v-show="o.upType == 'video'"
-                  :src="`${imgUrl}/play.png`"
-                  class="play"
-                />
-                <div style="padding: 14px">
-                  <span class="inner-title"
-                    >{{ o && o.actName ? o.actName : "" }}
-                  </span>
-                  <!-- <p class="inner-desc">{{ o.actIntroduction }}</p>
-                  <div class="inner-btn clearfix">
-                    <el-button type="text"
-                               class="inner-opera"
-                               @click="goaction(o)">{{ actionBtn(o) }}</el-button>
-                  </div> -->
-                </div>
-                <div class="timedanwei-cw">
-                  <div>活动时间：{{ o.startTime.substring(0, 16) }}</div>
-                  <div>发布单位：{{ o.orgBelong }}</div>
-                </div>
-              </el-card>
-            </el-col>
-            <Empty
-              v-show="listData.startSignBBS && !listData.startSignBBS.length"
+        <el-col v-for="(o, index) in listDataShow" :key="o.actId" :span="8">
+          <el-card
+            :body-style="{ padding: '0px' }"
+            class="inner_card"
+            shadow="hover"
+            @click.native="goaction(o)"
+          >
+            <img
+              v-real-img="o.actCover"
+              :src="`${imgUrl}/activity1.jpg`"
+              class="image"
             />
-          </el-row>
-        </el-card>
+            <div style="padding: 10px">
+              <span class="inner-title"
+                >{{ o && o.actName ? o.actName : "" }}
+              </span>
+            </div>
+            <div class="timedanwei-cw">
+              <div>活动时间：{{ o.startTime.substring(0, 16) }}</div>
+              <div>发布单位：{{ o.orgBelong }}</div>
+            </div>
+          </el-card>
+        </el-col>
+        <Empty
+          v-show="listData.startSignBBS && !listData.startSignBBS.length"
+        />
       </el-row>
+      <div class="pagination-box">
+        <div class="pagination-box-currentpage" key="1">
+          {{ pageConfig.currentPage }} / {{ pageConfig.total }}
+        </div>
+        <el-pagination
+          :current-page="pageConfig.currentPage"
+          :page-size="pageConfig.pageSize"
+          @current-change="handleCurrentChange"
+          background
+          layout="prev, pager, next"
+          :total="pageConfig.total"
+        >
+        </el-pagination>
+        <el-input
+          v-model="pageValue"
+          style="width: 3vw; margin: 0 12px 0 40px; color: #1919c1"
+          oninput="value=value.replace(/[^\d]/g,'')"
+        ></el-input>
+        <div
+          class="pagination-box-currentpage"
+          style="cursor: pointer"
+          @click="handleCurrentChange(pageValue)"
+        >
+          跳转
+        </div>
+      </div>
     </div>
   </el-main>
 </template>
@@ -178,6 +176,12 @@ export default {
         pageNum: 1,
       },
       listsData: [],
+      pageConfig: {
+        currentPage: 1,
+        pageSize: 9,
+        total: 0,
+      },
+      pageValue: 1,
       options: {
         hlsUrl: "https://cdn.staticfile.org/hls.js/0.8.9/hls.min.js", // 0.0.5增加
         width: 620,
@@ -215,6 +219,25 @@ export default {
     };
   },
   computed: {
+    // listDataShow: function () {
+    //   let list = [];
+    //   debugger;
+    //   let type = this.searchData.actClassification;
+    //   if (type == "") {
+    //     list = [
+    //       ...this.listData.startSignBBS,
+    //       ...this.listData.release,
+    //       ...this.listData.launch,
+    //     ];
+    //   } else if (type == "ssb") {
+    //     list = [...this.listData.startSignBBS];
+    //   } else if (type == "release") {
+    //     list = [...this.listData.release];
+    //   } else if (type == "launch") {
+    //     list = [...this.listData.launch];
+    //   }
+    //   return list;
+    // },
     hasmore: () => {
       return (list) => {
         return list?.length > 5;
@@ -263,9 +286,12 @@ export default {
       getActivityhome()
         .then((res) => {
           if (res.code == "0000") {
+            let listAll = [];
             _.forEach(res.obj, (list, key) => {
+              listAll = [...listAll, ...list];
               this.$set(this.listData, key, list);
             });
+            this.listDataShow = listAll;
             console.log(this.listData);
           } else {
             this.$message.warning(res.msg);
@@ -430,6 +456,12 @@ export default {
         },
       });
     },
+
+    handleCurrentChange(page) {
+      this.pageConfig.currentPage = page;
+      this.pageValue = page;
+      this.loadData();
+    },
   },
 };
 </script>
@@ -525,16 +557,15 @@ export default {
   }
 }
 .timedanwei-cw {
-  border-top: 1px solid #eeeeee;
   div:nth-child(1) {
-    margin: 12px 0 18px 15px;
+    margin: 12px 0 14px 10px;
     font-size: 14px;
     font-family: PingFang SC;
     font-weight: 300;
     color: #333333;
   }
   div:nth-child(2) {
-    margin: 0 0 15px 15px;
+    margin: 0 0 15px 10px;
     font-size: 14px;
     font-family: PingFang SC;
     font-weight: 300;
@@ -629,15 +660,14 @@ export default {
   }
 }
 .content {
-  padding: 30px calc((100% - 1245px) / 2) 0;
-  background: #fff;
+  width: pxToVW(1381);
+  margin: 0 auto;
 }
 .search-area {
   background-color: #ffffff;
-  margin-bottom: 100px;
+  margin-bottom: 130px;
   height: 640px;
   display: flex;
-  // justify-content: center;
   align-items: center;
   flex-direction: column;
   background: url("../../assets/img/activityManage/banner.png") no-repeat center
@@ -677,11 +707,10 @@ export default {
     background: transparent;
     position: absolute;
     bottom: -100px;
+    z-index: 999;
     .filter-box-content {
       background: #fff;
-      height: 206px;
-      background: #ffffff;
-      box-shadow: 0px 0px 46px 0px #d8e0f0;
+      box-shadow: 0px 20px 46px 20px #d8e0f0;
       border-radius: 16px;
       .left-classify {
         width: 100%;
@@ -763,25 +792,17 @@ export default {
       background-color: #516fd2;
     }
   }
-  // .more {
-  //   color: #516fd2;
-  //   font-size: 18px;
-  //   float: right;
-  //   padding: 3px 0;
-  //   i {
-  //     font-weight: 600;
-  //   }
-  // }
 }
 .mb0 {
   margin-bottom: 0;
-}
-.inner_layout {
 }
 .inner_card {
   cursor: pointer;
   margin: 0 10px 13px 0;
   position: relative;
+  // background: linear-gradient(0deg, #e3eefd, #ffffff);
+  box-shadow: 1px 1px 7px 2px #d8e0f0;
+  border-radius: 16px;
   .inner-title {
     font-size: 18px;
     font-family: PingFang SC;
@@ -854,6 +875,26 @@ export default {
     height: 6px;
     background: #76eea0;
     border-radius: 50%;
+  }
+}
+.pagination-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 50px 27px 64px 0;
+  &-currentpage {
+    background-color: #fff;
+    padding: 10px 23px;
+    font-weight: 400;
+    color: #19191c;
+    border: 1px solid #cccccc;
+    border-radius: 6px;
+  }
+  :deep(.el-input__inner) {
+    text-align: center;
+    color: #19191c;
+    font-size: 16px;
+    font-weight: 400;
   }
 }
 </style>
