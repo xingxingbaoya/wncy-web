@@ -221,7 +221,7 @@ export default {
             this.loadData()
         },
         getProjDetail(proj) {
-            this.$router.push('/projectmanage/detail')
+            this.$router.push({ path: '/projectmanage/detail', query: { projectId: proj.id }})
         },
         handleSearchDataChange(type, value) {
             this.searchData[type] = value

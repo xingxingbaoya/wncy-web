@@ -172,7 +172,7 @@
                             </el-col>
                         </el-row>
                         <div style="text-align: center;">
-                            <el-button type="primary" style="width:9vw">立即发布</el-button>
+                            <el-button type="primary" style="width:9vw" @click="doPublishProject">立即发布</el-button>
                         </div>
                     </el-row>
 
@@ -206,6 +206,7 @@
 
 <script>
 import city from '@/assets/city/city_code.json'
+import { addProjectDetail } from '@/api/projecthall'
 
 export default {
 
@@ -320,6 +321,22 @@ export default {
             }
             this.formDataRef.pic_file = file.raw
         },
+         doPublishProject() {
+            this.$refs.formDataRef.validate(async (vali) => {
+                try {
+                    if(vali) {                    
+                       const res = await addProjectDetail({ ...this.formData })
+                       if(res.code == '0000') {
+                         this.$message.success('发布成功')
+                       } else {
+                         this.$message.error('发布失败')
+                       }
+                    }
+                } catch (error) {
+                    console.log(error)
+                }
+            })
+        }
     }
 }
 </script>

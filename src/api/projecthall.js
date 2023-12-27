@@ -2,7 +2,7 @@ import request from '@/utils/request'
 
 export function getProjectList(data) {
   return request({
-    url: 'bussiness/project/getProjectList',
+    url: 'project/getProjectList',
     method: 'post',
     data
   })
@@ -10,7 +10,7 @@ export function getProjectList(data) {
 
 export function getProjectDetail(params) {
   return request({
-    url: 'bussiness/project/getProjectDetail',
+    url: 'project/getProjectDetail',
     method: 'get',
     params
   })
@@ -18,7 +18,7 @@ export function getProjectDetail(params) {
 
 export function addProjectDetail(data) {
   return request({
-    url: 'bussiness/project/add',
+    url: 'project/add',
     method: 'post',
     data
   })
