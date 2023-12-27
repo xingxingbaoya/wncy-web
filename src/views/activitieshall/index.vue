@@ -513,6 +513,7 @@ export default {
       this.loading = true;
       getActivityhome()
         .then((res) => {
+          debugger
           if (res.code == "0000") {
             _.forEach(res.obj, (list, key) => {
               this.$set(this.listData, key, list);
@@ -553,7 +554,7 @@ export default {
         });
       }
       params = num ? this.searchData : params;
-      getZgcActivityList(params)
+      getActivityhome(params)
         .then((res) => {
           if (res.code == "0") {
             if (!num) {
