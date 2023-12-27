@@ -223,9 +223,10 @@ export default {
                     border-radius: 6px;
                     color: #2434AF;
                     font-size: 18px;
-                    padding: 16px pxToVW(80);
+                    padding: 16px 0;
                     margin-top: 42px;
                     cursor: pointer;
+                    text-align: center;
                 }
             }
         }

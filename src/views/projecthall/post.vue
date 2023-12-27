@@ -56,7 +56,7 @@
                              :auto-upload="false">
                     <i slot="default"
                        class="el-icon-plus" />
-                    <div slot="file"
+                    <!-- <div slot="file"
                          slot-scope="{file}"
                          class="img-wrapper">
                       <img  class="el-upload-list__item-thumbnail"
@@ -73,7 +73,7 @@
                           <i class="el-icon-delete" />
                         </span>
                       </span>
-                    </div>
+                    </div> -->
                   </el-upload>
                   <el-dialog :visible.sync="dialogVisible">
                     <img width="100%"
@@ -461,10 +461,10 @@ export default {
           { required: true,message: '请输入详细地址',trigger: 'blur' }
         ],
         postalfulladdress: [
-          { required: true,message: '请选择来源地',trigger: 'change' }
+          { required: true, message: '请选择来源地', trigger: 'change' }
         ],
         email: [
-          { required: true,message: '请输入邮箱',trigger: 'blur' }
+          { required: true, message: '请输入邮箱', trigger: 'blur' }
         ]
       },
       dialogVisible: false,
