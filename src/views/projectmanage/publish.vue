@@ -212,7 +212,7 @@ export default {
 
     data() {
         const validateproIntentionPrice = (rule, value, callback) => {
-            if (value == '' && this.form1.faceFlag == 0) {
+            if (value == '' && this.formData.faceFlag == 0) {
                 callback(new Error('请输入意向资金'))
             } else {
                 callback()

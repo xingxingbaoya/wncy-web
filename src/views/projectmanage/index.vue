@@ -111,7 +111,7 @@
                 
                 <div class="right">
                     <div class="right-fab">
-                        <img src="~img/projectManage/projmanage-fab.png"/>
+                        <img src="~img/projectManage/projmanage-fab.png" style="width: 100%;"/>
                         <div class="right-fab-content">
                             <el-select>
                                 <span slot="prefix">我需要</span>

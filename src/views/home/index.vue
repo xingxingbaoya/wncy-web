@@ -596,6 +596,7 @@ export default {
     if (!_.isEmpty(getToken()) && this.$store.getters.isPerfect == "0") {
       this.isPerfectVisible = true;
     }
+    // this.loadData()
   },
   methods: {
     loadData() {
