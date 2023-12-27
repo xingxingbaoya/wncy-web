@@ -15,6 +15,10 @@ const state = {
   policy_type: [],
   support_ind: [],
   policy_state: [],
+  project_academy: [],
+  top_10_hg_category: [],
+  zgckjy_241_category: [],
+  bj_2441_category: []
 }
 
 const mutations = {

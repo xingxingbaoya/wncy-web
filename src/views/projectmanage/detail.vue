@@ -31,7 +31,7 @@
                 </el-row>
                 <div class="project-info-theme">项目介绍</div>
                 <el-row>
-                    <el-col :span="6" v-for="item in introList">
+                    <!-- <el-col :span="6" v-for="item in introList">
                         <div class="name">{{ item.name }}</div>
                         <template v-if="item.word == 'faceFlag'">
                             <div class="values" style="color:#E61818">{{ project.faceFlag == '1'? '面议': project.proIntentionPrice || 1000+"万元" }}</div>
@@ -42,11 +42,35 @@
                         <template v-else>
                             <div class="values">{{ project[item.word] || item.value }}</div>
                         </template>
+                    </el-col> -->
+                    <el-col :span="24">
+                        <span class="name">所在院所</span>  <span class="values">xxxx</span>
+                    </el-col>
+                    <el-col :span="24">
+                        <span class="name">产业分类</span>  <span class="values">xxxx</span>
+                    </el-col>
+                    <el-col :span="24">
+                        <span class="name">应用场景</span>  <span class="values">文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本</span>
+                    </el-col>
+                    <el-col :span="24">
+                        <span class="name">项目类别</span>  <span class="values">xxxx</span>
+                    </el-col>
+                    <el-col :span="24">
+                        <span class="name">合作意向</span>  <span class="values">xxxx</span>
                     </el-col>
                 </el-row>
                 <div class="project-info-theme">项目内容</div>
                 <span style="line-height: 36px;margin-bottom: 55px;display: inline-block;">{{ project.proIntroduct || '有老pc端游全套序列帧素材（包含人物 NPC 怪物 装备 地图 UI） 需求是1：1复刻仿制成三端 或者手机端 前端换皮 后端复刻逻辑 需要有在线刷新脚本功能价格可商议 仅支持网站担保交易 全部做完后一次性验收' }}</span>
                 <div class="project-info-theme">项目附件</div>
+                <div class="project-info-theme">联系信息</div>
+                <el-row>
+                    <el-col :span="24">
+                        <span class="name">联系人</span>  <span class="values">xxxx</span>
+                    </el-col>
+                    <el-col :span="24">
+                        <span class="name">联系方式</span>  <span class="values">1200000000</span>
+                    </el-col>
+                </el-row>
             </div>
 
         </div>
@@ -78,6 +102,7 @@ export default {
             {name: '单位名称', value: '北京中关村科技服务有限公司', word: 'company'},
             {name: '联系人', value: '太傅', word: 'linkman'},
             {name: '联系电话', value: '13800000000', word: 'phone'},
+
             ],
             introList: [
                 {name: '项目名称', value: '跨境电商综合服务平台开发', word: 'title'},
@@ -199,18 +224,27 @@ export default {
                     margin-bottom: 30px;
 
                 }
+                
                 .el-row {
                     margin-bottom: 10px;
+                    :deep(.el-col-24) {
+                        display: flex;
+                        margin-bottom: 10px;
+
+                    }
                     
                     .name {
                         font-weight: 400;
                         color: #999999;
                         margin-bottom: 16px;
+                        min-width: pxToVW(80);
+                        display: inline-block;
                     }
                     .values {
+                        margin-left: 20px;
                         font-weight: 400;
                         color: #19191C;
-                        margin-bottom: 55px;
+                        display: inline-block;
 
                     }
                 }
