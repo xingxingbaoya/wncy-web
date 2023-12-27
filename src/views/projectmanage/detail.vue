@@ -26,7 +26,7 @@
                 <el-row>
                     <el-col :span="6" v-for="item in infoList">
                         <div class="name">{{ item.name }}</div>
-                        <div class="values">{{ project[item.word] || item.default }}</div>
+                        <div class="values">{{ project[item.word] || item.value }}</div>
                     </el-col>
                 </el-row>
                 <div class="project-info-theme">项目介绍</div>
@@ -40,7 +40,7 @@
                             <div class="values">{{ item.isNotNational == '1'? '国内':'国际' }}</div>
                         </template>
                         <template v-else>
-                            <div class="values">{{ project[item.word] || item.default }}</div>
+                            <div class="values">{{ project[item.word] || item.value }}</div>
                         </template>
                     </el-col>
                 </el-row>
@@ -69,35 +69,51 @@
 </template>
 
 <script>
+import { getProjectDetail } from '@/api/projecthall'
 export default {
     data() {
         return {
             project: {},
             infoList: [
-            {name: '单位名称', default: '北京中关村科技服务有限公司', word: 'company'},
-            {name: '联系人', default: '太傅', word: 'linkman'},
-            {name: '联系电话', default: '13800000000', word: 'phone'},
+            {name: '单位名称', value: '北京中关村科技服务有限公司', word: 'company'},
+            {name: '联系人', value: '太傅', word: 'linkman'},
+            {name: '联系电话', value: '13800000000', word: 'phone'},
             ],
             introList: [
-                {name: '项目名称', default: '跨境电商综合服务平台开发', word: 'title'},
-                {name: '行业分类', default: '软件开发', word: 'industryone'},
-                {name: '技术来源', default: '企业', word: 'company'},
-                {name: '来源地', default: '北京', word: 'province'},
-                {name: '技术类型', default: '技术项目', word: 'type'},
-                {name: '项目国别', default: '中国', word: 'isNotNational'},
-                {name: '意向价格', default: '100万', word: 'faceFlag'},
-                {name: '合作方式', default: '招标', word: 'cooperation'},
-                {name: '合作方式', default: '无', word: 'proPatentInfo'},
-                {name: '专利授权日', default: '2022年10月11日', word: 'proGrantTime'},
-                {name: '专利号', default: '234789999000', word: 'proPatentNo'},
-                {name: '专利权人', default: '府丞', word: 'patentOwner'},
-                {name: '项目开发阶段', default: '无', word: 'proDevelopment'},                
+                {name: '项目名称', value: '跨境电商综合服务平台开发', word: 'title'},
+                {name: '行业分类', value: '软件开发', word: 'industryone'},
+                {name: '技术来源', value: '企业', word: 'company'},
+                {name: '来源地', value: '北京', word: 'province'},
+                {name: '技术类型', value: '技术项目', word: 'type'},
+                {name: '项目国别', value: '中国', word: 'isNotNational'},
+                {name: '意向价格', value: '100万', word: 'faceFlag'},
+                {name: '合作方式', value: '招标', word: 'cooperation'},
+                {name: '合作方式', value: '无', word: 'proPatentInfo'},
+                {name: '专利授权日', value: '2022年10月11日', word: 'proGrantTime'},
+                {name: '专利号', value: '234789999000', word: 'proPatentNo'},
+                {name: '专利权人', value: '府丞', word: 'patentOwner'},
+                {name: '项目开发阶段', value: '无', word: 'proDevelopment'},
             ]
         }
+    },
+    created() {
+        this.loadData()
     },
     methods: {
         doProjPublish() {
             this.$router.push('/projectmanage/publish')
+        },
+        loadData() {
+            const id = this.$route.query.projectId
+            getProjectDetail({ id }).then(res => {
+                if(res.code=='0000') {
+                    this.project=res.obj
+                } else {
+                    this.$message.error(res.msg)
+                }
+            }).finally(() => {
+                this.loading=false
+            })
         }
     }
 }
