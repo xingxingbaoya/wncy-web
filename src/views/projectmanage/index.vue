@@ -143,6 +143,7 @@ import mainfen from "@/assets/img/projectManage/mianfei.png"
 import lindai from "@/assets/img/projectManage/lindai.png"
 import qianyuan from "@/assets/img/projectManage/qian-yuan-L.png"
 import city from '@/assets/city/city_code.json'
+import { getProjectList } from '@/api/projecthall'
 
 export default {
     data() {
@@ -152,7 +153,6 @@ export default {
             {id:1,title:'技术项目'},
             {id:2,title:'专利项目'}
             ],
-
             techSourceDict: [
             {id:0, title:'不限'},
             {id:1,title:'企业'}, 
@@ -199,13 +199,13 @@ export default {
         }
     },
     created() {
-        loadData()
+        this.loadData()
     },
     methods: {
         loadData () {
             this.loading=true
             getProjectList({ ...this.pageConfig,...this.searchData }).then(res => {
-                if(res.code=='0000') {
+                if(res.code=='200') {
                 this.projectList=res.rows
                 this.$set(this.pager,'total',res.total)
                 } else {
