@@ -1301,8 +1301,7 @@ export default {
     margin-top: 48px;
     &-item {
       width: 20vw;
-      height: 670px;
-      border: 1px solid rgba(0, 0, 0, 0.3);
+      height: 650px;
       position: relative;
       cursor: pointer;
       >img {
