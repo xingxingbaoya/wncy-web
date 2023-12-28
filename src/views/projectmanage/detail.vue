@@ -81,10 +81,21 @@
         </div>
         <div class="project-detail-wrap-right">
             <div class="preview">
-                <div>
+                <!-- <template v-if="project.status == 0">
+                    <div>已结束</div>
+                </template> -->
+                <template v-if="project.status == 1">
+                    <img src="~img/projectManage/dengdai.png"/>
+                    <div class="status" style="color:#FF6900">等待审核中</div>
+                </template>
+                <template v-else="project.status == 2">
+                    <img src="~img/projectManage/tongguo.png"/>
+                    <div class="status" style="color:#2ECB82 ;">审核通过</div>
+                    <div class="publish-btn" @click="doProjPublish" v-if="project.status != 1">发布类似节目</div>
+                </template>
+                <!-- <div>
                     <img src="~img/projectManage/fabu.png"/>
-                </div>
-                <div class="publish-btn" @click="doProjPublish">发布类似节目</div>
+                </div> -->
             </div>
         </div>
 
@@ -295,6 +306,11 @@ export default {
                     cursor: pointer;
                     text-align: center;
                 }
+            }
+            .status {
+                font-size: 32px;
+                font-weight: bold;
+                line-height: 74px;
             }
         }
 

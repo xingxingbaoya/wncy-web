@@ -23,14 +23,36 @@
             <div class="left-classify">
               <div class="left-classify-item">
                 <div class="left-classify-item-title">所在院所：</div>
-                <el-select v-model="searchData.sponsor" :popper-append-to-body="false" placeholder="项目分类" clearable  @change="handleSearchDataChange('sponsor', searchData.sponsor)" style="width: 50%;">
+                <el-select v-model="searchData.sponsor" :popper-append-to-body="false" placeholder="所在院所" clearable  @change="handleSearchDataChange('sponsor', searchData.sponsor)">
                     <el-option v-for="item in academyStateDict" :label="item.dictLabel" :key="item.dictValue"
                         :value="item.dictValue" />
                 </el-select>
               </div>
               <div class="left-classify-item">
-                <div class="left-classify-item-title">产业分类：</div>
-                <div class="left-classify-item-city">
+                <div class="left-classify-item-title">十大高精尖产业：</div>
+                <el-select v-model="searchData.top10hg" :popper-append-to-body="false" @change="value => handleSearchDataChange('top10hg', value)" 
+                    placeholder="十大高精尖产业">
+                    <el-option v-for="item in topTenStateDict" :key="item.dictValue" :label="item.dictLabel"
+                        :value="item.dictValue" />
+                </el-select>
+              </div>
+              <div class="left-classify-item">
+                <div class="left-classify-item-title">北京2411产业：</div>
+                <el-select v-model="searchData.bj2441" :popper-append-to-body="false" @change="value => handleSearchDataChange('bj2441', value)" 
+                      placeholder="北京2411产业">
+                      <el-option v-for="item in bjStateDict" :key="item.dictValue" :label="item.dictLabel"
+                          :value="item.dictValue" />
+                  </el-select>
+              </div>
+              <div class="left-classify-item">
+                <div class="left-classify-item-title">中关村科技园区管理委员会241产业分类：</div>
+                <el-select v-model="searchData.zgckjy241" :popper-append-to-body="false" @change="value => handleSearchDataChange('zgckjy241', value)" 
+                    placeholder="中关村科技园区管理委员会241产业分类">
+                    <el-option v-for="item in zgckjyStateDict" :key="item.dictValue" :label="item.dictLabel"
+                        :value="item.dictValue" />
+                </el-select>
+              </div>
+                <!-- <div class="left-classify-item-city">
                 
                     <div
                       v-for="(city, index) in [...topTenStateDict, ...bjStateDict, ...zgckjyStateDict]" :key="city"
@@ -80,7 +102,7 @@
                   
                   </div>
                 </div>
-              </div>
+               -->
               <!-- <div class="left-classify-item">
                 <div class="left-classify-item-title">技术来源：</div>
                 <div v-for="tech in techSourceDict" :key="tech">
@@ -163,13 +185,14 @@
                 <div class="left-content">
                   <div class="title">{{ item.title }}</div>
                   <div class="attach">
-                    <img src="~img/projectManage/address.png" />
+                    <span class="attach-address">{{ academyStateDict?.find(item => item.dictValue == item.sponsor)?.dictLabel || '无' }}</span>
+                    <!-- <img src="~img/projectManage/address.png" />
                     <span class="attach-address"
                       >{{ item.provinceName }} {{ item.cityName }}
                       {{ item.areaName }}</span
-                    >
-                    <img src="~img/projectManage/time.png" />
-                    {{ item.createTime }}
+                    > -->
+                    <!-- <img src="~img/projectManage/time.png" />
+                    {{ item.createTime }} -->
                   </div>
                 </div>
                 <!-- <div class="right-content">
@@ -513,9 +536,11 @@ export default {
               color: #3c3c41;
               font-weight: 400;
               &-title {
-                min-width: pxToVW(100);
+                width: 11vw;
                 padding-top: 10px;
                 align-self: start;
+                text-align: end;
+                margin-right: 12px;
               }
               &-option {
                 padding: 8px 13px;
