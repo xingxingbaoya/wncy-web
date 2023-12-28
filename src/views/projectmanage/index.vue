@@ -22,18 +22,44 @@
           <div class="left">
             <div class="left-classify">
               <div class="left-classify-item">
-                <div class="left-classify-item-title">技术类型：</div>
-                <div v-for="tech in techTypeDict" :key="tech">
-                  <div
-                    class="left-classify-item-option"
-                    :class="searchData.proPatentInfo == tech.id ? 'active' : ''"
-                    @click="handleSearchDataChange('proPatentInfo', tech.id)"
-                  >
-                    {{ tech.title }}
-                  </div>
-                </div>
+                <div class="left-classify-item-title">所以在院所：</div>
+                <el-select v-model="searchData.sponsor" :popper-append-to-body="false" placeholder="项目分类">
+                    <el-option v-for="item in academyStateDict" :label="item.dictLabel" :key="item.dictValue"
+                        :value="item.dictValue" />
+                </el-select>
               </div>
               <div class="left-classify-item">
+                <div class="left-classify-item-title">产业分类：</div>
+                <div class="left-classify-item-city">
+                  <div v-for="(city, index) in [...topTenStateDict, ...bjStateDict, ...zgckjyStateDict]" :key="city">
+                    <div
+                      class="left-classify-item-option"
+                      :style="
+                        collapsed && index + 1 > firstLineProvince
+                          ? 'display:none'
+                          : 'display:block'
+                      "
+                      id="cityOption"
+                      :class="searchData.province == city.dictValue ? 'active' : ''"
+                      @click="handleSearchDataChange('province', city.dictValue)"
+                    >
+                      {{ city.dictLabel }}
+                    </div>
+                  </div>
+                </div>
+                <div
+                  @click="collapsed = !collapsed"
+                  class="left-classify-item-more"
+                >
+                  <template v-if="collapsed">
+                    {{ "更多" }} <i class="el-icon-arrow-up"></i>
+                  </template>
+                  <template v-else>
+                    {{ "收起" }} <i class="el-icon-arrow-down"></i>
+                  </template>
+                </div>
+              </div>
+              <!-- <div class="left-classify-item">
                 <div class="left-classify-item-title">技术来源：</div>
                 <div v-for="tech in techSourceDict" :key="tech">
                   <div
@@ -44,8 +70,8 @@
                     {{ tech.title }}
                   </div>
                 </div>
-              </div>
-              <div class="left-classify-item">
+              </div> -->
+              <!-- <div class="left-classify-item">
                 <div class="left-classify-item-title">来 源 地：</div>
                 <div class="left-classify-item-city">
                   <div v-for="(city, index) in cityList" :key="city">
@@ -75,8 +101,8 @@
                     {{ "收起" }} <i class="el-icon-arrow-down"></i>
                   </template>
                 </div>
-              </div>
-              <div class="left-classify-item">
+              </div> -->
+              <!-- <div class="left-classify-item">
                 <div class="left-classify-item-title">其他要求：</div>
                 <span>是否挂牌：</span>
                 <el-select
@@ -103,7 +129,7 @@
                   <el-option value="0" label="国内项目" key="0"></el-option>
                   <el-option value="1" label="国外项目" key="1"></el-option>
                 </el-select>
-              </div>
+              </div> -->
             </div>
             <div class="left-project">
               <div
@@ -171,7 +197,7 @@
               />
               <div class="right-fab-content">
                 <el-button type="primary" style="width: 100%"
-                  @click="toPublishPage">立即发布</el-button
+                  @click.prevent="toPublishPage">立即发布</el-button
                 >
               </div>
             </div>
@@ -302,6 +328,7 @@ export default {
         proNature: 0,
         isNotNational: "",
         isListing: "",
+        sponsor:'',
       },
       firstLineProvince: 34,
       collapsed: true,
@@ -311,14 +338,17 @@ export default {
     cityList() {
       return [{ name: "全部", code: 0 }, ...city];
     },
-    toPublishPage() {
-      this.$router.push('/projectmanage/publish')
-    },
+    // proList() {
+    //   return 
+    // }
   },
   created() {
     this.loadData();
   },
   methods: {
+    toPublishPage() {
+      this.$router.push('/projectmanage/publish')
+    },
     loadData() {
       this.loading = true;
       getProjectList({ ...this.pageConfig, ...this.searchData })
@@ -432,7 +462,7 @@ export default {
               color: #3c3c41;
               font-weight: 400;
               &-title {
-                min-width: 80px;
+                min-width: pxToVW(100);
                 padding-top: 10px;
                 align-self: start;
               }
