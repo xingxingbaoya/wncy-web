@@ -19,15 +19,24 @@
         <div class="filter-box-content">
           <div class="left-classify">
             <div class="left-classify-item">
-
               <div class="left-classify-item-title">活动类型：</div>
-              <div v-for="tech in [{dictLabel: '不限', dictValue: ''}, ...activityWayDict]" :key="tech.key">
+              <div
+                v-for="tech in [
+                  { dictLabel: '不限', dictValue: '' },
+                  ...activityWayDict,
+                ]"
+                :key="tech.key"
+              >
                 <div
                   class="left-classify-item-option"
                   :class="
-                    searchData.actClassification == tech.dictValue ? 'active' : ''
+                    searchData.actClassification == tech.dictValue
+                      ? 'active'
+                      : ''
                   "
-                  @click="handleSearchDataChange('actClassification', tech.dictValue)"
+                  @click="
+                    handleSearchDataChange('actClassification', tech.dictValue)
+                  "
                 >
                   {{ tech.dictLabel }}
                 </div>
@@ -35,10 +44,18 @@
             </div>
             <div class="left-classify-item">
               <div class="left-classify-item-title">活动状态：</div>
-              <div v-for="tech in [ {dictLabel: '不限', dictValue: ''},...activityStatusDict]" :key="tech.dictValue">
+              <div
+                v-for="tech in [
+                  { dictLabel: '不限', dictValue: '' },
+                  ...activityStatusDict,
+                ]"
+                :key="tech.dictValue"
+              >
                 <div
                   class="left-classify-item-option"
-                  :class="searchData.actStatus == tech.dictValue ? 'active' : ''"
+                  :class="
+                    searchData.actStatus == tech.dictValue ? 'active' : ''
+                  "
                   @click="handleSearchDataChange('actStatus', tech.dictValue)"
                 >
                   {{ tech.dictLabel }}
@@ -55,7 +72,9 @@
                   placeholder="开始"
                   size="mini"
                   style="width: 140px"
-                  @change="handleSearchDataChange('startTime', searchData.startTime )"
+                  @change="
+                    handleSearchDataChange('startTime', searchData.startTime)
+                  "
                 >
                 </el-date-picker>
                 <span style="margin: 0 10px">-</span>
@@ -65,7 +84,9 @@
                   placeholder="结束"
                   size="mini"
                   style="width: 140px"
-                  @change="handleSearchDataChange('endTime', searchData.endTime )"
+                  @change="
+                    handleSearchDataChange('endTime', searchData.endTime)
+                  "
                 >
                 </el-date-picker>
               </div>
@@ -105,7 +126,7 @@
       </el-row>
       <div class="pagination-box">
         <div class="pagination-box-currentpage" key="1">
-          {{ pageConfig.currentPage }} / {{ pageConfig.total }}
+          {{ pageConfig.pageNum }} / {{ total }}
         </div>
         <el-pagination
           :current-page="pageConfig.pageNum"
@@ -113,7 +134,7 @@
           @current-change="handleCurrentChange"
           background
           layout="prev, pager, next"
-          :total="pageConfig.total"
+          :total="total"
         >
         </el-pagination>
         <el-input
@@ -172,19 +193,17 @@ export default {
       // ],
       searchData: {
         actName: "",
-        actStatus: 0,
+        actStatus: "",
         actClassification: "",
         startTime: "",
         endTime: "",
-        pageSize: 6,
-        pageNum: 1,
       },
       listsData: [],
       pageConfig: {
         pageNum: 1,
         pageSize: 9,
-        total: 0,
       },
+      total: 0,
       pageValue: 1,
       options: {
         hlsUrl: "https://cdn.staticfile.org/hls.js/0.8.9/hls.min.js", // 0.0.5增加
@@ -281,13 +300,13 @@ export default {
     },
   },
   created() {
-    this.loadDataZXDT();
-    this.getMeetLiving();
+    // this.loadDataZXDT();
+    // this.getMeetLiving();
   },
   methods: {
     loadData() {
       this.loading = true;
-      getActivityhome({...this.searchData, ...this.pageConfig})
+      getActivityhome({ ...this.searchData, ...this.pageConfig })
         .then((res) => {
           if (res.code == "0000") {
             let listAll = [];
@@ -296,9 +315,10 @@ export default {
               this.$set(this.listData, key, list);
             });
             this.listDataShow = listAll;
+            this.total = listAll.length;
             console.log(this.listData);
           } else {
-            this.$message.warning(res.msg);
+            // this.$message.warning(res.msg);
           }
         })
         .finally(() => {
@@ -307,7 +327,8 @@ export default {
     },
 
     handleSearchDataChange(type, value) {
-      if(['startTime', 'endTime'].includes(type)) value = dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+      if (["startTime", "endTime"].includes(type))
+        value = dayjs(value).format("YYYY-MM-DD HH:mm:ss");
       this.searchData[type] = value;
       this.loadData();
     },
@@ -376,7 +397,7 @@ export default {
               }
             }
           } else {
-            this.$message.warning(res.msg);
+            // this.$message.warning(res.msg);
           }
         })
         .finally(() => {
@@ -403,53 +424,13 @@ export default {
     },
 
     goaction({ upType, actStatus, actId, signUpEnable }) {
-      if (upType == "video") {
-        if (actStatus == "started") {
-          this.golive(actId);
-        } else {
-          this.govideo(actId);
-        }
+      if (signUpEnable == "1") {
+        this.gosign(actId);
       } else {
-        if (signUpEnable == "1") {
-          this.gosign(actId);
-        } else {
-          this.goarticle(actId);
-        }
+        this.goarticle(actId);
       }
     },
-    gomore(actClassification) {
-      this.goBlank({
-        path: "/activitieshall/more",
-        query: {
-          actClassification,
-          searchTitle: this.searchData.title,
-        },
-      });
-    },
-    gomoreSearch() {
-      this.goBlank({
-        path: "/activitieshall/activityLthd",
-        query: {
-          searchTitle: this.searchData.title,
-        },
-      });
-    },
-    govideo(id) {
-      this.goBlank({
-        path: "/activitieshall/video",
-        query: {
-          id,
-        },
-      });
-    },
-    golive(id) {
-      this.goBlank({
-        path: "/activitieshall/live",
-        query: {
-          id,
-        },
-      });
-    },
+
     goarticle(id) {
       this.goBlank({
         path: "/activitieshall/article",
@@ -722,6 +703,9 @@ export default {
       background: #fff;
       box-shadow: 0px 20px 46px 20px #d8e0f0;
       border-radius: 16px;
+      :deep .el-date-editor {
+        font-size: 12px !important;
+      }
       .left-classify {
         width: 100%;
         padding: 36px 28px;

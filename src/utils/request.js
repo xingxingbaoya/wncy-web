@@ -69,11 +69,11 @@ service.interceptors.response.use(
           router.push(`/`)
         })
       }
-      Message({
-        message: res.msg || '没有msg',
-        type: 'warning',
-        duration: 5 * 1000
-      })
+      // Message({
+      //   message: res.msg || '没有msg',
+      //   type: 'warning',
+      //   duration: 5 * 1000
+      // })
       return Promise.reject(new Error(res.msg || '没有msg'))
     } else {
       return res

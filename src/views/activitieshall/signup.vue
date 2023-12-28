@@ -1,7 +1,9 @@
 <template>
   <el-main class="content">
     <div class="wrapper">
-      <div class="nav-bread">当前位置：首页 > 科技成果 > 标题</div>
+      <div class="nav-bread">
+        当前位置：首页 > 产研对接 > {{ item.actName }}
+      </div>
       <div class="play-content" shadow="never">
         <div class="article-left">
           <div class="play-title">{{ item.actName }}</div>
@@ -13,27 +15,33 @@
             <div class="box-title">活动介绍</div>
             <div class="text-content">
               <div>活动类型：</div>
-              <div>论坛活动</div>
+              <div>
+                {{
+                  activityWayDict.filter(
+                    (i) => i.defaultValue == item.actClassification
+                  )[0] || "未知"
+                }}
+              </div>
             </div>
             <div class="text-content">
               <div>活动形式：</div>
-              <div>线下室外</div>
+              <div>{{ item.actWay }}</div>
             </div>
             <div class="text-content">
               <div>活动预告：</div>
-              <div>123123123123123123123123123123123</div>
+              <div v-html="item.actDetail"></div>
             </div>
           </div>
           <div class="box-card-left" shadow="never">
             <div class="box-title">活动时间</div>
             <div class="text-content">
-              <div>2023年12月19日 9:00-18:00</div>
+              <div>{{ item.startTime }}</div>
             </div>
           </div>
         </div>
         <div class="play-right">
-          <div>
-            <img src="" alt="" srcset="" />
+          <div style="margin-top: 10px; margin-bottom: 40px;">
+            <img width="103px" src="@/assets/img/activityManage/baoming.png" alt="" srcset="" />
           </div>
           <div class="play-right-btn">
             <div class="libm" @click="signUp">立即报名</div>
@@ -224,7 +232,7 @@ export default {
     width: pxToVW(1366);
   }
   .nav-bread {
-    margin: 160px 0 40px;
+    margin: 80px 0 40px;
   }
   .play-content {
     display: flex;

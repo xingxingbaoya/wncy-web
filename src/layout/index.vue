@@ -1,10 +1,13 @@
 <template>
-  <div :class="classObj"
-       class="app-wrapper">
+  <div :class="classObj" class="app-wrapper">
     <div class="main-container">
       <el-scrollbar ref="scroll">
         <!-- <navbar /> -->
         <head-navbar />
+        <div
+          v-if="this.$route.name !== 'Home'"
+          style="width: 100%; height: 90px; background-color: #fff"
+        ></div>
         <app-main />
         <footbar />
         <!-- <div class="ranks"
@@ -17,27 +20,28 @@
                class="image"
                @click="gorank">
         </div> -->
-        <div class="tips"
-             :class="{'tips-show':isRankBottom}">
+        <div class="tips" :class="{ 'tips-show': isRankBottom }">
           <el-row class="tip-layout">
-            <el-col :span="8"
-                    class="tip-item_fa"
-                    @click.native="gopost">
-              <img v-if="isProjecthall || isDemandhall"
-                   src="../assets/img/fabutc.png"
-                   alt="">
-              <img v-if="isMeethall"
-                   src="../assets/img/dzhk.png"
-                   alt="">
+            <el-col :span="8" class="tip-item_fa" @click.native="gopost">
+              <img
+                v-if="isProjecthall || isDemandhall"
+                src="../assets/img/fabutc.png"
+                alt=""
+              />
+              <img v-if="isMeethall" src="../assets/img/dzhk.png" alt="" />
               <span v-if="isProjecthall">项目发布</span>
               <span v-if="isDemandhall">需求发布</span>
               <span v-if="isMeethall">电子会刊</span>
             </el-col>
-            <el-popover ref="popover"
-                        placement="left"
-                        trigger="hover"
-                        popper-class="qrcode-pop">
-              <span class="contact">联系方式: <span class="mob">010-83453762</span></span>
+            <el-popover
+              ref="popover"
+              placement="left"
+              trigger="hover"
+              popper-class="qrcode-pop"
+            >
+              <span class="contact"
+                >联系方式: <span class="mob">010-83453762</span></span
+              >
               <!-- &lt;!&ndash; <img class="qrcode"
                    :src="`${imgUrl}/test1.png`">&ndash;&gt; -->
             </el-popover>
@@ -48,15 +52,11 @@
             <!-- <el-col :span="8"
                     class="tip-item"><img src="@/assets/img/zixun.png"
                    alt=""></el-col> -->
-            <el-col v-popover:popover
-                    :span="8"
-                    class="tip-item"><img src="@/assets/img/phone.png"
-                   alt=""></el-col>
-            <el-col :span="8"
-                    class="tip-item"
-                    @click.native="backTop">
-              <img src="@/assets/img/toTop.png"
-                   alt="">
+            <el-col v-popover:popover :span="8" class="tip-item"
+              ><img src="@/assets/img/phone.png" alt=""
+            /></el-col>
+            <el-col :span="8" class="tip-item" @click.native="backTop">
+              <img src="@/assets/img/toTop.png" alt="" />
             </el-col>
           </el-row>
         </div>
@@ -66,21 +66,21 @@
 </template>
 
 <script>
-import { Sidebar,AppMain,HeadNavbar,Navbar,Footbar } from './components'
-import ResizeMixin from './mixin/ResizeHandler'
-import common from '@/mixin/common'
+import { Sidebar, AppMain, HeadNavbar, Navbar, Footbar } from "./components";
+import ResizeMixin from "./mixin/ResizeHandler";
+import common from "@/mixin/common";
 
 export default {
-  name: 'Layout',
+  name: "Layout",
   components: {
     Sidebar,
     Navbar,
     HeadNavbar,
     Footbar,
-    AppMain
+    AppMain,
   },
-  mixins: [ResizeMixin,common],
-  data () {
+  mixins: [ResizeMixin, common],
+  data() {
     return {
       isBottom: false,
       isRankBottom: false,
@@ -89,105 +89,104 @@ export default {
       isProjecthall: false,
       isMeethall: false,
       isHomeCW: false,
-      path: this.$route.path
-    }
+      path: this.$route.path,
+    };
   },
   computed: {
-    sidebar () {
-      return this.$store.state.app.sidebar
+    sidebar() {
+      return this.$store.state.app.sidebar;
     },
-    classObj () {
+    classObj() {
       return {
         hideSidebar: !this.sidebar.opened,
         openSidebar: this.sidebar.opened,
-        withoutAnimation: this.sidebar.withoutAnimation
-      }
+        withoutAnimation: this.sidebar.withoutAnimation,
+      };
     },
-    isHome () {
-      return this.$route.name=='Home'
+    isHome() {
+      return this.$route.name == "Home";
     },
-
-
   },
   watch: {
-    path (cur,old) {
-      console.log(cur,old);
-    }
+    path(cur, old) {
+      console.log(cur, old);
+    },
   },
-  created () {
+  created() {
     console.log(this.path);
   },
 
   // 监听,当路由发生变化的时候执行
-  beforeRouteEnter (to,from,next) {
+  beforeRouteEnter(to, from, next) {
     // 需要注意这里不能使用this,
     // 因为我们使用的是进入路由之前，那会组件还没创建，
     next((vm) => {
       // 所有我们只能使用过vm异步语句来让节点上树；
-      vm.checkRoute()
-    })
+      vm.checkRoute();
+    });
   },
-  mounted () {
-    window.addEventListener('scroll',_.throttle(this.isShow,60),false)
+  mounted() {
+    window.addEventListener("scroll", _.throttle(this.isShow, 60), false);
   },
-  beforeDestroy () {
-    window.removeEventListener('scroll',_.throttle(this.isShow,60))
+  beforeDestroy() {
+    window.removeEventListener("scroll", _.throttle(this.isShow, 60));
   },
 
   methods: {
-    isShow (num) {
-      const osTop=document.documentElement.scrollTop||document.body.scrollTop
-
+    isShow(num) {
+      const osTop =
+        document.documentElement.scrollTop || document.body.scrollTop;
 
       // this.isBottom = osTop > document.body.scrollHeight - Math.ceil(document.body.scrollHeight / 2) ;
-      if(this.isHomeCW) {
-        this.checkRoute()
-        this.$store.dispatch('app/setTransparentHead',osTop>this.$store.getters.wheight)
-        this.isRankBottom=osTop>800
+      if (this.isHomeCW) {
+        this.checkRoute();
+        this.$store.dispatch(
+          "app/setTransparentHead",
+          osTop > this.$store.getters.wheight
+        );
+        this.isRankBottom = osTop > 800;
       } else {
-        this.checkRoute()
-        this.$store.dispatch('app/setTransparentHead',osTop>424)
-        this.isRankBottom=osTop>150
+        this.checkRoute();
+        this.$store.dispatch("app/setTransparentHead", osTop > 424);
+        this.isRankBottom = osTop > 150;
       }
     },
-    gorank () {
+    gorank() {
       this.goBlank({
-        path: '/rank'
-      })
+        path: "/rank",
+      });
     },
 
-    checkRoute () {
-      this.isProjecthall=false
-      this.isDemandhall=false
-      this.isMeethall=false
-      this.isHomeCW=false
-      let path=this.$route.path
-      if(path=='/projecthall') {
-        this.isProjecthall=true
-      } else if(path=='/demandhall') {
-        this.isDemandhall=true
-      } else if(path=='/meethall') {
-        this.isMeethall=true
-      } else if(path=='/') {
-        this.isHomeCW=true
+    checkRoute() {
+      this.isProjecthall = false;
+      this.isDemandhall = false;
+      this.isMeethall = false;
+      this.isHomeCW = false;
+      let path = this.$route.path;
+      if (path == "/projecthall") {
+        this.isProjecthall = true;
+      } else if (path == "/demandhall") {
+        this.isDemandhall = true;
+      } else if (path == "/meethall") {
+        this.isMeethall = true;
+      } else if (path == "/") {
+        this.isHomeCW = true;
       }
     },
-    gopost () {
-      if(this.isDemandhall) {
+    gopost() {
+      if (this.isDemandhall) {
         this.goBlank({
-          path: '/demandhall/post'
-        })
-      } else if(this.isProjecthall) {
+          path: "/demandhall/post",
+        });
+      } else if (this.isProjecthall) {
         this.goBlank({
-          path: '/projecthall/post'
-        })
+          path: "/projecthall/post",
+        });
       } else {
-
       }
-
-    }
-  }
-}
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

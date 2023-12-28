@@ -23,15 +23,12 @@
         :base-path="route.path"
       />
     </el-menu>
-    <!--    <i class="el-icon-search" />-->
     <div class="head-right">
       <temp v-show="isLogin" class="opera" :class="{ 'home-menu': isHome }">
-        <span class="regist-button"  @click="goLogin"
-          >注册</span>
+        <span class="regist-button" @click="goLogin">注册</span>
         <el-button class="login-button" size="mini" round @click="goLogin"
           >登录</el-button
         >
-        
       </temp>
       <div v-show="!isLogin" class="opera" :class="{ 'home-menu': isHome }">
         <el-dropdown @command="handleCommand">
@@ -140,7 +137,7 @@ export default {
 }
 .top_c {
   padding-top: 30px;
-  z-index: 99999 !important;
+  z-index: 99 !important;
 }
 .icon {
   font-size: 30px;
@@ -176,7 +173,7 @@ export default {
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 9999;
+  z-index: 99;
   display: flex;
   align-items: center;
   padding: 0 pxToVW(180);
@@ -193,17 +190,17 @@ export default {
     .regist-button {
       color: #fff;
       line-height: 90px;
-      margin-right: pxToVW(12)
+      margin-right: pxToVW(12);
     }
     .login-button {
       display: inline-block;
       color: #fff;
-      background-color: #333C6D;
+      background-color: #333c6d;
       width: pxToVW(137);
       border: none;
       font-size: 16px;
 
-      img{
+      img {
         width: 100%;
       }
     }

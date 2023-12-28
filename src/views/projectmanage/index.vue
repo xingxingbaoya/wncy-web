@@ -463,7 +463,7 @@ export default {
       font-size: 72px;
       color: #19191c;
       font-weight: bold;
-      margin-top: 240px;
+      margin-top: 140px;
     }
     &-attach {
       font-size: 37px;

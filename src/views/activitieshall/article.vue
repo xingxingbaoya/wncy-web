@@ -1,55 +1,61 @@
 <template>
   <el-main class="content">
     <div class="wrapper">
-      <div class="nav-bread">当前位置：首页 > 科技成果 > 标题</div>
+      <div class="nav-bread">
+        当前位置：首页 > 产研对接 > {{ item.actName }}
+      </div>
       <div class="play-content" shadow="never">
         <div class="article-left">
           <div class="play-title">{{ item.actName }}</div>
           <p class="play-status">
-            <span class="p-ft_cw">发布人: </span
-            ><span class="mr20">{{ item.createTime }}</span>
+            <span class="p-ft_cw">发布人： </span
+            ><span class="mr20"> {{ item.createTime }}</span>
           </p>
           <div class="article-left-img">
-            <img
-              src="http://zgcgroup.pipix.ltd/static/img/bgHeader.91ea0038.png"
-              alt=""
-              srcset=""
-            />
+            <img width="100%" :src="item.actCover" alt="" srcset="" />
           </div>
           <div class="box-card-left" shadow="never">
             <div class="box-title">活动介绍</div>
             <div class="text-content">
               <div>活动类型：</div>
-              <div>论坛活动</div>
+              <div>
+                {{
+                  activityWayDict.filter(
+                    (i) => i.defaultValue == item.actClassification
+                  )[0] || "未知"
+                }}
+              </div>
             </div>
             <div class="text-content">
               <div>活动形式：</div>
-              <div>线下室外</div>
+              <div>{{ item.actWay }}</div>
             </div>
             <div class="text-content">
-              <div>活动预告：</div>
-              <div>123123123123123123123123123123123</div>
+              <div style="text-wrap: nowrap">活动预告：</div>
+              <div v-html="item.actDetail"></div>
             </div>
           </div>
           <div class="box-card-left" shadow="never">
             <div class="box-title">活动时间</div>
             <div class="text-content">
-              <div>2023年12月19日 9:00-18:00</div>
+              <div>{{ item.startTime }}</div>
             </div>
           </div>
         </div>
         <div class="play-right">
           <div class="play-right-title">热门活动</div>
           <div style="width: 100%">
-            <div class="hot-list">
-              <img
-                class="hot-item-img"
-                height="60px"
-                src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png"
-              />
+            <div
+              class="hot-list"
+              v-for="i in listDataShow"
+              :key="i.actId"
+            >
+              <img class="hot-item-img" height="60px" width="40%" :src="i.actCover" />
               <div class="hot-item-content">
-                <div class="hot-item-title">好吃的汉堡</div>
-                <div class="hot-item-time">2023-12-28</div>
+                <div class="hot-item-title">{{ i.actName }}</div>
+                <div class="hot-item-time">
+                  {{ i.startTime.slice(0, 10) }}
+                </div>
               </div>
             </div>
           </div>
@@ -117,7 +123,11 @@
 
 <script>
 import common from "@/mixin/common";
-import { getActivityDetail, signUpActivity } from "@/api/activitieshall";
+import {
+  getActivityDetail,
+  getActivityhome,
+  signUpActivity,
+} from "@/api/activitieshall";
 
 export default {
   name: "Activitieshallsignup",
@@ -125,6 +135,8 @@ export default {
   data() {
     return {
       SignUpDialog: false,
+      listDataShow: [],
+      listData:[],
       signUpForm: {
         signName: "",
         contactInfo: "",
@@ -148,6 +160,9 @@ export default {
     isSignUp() {
       return this.item.signUpEnable == "1";
     },
+  },
+  mounted() {
+    this.getHot();
   },
   methods: {
     signUp() {
@@ -176,6 +191,20 @@ export default {
           return false;
         }
       });
+    },
+    getHot() {
+      getActivityhome({ actStatus: "started", pageNum: 1, pageSize: 9 }).then(
+        (res) => {
+          if (res.code == "0000") {
+            let listAll = [];
+            _.forEach(res.obj, (list, key) => {
+              listAll = [...listAll, ...list];
+              this.$set(this.listData, key, list);
+            });
+            this.listDataShow = listAll;
+          }
+        }
+      );
     },
     closeSignUpDialog() {
       this.SignUpDialog = false;
@@ -239,7 +268,7 @@ export default {
     width: pxToVW(1366);
   }
   .nav-bread {
-    margin: 160px 0 40px;
+    margin: 80px 0 40px;
   }
   .play-content {
     display: flex;
@@ -281,6 +310,7 @@ export default {
       }
       .hot-list {
         display: flex;
+        margin-bottom: 10px;
         .hot-item-img {
           flex: 2;
         }

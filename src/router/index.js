@@ -253,47 +253,6 @@ export const constantRoutes = [
         }
       },
       {
-        path: 'more',
-        name: 'Activitieshallmore',
-        hidden: true,
-        component: () => import('@/views/activitieshall/more'),
-        meta: {
-          title: '查看更多', activeMenu: '/activitieshall',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      },
-      {
-        path: 'activityLthd',
-        name: 'ActivityLthd',
-        hidden: true,
-        component: () => import('@/views/activitieshall/lthdList.vue'),
-        meta: {
-          title: '查看更多', activeMenu: '/activitieshall',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      },
-      {
-        path: 'video',
-        name: 'Activitieshallvideo',
-        hidden: true,
-        component: () => import('@/views/activitieshall/video'),
-        meta: {
-          title: '视频详情', activeMenu: '/activitieshall',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      },
-      {
-        path: 'live',
-        name: 'Activitieshalllive',
-        hidden: true,
-        component: () => import('@/views/activitieshall/live'),
-        meta: {
-          title: '直播详情', activeMenu: '/activitieshall',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager'
-          ]
-        }
-      },
-      {
         path: 'article',
         name: 'Activitieshallarticle',
         hidden: true,

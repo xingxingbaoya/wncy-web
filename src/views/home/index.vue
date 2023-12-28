@@ -1004,22 +1004,6 @@ export default {
         }
       }
     },
-    govideo(id) {
-      this.goBlank({
-        path: "/activitieshall/video",
-        query: {
-          id,
-        },
-      });
-    },
-    golive(id) {
-      this.goBlank({
-        path: "/activitieshall/live",
-        query: {
-          id,
-        },
-      });
-    },
     goarticle(id) {
       this.goBlank({
         path: "/activitieshall/article",
