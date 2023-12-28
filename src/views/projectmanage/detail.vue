@@ -4,7 +4,7 @@
     <p>当前位置：首页 > 所有项目</p>
     <div class="project-detail-wrap">
         <div class="project-detail-wrap-left">
-            <div class="project-wrap project-main">
+            <!-- <div class="project-wrap project-main">
                 <div class="project-main-img">
                     <img src="~img/projectManage/projdetail-compay.png"/>
                 </div>
@@ -20,14 +20,14 @@
                     <div class="first-wrap">项目</div>
                     <div class="second-wrap">{{ project.faceFlag == '1'? '面议': project.proIntentionPrice || 1000+"万元" }}</div>
                 </div>
-            </div>
+            </div> -->
             <div class="project-wrap project-info">
                 <el-row>
                     <el-col :span="24">
                         <span class="title">{{project.title || '无'}}</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="value">{{project.title }}</span>
+                        <span class="value" style="color: #999999;margin: 10px 0 90px;display: flex;align-items: center;"><img src="~img/projectManage/time.png"/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{project.createTime }}</span>
                     </el-col>
                     <!-- <el-col :span="6" v-for="item in infoList">
                         <div class="name">{{ item.name }}</div>
@@ -49,7 +49,7 @@
                         </template>
                     </el-col> -->
                     <el-col :span="24">
-                        <!-- <span class="name">所在院所</span>  <span class="values">{{ academyStateDict.find(item => item.dictValue == project.sponsor).dictLabel }}</span> -->
+                        <span class="name">所在院所</span>  <span class="values">{{ academy }}</span>
                     </el-col>
                     <el-col :span="24">
                         <span class="name">产业分类</span>  <span class="values">xxxx</span>
@@ -58,14 +58,14 @@
                         <span class="name">应用场景</span>  <span class="values">{{ project.scenario }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <!-- <span class="name">项目类别</span>  <span class="values">{{ industryOneDict.find(item => item.dictValue == project.typeDescription).dictLabel }}</span> -->
+                        <span class="name">项目类别</span>  <span class="values">{{ industry }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <!-- <span class="name">合作意向</span>  <span class="values">{{ cooperationDict.find(item => item.dictValue == project.typeDescription).dictLabel }}</span> -->
+                        <span class="name">合作意向</span>  <span class="values">{{ expire }}</span>
                     </el-col>
                 </el-row>
                 <div class="project-info-theme">项目内容</div>
-                <span style="line-height: 36px;margin-bottom: 55px;display: inline-block;">{{ project.proIntroduct || '有老pc端游全套序列帧素材（包含人物 NPC 怪物 装备 地图 UI） 需求是1：1复刻仿制成三端 或者手机端 前端换皮 后端复刻逻辑 需要有在线刷新脚本功能价格可商议 仅支持网站担保交易 全部做完后一次性验收' }}</span>
+                <span style="line-height: 36px;margin-bottom: 55px;display: inline-block;" v-html="project.proIntroduct"></span>
                 <div class="project-info-theme">项目附件</div>
                 <div class="project-info-theme">联系信息</div>
                 <el-row>
@@ -80,12 +80,6 @@
 
         </div>
         <div class="project-detail-wrap-right">
-            <el-input placeholder="输入项目关键词进行搜索" class="project-manage-main-search">
-                <i slot="prefix" class="el-input__icon el-icon-search"></i>
-                <i slot="suffix">
-                    <img src="~img/projectManage/search.png"/>
-                </i>
-            </el-input>
             <div class="preview">
                 <div style="color:#999">浏览人数</div>
                 <div style="color: #19191C;font-weight: bold;font-size: 26px;">246</div>
@@ -99,7 +93,10 @@
 
 <script>
 import { getProjectDetail } from '@/api/projecthall'
+import common from '@/mixin/common'
+
 export default {
+    mixins: [common],
     data() {
         return {
             project: {},
@@ -123,10 +120,13 @@ export default {
                 {name: '专利号', value: '234789999000', word: 'proPatentNo'},
                 {name: '专利权人', value: '府丞', word: 'patentOwner'},
                 {name: '项目开发阶段', value: '无', word: 'proDevelopment'},
-            ]
+            ],
+            academy: '',
+            industry: '',
+            expire:'',
         }
     },
-    created() {
+    mounted() {
         this.loadData()
     },
     methods: {
@@ -138,6 +138,13 @@ export default {
             getProjectDetail({ id }).then(res => {
                 if(res.code=='0000') {
                     this.project=res.obj
+                    console.log('qq', this.academyStateDict, this.project.sponsor)
+                    this.academy = this.academyStateDict?.find(item => item.dictValue == this.project.sponsor).dictLabel || '无'
+                    this.industry = this.industryOneDict?.find(item => item.dictValue == this.project.typeDescription).dictLabel || '无'
+                    this.expire = this.cooperationDict?.find(item => item.dictValue == this.project.cooperation).dictLabel || '无'
+                    // this.project.sponsor = this.academyStateDict?.find(item => item.dictValue == this.project.sponsor).dictLabel
+                    // this.project.sponsor = this.academyStateDict?.find(item => item.dictValue == this.project.sponsor).dictLabel
+
                 } else {
                     this.$message.error(res.msg)
                 }
@@ -271,7 +278,6 @@ export default {
                 top: 4px;
             }
             .preview {
-                margin-top: 20px;
                 padding: 48px pxToVW(30);
                 width: 100%;
                 background: #FFFFFF;

@@ -12,7 +12,7 @@
       >
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
         <i slot="suffix">
-          <img src="~img/projectManage/search.png" style="cursor: pointer" />
+          <img @click="handleSearchDataChange('title', searchData.title)" src="~img/projectManage/search.png" style="cursor: pointer" />
         </i>
       </el-input>
       <div class="project-manage-main-group">
@@ -23,7 +23,7 @@
             <div class="left-classify">
               <div class="left-classify-item">
                 <div class="left-classify-item-title">所以在院所：</div>
-                <el-select v-model="searchData.sponsor" :popper-append-to-body="false" placeholder="项目分类">
+                <el-select v-model="searchData.sponsor" :popper-append-to-body="false" placeholder="项目分类" multiple>
                     <el-option v-for="item in academyStateDict" :label="item.dictLabel" :key="item.dictValue"
                         :value="item.dictValue" />
                 </el-select>
@@ -31,11 +31,12 @@
               <div class="left-classify-item">
                 <div class="left-classify-item-title">产业分类：</div>
                 <div class="left-classify-item-city">
-                  <div v-for="(city, index) in [...topTenStateDict, ...bjStateDict, ...zgckjyStateDict]" :key="city">
+                
                     <div
+                      v-for="(city, index) in [...topTenStateDict, ...bjStateDict, ...zgckjyStateDict]" :key="city"
                       class="left-classify-item-option"
                       :style="
-                        collapsed && index + 1 > firstLineProvince
+                        index > firstLineProvince
                           ? 'display:none'
                           : 'display:block'
                       "
@@ -45,18 +46,39 @@
                     >
                       {{ city.dictLabel }}
                     </div>
-                  </div>
                 </div>
                 <div
-                  @click="collapsed = !collapsed"
+                  
                   class="left-classify-item-more"
                 >
                   <template v-if="collapsed">
-                    {{ "更多" }} <i class="el-icon-arrow-up"></i>
+                    <span @click="collapsed = !collapsed">{{ "更多" }} <i class="el-icon-arrow-up"></i></span>
                   </template>
                   <template v-else>
-                    {{ "收起" }} <i class="el-icon-arrow-down"></i>
+                    <span @click="collapsed = !collapsed">{{ "收起" }} <i class="el-icon-arrow-down"></i></span>
                   </template>
+
+                  <div class="more-options" :style="collapsed? 'display:none':'display:flex'">
+                    <div>
+                      <el-row>
+                        <el-col :span="12"
+                        v-for="(city, index) in [...topTenStateDict, ...bjStateDict, ...zgckjyStateDict]" :key="city"
+                         class="more-options-item"
+                          :style="
+                            index < firstLineProvince
+                              ? 'display:none'
+                              : 'display:block'
+                          "
+                          id="cityOption"
+                          :class="searchData.province == city.dictValue ? 'active' : ''"
+                          @click="handleSearchDataChange('province', city.dictValue)"
+                        >
+                          {{ city.dictLabel }}
+                        </el-col>
+                      </el-row>
+                    </div>
+                  
+                  </div>
                 </div>
               </div>
               <!-- <div class="left-classify-item">
@@ -150,23 +172,23 @@
                     {{ item.createTime }}
                   </div>
                 </div>
-                <div class="right-content">
+                <!-- <div class="right-content">
                   <span>{{
                     item.faceFlag == "1" || item.proIntentionPrice == 0
                       ? "面议"
                       : item.proIntentionPrice + `万元`
                   }}</span>
-                </div>
+                </div> -->
               </div>
               <Empty v-show="!projectList.length" />
             </div>
 
             <div class="pagination-box">
               <div class="pagination-box-currentpage" key="1">
-                {{ pageConfig.currentPage }} / {{ pageConfig.total }}
+                {{ pageConfig.pageNum }} / {{ pageConfig.total }}
               </div>
               <el-pagination
-                :current-page="pageConfig.currentPage"
+                :current-page="pageConfig.pageNum"
                 :page-size="pageConfig.pageSize"
                 @current-change="handleCurrentChange"
                 background
@@ -302,9 +324,9 @@ export default {
         },
       ],
       pageConfig: {
-        currentPage: 1,
+        pageNum: 1,
         pageSize: 20,
-        total: 100,
+        total: 0,
       },
       pageValue: 1,
       extractInfo: [
@@ -321,14 +343,39 @@ export default {
         { title: "免费发布", detail: "所有类型项目，免费发布", icons: mainfen },
       ],
       searchData: {
-        title: "",
-        industryone: "",
-        province: 0,
-        proPatentInfo: 0,
-        proNature: 0,
-        isNotNational: "",
-        isListing: "",
-        sponsor:'',
+        title: '',
+        fulladdress: '',
+        province: '',
+        city: '',
+        area: '',
+        isNotNational: '',
+        proName: '',
+        industryone: '',
+        proIntroduct: '',
+        faceFlag: '',
+        proPatentInfo: '',
+        cooperation: '',
+        proIntentionPrice: '',
+        proDevelopment: '',
+        proPatentCategory: '',
+        proPatentNo: '',
+        patentOwner: '',
+        proGrantTime: '',
+        pic_file: '',
+        linkman: '',
+        phone: '',
+        email: '',
+        company: '',
+        postalfulladdressType: '',
+        postalfulladdress: '',
+        position: '',
+        isListing: '',
+        sponsor: '',
+        typeDescription: '',
+        scenario: '',
+        top10hg: '',
+        bj2441: '',
+        zgckjy241: '',
       },
       firstLineProvince: 34,
       collapsed: true,
@@ -353,9 +400,10 @@ export default {
       this.loading = true;
       getProjectList({ ...this.pageConfig, ...this.searchData })
         .then((res) => {
-          if (res.code == "200") {
+          if (res.code == "0000") {
             this.projectList = res.rows;
-            this.$set(this.pager, "total", res.total);
+            console.log('1234',this.projectList)
+            this.pageConfig.total = res.total
           } else {
             this.$message.error(res.msg);
           }
@@ -365,7 +413,7 @@ export default {
         });
     },
     handleCurrentChange(page) {
-      this.pageConfig.currentPage = page;
+      this.pageConfig.pageNum = page;
       this.pageValue = page;
       this.loadData();
     },
@@ -455,6 +503,9 @@ export default {
             padding: 36px 28px;
             background-color: #fff;
             border-radius: 16px;
+            :deep(.el-select-dropdown.is-multiple .el-select-dropdown__item.selected) {
+              color: #2434af;
+            }
             &-item {
               display: flex;
               align-items: center;
@@ -482,6 +533,7 @@ export default {
               &-city {
                 display: flex;
                 flex-wrap: wrap;
+                width: pxToVW(780);
               }
               .other {
                 span {
@@ -501,6 +553,39 @@ export default {
                 align-self: start;
                 cursor: pointer;
                 color: #0e1e9c;
+                position: relative;
+                .more-options {
+                  display: flex;
+                  position: absolute;
+                  transform: translatex(-50%);
+                  top: 60px;
+                  width: pxToVW(455);
+                  height: 318px;
+                  overflow: hidden;
+                  background: #FFFFFF;
+                  border: 1px solid #E4E7ED;
+                  box-shadow: 0px 0px 57px 0px rgba(218,219,228,0.3);
+                  border-radius: 6px;
+                  padding: 26px pxToVW(38);
+                  >div {
+                    height: 100%;
+                    overflow-y: auto;
+                  }
+                  &-item {
+                    padding: 8px 13px;
+                    cursor: pointer;
+                    border: 1px solid rgba(0, 0, 0, 0);
+                    color: #3c3c41;
+
+                    &.active {
+                      background: #ffe5e5;
+                      border: 1px solid #ee6868;
+                      border-radius: 6px;
+                      color: #ec4646;
+                    }
+                  }
+
+                }
               }
             }
           }

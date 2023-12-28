@@ -143,7 +143,7 @@ export const constantRoutes = [
         name: 'Projectmanage',
         component: () => import('@/views/projectmanage/index'),
         meta: {
-          title: '科技成本', activeMenu: '/projectmanage',
+          title: '科技成果', activeMenu: '/projectmanage',
           roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
         }
       },

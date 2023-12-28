@@ -254,6 +254,7 @@ import city from '@/assets/city/city_code.json'
 import { addProjectDetail } from '@/api/projecthall'
 import common from '@/mixin/common'
 import { param2Form } from '@/utils'
+import dayjs from "dayjs"
 
 export default {
     mixins: [common],
@@ -272,12 +273,12 @@ export default {
                 province: '',
                 city: '',
                 area: '',
-                isNotNational: '',
+                isNotNational: '0',
                 proName: '',
                 industryone: '',
                 proIntroduct: '',
                 faceFlag: '0',
-                proPatentInfo: '',
+                proPatentInfo: '0',
                 cooperation: '',
                 proIntentionPrice: '',
                 proDevelopment: '',
@@ -300,6 +301,7 @@ export default {
                 top10hg: '',
                 bj2441: '',
                 zgckjy241: '',
+                createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
             },
 
             rules: {
@@ -394,7 +396,8 @@ export default {
                 // this.pic_file_list.pop()
                 return this.$message.warning('上传图片大小不能超过 2MB!')
             }
-            this.formDataRef.pic_file = file.raw
+            this.formData.pic_file = file.raw
+            console.log('封面', file.raw, this.formData.pic_file)
         },
          doPublishProject() {
             this.$refs.formDataRef.validate(async (vali) => {
