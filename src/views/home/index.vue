@@ -5,7 +5,7 @@
     </div>
     <div class="home-companyintro">
       <div class="theme-box">
-        <span>公司介绍</span>
+        <span>平台介绍</span>
         <b></b>
       </div>
       <div class="home-companyintro-content">
@@ -35,6 +35,19 @@
           北京中关村微纳能源投资有限公司是一个科创服务平台，致力于为科学家、企业家和政府提供全面的科创服务。
         </div>
         将各种创新要素聚集在一起，促进创新资源的共享和优化配置，构建一个有利于创新创业的生态系统。
+      </div>
+    </div>
+    <div class="home-workmode">
+      <div class="home-workmode-left">
+        <img src="~img/home/work-mode.png"/>
+        <div style="text-align: center;line-height: 70px;;">中关村微纳服务工作模式</div>
+      </div>
+      <div class="home-workmode-right">
+        <div class="title">中关村微纳简介</div>
+        <div class="content">
+          中关村微纳，怀柔区政府和中关村发展集团组建合作的区市共建科创集成服务平台，是中发展在怀柔提供其“科服、投资、金融、园区、区域协同、国际链接”服务的总接口，作为怀柔科学城创新联合体牵头单位，从
+服务在怀30多家国家战略科技力量产研两侧技术供需对接微观需求入手，以密集产研对接吸纳贸通目标产业内“政产学研金介用”各级资源，做好科学家 “经纪人”、企业家政府科创服务“合伙人"，通过 “两库，两平台、一集成服务”，打造具备“服务+投资+园区”核心功能的区市共建科创服务平台。
+        </div>
       </div>
     </div>
     <div class="home-platformservices">
@@ -1127,12 +1140,41 @@ export default {
   }
 }
 
+.home-workmode {
+  display: flex;
+  &-left {
+    flex: 1;
+    background-color: #F4F4F4;
+    padding: 164px 0 200px pxToVW(270);
+  }
+  &-right {
+    width: pxToVW(648);
+    padding: 164px pxToVW(270) 200px pxToVW(68);
+    background-color: #fff;
+    .title {
+      font-size: 34px;
+      font-weight: bold;
+      color: #17181C;
+      line-height: 74px;
+    }
+    .content {
+      font-size: 16px;
+      font-weight: 400;
+      color: #494949;
+      line-height: 42px;
+    }
+  }
+
+}
+
 .home-companyintro {
   padding: 73px 0 0;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  background-color: #fff;
+
   &-content {
     display: flex;
     justify-content: center;
@@ -1218,7 +1260,6 @@ export default {
   background-image: url("~img/home/platformServices.png");
   background-size: 100%;
   background-repeat: no-repeat;
-  margin-top: 80px;
   padding: 88px 0 0;
   color: #fff;
   display: flex;
@@ -1257,11 +1298,11 @@ export default {
   &-featurepic {
     display: flex;
     width: 100%;
-    margin-top: 70px;
+    margin-top: 48px;
     &-item {
       width: 20vw;
       height: 670px;
-      // border: 1px solid #fff;
+      border: 1px solid rgba(0, 0, 0, 0.3);
       position: relative;
       cursor: pointer;
       >img {

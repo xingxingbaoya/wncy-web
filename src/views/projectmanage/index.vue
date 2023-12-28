@@ -163,13 +163,14 @@
                 <div class="left-content">
                   <div class="title">{{ item.title }}</div>
                   <div class="attach">
-                    <img src="~img/projectManage/address.png" />
+                    <span class="attach-address">{{ academyStateDict?.find(item => item.dictValue == item.sponsor)?.dictLabel || '无' }}</span>
+                    <!-- <img src="~img/projectManage/address.png" />
                     <span class="attach-address"
                       >{{ item.provinceName }} {{ item.cityName }}
                       {{ item.areaName }}</span
-                    >
-                    <img src="~img/projectManage/time.png" />
-                    {{ item.createTime }}
+                    > -->
+                    <!-- <img src="~img/projectManage/time.png" />
+                    {{ item.createTime }} -->
                   </div>
                 </div>
                 <!-- <div class="right-content">
