@@ -107,7 +107,7 @@ module.exports = {
           additionalData: `@import "${path.resolve(__dirname, 'src/styles/index.scss')}";`,
         },
       });
-    },
+  },
   devServer: {
     port: port,
     open: true,

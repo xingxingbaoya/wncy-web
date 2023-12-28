@@ -327,6 +327,5 @@ export default {
     bjStateDict: () => {
       return JSON.parse(localStorage.getItem('dic-bj_2441_category'))
     },
-    
   }
 }

@@ -22,12 +22,17 @@
                 </div>
             </div>
             <div class="project-wrap project-info">
-                <div class="project-info-theme">单位信息</div>
                 <el-row>
-                    <el-col :span="6" v-for="item in infoList">
+                    <el-col :span="24">
+                        <span class="title">{{project.title || '无'}}</span>
+                    </el-col>
+                    <el-col :span="24">
+                        <span class="value">{{project.title }}</span>
+                    </el-col>
+                    <!-- <el-col :span="6" v-for="item in infoList">
                         <div class="name">{{ item.name }}</div>
                         <div class="values">{{ project[item.word] || item.value }}</div>
-                    </el-col>
+                    </el-col> -->
                 </el-row>
                 <div class="project-info-theme">项目介绍</div>
                 <el-row>
@@ -44,19 +49,19 @@
                         </template>
                     </el-col> -->
                     <el-col :span="24">
-                        <span class="name">所在院所</span>  <span class="values">xxxx</span>
+                        <!-- <span class="name">所在院所</span>  <span class="values">{{ academyStateDict.find(item => item.dictValue == project.sponsor).dictLabel }}</span> -->
                     </el-col>
                     <el-col :span="24">
                         <span class="name">产业分类</span>  <span class="values">xxxx</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">应用场景</span>  <span class="values">文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本</span>
+                        <span class="name">应用场景</span>  <span class="values">{{ project.scenario }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">项目类别</span>  <span class="values">xxxx</span>
+                        <!-- <span class="name">项目类别</span>  <span class="values">{{ industryOneDict.find(item => item.dictValue == project.typeDescription).dictLabel }}</span> -->
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">合作意向</span>  <span class="values">xxxx</span>
+                        <!-- <span class="name">合作意向</span>  <span class="values">{{ cooperationDict.find(item => item.dictValue == project.typeDescription).dictLabel }}</span> -->
                     </el-col>
                 </el-row>
                 <div class="project-info-theme">项目内容</div>
@@ -65,10 +70,10 @@
                 <div class="project-info-theme">联系信息</div>
                 <el-row>
                     <el-col :span="24">
-                        <span class="name">联系人</span>  <span class="values">xxxx</span>
+                        <span class="name">联系人</span>  <span class="values">{{ project.linkman }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">联系方式</span>  <span class="values">1200000000</span>
+                        <span class="name">联系方式</span>  <span class="values">{{ project.phone }}</span>
                     </el-col>
                 </el-row>
             </div>
@@ -232,7 +237,12 @@ export default {
                         margin-bottom: 10px;
 
                     }
-                    
+                    .title {
+                        height: 27px;
+                        font-size: 28px;
+                        font-weight: 400;
+                        color: #3C3C41;
+                    }
                     .name {
                         font-weight: 400;
                         color: #999999;

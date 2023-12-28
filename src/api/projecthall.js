@@ -21,7 +21,7 @@ export function addProjectDetail(data) {
     url: 'bussiness/project/add',
     method: 'post',
     data,
-    headers: { 'Content-Type': 'multipart/form-data' }
+    headers: { 'Content-Type': 'multipart/form-data' },
   })
 }
 
