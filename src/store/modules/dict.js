@@ -18,7 +18,9 @@ const state = {
   project_academy: [],
   top_10_hg_category: [],
   zgckjy_241_category: [],
-  bj_2441_category: []
+  bj_2441_category: [],
+  t_activity_way: [],
+  t_activity_status: [],
 }
 
 const mutations = {

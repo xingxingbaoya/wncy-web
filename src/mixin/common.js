@@ -327,5 +327,11 @@ export default {
     bjStateDict: () => {
       return JSON.parse(localStorage.getItem('dic-bj_2441_category'))
     },
+    activityWayDict: () => {
+      return JSON.parse(localStorage.getItem('dic-t_activity_way'))
+    },	
+    activityStatusDict: () => {
+      return JSON.parse(localStorage.getItem('dic-t_activity_status'))
+    }
   }
 }

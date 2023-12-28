@@ -19,28 +19,29 @@
         <div class="filter-box-content">
           <div class="left-classify">
             <div class="left-classify-item">
+
               <div class="left-classify-item-title">活动类型：</div>
-              <div v-for="tech in activityTypeDict" :key="tech.key">
+              <div v-for="tech in [{dictLabel: '不限', dictValue: ''}, ...activityWayDict]" :key="tech.key">
                 <div
                   class="left-classify-item-option"
                   :class="
-                    searchData.actClassification == tech.key ? 'active' : ''
+                    searchData.actClassification == tech.dictValue ? 'active' : ''
                   "
-                  @click="searchData.actClassification = tech.key"
+                  @click="handleSearchDataChange('actClassification', tech.dictValue)"
                 >
-                  {{ tech.title }}
+                  {{ tech.dictLabel }}
                 </div>
               </div>
             </div>
             <div class="left-classify-item">
               <div class="left-classify-item-title">活动状态：</div>
-              <div v-for="tech in activityStatusDict" :key="tech.key">
+              <div v-for="tech in [ {dictLabel: '不限', dictValue: ''},...activityStatusDict]" :key="tech.dictValue">
                 <div
                   class="left-classify-item-option"
-                  :class="searchData.actStatus == tech.key ? 'active' : ''"
-                  @click="searchData.actStatus = tech.key"
+                  :class="searchData.actStatus == tech.dictValue ? 'active' : ''"
+                  @click="handleSearchDataChange('actStatus', tech.dictValue)"
                 >
-                  {{ tech.title }}
+                  {{ tech.dictLabel }}
                 </div>
               </div>
             </div>
@@ -54,6 +55,7 @@
                   placeholder="开始"
                   size="mini"
                   style="width: 140px"
+                  @change="handleSearchDataChange('startTime', searchData.startTime )"
                 >
                 </el-date-picker>
                 <span style="margin: 0 10px">-</span>
@@ -63,6 +65,7 @@
                   placeholder="结束"
                   size="mini"
                   style="width: 140px"
+                  @change="handleSearchDataChange('endTime', searchData.endTime )"
                 >
                 </el-date-picker>
               </div>
@@ -105,7 +108,7 @@
           {{ pageConfig.currentPage }} / {{ pageConfig.total }}
         </div>
         <el-pagination
-          :current-page="pageConfig.currentPage"
+          :current-page="pageConfig.pageNum"
           :page-size="pageConfig.pageSize"
           @current-change="handleCurrentChange"
           background
@@ -136,6 +139,7 @@ import { VTcPlayer } from "v-tcplayer";
 import "video.js/dist/video-js.css";
 import "vue-video-player/src/custom-theme.css";
 import "videojs-contrib-hls";
+import dayjs from "dayjs";
 import common from "@/mixin/common";
 import {
   getActivityhome,
@@ -153,19 +157,19 @@ export default {
     return {
       meetLiveLit: [],
       listData: {},
-      activityTypeDict: [
-        { id: 0, title: "不限", key: "" },
-        { id: 1, title: "论坛活动", key: "ssb" },
-        { id: 2, title: "成果发布", key: "release" },
-        { id: 2, title: "项目路演", key: "launch" },
-      ],
+      // activityTypeDict: [
+      //   { id: 0, title: "不限", key: "" },
+      //   { id: 1, title: "论坛活动", key: "ssb" },
+      //   { id: 2, title: "成果发布", key: "release" },
+      //   { id: 2, title: "项目路演", key: "launch" },
+      // ],
 
-      activityStatusDict: [
-        { id: 0, title: "不限", key: "" },
-        { id: 1, title: "已开始", key: "started" },
-        { id: 2, title: "未开始", key: "notstart" },
-        { id: 3, title: "已结束", key: "end" },
-      ],
+      // activityStatusDict: [
+      //   { id: 0, title: "不限", key: "" },
+      //   { id: 1, title: "已开始", key: "started" },
+      //   { id: 2, title: "未开始", key: "notstart" },
+      //   { id: 3, title: "已结束", key: "end" },
+      // ],
       searchData: {
         actName: "",
         actStatus: 0,
@@ -177,7 +181,7 @@ export default {
       },
       listsData: [],
       pageConfig: {
-        currentPage: 1,
+        pageNum: 1,
         pageSize: 9,
         total: 0,
       },
@@ -283,7 +287,7 @@ export default {
   methods: {
     loadData() {
       this.loading = true;
-      getActivityhome()
+      getActivityhome({...this.searchData, ...this.pageConfig})
         .then((res) => {
           if (res.code == "0000") {
             let listAll = [];
@@ -300,6 +304,12 @@ export default {
         .finally(() => {
           this.loading = false;
         });
+    },
+
+    handleSearchDataChange(type, value) {
+      if(['startTime', 'endTime'].includes(type)) value = dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+      this.searchData[type] = value;
+      this.loadData();
     },
 
     loadDataZXDT(num, item, index) {
@@ -458,7 +468,7 @@ export default {
     },
 
     handleCurrentChange(page) {
-      this.pageConfig.currentPage = page;
+      this.pageConfig.pageNum = page;
       this.pageValue = page;
       this.loadData();
     },

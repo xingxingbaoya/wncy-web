@@ -22,8 +22,8 @@
           <div class="left">
             <div class="left-classify">
               <div class="left-classify-item">
-                <div class="left-classify-item-title">所以在院所：</div>
-                <el-select v-model="searchData.sponsor" :popper-append-to-body="false" placeholder="项目分类" multiple>
+                <div class="left-classify-item-title">所在院所：</div>
+                <el-select v-model="searchData.sponsor" :popper-append-to-body="false" placeholder="项目分类" clearable  @change="handleSearchDataChange('sponsor', searchData.sponsor)" style="width: 50%;">
                     <el-option v-for="item in academyStateDict" :label="item.dictLabel" :key="item.dictValue"
                         :value="item.dictValue" />
                 </el-select>
@@ -224,7 +224,7 @@
               </div>
             </div>
             <div class="right-select">
-              <img src="~img/projectManage/selectwn.png" />
+              <img src="~img/projectManage/selectwn.png" style="width: 100%;" />
               <div class="right-select-content">
                 <div
                   v-for="item in extractInfo"
@@ -247,9 +247,9 @@
 </template>
 
 <script>
-import mainfen from "@/assets/img/projectManage/mianfei.png";
+import heizuo from "@/assets/img/projectManage/hezuo.png";
 import lindai from "@/assets/img/projectManage/lindai.png";
-import qianyuan from "@/assets/img/projectManage/qian-yuan-L.png";
+import ziyuan from "@/assets/img/projectManage/ziyuan.png";
 import city from "@/assets/city/city_code.json";
 import { getProjectList } from "@/api/projecthall";
 import common from "@/mixin/common";
@@ -330,17 +330,17 @@ export default {
       },
       pageValue: 1,
       extractInfo: [
+      {
+          title: "资源共享",
+          detail: "免费发布与推广项目，资源信息在线共享",
+          icons: ziyuan,
+        },
         {
           title: "专业服务",
-          detail: "用户实名认证，雇主放心交易",
+          detail: "政产学研金服用”全方位专业服务支持",
           icons: lindai,
         },
-        {
-          title: "专业服务",
-          detail: "资金托管，全程跟踪有保障",
-          icons: qianyuan,
-        },
-        { title: "免费发布", detail: "所有类型项目，免费发布", icons: mainfen },
+        { title: "合作共赢", detail: "多方参与、利益分享、合作共赢", icons: heizuo },
       ],
       searchData: {
         title: '',

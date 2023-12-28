@@ -66,7 +66,7 @@
                 </el-row>
                 <div class="project-info-theme">项目内容</div>
                 <span style="line-height: 36px;margin-bottom: 55px;display: inline-block;" v-html="project.proIntroduct"></span>
-                <div class="project-info-theme">项目附件</div>
+                <!-- <div class="project-info-theme">项目附件</div> -->
                 <div class="project-info-theme">联系信息</div>
                 <el-row>
                     <el-col :span="24">
@@ -81,8 +81,9 @@
         </div>
         <div class="project-detail-wrap-right">
             <div class="preview">
-                <div style="color:#999">浏览人数</div>
-                <div style="color: #19191C;font-weight: bold;font-size: 26px;">246</div>
+                <div>
+                    <img src="~img/projectManage/fabu.png"/>
+                </div>
                 <div class="publish-btn" @click="doProjPublish">发布类似节目</div>
             </div>
         </div>

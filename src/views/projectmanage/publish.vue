@@ -301,7 +301,7 @@ export default {
                 top10hg: '',
                 bj2441: '',
                 zgckjy241: '',
-                createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+                // createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
             },
 
             rules: {
@@ -407,6 +407,7 @@ export default {
                        const res = await addProjectDetail(param2Form({ ...this.formData }))
                        if(res.code == '0000') {
                          this.$message.success('发布成功')
+                         this.$router.push('/projectmanage')
                        } else {
                          this.$message.error('发布失败')
                        }
