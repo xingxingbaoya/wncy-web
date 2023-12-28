@@ -14,6 +14,7 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
   config => {
+    console.log('config', config)
     // do something before request is sent
     const hasToken = getToken() || localStorage.getItem('zgc_token')
     if (hasToken) {

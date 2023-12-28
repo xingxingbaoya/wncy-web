@@ -20,7 +20,8 @@ export function addProjectDetail(data) {
   return request({
     url: 'bussiness/project/add',
     method: 'post',
-    data
+    data,
+    headers: { 'Content-Type': 'multipart/form-data' }
   })
 }
 

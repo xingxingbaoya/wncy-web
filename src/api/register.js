@@ -11,7 +11,7 @@ export function sendValidateCode(params) {
   return request({
     url: `user/user/validateCode/send`,
     method: 'get',
-    params
+    params,
   })
 }
 
@@ -19,7 +19,7 @@ export function registerUser(data) {
   return request({
     url: `user/user/register`,
     method: 'post',
-    data
+    data,
   })
 }
 export function passLogin(data) {
@@ -34,7 +34,7 @@ export function smsLogin(data) {
   return request({
     url: `user/user/smsLogin`,
     method: 'post',
-    data
+    data,
   })
 }
 
