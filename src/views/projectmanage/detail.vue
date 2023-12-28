@@ -24,10 +24,16 @@
             <div class="project-wrap project-info">
                 <div class="project-info-theme">单位信息</div>
                 <el-row>
-                    <el-col :span="6" v-for="item in infoList">
+                    <el-col :span="24">
+                        <span class="name">{{project.title}}</span>
+                    </el-col>
+                    <el-col :span="24">
+                        <span class="value">{{project.title }}</span>
+                    </el-col>
+                    <!-- <el-col :span="6" v-for="item in infoList">
                         <div class="name">{{ item.name }}</div>
                         <div class="values">{{ project[item.word] || item.value }}</div>
-                    </el-col>
+                    </el-col> -->
                 </el-row>
                 <div class="project-info-theme">项目介绍</div>
                 <el-row>
@@ -44,16 +50,16 @@
                         </template>
                     </el-col> -->
                     <el-col :span="24">
-                        <span class="name">所在院所</span>  <span class="values">xxxx</span>
+                        <span class="name">所在院所</span>  <span class="values">{{ project.sponsor}}</span>
                     </el-col>
                     <el-col :span="24">
                         <span class="name">产业分类</span>  <span class="values">xxxx</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">应用场景</span>  <span class="values">文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本文本</span>
+                        <span class="name">应用场景</span>  <span class="values">{{ project.scenario }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">项目类别</span>  <span class="values">xxxx</span>
+                        <span class="name">项目类别</span>  <span class="values">{{ project.typeDescription }}</span>
                     </el-col>
                     <el-col :span="24">
                         <span class="name">合作意向</span>  <span class="values">xxxx</span>

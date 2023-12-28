@@ -170,11 +170,8 @@
                 style="width: 100%"
               />
               <div class="right-fab-content">
-                <el-select>
-                  <span slot="prefix">我需要</span>
-                </el-select>
                 <el-button type="primary" style="width: 100%"
-                  >立即发布</el-button
+                  @click="toPublishPage">立即发布</el-button
                 >
               </div>
             </div>
@@ -313,6 +310,9 @@ export default {
   computed: {
     cityList() {
       return [{ name: "全部", code: 0 }, ...city];
+    },
+    toPublishPage() {
+      this.$router.push('/projectmanage/publish')
     },
   },
   created() {

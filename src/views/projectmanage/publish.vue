@@ -8,21 +8,21 @@
                 <el-form ref="formDataRef" :model="formData" :rules="rules" label-position="right" label-width="150px">
                     <el-row class="project-wrap">
                         <el-col :span="16">
-                            <el-form-item label="项目名称" prop="proName">
-                                <el-input v-model="formData.proName" placeholder="项目名称" />
+                            <el-form-item label="项目名称" prop="title">
+                                <el-input v-model="formData.title" placeholder="项目名称" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="16">
-                            <el-form-item label="所在院所" prop="proName">
-                                <el-select v-model="formData.industryone" :popper-append-to-body="false" placeholder="项目分类">
+                            <el-form-item label="所在院所" prop="sponsor">
+                                <el-select v-model="formData.sponsor" :popper-append-to-body="false" placeholder="项目分类">
                                     <el-option v-for="item in academyStateDict" :label="item.dictLabel" :key="item.dictValue"
                                         :value="item.dictValue" />
                                 </el-select>
                             </el-form-item>
                         </el-col>
                         <el-col :span="16">
-                            <el-form-item label="项目类别" prop="industryone">
-                                <el-select v-model="formData.industryone" :popper-append-to-body="false" placeholder="项目分类">
+                            <el-form-item label="项目类别" prop="typeDescription">
+                                <el-select v-model="formData.typeDescription" :popper-append-to-body="false" placeholder="项目分类">
                                     <el-option v-for="item in industryOneDict" :label="item.dictLabel" :key="item.dictValue"
                                         :value="item.dictValue" />
                                 </el-select>
@@ -38,8 +38,8 @@
                             </el-form-item>
                         </el-col> -->
                         <el-col :span="16">
-                            <el-form-item label="应用场景" prop="proName">
-                                <el-input v-model="formData.proName" placeholder="应用场景" />
+                            <el-form-item label="应用场景" prop="scenario">
+                                <el-input v-model="formData.scenario" placeholder="应用场景" />
                             </el-form-item>
                         </el-col>
                         <el-col :span="16">
@@ -66,8 +66,8 @@
 
                     <el-row class="project-wrap">
                         <el-col :span="16">
-                            <el-form-item label="十大高精尖产业" prop="proDevelopment">
-                                <el-select v-model="formData.proDevelopment" :popper-append-to-body="false"
+                            <el-form-item label="十大高精尖产业" prop="top10hg">
+                                <el-select v-model="formData.top10hg" :popper-append-to-body="false"
                                     placeholder="十大高精尖产业">
                                     <el-option v-for="item in topTenStateDict" :key="item.dictValue" :label="item.dictLabel"
                                         :value="item.dictValue" />
@@ -75,8 +75,8 @@
                             </el-form-item>
                         </el-col>
                         <el-col :span="16">
-                            <el-form-item label="北京2411产业" prop="proDevelopment">
-                                <el-select v-model="formData.proDevelopment" :popper-append-to-body="false"
+                            <el-form-item label="北京2411产业" prop="bj2441">
+                                <el-select v-model="formData.bj2441" :popper-append-to-body="false"
                                     placeholder="北京2411产业">
                                     <el-option v-for="item in bjStateDict" :key="item.dictValue" :label="item.dictLabel"
                                         :value="item.dictValue" />
@@ -84,8 +84,8 @@
                             </el-form-item>
                         </el-col>
                         <el-col :span="16">
-                            <el-form-item label="中关村科技园区管理委员会241产业分类" prop="proDevelopment">
-                                <el-select v-model="formData.proDevelopment" :popper-append-to-body="false"
+                            <el-form-item label="中关村科技园区管理委员会241产业分类" prop="zgckjy241">
+                                <el-select v-model="formData.zgckjy241" :popper-append-to-body="false"
                                     placeholder="中关村科技园区管理委员会241产业分类">
                                     <el-option v-for="item in zgckjyStateDict" :key="item.dictValue" :label="item.dictLabel"
                                         :value="item.dictValue" />
@@ -253,6 +253,7 @@
 import city from '@/assets/city/city_code.json'
 import { addProjectDetail } from '@/api/projecthall'
 import common from '@/mixin/common'
+import { param2Form } from '@/utils'
 
 export default {
     mixins: [common],
@@ -293,9 +294,18 @@ export default {
                 postalfulladdress: '',
                 position: '',
                 isListing: '0',
+                sponsor: '',
+                typeDescription: '',
+                scenario: '',
+                top10hg: '',
+                bj2441: '',
+                zgckjy241: '',
             },
 
             rules: {
+                title: [
+                    { required: true, message: '请输入项目名称', trigger: 'blur' },
+                ],
                 proName: [
                     { required: true, message: '项目权属方不能为空', trigger: 'blur' },
                 ],
@@ -340,7 +350,25 @@ export default {
                 ],
                 isListing: [
                     { required: true, message: '请选择是否挂牌', trigger: 'change' }
-                ]
+                ],
+                sponsor: [
+                    { required: true, message: '请选择所在院所', trigger: 'change' }
+                ],
+                typeDescription: [
+                    { required: true, message: '请选择项目类别', trigger: 'change' }
+                ],
+                scenario: [
+                    { required: true, message: '请输入应用场景', trigger: 'change' }
+                ],
+                top10hg: [
+                    { required: true, message: '请选择十大高精尖产业', trigger: 'change' }
+                ],
+                bj2441: [
+                    { required: true, message: '请选择北京2411产业', trigger: 'change' }
+                ],
+                zgckjy241: [
+                    { required: true, message: '请选择中关村科技园区管理委员会241产业分类', trigger: 'change' }
+                ],
             },
             pic_file_list: [],
 
@@ -371,8 +399,9 @@ export default {
          doPublishProject() {
             this.$refs.formDataRef.validate(async (vali) => {
                 try {
-                    if(vali) {                    
-                       const res = await addProjectDetail({ ...this.formData })
+                    if(vali) {
+                        console.log('ppublish', this.formData)               
+                       const res = await addProjectDetail(param2Form({ ...this.formData }))
                        if(res.code == '0000') {
                          this.$message.success('发布成功')
                        } else {

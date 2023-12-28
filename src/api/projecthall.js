@@ -16,11 +16,14 @@ export function getProjectDetail(params) {
   })
 }
 
-export function addProjectDetail(data) {
+export function addProjectDetail(params) {
   return request({
     url: 'bussiness/project/add',
     method: 'post',
-    data
+    headers: {
+      'content-type': 'multi-part/form-data'
+    },
+    params
   })
 }
 
