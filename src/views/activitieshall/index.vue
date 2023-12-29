@@ -14,8 +14,8 @@
         </i>
       </el-input>
       <div class="filter-box">
-        <img src="~img/projectManage/project-search.png" />
-        <p>当前位置：首页 > 所有项目</p>
+        <!-- <img src="~img/projectManage/project-search.png" /> -->
+        <p>当前位置：首页 > 产研对接</p>
         <div class="filter-box-content">
           <div class="left-classify">
             <div class="left-classify-item">

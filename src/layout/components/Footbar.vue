@@ -31,29 +31,27 @@
             </div>
           </div>
           <div class="foot_right_connect_wx">
-            <div>
+            <div style="text-align: center;margin-left: 50px;">
               <img
-                style="margin-left: 50px"
                 width="35px"
                 height="29px"
                 src="../../assets/img/weixin.png"
                 alt=""
               />
 
-              <div class="qr_code_1">
+              <div class="qr_code_1" style="margin-top: 4px">
                 <img width="100px" src="../../assets/img/foot_qr.png" alt="" />
               </div>
             </div>
-            <div>
+            <div style="text-align: center;margin-left: 50px;">
               <img
-                style="margin-left: 100px"
                 width="28px"
                 height="33px"
                 src="../../assets/img/douyin.png"
                 alt=""
               />
               <div class="qr_code_2">
-                <img width="100px" src="../../assets/img/foot_qr.png" alt="" />
+                <img width="100px" src="../../assets/img/home/douyin-code.png" alt="" />
               </div>
             </div>
           </div>
@@ -256,7 +254,7 @@ export default {
       }
       .qr_code_1,
       .qr_code_2 {
-        display: none;
+        // display: none;
       }
       img:first {
         &:hover {

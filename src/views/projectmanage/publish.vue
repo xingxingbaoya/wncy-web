@@ -1,7 +1,7 @@
 <template>
     <div class="project-publish">
         <img src="~img/projectManage/publish-project.png" />
-        <p>当前位置：首页 > 所有项目</p>
+        <p>当前位置：首页 > 科技成果 > 发布项目</p>
         <div class="project-publish-wrap">
             <div class="project-publish-wrap-left">
                 <!-- <div class="project-wrap"> -->

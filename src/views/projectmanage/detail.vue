@@ -1,7 +1,7 @@
  <template>
   <div class="project-detail">
     <img src="~img/projectManage/project-search.png"/>
-    <p>当前位置：首页 > 所有项目</p>
+    <p>当前位置：首页 > 科技成果 > {{ project.title }}</p>
     <div class="project-detail-wrap">
         <div class="project-detail-wrap-left">
             <!-- <div class="project-wrap project-main">
@@ -173,7 +173,6 @@ export default {
   @return ($px/1920) * 100vw;
 }
 .project-detail {
-    margin-top: 90px;
     width: 100%;
     background-image: url("~img/projectManage/projdetail-back.png");
     background-size: 100%;
