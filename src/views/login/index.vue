@@ -1,46 +1,112 @@
 <template>
   <div class="login-container">
-    <div class="login-inner">
-      <div class="login-denglu">
-        登 录
-      </div>
-      <span style="color: #72727E;">中关村产研对接数字化服务平台管理后台</span>
-      <el-form ref="loginForm2" :model="loginForm2" :rules="loginRules2" class="login-form" auto-complete="on">
-        <el-row class="form-layout">
-          <el-col :span="24">
-            <el-form-item prop="userName" label="用户名">
-              <el-input v-model="loginForm2.userName" placeholder="请输入用户名" maxlength="30" auto-complete="on">
-              </el-input>
-            </el-form-item>
-          </el-col>
+    <el-row class="login-inner">
+      <el-col :span="12" class="login-left">
+        <img :src="`${imgUrl}/long-logo.png`" class="logo">
+        <img :src="`${imgUrl}/login-bg2.png`" class="bg">
+      </el-col>
+      <el-col :span="12" class="login-right">
+        <el-tabs v-model="loginType" stretch @tab-click="tabChange">
+          <el-tab-pane label="手机号登录" name="smsLogin">
+            <el-form ref="loginForm1" :model="loginForm1" :rules="loginRules1" class="login-form" auto-complete="on">
+              <el-row class="form-layout">
+                <el-col :span="24">
+                  <el-form-item prop="telephone">
+                    <el-input v-model="loginForm1.telephone" placeholder="请输入手机号" maxlength="11" auto-complete="on" @focus="addClass">
+                      <template slot="prepend">
+                        <svg-icon icon-class="r3" />
+                      </template>
+                    </el-input>
+                  </el-form-item>
+                </el-col>
 
-          <el-col :span="24">
-            <el-form-item prop="password" label="密码">
-              <el-input v-model="loginForm2.password" placeholder="请输入密码" type="password" show-password>
-              </el-input>
-            </el-form-item>
-          </el-col>
+                <el-col :span="24">
+                  <el-form-item prop="validateCode">
+                    <el-input v-model="loginForm1.validateCode" placeholder="手机验证码" maxlength="13" auto-complete="on">
+                      <template slot="prepend">
+                        <svg-icon icon-class="r5" />
+                      </template>
+                      <template slot="append"><el-button :disabled="disabled" @click="getMsgCode(loginForm1)">{{ codeBtn }}</el-button></template>
+                    </el-input>
+                  </el-form-item>
+                </el-col>
 
-          <el-row>
-            <el-col :span="14">
-              <el-form-item class="msg-code" prop="validateCode" label="验证码">
-                <el-input v-model="loginForm2.validateCode" placeholder="请输入验证码" maxlength="13" auto-complete="on"/>
-              </el-form-item>
-            </el-col>
-            <el-Col :span="6">
-              <el-form-item style="margin-top: 40px;width: 7vw;margin-left: 1vw;">
-                <img ref="CaptchaImage" :src="CaptchaImage" @click="getCaptcha" style="width:100%;object-fit: contain;">
-              </el-form-item>
-            </el-Col>
-          </el-row>
-        </el-row>
-        <el-row>
-          <el-col :span="24" class="regist-btn">
-            <el-button class="go-regist" @keyup.enter.native="handLogin('loginForm2')" @click.native.prevent="handLogin('loginForm2')">立即登录</el-button>
-          </el-col>
-        </el-row>
-      </el-form>
-    </div>
+                <el-col :span="24" class="clause">
+                  <el-form-item />
+                  <el-form-item />
+                </el-col>
+
+              </el-row>
+              <el-row>
+                <el-col :span="24" class="regist-btn">
+                  <el-button class="go-regist" @keyup.enter.native="handLogin('loginForm1')" @click.native.prevent="handLogin('loginForm1')">立即登录</el-button>
+                </el-col>
+                <el-col :span="24">
+                  <p class="other-login">没有账号,<span class="go-register" @click="goregist">点击注册</span></p>
+                  <p class="other-login">未注册手机验证后自动登录,注册即代表同意<span class="go-register" @click="dialogVisible = true">《相关服务协议》</span></p>
+                </el-col>
+
+              </el-row>
+
+            </el-form>
+          </el-tab-pane>
+          <el-tab-pane label="账号登录" name="passLogin">
+            <el-form ref="loginForm2" :model="loginForm2" :rules="loginRules2" class="login-form" auto-complete="on">
+              <el-row class="form-layout">
+                <el-col :span="24">
+                  <el-form-item prop="userName">
+                    <el-input v-model="loginForm2.userName" placeholder="请输入用户名" maxlength="30" auto-complete="on">
+                      <template slot="prepend">
+                        <svg-icon icon-class="r1" />
+                      </template>
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+
+                <el-col :span="24">
+                  <el-form-item prop="password">
+                    <el-input v-model="loginForm2.password" placeholder="请输入密码" type="password" show-password>
+                      <template slot="prepend">
+                        <svg-icon icon-class="r2" />
+                      </template>
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+
+                <el-col :span="24">
+                  <el-form-item class="msg-code" prop="validateCode">
+                    <el-input v-model="loginForm2.validateCode" placeholder="请输入验证码" maxlength="13" auto-complete="on">
+                      <template slot="prepend">
+                        <svg-icon icon-class="r4" />
+                      </template>
+                      <template slot="append"><img ref="CaptchaImage" :src="CaptchaImage" @click="getCaptcha"></template>
+                    </el-input>
+                  </el-form-item>
+                </el-col>
+
+                <el-col :span="24" class="clause">
+                  <el-form-item>
+                    <el-checkbox v-model="isRember">记住密码</el-checkbox>
+                  </el-form-item>
+                  <el-form-item>
+                    <span class="forget" @click="goforget">忘记密码？</span>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="24" class="regist-btn">
+                  <el-button class="go-regist" @keyup.enter.native="handLogin('loginForm2')" @click.native.prevent="handLogin('loginForm2')">立即登录</el-button>
+                </el-col>
+                <el-col :span="24">
+                  <p class="other-login">没有账号,<span class="go-register" @click="goregist">点击注册</span></p>
+                  <p class="other-login">未注册手机验证后自动登录,注册即代表同意<span class="go-register" @click="dialogVisible = true">《相关服务协议》</span></p>
+                </el-col>
+              </el-row>
+            </el-form>
+          </el-tab-pane>
+        </el-tabs>
+      </el-col>
+    </el-row>
 
     <el-dialog
       :visible.sync="dialogVisible"
@@ -197,38 +263,49 @@ export default {
 $bg:#2d3a4b;
 $dark_gray:#889aa4;
 $light_gray:#eee;
-@function pxToVW($px) {
-  @return ($px/1920) * 100vw;
-}
+
 .login-container {
   min-height: 100%;
   width: 100%;
   display: flex;
   align-items: center;
-  background-image: url("~img/login.png");
-  background-size: 100% 100%;
+  justify-content: center;
+  background-image: url($backgroundImgURL + "/login-bg.png");
+  background-size: cover;
   background-repeat:no-repeat;
   overflow: hidden;
   .login-inner{
-    margin-left: pxToVW(1020);
-    // background-color: #fff;
-    background-image: url("~img/login-back.png");
-    background-size: 100% ;
+    margin: auto;
+    height: 800px;
+    width: 1450px;
+    background-image: url($backgroundImgURL + "/login-bg1.png");
+    background-size: cover;
     background-repeat:no-repeat;
-    width: pxToVW(664);
     overflow: hidden;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-radius: 16px;
-    padding: 100px 0;
+    .login-left {
+      height: 800px;
+      position: relative;
+      //justify-content: space-around;
 
-    .login-denglu {
-      font-size: 44px;
-      font-weight: 400;
-      color: #121213;
-      margin-bottom: 18px;
+      .logo {
+        height: 51px;
+        object-fit: cover;
+        position: absolute;
+        left: 47px;
+        top: 52px;
+      }
+      .bg {
+        object-fit: contain;
+        width: 551px;
+        height: 800px;
+        position: absolute;
+        right: 50px;
+        top: 0;
+      }
+
     }
   }
 
@@ -273,32 +350,86 @@ $light_gray:#eee;
 
   .login-form {
     position: relative;
-    width: pxToVW(360);
+    width: 490px;
     max-width: 100%;
     margin: 0 auto;
     overflow: hidden;
-    margin: 44px 0 60px;
     ::v-deep .el-input__inner {
-      background: #F2F2F6;
-      border-radius: 6px;
-      border-color:#F2F2F6;
-      height: 54px;
+      border: none;
     }
-    ::v-deep .el-form-item__label {
+
+    ::v-deep .el-input__inner::placeholder {
+      font-size: 18px;
       font-weight: 400;
-      color: #B9B9C4; 
-      font-size: 14px;
-      &::before{
-        content: "";
+      color: #AAAAAA;
+    }
+
+    ::v-deep .el-input__inner {
+      font-size: 18px;
+    }
+
+    ::v-deep .el-form-item__content{
+      border-bottom: 2px solid #DFDFDF;
+      padding-bottom: 5px;
+    }
+
+    ::v-deep .el-form-item {
+      margin-bottom: 36px;
+    }
+
+    ::v-deep .el-input-group__prepend {
+      border: none;
+      background-color: #FFFFFF;
+      position: relative;
+
+      .svg-icon {
+        width: 25px;
+        height: 25px;
+      }
+      &:after {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+        content: '';
+        display: block;
+        height: 50%;
+        width: 2px;
+        background: #DFDFDF;
       }
     }
 
-    .form-layout {
-      height: 350px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
+    ::v-deep .el-input-group__append {
+      border: none;
+      background-color: #FFFFFF;
+      position: relative;
+      font-size: 18px;
+      &:before {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto 0;
+        content: '';
+        display: block;
+        height: 50%;
+        width: 2px;
+        background: #DFDFDF;
+      }
+    }
+
+    ::v-deep .el-checkbox__input.is-checked .el-checkbox__inner,::v-deep .el-checkbox__input.is-indeterminate .el-checkbox__inner {
+      background-color: #516FD2;
+      border-color: #516FD2;
+    }
+
+    ::v-deep .el-checkbox__input.is-checked+.el-checkbox__label {
+      color: #516FD2;
+    }
+
+    ::v-deep .el-checkbox {
+      color: #AAAAAA;
     }
 
     .msg-code {
@@ -331,13 +462,14 @@ $light_gray:#eee;
       justify-content: center;
     }
     .go-regist {
-      width: pxToVW(360);
-      height: 54px;
-      background: #2434AF;
+      width: 284px;
+      height: 56px;
+      background: #4D6DDA;
+      box-shadow: 0px 0px 16px 0px rgba(77, 109, 218, 0.34);
+      border-radius: 27px;
       font-size: 18px;
       font-weight: 400;
       color: #FFFFFF;
-      margin-top: 60px;
     }
 
     .other-login {
@@ -381,5 +513,11 @@ $light_gray:#eee;
   height: 650px;
 }
 
-
+.form-layout {
+  height: 350px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 </style>
