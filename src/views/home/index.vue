@@ -1,7 +1,9 @@
 <template>
   <el-main v-loading="loading">
     <div class="home-main">
-      <img src="~img/home/banner.png" />
+      <div class="title">见微知著</div>
+      <div class="attach">立足怀柔科学城的产研对接居间集成服务平台</div>
+      <!-- <img src="~img/home/banner.png" /> -->
     </div>
     <div class="home-companyintro">
       <div class="theme-box">
@@ -1132,11 +1134,25 @@ export default {
 }
 .home-main {
   position: relative;
-  img {
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  height: 100vh;
+  background-image: url('~img/home/banner.png');
+  background-size:100% 100%;
+  background-repeat: no-repeat;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .title {
+    font-size: 178px;
+    font-weight: normal;
+    color: #FFFFFF;
+    line-height: 176px;
+  }
+  .attach {
+    font-size: 41px;
+    font-weight: normal;
+    color: #FFFFFF;
+    line-height: 40px;
   }
 }
 
