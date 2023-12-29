@@ -52,7 +52,7 @@
                         <span class="name">所在院所</span>  <span class="values">{{ academy }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">产业分类</span>  <span class="values">xxxx</span>
+                        <span class="name">产业分类</span>  <span class="values">{{  }}</span>
                     </el-col>
                     <el-col :span="24">
                         <span class="name">应用场景</span>  <span class="values">{{ project.scenario }}</span>

@@ -18,7 +18,7 @@
             @click="activeIntro = item.id"
           >
             <div class="home-companyintro-content-nav-item-title">
-              <img :src="item.iconUrl" />{{ item.title }}
+              <img :src="activeIntro == item.id ? item.whiteIcon : item.iconUrl" />{{ item.title }}
             </div>
           </div>
         </div>
@@ -157,6 +157,11 @@ import companyinto2 from "@/assets/img/home/companyintro-2.png";
 import companyinto3 from "@/assets/img/home/companyintro-3.png";
 import companyinto4 from "@/assets/img/home/companyintro-4.png";
 import companyinto5 from "@/assets/img/home/companyintro-5.png";
+import companyinto1white from "@/assets/img/home/companyintro-1-white.png";
+import companyinto2white from "@/assets/img/home/companyintro-2-white.png";
+import companyinto3white from "@/assets/img/home/companyintro-3-white.png";
+import companyinto4white from "@/assets/img/home/companyintro-4-white.png";
+import companyinto5white from "@/assets/img/home/companyintro-5-white.png";
 import companyintropic1 from "@/assets/img/home/companyintro-pic1.png";
 import companyintropic2 from "@/assets/img/home/companyintro-pic2.png";
 import companyintropic3 from "@/assets/img/home/companyintro-pic3.png";
@@ -484,6 +489,7 @@ export default {
           id: 0,
           title: "平台服务",
           iconUrl: companyinto1,
+          whiteIcon: companyinto1white,
           imgUrl: companyintropic1,
           introInfo: "科创服务平台",
           detail: "聚集创新要素",
@@ -492,6 +498,7 @@ export default {
           id: 1,
           title: "产研对接",
           iconUrl: companyinto2,
+          whiteIcon: companyinto2white,
           imgUrl: companyintropic2,
           introInfo: "科创服务平台",
           detail: "聚集创新要素",
@@ -500,6 +507,7 @@ export default {
           id: 2,
           title: "科技成果",
           iconUrl: companyinto4,
+          whiteIcon: companyinto4white,
           imgUrl: companyintropic3,
           introInfo: "科创服务平台",
           detail: "聚集创新要素",
@@ -508,6 +516,7 @@ export default {
           id: 3,
           title: "企业需求",
           iconUrl: companyinto3,
+          whiteIcon: companyinto3white,
           imgUrl: companyintropic4,
           introInfo: "科创服务平台",
           detail: "聚集创新要素",
@@ -517,6 +526,7 @@ export default {
           id: 4,
           title: "集成服务",
           iconUrl: companyinto5,
+          whiteIcon: companyinto5white,
           imgUrl: companyintropic5,
           introInfo: "科创服务平台",
           detail: "聚集创新要素",
