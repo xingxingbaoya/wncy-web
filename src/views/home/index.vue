@@ -23,11 +23,11 @@
           </div>
         </div>
         <div class="home-companyintro-content-pic">
-          <img :src="companyintroList[activeIntro].imgUrl" />
-          <div class="home-companyintro-content-pic-intro">
+          <img :src="companyintroList[activeIntro].imgUrl" style="width:100%;object-fit:contain"/>
+          <!-- <div class="home-companyintro-content-pic-intro">
             <div>{{ companyintroList[activeIntro].introInfo }}</div>
             <div>{{ companyintroList[activeIntro].detail }}</div>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="home-companyintro-detail">
@@ -158,6 +158,11 @@ import companyinto3 from "@/assets/img/home/companyintro-3.png";
 import companyinto4 from "@/assets/img/home/companyintro-4.png";
 import companyinto5 from "@/assets/img/home/companyintro-5.png";
 import companyintropic1 from "@/assets/img/home/companyintro-pic1.png";
+import companyintropic2 from "@/assets/img/home/companyintro-pic2.png";
+import companyintropic3 from "@/assets/img/home/companyintro-pic3.png";
+import companyintropic4 from "@/assets/img/home/companyintro-pic4.png";
+import companyintropic5 from "@/assets/img/home/companyintro-pic5.png";
+
 
 import featurePic4 from "@/assets/img/home/feature-pic4.png"
 import featurePic6 from "@/assets/img/home/feature-pic6.png"
@@ -477,7 +482,7 @@ export default {
       companyintroList: [
         {
           id: 0,
-          title: "科创服务",
+          title: "平台服务",
           iconUrl: companyinto1,
           imgUrl: companyintropic1,
           introInfo: "科创服务平台",
@@ -485,33 +490,34 @@ export default {
         },
         {
           id: 1,
-          title: "科技成果",
+          title: "产研对接",
           iconUrl: companyinto2,
-          imgUrl: companyintropic1,
+          imgUrl: companyintropic2,
           introInfo: "科创服务平台",
           detail: "聚集创新要素",
         },
         {
           id: 2,
-          title: "企业需求",
-          iconUrl: companyinto3,
-          imgUrl: companyintropic1,
+          title: "科技成果",
+          iconUrl: companyinto4,
+          imgUrl: companyintropic3,
           introInfo: "科创服务平台",
           detail: "聚集创新要素",
         },
         {
           id: 3,
-          title: "产研对接",
-          iconUrl: companyinto4,
-          imgUrl: companyintropic1,
+          title: "企业需求",
+          iconUrl: companyinto3,
+          imgUrl: companyintropic4,
           introInfo: "科创服务平台",
           detail: "聚集创新要素",
         },
+        
         {
           id: 4,
-          title: "区域协同",
+          title: "集成服务",
           iconUrl: companyinto5,
-          imgUrl: companyintropic1,
+          imgUrl: companyintropic5,
           introInfo: "科创服务平台",
           detail: "聚集创新要素",
         },
@@ -1198,7 +1204,7 @@ export default {
       }
     }
     &-pic {
-      flex: 0;
+      flex: 1;
       width: pxToVW(1024);
       height: 100%;
       position: relative;

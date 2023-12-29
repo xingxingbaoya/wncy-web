@@ -173,7 +173,6 @@ export default {
   @return ($px/1920) * 100vw;
 }
 .project-detail {
-    margin-top: 90px;
     width: 100%;
     background-image: url("~img/projectManage/projdetail-back.png");
     background-size: 100%;
