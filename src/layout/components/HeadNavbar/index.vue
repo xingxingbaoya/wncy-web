@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="{ 'menu-shadow': isHome, isTransparent: isTransparent }"
+    :class="{ 'menu-shadow': isHome, isTransparent: isHome }"
     class="head-menu"
   >
     <div class="head-left">
@@ -180,7 +180,8 @@ export default {
   display: flex;
   align-items: center;
   padding: 0 pxToVW(180);
-  background: transparent;
+  background: #fff;
+  z-index: 9999;
 
   :deep .el-menu-item {
     color: #000 !important;
