@@ -4,7 +4,8 @@
     class="head-menu"
   >
     <div class="head-left">
-      <img src="~img/logo.png" alt="中关村科技成果转化与技术交易综合服务平台" />
+      <img v-if="isHome" src="~img/logo.svg" alt="中关村科技成果转化与技术交易综合服务平台" />
+      <img v-else src="~img/logo_block.svg" alt="中关村科技成果转化与技术交易综合服务平台" />
     </div>
 
     <el-menu
@@ -202,6 +203,7 @@ export default {
   }
   .head-left {
     width: pxToVW(192);
+    display: flex;
     img {
       width: 100%;
       object-fit: contain;
