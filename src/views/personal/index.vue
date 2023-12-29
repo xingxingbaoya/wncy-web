@@ -6,48 +6,6 @@
           <img v-if="item.avatar" :src="item.avatar" alt="">
           <svg-icon v-else icon-class="avatar" class-name="avatar" />
           <p>{{ item.userName }}</p>
-          <!--          <p>{{ item.phone }}</p>-->
-        </div>
-        <div class="mid">
-          <p class="mid-title">认证中心</p>
-          <el-row class="mid-cont">
-            <el-col class="mid-box mb28" :span="12">
-              <div class="box-left">
-                <svg-icon icon-class="c1" class-name="icon" @click="goexperts(item)" />
-              </div>
-              <div class="box-right">
-                <p class="right-t" :class="{'hasAuth':hasAuth(item,'4')}" @click="goexperts(item)">专家认证</p>
-                <p class="right-s" :class="{'hasRejectd':hasRejectd(item,'4')}">{{ authStatus(item,'4') }}</p>
-              </div>
-            </el-col>
-            <el-col class="mid-box mb28" :span="12">
-              <div class="box-left">
-                <svg-icon icon-class="c2" class-name="icon" @click="gomanger(item)" />
-              </div>
-              <div class="box-right">
-                <p class="right-t" :class="{'hasAuth':hasAuth(item,'5')}" @click="gomanger(item)">技术经理人认证</p>
-                <p class="right-s" :class="{'hasRejectd':hasRejectd(item,'5')}">{{ authStatus(item,'5') }}</p>
-              </div>
-            </el-col>
-            <el-col class="mid-box" :span="12">
-              <div class="box-left">
-                <svg-icon icon-class="c3" class-name="icon" @click="gocompany(item)" />
-              </div>
-              <div class="box-right">
-                <p class="right-t" :class="{'hasAuth':hasAuth(item,'2')}" @click="gocompany(item)">企业认证</p>
-                <p class="right-s" :class="{'hasRejectd':hasRejectd(item,'2')}">{{ authStatus(item,'2') }}</p>
-              </div>
-            </el-col>
-            <el-col class="mid-box" :span="12">
-              <div class="box-left">
-                <svg-icon icon-class="c4" class-name="icon" @click="goorg(item)" />
-              </div>
-              <div class="box-right">
-                <p class="right-t" :class="{'hasAuth':hasAuth(item,'3')}" @click="goorg(item)">机构认证</p>
-                <p class="right-s" :class="{'hasRejectd':hasRejectd(item,'3')}">{{ authStatus(item,'3') }}</p>
-              </div>
-            </el-col>
-          </el-row>
         </div>
         <div class="bot">
           <p class="bot-title">与我相关</p>
@@ -55,16 +13,8 @@
             <el-collapse-item title="项目大厅" name="1">
               <router-link to="/personal/center/search-project" tag="p">我发布的项目</router-link>
             </el-collapse-item>
-            <el-collapse-item title="需求大厅" name="2">
-              <router-link to="/personal/center/search-demand" tag="p">我发布的需求</router-link>
-            </el-collapse-item>
             <el-collapse-item title="活动大厅" name="3">
               <router-link to="/personal/center/search-activit" tag="p">我报名的活动</router-link>
-            </el-collapse-item>
-            <el-collapse-item v-if="!isProd" title="论坛大厅" name="4">
-              <router-link to="/personal/center/search-bbs" tag="p">我的专栏投稿</router-link>
-              <router-link to="/personal/center/search-question" tag="p">我的科技问答</router-link>
-              <router-link to="/personal/center/search-ask" tag="p">我的评论</router-link>
             </el-collapse-item>
           </el-collapse>
         </div>

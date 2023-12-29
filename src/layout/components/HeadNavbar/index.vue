@@ -177,7 +177,29 @@ export default {
   display: flex;
   align-items: center;
   padding: 0 pxToVW(180);
-  background: rgba(38, 38, 45, 0.3);
+  background: transparent;
+
+  :deep .el-menu-item {
+    color: #000 !important;
+    &.is-active {
+      color: #000 !important;
+    }
+    &:hover {
+      color: #000 !important;
+    }
+  }
+  &.menu-shadow {
+    background: rgba(38, 38, 45, 0.3);
+    :deep .el-menu-item {
+      color: #fff !important;
+      &.is-active {
+        color: #fff !important;
+      }
+      &:hover {
+        color: #fff !important;
+      }
+    }
+  }
   .head-left {
     width: pxToVW(192);
     img {
