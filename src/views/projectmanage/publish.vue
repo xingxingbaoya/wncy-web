@@ -427,7 +427,6 @@ export default {
 }
 
 .project-publish {
-    margin-top: 90px;
     width: 100%;
     background-image: url("~img/projectManage/projdetail-back.png");
     background-size: 100%;
