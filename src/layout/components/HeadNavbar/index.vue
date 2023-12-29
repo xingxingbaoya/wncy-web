@@ -4,8 +4,16 @@
     class="head-menu"
   >
     <div class="head-left">
-      <img v-if="isHome" src="~img/logo.svg" alt="中关村科技成果转化与技术交易综合服务平台" />
-      <img v-else src="~img/logo_block.svg" alt="中关村科技成果转化与技术交易综合服务平台" />
+      <img
+        v-if="isHome"
+        src="~img/logo.svg"
+        alt="中关村科技成果转化与技术交易综合服务平台"
+      />
+      <img
+        v-else
+        src="~img/logo_block.svg"
+        alt="中关村科技成果转化与技术交易综合服务平台"
+      />
     </div>
 
     <el-menu
@@ -35,7 +43,7 @@
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             <span class="name">{{ username }}</span>
-            <svg-icon icon-class="user1" class-name="icon" />
+            <img src="@/assets/img/user_block.png" alt="" srcset="" />
           </span>
           <el-dropdown-menu slot="dropdown" class="top_c">
             <el-dropdown-item command="gocenter">
@@ -159,12 +167,6 @@ export default {
     }
   }
 
-  .opera {
-    .name {
-      color: #333333 !important;
-    }
-  }
-
   :deep(.el-menu-item:hover:before, .el-menu-item.is-active:before) {
     display: none;
   }
@@ -211,6 +213,12 @@ export default {
   }
 
   .head-right {
+    .opera {
+      .el-dropdown-link{
+        display: flex;
+        align-items: center;
+      }
+    }
     .regist-button {
       color: #fff;
       line-height: 90px;

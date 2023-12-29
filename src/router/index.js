@@ -803,7 +803,7 @@ export const constantRoutes = [
             path: '/',
             name: 'Personalread',
             hidden: true,
-            component: () => import('@/views/personal/account')
+            component: () => import('@/views/personal/table')
           },
           {
             path: 'rejected',

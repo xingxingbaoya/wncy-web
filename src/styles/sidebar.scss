@@ -388,11 +388,19 @@
         border-color: #1E86F9 !important;
         border-radius: 21px;
       }
+      &.home-menu{
+        .name {
+          color: #fff !important;
+        }
+      }
 
       .name {
         font-size: 24px;
-        color: #fff !important;
+        color: #000 !important;
         margin-right: 10px;
+      }
+      .icon{
+        color: #000;
       }
     }
 }
