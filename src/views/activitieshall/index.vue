@@ -701,7 +701,7 @@ export default {
     z-index: 999;
     .filter-box-content {
       background: #fff;
-      box-shadow: 0px 20px 46px 20px #d8e0f0;
+      // box-shadow: 0px 20px 46px 20px #d8e0f0;
       border-radius: 16px;
       :deep .el-date-editor {
         font-size: 12px !important;
