@@ -1,7 +1,7 @@
  <template>
   <div class="project-detail">
     <img src="~img/projectManage/project-search.png"/>
-    <p>当前位置：首页 > 所有项目</p>
+    <p>当前位置：首页 > 科技成果 > {{ project.title }}</p>
     <div class="project-detail-wrap">
         <div class="project-detail-wrap-left">
             <!-- <div class="project-wrap project-main">

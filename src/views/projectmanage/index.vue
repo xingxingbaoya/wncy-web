@@ -16,8 +16,8 @@
         </i>
       </el-input>
       <div class="project-manage-main-group">
-        <img src="~img/projectManage/project-search.png" />
-        <p>当前位置：首页 > 所有项目</p>
+        <!-- <img src="~img/projectManage/project-search.png" /> -->
+        <p>当前位置：首页 > 科技成果</p>
         <div class="project-manage-main-group-wrap">
           <div class="left">
             <div class="left-classify">
