@@ -1,8 +1,8 @@
 <template>
   <el-main v-loading="loading">
     <div class="home-main">
-      <div class="title">见微知著</div>
-      <div class="attach">立足怀柔科学城的产研对接居间集成服务平台</div>
+      <div class="home-main-title">见微知著</div>
+      <div class="home-main-attach">立足怀柔科学城的产研对接居间集成服务平台</div>
       <!-- <img src="~img/home/banner.png" /> -->
     </div>
     <div class="home-companyintro">
@@ -1140,19 +1140,17 @@ export default {
   background-repeat: no-repeat;
   text-align: center;
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
-  .title {
+  &-title {
     font-size: 178px;
     font-weight: normal;
     color: #FFFFFF;
-    line-height: 176px;
   }
-  .attach {
+  &-attach {
     font-size: 41px;
     font-weight: normal;
     color: #FFFFFF;
-    line-height: 40px;
   }
 }
 
