@@ -1,9 +1,7 @@
 <template>
   <el-main v-loading="loading">
     <div class="home-main">
-      <div class="home-main-title">见微知著</div>
-      <div class="home-main-attach">立足怀柔科学城的产研对接居间集成服务平台</div>
-      <!-- <img src="~img/home/banner.png" /> -->
+      <img src="~img/home/banner.jpg" />
     </div>
     <div class="home-companyintro">
       <div class="theme-box">
@@ -33,10 +31,7 @@
         </div>
       </div>
       <div class="home-companyintro-detail">
-        <div>
-          北京中关村微纳能源投资有限公司是一个科创服务平台，致力于为科学家、企业家和政府提供全面的科创服务。
-        </div>
-        将各种创新要素聚集在一起，促进创新资源的共享和优化配置，构建一个有利于创新创业的生态系统。
+        {{ companyintroList[activeIntro].introInfo }}
       </div>
     </div>
     <div class="home-workmode">
@@ -493,7 +488,7 @@ export default {
           iconUrl: companyinto1,
           whiteIcon: companyinto1white,
           imgUrl: companyintropic1,
-          introInfo: "科创服务平台",
+          introInfo: "北京中关村微纳能源投资有限公司是一个科创服务平台，致力于为科学家、企业家和政府提供全面的科创服务。将各种创新要素聚集在一起，促进创新资源的共享和优化配置，构建一个有利于创新创业的生态系统。",
           detail: "聚集创新要素",
         },
         {
@@ -502,7 +497,7 @@ export default {
           iconUrl: companyinto2,
           whiteIcon: companyinto2white,
           imgUrl: companyintropic2,
-          introInfo: "科创服务平台",
+          introInfo: "低碳技术领域（能源、材料、环境、装备、认证），以及空天、生物医药健康、信息智能、仪器传感领域，“基础设施-基础研究-应用研究-技术开发-成果转化-高精尖产业”等战略科技力量体系最完善创新链的对接。",
           detail: "聚集创新要素",
         },
         {
@@ -511,7 +506,7 @@ export default {
           iconUrl: companyinto4,
           whiteIcon: companyinto4white,
           imgUrl: companyintropic3,
-          introInfo: "科创服务平台",
+          introInfo: "公司与中科院物理所、化学所、半导体所、自动化所、纳米能源所、生物物理所、高能物理所、计算所等10多个中科院研究所以及国科大、华北电力大学、航天工程大学、北化大、北工大等高等院校的课题组和专家进行对接，储备大量优质科技成果项目。",
           detail: "聚集创新要素",
         },
         {
@@ -520,7 +515,7 @@ export default {
           iconUrl: companyinto3,
           whiteIcon: companyinto3white,
           imgUrl: companyintropic4,
-          introInfo: "科创服务平台",
+          introInfo: "储备中国电能、超智控信、巴音孟克、佳瑞达等公司的技术、融资、落地等具体需求30余项。与国家电投中国电能合作，为国家电投寻找最适用、最匹配的技术、装备和服务等解决方案。现有技术需求120项，其中常规需求90项，新兴产业需求30项 。",
           detail: "聚集创新要素",
         },
         
@@ -530,7 +525,7 @@ export default {
           iconUrl: companyinto5,
           whiteIcon: companyinto5white,
           imgUrl: companyintropic5,
-          introInfo: "科创服务平台",
+          introInfo: "集成对接政产学研金服用全要素资源”，做好科学家“经纪人”、企业家“经理人”、政府科创服务“合伙人”，实现“服务——一对一居间链接服务+投资——认股权投资绑定机制+空间——企业落地园区”的核心功能。",
           detail: "聚集创新要素",
         },
       ],
@@ -1135,23 +1130,20 @@ export default {
 .home-main {
   position: relative;
   height: 100vh;
-  background-image: url('~img/home/banner.png');
-  background-size:100% 100%;
-  background-repeat: no-repeat;
-  text-align: center;
-  display: flex;
-  // justify-content: center;
-  align-items: center;
-  &-title {
-    font-size: 178px;
-    font-weight: normal;
-    color: #FFFFFF;
+  >img {
+    width: 100%;
+    height: 100%;
   }
-  &-attach {
-    font-size: 41px;
-    font-weight: normal;
-    color: #FFFFFF;
-  }
+  // &-title {
+  //   font-size: 178px;
+  //   font-weight: normal;
+  //   color: #FFFFFF;
+  // }
+  // &-attach {
+  //   font-size: 41px;
+  //   font-weight: normal;
+  //   color: #FFFFFF;
+  // }
 }
 
 .home-workmode {
@@ -1266,6 +1258,7 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0 pxToVW(100);
   }
 }
 
