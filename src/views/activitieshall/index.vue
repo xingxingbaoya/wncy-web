@@ -6,11 +6,11 @@
       <el-input
         placeholder="输入咨询关键词，进行搜索"
         class="activity-manage-main-search"
-        v-model="searchData.title"
+        v-model="searchData.keyword"
       >
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
         <i slot="suffix">
-          <img src="~img/projectManage/search.png" style="cursor: pointer" />
+          <img src="~img/projectManage/search.png" style="cursor: pointer" @click="handleSearchDataChange('title', searchData.keyword)"/>
         </i>
       </el-input>
       <div class="filter-box">
@@ -23,7 +23,7 @@
               <div
                 v-for="tech in [
                   { dictLabel: '不限', dictValue: '' },
-                  ...activityWayDict,
+                  ...activityKindDict,
                 ]"
                 :key="tech.key"
               >
@@ -192,6 +192,7 @@ export default {
       //   { id: 3, title: "已结束", key: "end" },
       // ],
       searchData: {
+        keyword: "",
         actName: "",
         actStatus: "",
         actClassification: "",

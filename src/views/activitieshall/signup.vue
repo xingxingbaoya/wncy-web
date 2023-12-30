@@ -17,7 +17,7 @@
               <div>活动类型：</div>
               <div>
                 {{
-                  activityWayDict.filter(
+                  activityKindDict.filter(
                     (i) => i.defaultValue == item.actClassification
                   )[0] || "未知"
                 }}

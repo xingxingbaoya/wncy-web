@@ -299,7 +299,9 @@ export default {
       flex-direction: column;
       padding: 20px;
       border-radius: 4px;
-      height: 260px;
+      max-height: 100%;
+      height: fit-content;
+      overflow-y: auto;
       flex-direction: column;
       align-items: center;
       .play-right-title {

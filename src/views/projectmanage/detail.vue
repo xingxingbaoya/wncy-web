@@ -52,13 +52,19 @@
                         <span class="name">所在院所</span>  <span class="values">{{ academy }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">产业分类</span>  <span class="values">{{  }}</span>
+                        <span class="name">十大高精尖产业</span>  <span class="values">{{ industryKind.top10hg }}</span>
+                    </el-col>
+                    <el-col :span="24">
+                        <span class="name">北京2411产业</span>  <span class="values">{{ industryKind.bj2441 }}</span>
+                    </el-col>
+                    <el-col :span="24">
+                        <span class="name">中关村科技园区管理委员会241产业分类</span>  <span class="values">{{ industryKind.zgckjy241 }}</span>
                     </el-col>
                     <el-col :span="24">
                         <span class="name">应用场景</span>  <span class="values">{{ project.scenario }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">项目类别</span>  <span class="values">{{ industry }}</span>
+                        <span class="name">项目类别</span>  <span class="values">{{ project.typeDescription }}</span>
                     </el-col>
                     <el-col :span="24">
                         <span class="name">合作意向</span>  <span class="values">{{ expire }}</span>
@@ -136,6 +142,11 @@ export default {
             academy: '',
             industry: '',
             expire:'',
+            industryKind: {
+                top10hg: '',
+                bj2441: '',
+                zgckjy241: ''
+            }
         }
     },
     mounted() {
@@ -152,10 +163,12 @@ export default {
                     this.project=res.obj
                     console.log('qq', this.academyStateDict, this.project.sponsor)
                     this.academy = this.academyStateDict?.find(item => item.dictValue == this.project.sponsor).dictLabel || '无'
-                    this.industry = this.industryOneDict?.find(item => item.dictValue == this.project.typeDescription).dictLabel || '无'
                     this.expire = this.cooperationDict?.find(item => item.dictValue == this.project.cooperation).dictLabel || '无'
-                    // this.project.sponsor = this.academyStateDict?.find(item => item.dictValue == this.project.sponsor).dictLabel
-                    // this.project.sponsor = this.academyStateDict?.find(item => item.dictValue == this.project.sponsor).dictLabel
+                    this.industryKind.top10hg = this.topTenStateDict?.find(item => item.dictValue == this.project.top10hg).dictLabel || '无'
+                    this.industryKind.bj2441 = this.bjStateDict?.find(item => item.dictValue == this.project.bj2441).dictLabel || '无'
+                    this.industryKind.zgckjy241 = this.zgckjyStateDict?.find(item => item.dictValue == this.project.zgckjy241).dictLabel || '无'
+
+                    
 
                 } else {
                     this.$message.error(res.msg)

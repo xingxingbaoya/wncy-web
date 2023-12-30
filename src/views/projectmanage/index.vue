@@ -8,11 +8,11 @@
       <el-input
         placeholder="输入项目关键词进行搜索"
         class="project-manage-main-search"
-        v-model="searchData.title"
+        v-model="searchData.keyword"
       >
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
         <i slot="suffix">
-          <img @click="handleSearchDataChange('title', searchData.title)" src="~img/projectManage/search.png" style="cursor: pointer" />
+          <img @click="handleSearchDataChange('title', searchData.keyword)" src="~img/projectManage/search.png" style="cursor: pointer" />
         </i>
       </el-input>
       <div class="project-manage-main-group">
@@ -185,7 +185,7 @@
                 <div class="left-content">
                   <div class="title">{{ item.title }}</div>
                   <div class="attach">
-                    <span class="attach-address">{{ academyStateDict?.find(item => item.dictValue == item.sponsor)?.dictLabel || '无' }}</span>
+                    <span class="attach-address">{{ item.academy || '无' }}</span>
                     <!-- <img src="~img/projectManage/address.png" />
                     <span class="attach-address"
                       >{{ item.provinceName }} {{ item.cityName }}
@@ -294,58 +294,7 @@ export default {
         { id: 4, title: "协会团体" },
         { id: 5, title: "个人" },
       ],
-      projectList: [
-        {
-          id: 0,
-          title: "【商业贸易】跨境平台综合服务开发",
-          provinceName: "广西壮族自治区",
-          cityName: "南宁市",
-          areaName: "江南区",
-          createTime: "2023.12.07",
-          proIntentionPrice: "100",
-          faceFlag: "0",
-        },
-        {
-          id: 0,
-          title: "【商业贸易】跨境平台综合服务开发",
-          provinceName: "广西壮族自治区",
-          cityName: "南宁市",
-          areaName: "江南区",
-          createTime: "2023.12.07",
-          proIntentionPrice: "100",
-          faceFlag: "0",
-        },
-        {
-          id: 0,
-          title: "【商业贸易】跨境平台综合服务开发",
-          provinceName: "广西壮族自治区",
-          cityName: "南宁市",
-          areaName: "江南区",
-          createTime: "2023.12.07",
-          proIntentionPrice: "100",
-          faceFlag: "1",
-        },
-        {
-          id: 0,
-          title: "【商业贸易】跨境平台综合服务开发",
-          provinceName: "广西壮族自治区",
-          cityName: "南宁市",
-          areaName: "江南区",
-          createTime: "2023.12.07",
-          proIntentionPrice: 0,
-          faceFlag: "0",
-        },
-        {
-          id: 0,
-          title: "【商业贸易】跨境平台综合服务开发",
-          provinceName: "广西壮族自治区",
-          cityName: "南宁市",
-          areaName: "江南区",
-          createTime: "2023.12.07",
-          proIntentionPrice: 100,
-          faceFlag: "0",
-        },
-      ],
+      projectList:[],
       pageConfig: {
         pageNum: 1,
         pageSize: 20,
@@ -366,7 +315,7 @@ export default {
         { title: "合作共赢", detail: "多方参与、利益分享、合作共赢", icons: heizuo },
       ],
       searchData: {
-        title: '',
+        keyword: '',
         fulladdress: '',
         province: '',
         city: '',
@@ -425,6 +374,9 @@ export default {
         .then((res) => {
           if (res.code == "0000") {
             this.projectList = res.rows;
+            this.projectList.forEach((item, index) =>  {
+              this.projectList[index].academy = this.academyStateDict?.find(p => p.dictValue == item.sponsor).dictLabel
+            })
             console.log('1234',this.projectList)
             this.pageConfig.total = res.total
           } else {

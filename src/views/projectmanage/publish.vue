@@ -23,7 +23,7 @@
                 <el-select
                   v-model="formData.sponsor"
                   :popper-append-to-body="false"
-                  placeholder="项目分类"
+                  placeholder="项目类别"
                 >
                   <el-option
                     v-for="item in academyStateDict"
@@ -36,7 +36,8 @@
             </el-col>
             <el-col :span="16">
               <el-form-item label="项目类别" prop="typeDescription">
-                <el-select
+                <el-input v-model="formData.typeDescription" placeholder="项目类别" />
+                <!-- <el-select
                   v-model="formData.typeDescription"
                   :popper-append-to-body="false"
                   placeholder="项目分类"
@@ -47,7 +48,7 @@
                     :key="item.dictValue"
                     :value="item.dictValue"
                   />
-                </el-select>
+                </el-select> -->
               </el-form-item>
             </el-col>
             <!-- <el-col :span="16">
@@ -471,7 +472,7 @@ export default {
           { required: true, message: "请选择所在院所", trigger: "change" },
         ],
         typeDescription: [
-          { required: true, message: "请选择项目类别", trigger: "change" },
+          { required: true, message: "请输入项目类别", trigger: "change" },
         ],
         scenario: [
           { required: true, message: "请输入应用场景", trigger: "change" },
