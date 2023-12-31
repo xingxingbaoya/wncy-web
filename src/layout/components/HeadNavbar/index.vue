@@ -215,13 +215,13 @@ export default {
 
   .head-right {
     .opera {
-      .el-dropdown-link{
+      .el-dropdown-link {
         display: flex;
         align-items: center;
       }
     }
     .regist-button {
-      color: #fff;
+      color: #000;
       line-height: 90px;
       margin-right: pxToVW(12);
     }
@@ -283,5 +283,8 @@ export default {
 
 .isTransparent {
   background: rgba(38, 38, 45, 0.7);
+  .regist-button {
+    color: #fff !important;
+  }
 }
 </style>

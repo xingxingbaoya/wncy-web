@@ -191,6 +191,20 @@ export const constantRoutes = [
       },
     ],
   },
+
+  {
+    path: "/introduce",
+    component: Layout,
+    children: [
+      {
+        path: "",
+        component: () => import("@/views/introduce/index"),
+        meta: {
+          title: "平台简介",
+        },
+      },
+    ],
+  },
   {
     path: "/projectmanage",
     component: Layout,
@@ -334,6 +348,12 @@ export const constantRoutes = [
             name: "Personalrejected",
             hidden: true,
             component: () => import("@/views/personal/rejected"),
+          },
+          {
+            path: "account",
+            name: "Account",
+            hidden: true,
+            component: () => import("@/views/personal/account"),
           },
           {
             path: "edit",
@@ -522,36 +542,17 @@ export const constantRoutes = [
     ],
   },
   {
-    path: '/introduce',
+    path: "/services",
     component: Layout,
-    hidden: true,
     children: [
       {
-        path: '',
-        hidden: true,
-        component: () => import('@/views/introduce/index'),
+        path: "",
+        component: () => import("@/views/services/index"),
         meta: {
-          title: '平台简介',
-          // roles: ['user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      }
-    ]
-  },
-  {
-    path: '/services',
-    component: Layout,
-    hidden: true,
-    children: [
-      {
-        path: '',
-        hidden: true,
-        component: () => import('@/views/services/index'),
-        meta: {
-          title: '集成服务',
-          // roles: ['user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      }
-    ]
+          title: "集成服务",
+        },
+      },
+    ],
   },
   // 404 page must be placed at the end !!!
   { path: "*", redirect: "/404", hidden: true },

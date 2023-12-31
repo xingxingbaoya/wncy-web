@@ -369,6 +369,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 90px;
   .opera {
       .login {
         font-size: 16px;
@@ -389,6 +390,8 @@
         border-radius: 21px;
       }
       &.home-menu{
+        height: 100%;
+        line-height: 90px;
         .name {
           color: #fff !important;
         }

@@ -1,5 +1,5 @@
 <template>
-  <el-main>
+  <el-main style="overflow-x: hidden;">
     <div class="nav-menu">
       <div class="nav-menu-content">
         <div
@@ -7,7 +7,7 @@
           @click="
             () => {
               active = 1;
-              $router.push('/personal/center/?active=2');
+              $router.push('/personal/center?active=1');
             }
           "
         >
@@ -18,7 +18,7 @@
           @click="
             () => {
               active = 2;
-              $router.push('/personal/center/pass?active=2');
+              $router.push('/personal/center/edit?active=2');
             }
           "
         >
@@ -28,12 +28,12 @@
     </div>
     <el-row class="main-cont">
       <div class="left">
-        <div class="top" @click="goedit">
+        <div class="top" @click="goedit" v-if="active == 1 || !active">
           <img v-if="item.avatar" :src="item.avatar" alt="" />
           <svg-icon v-else icon-class="avatar" class-name="avatar" />
-          <p>{{ item.userName }}</p>
+          <p style="user-select: none">{{ item.userName }}</p>
         </div>
-        <div class="bot">
+        <div class="bot" v-if="active == 1 || !active">
           <p class="bot-title">与我相关</p>
           <el-collapse v-model="activeNames" accordion @change="handleChange">
             <el-collapse-item title="项目大厅" name="1">
@@ -44,6 +44,21 @@
             <el-collapse-item title="活动大厅" name="3">
               <router-link to="/personal/center/search-activit" tag="p"
                 >我报名的活动</router-link
+              >
+            </el-collapse-item>
+          </el-collapse>
+        </div>
+        <div class="bot" v-else>
+          <p class="bot-title">账号设置</p>
+          <el-collapse v-model="activeNames" accordion @change="handleChange">
+            <el-collapse-item title="个人资料" name="1" co>
+              <router-link to="/personal/center/edit?active=2" tag="p"
+                >基本信息</router-link
+              >
+            </el-collapse-item>
+            <el-collapse-item title="密码修改" name="3">
+              <router-link to="/personal/center/pass?active=2" tag="p"
+                >登录密码修改</router-link
               >
             </el-collapse-item>
           </el-collapse>
@@ -72,7 +87,7 @@ export default {
     };
   },
   mounted() {
-    this.active = this.$router.queyr?.active || 1;
+    this.active = this.$route.query?.active || 1;
   },
   computed: {
     ...mapGetters(["item"]),
@@ -295,6 +310,7 @@ export default {
   padding: 0 calc((100% - 1245px) / 2) 38px;
   display: flex;
   align-items: stretch;
+  overflow: hidden;
   .left {
     width: 350px;
     margin-right: 18px;

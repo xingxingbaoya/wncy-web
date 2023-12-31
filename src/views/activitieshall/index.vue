@@ -10,7 +10,7 @@
       >
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
         <i slot="suffix">
-          <img src="~img/projectManage/search.png" style="cursor: pointer" @click="handleSearchDataChange('title', searchData.keyword)"/>
+          <img src="~img/projectManage/search.png" style="cursor: pointer" @click="handleSearchDataChange('actName', searchData.keyword)"/>
         </i>
       </el-input>
       <div class="filter-box">
