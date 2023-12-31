@@ -54,10 +54,12 @@
               :class="itemIndex != index + 1 ? 'nav-content-item nav-content-item-full line-color' : 'nav-content-item nav-content-item-full line-color item-active'"
               v-for="(item, index) in navList[active].itemList" :key="index" @click="changeItem(index)">
               <div class="item-content" v-if="itemIndex != index + 1">
+                <div class="item-bg-title">{{ item.typename || "--" }}</div>
                 <div class="item-title">{{ item.title }}</div>
                 <div class="item-subtitle">{{ item.desc }} </div>
               </div>
               <div class="item-content-hover" v-if="itemIndex == index + 1">
+                <div class="item-bg-title">{{ item.typename || "--" }}</div>
                 <div class="item-hover-title">{{ item.title }}</div>
                 <div class="item-hover-subtitle">{{ item.desc }} </div>
               </div>
