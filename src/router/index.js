@@ -521,6 +521,38 @@ export const constantRoutes = [
       },
     ],
   },
+  {
+    path: '/introduce',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '',
+        hidden: true,
+        component: () => import('@/views/introduce/index'),
+        meta: {
+          title: '平台简介',
+          // roles: ['user', 'enterprise', 'organization', 'expert', 'manager']
+        }
+      }
+    ]
+  },
+  {
+    path: '/services',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: '',
+        hidden: true,
+        component: () => import('@/views/services/index'),
+        meta: {
+          title: '集成服务',
+          // roles: ['user', 'enterprise', 'organization', 'expert', 'manager']
+        }
+      }
+    ]
+  },
   // 404 page must be placed at the end !!!
   { path: "*", redirect: "/404", hidden: true },
 ];
