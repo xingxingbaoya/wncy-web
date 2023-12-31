@@ -3,7 +3,7 @@
     :class="{ 'menu-shadow': isHome, isTransparent: isHome }"
     class="head-menu"
   >
-    <div class="head-left">
+    <div class="head-left" @click="$router.push('/')">
       <img
         v-if="isHome"
         src="~img/logo.svg"

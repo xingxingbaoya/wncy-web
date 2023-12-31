@@ -1,10 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from "vue";
+import Router from "vue-router";
 
-Vue.use(Router)
+Vue.use(Router);
 
 /* Layout */
-import Layout from '@/layout'
+import Layout from "@/layout";
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -31,395 +31,499 @@ import Layout from '@/layout'
  */
 export const constantRoutes = [
   {
-    path: '/login',
-    name: 'Login',
-    component: () => import('@/views/login/index'),
-    meta: { title: '登录' },
-    hidden: true
+    path: "/login",
+    name: "Login",
+    component: () => import("@/views/login/index"),
+    meta: { title: "登录" },
+    hidden: true,
   },
   {
-    path: '/forget',
-    name: 'Forget',
-    component: () => import('@/views/login/forget'),
-    meta: { title: '找回密码' },
-    hidden: true
+    path: "/forget",
+    name: "Forget",
+    component: () => import("@/views/login/forget"),
+    meta: { title: "找回密码" },
+    hidden: true,
   },
   {
-    path: '/register',
-    name: 'Register',
-    component: () => import('@/views/register/index'),
-    meta: { title: '注册' },
-    hidden: true
+    path: "/register",
+    name: "Register",
+    component: () => import("@/views/register/index"),
+    meta: { title: "注册" },
+    hidden: true,
   },
 
   {
-    path: '/404',
-    name: '404',
-    component: () => import('@/views/404'),
-    hidden: true
+    path: "/404",
+    name: "404",
+    component: () => import("@/views/404"),
+    hidden: true,
   },
   {
-    path: '/',
+    path: "/",
     component: Layout,
     children: [
       {
-        path: '',
-        name: 'Home',
-        component: () => import('@/views/home/index'),
+        path: "",
+        name: "Home",
+        component: () => import("@/views/home/index"),
+        hidden: true,
         meta: {
-          title: '首页', activeMenu: '/',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "首页",
+          activeMenu: "/",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
 
       {
-        path: 'meet',
-        name: 'Meet',
+        path: "meet",
+        name: "Meet",
         hidden: true,
-        component: () => import('@/views/home/tradeMeeting'),
+        component: () => import("@/views/home/tradeMeeting"),
         meta: {
-          title: '大会现场', activeMenu: '/',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "大会现场",
+          activeMenu: "/",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
       {
-        path: 'rank',
-        name: 'Rank',
+        path: "rank",
+        name: "Rank",
         hidden: true,
-        component: () => import('@/views/home/rank'),
+        component: () => import("@/views/home/rank"),
         meta: {
-          title: '榜单汇总', activeMenu: '/',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "榜单汇总",
+          activeMenu: "/",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
       {
-        path: 'rdetail',
-        name: 'RankDetail',
+        path: "rdetail",
+        name: "RankDetail",
         hidden: true,
-        component: () => import('@/views/home/rank-detail'),
+        component: () => import("@/views/home/rank-detail"),
         meta: {
-          title: '榜单详情', activeMenu: '/',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "榜单详情",
+          activeMenu: "/",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
       {
-        path: 'policy',
-        name: 'PolicDeatil',
+        path: "policy",
+        name: "PolicDeatil",
         hidden: true,
-        component: () => import('@/views/home/policy'),
+        component: () => import("@/views/home/policy"),
         meta: {
-          title: '政策详情', activeMenu: '/',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "政策详情",
+          activeMenu: "/",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
       {
-        path: 'guest',
-        name: 'Guest',
+        path: "guest",
+        name: "Guest",
         hidden: true,
-        component: () => import('@/views/home/guest'),
+        component: () => import("@/views/home/guest"),
         meta: {
-          title: '嘉宾列表', activeMenu: '/',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "嘉宾列表",
+          activeMenu: "/",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
       {
-        path: 'gdetail',
-        name: 'Guestdetail',
+        path: "gdetail",
+        name: "Guestdetail",
         hidden: true,
-        component: () => import('@/views/home/guest-detail'),
+        component: () => import("@/views/home/guest-detail"),
         meta: {
-          title: '嘉宾详情', activeMenu: '/',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      }
-    ]
+          title: "嘉宾详情",
+          activeMenu: "/",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
+      },
+    ],
   },
   {
-    path: '/projectmanage',
+    path: "/projectmanage",
     component: Layout,
     children: [
       {
-        path: '',
-        name: 'Projectmanage',
-        component: () => import('@/views/projectmanage/index'),
+        path: "",
+        name: "Projectmanage",
+        component: () => import("@/views/projectmanage/index"),
         meta: {
-          title: '科技成果', activeMenu: '/projectmanage',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "科技成果",
+          activeMenu: "/projectmanage",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
       {
-        path: 'detail',
-        name: 'Projectmanagedetail',
-        component: () => import('@/views/projectmanage/detail'),
+        path: "detail",
+        name: "Projectmanagedetail",
+        component: () => import("@/views/projectmanage/detail"),
         hidden: true,
         meta: {
-          title: '项目详情', activeMenu: '/projectmanage',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "项目详情",
+          activeMenu: "/projectmanage",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
       {
-        path: 'publish',
-        name: 'Projectmanagepublish',
-        component: () => import('@/views/projectmanage/publish'),
+        path: "publish",
+        name: "Projectmanagepublish",
+        component: () => import("@/views/projectmanage/publish"),
         hidden: true,
         meta: {
-          title: '项目发布', activeMenu: '/projectmanage',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "项目发布",
+          activeMenu: "/projectmanage",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
-    ]
+    ],
   },
   {
-    path: '/activitieshall',
+    path: "/activitieshall",
     component: Layout,
     children: [
       {
-        path: '',
-        name: 'Activitieshall',
-        component: () => import('@/views/activitieshall/index'),
+        path: "",
+        name: "Activitieshall",
+        component: () => import("@/views/activitieshall/index"),
         meta: {
-          title: '产研对接', activeMenu: '/activitieshall',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "产研对接",
+          activeMenu: "/activitieshall",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
       {
-        path: 'article',
-        name: 'Activitieshallarticle',
+        path: "article",
+        name: "Activitieshallarticle",
         hidden: true,
-        component: () => import('@/views/activitieshall/article'),
+        component: () => import("@/views/activitieshall/article"),
         meta: {
-          title: '文章详情', activeMenu: '/activitieshall',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
+          title: "文章详情",
+          activeMenu: "/activitieshall",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
       },
       {
-        path: 'signup',
-        name: 'Activitieshallsignup',
+        path: "signup",
+        name: "Activitieshallsignup",
         hidden: true,
-        component: () => import('@/views/activitieshall/signup'),
+        component: () => import("@/views/activitieshall/signup"),
         meta: {
-          title: '活动报名详情', activeMenu: '/activitieshall',
-          roles: ['guest', 'user', 'enterprise', 'organization', 'expert', 'manager']
-        }
-      }
-    ]
+          title: "活动报名详情",
+          activeMenu: "/activitieshall",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
+      },
+    ],
   },
   {
-    path: '/personal',
+    path: "/personal",
     component: Layout,
     hidden: true,
     children: [
       {
-        path: 'center',
+        path: "center",
         hidden: true,
-        component: () => import('@/views/personal/index'),
+        component: () => import("@/views/personal/index"),
         meta: {
-          title: '个人中心',
-          roles: ['user', 'enterprise', 'organization', 'expert', 'manager']
+          title: "个人中心",
+          roles: ["user", "enterprise", "organization", "expert", "manager"],
         },
         children: [
           {
-            path: '/',
-            name: 'Personalread',
+            path: "/",
+            name: "Personalread",
             hidden: true,
-            component: () => import('@/views/personal/table')
+            component: () => import("@/views/personal/table"),
           },
           {
-            path: 'rejected',
-            name: 'Personalrejected',
+            path: "rejected",
+            name: "Personalrejected",
             hidden: true,
-            component: () => import('@/views/personal/rejected')
+            component: () => import("@/views/personal/rejected"),
           },
           {
-            path: 'edit',
-            name: 'Personaledit',
+            path: "edit",
+            name: "Personaledit",
             hidden: true,
-            component: () => import('@/views/personal/edit-account')
+            component: () => import("@/views/personal/edit-account"),
           },
           {
-            path: 'edit-experts',
-            name: 'Personalexpertsedit',
+            path: "edit-experts",
+            name: "Personalexpertsedit",
             hidden: true,
-            component: () => import('@/views/personal/edit-experts')
+            component: () => import("@/views/personal/edit-experts"),
           },
           {
-            path: 'edit-company',
-            name: 'Personalcompanyedit',
+            path: "edit-company",
+            name: "Personalcompanyedit",
             hidden: true,
-            component: () => import('@/views/personal/edit-company')
+            component: () => import("@/views/personal/edit-company"),
           },
           {
-            path: 'edit-org',
-            name: 'Personalorgedit',
+            path: "edit-org",
+            name: "Personalorgedit",
             hidden: true,
-            component: () => import('@/views/personal/edit-org')
+            component: () => import("@/views/personal/edit-org"),
           },
           {
-            path: 'edit-manger',
-            name: 'Personalmangeredit',
+            path: "edit-manger",
+            name: "Personalmangeredit",
             hidden: true,
-            component: () => import('@/views/personal/edit-manger')
+            component: () => import("@/views/personal/edit-manger"),
           },
           {
-            path: 'manger',
-            name: 'Personalmanger',
+            path: "manger",
+            name: "Personalmanger",
             hidden: true,
-            component: () => import('@/views/personal/manger')
+            component: () => import("@/views/personal/manger"),
           },
           {
-            path: 'org',
-            name: 'Personalorg',
+            path: "org",
+            name: "Personalorg",
             hidden: true,
-            component: () => import('@/views/personal/org')
+            component: () => import("@/views/personal/org"),
           },
           {
-            path: 'experts',
-            name: 'Personalexperts',
+            path: "experts",
+            name: "Personalexperts",
             hidden: true,
-            component: () => import('@/views/personal/experts')
+            component: () => import("@/views/personal/experts"),
           },
           {
-            path: 'company',
-            name: 'Personalcompany',
+            path: "company",
+            name: "Personalcompany",
             hidden: true,
-            component: () => import('@/views/personal/company')
+            component: () => import("@/views/personal/company"),
           },
           {
-            path: 'pass',
-            name: 'Personalpass',
+            path: "pass",
+            name: "Personalpass",
             hidden: true,
-            component: () => import('@/views/personal/paas')
+            component: () => import("@/views/personal/paas"),
           },
           {
-            path: 'search-project',
-            name: 'Personalproject',
+            path: "search-project",
+            name: "Personalproject",
             hidden: true,
-            component: () => import('@/views/personal/ofme/project')
+            component: () => import("@/views/personal/ofme/project"),
           },
           {
-            path: 'edit-project',
-            name: 'Personaleditproject',
+            path: "edit-project",
+            name: "Personaleditproject",
             hidden: true,
-            component: () => import('@/views/personal/ofme/edit-project')
+            component: () => import("@/views/personal/ofme/edit-project"),
           },
           {
-            path: 'detail-project',
-            name: 'Personaldetailproject',
+            path: "detail-project",
+            name: "Personaldetailproject",
             hidden: true,
-            component: () => import('@/views/personal/ofme/detail-project')
-          },
-
-          {
-            path: 'search-demand',
-            name: 'Personaldemand',
-            hidden: true,
-            component: () => import('@/views/personal/ofme/demand')
-          },
-          {
-            path: 'edit-demand',
-            name: 'Personaleditdemand',
-            hidden: true,
-            component: () => import('@/views/personal/ofme/edit-demand')
-          },
-          {
-            path: 'detail-demand',
-            name: 'Personaldetaildemand',
-            hidden: true,
-            component: () => import('@/views/personal/ofme/detail-demand')
-          },
-          {
-            path: 'search-talent',
-            name: 'Personaltalent',
-            hidden: true,
-            component: () => import('@/views/personal/ofme/talent')
-          },
-          {
-            path: 'edit-talent',
-            name: 'Personaledittalent',
-            hidden: true,
-            component: () => import('@/views/personal/ofme/edit-talent')
-          },
-          {
-            path: 'detail-talent',
-            name: 'Personaldetailtalent',
-            hidden: true,
-            component: () => import('@/views/personal/ofme/detail-talent')
-          },
-          {
-            path: 'search-activit',
-            name: 'Personalactivit',
-            hidden: true,
-            component: () => import('@/views/personal/ofme/activit')
-          },
-          {
-            path: 'detail-activit',
-            name: 'Personaldetailactivit',
-            hidden: true,
-            component: () => import('@/views/personal/ofme/detail-activit')
+            component: () => import("@/views/personal/ofme/detail-project"),
           },
 
           {
-            path: 'search-bbs',
-            name: 'Personalbbs',
+            path: "search-demand",
+            name: "Personaldemand",
             hidden: true,
-            component: () => import('@/views/personal/ofme/bbs')
+            component: () => import("@/views/personal/ofme/demand"),
+          },
+          {
+            path: "edit-demand",
+            name: "Personaleditdemand",
+            hidden: true,
+            component: () => import("@/views/personal/ofme/edit-demand"),
+          },
+          {
+            path: "detail-demand",
+            name: "Personaldetaildemand",
+            hidden: true,
+            component: () => import("@/views/personal/ofme/detail-demand"),
+          },
+          {
+            path: "search-talent",
+            name: "Personaltalent",
+            hidden: true,
+            component: () => import("@/views/personal/ofme/talent"),
+          },
+          {
+            path: "edit-talent",
+            name: "Personaledittalent",
+            hidden: true,
+            component: () => import("@/views/personal/ofme/edit-talent"),
+          },
+          {
+            path: "detail-talent",
+            name: "Personaldetailtalent",
+            hidden: true,
+            component: () => import("@/views/personal/ofme/detail-talent"),
+          },
+          {
+            path: "search-activit",
+            name: "Personalactivit",
+            hidden: true,
+            component: () => import("@/views/personal/ofme/activit"),
+          },
+          {
+            path: "detail-activit",
+            name: "Personaldetailactivit",
+            hidden: true,
+            component: () => import("@/views/personal/ofme/detail-activit"),
           },
 
           {
-            path: 'detail-bbs',
-            name: 'Personaldetailbbs',
+            path: "search-bbs",
+            name: "Personalbbs",
             hidden: true,
-            component: () => import('@/views/personal/ofme/detail-bbs')
+            component: () => import("@/views/personal/ofme/bbs"),
           },
 
           {
-            path: 'edit-bbs',
-            name: 'Personaleditbbs',
+            path: "detail-bbs",
+            name: "Personaldetailbbs",
             hidden: true,
-            component: () => import('@/views/personal/ofme/edit-bbs')
-          },
-          {
-            path: 'search-question',
-            name: 'Personalquestion',
-            hidden: true,
-            component: () => import('@/views/personal/ofme/question')
+            component: () => import("@/views/personal/ofme/detail-bbs"),
           },
 
           {
-            path: 'detail-question',
-            name: 'Personaldetailquestion',
+            path: "edit-bbs",
+            name: "Personaleditbbs",
             hidden: true,
-            component: () => import('@/views/personal/ofme/detail-question')
+            component: () => import("@/views/personal/ofme/edit-bbs"),
+          },
+          {
+            path: "search-question",
+            name: "Personalquestion",
+            hidden: true,
+            component: () => import("@/views/personal/ofme/question"),
           },
 
           {
-            path: 'edit-question',
-            name: 'Personaleditquestion',
+            path: "detail-question",
+            name: "Personaldetailquestion",
             hidden: true,
-            component: () => import('@/views/personal/ofme/edit-question')
+            component: () => import("@/views/personal/ofme/detail-question"),
           },
 
           {
-            path: 'search-ask',
-            name: 'Personalask',
+            path: "edit-question",
+            name: "Personaleditquestion",
             hidden: true,
-            component: () => import('@/views/personal/ofme/ask')
+            component: () => import("@/views/personal/ofme/edit-question"),
           },
 
           {
-            path: 'detail-ask',
-            name: 'Personaldetailask',
+            path: "search-ask",
+            name: "Personalask",
             hidden: true,
-            component: () => import('@/views/personal/ofme/detail-ask')
-          }
+            component: () => import("@/views/personal/ofme/ask"),
+          },
 
-        ]
-      }
-    ]
+          {
+            path: "detail-ask",
+            name: "Personaldetailask",
+            hidden: true,
+            component: () => import("@/views/personal/ofme/detail-ask"),
+          },
+        ],
+      },
+    ],
   },
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
-]
+  { path: "*", redirect: "/404", hidden: true },
+];
 
 /**
  * asyncRoutes
@@ -427,23 +531,24 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
-]
+  { path: "*", redirect: "/404", hidden: true },
+];
 
-const createRouter = () => new Router({
-  mode: process.env.VUE_APP_MODE === 'uat' ? 'hash' : 'history', // require service support
-  // mode: 'hash',
-  scrollBehavior: () => ({ y: 0 }),
-  base: process.env.VUE_APP_MODE === 'uat' ? '/zgc' : '/',
-  routes: constantRoutes
-})
+const createRouter = () =>
+  new Router({
+    mode: process.env.VUE_APP_MODE === "uat" ? "hash" : "history", // require service support
+    // mode: 'hash',
+    scrollBehavior: () => ({ y: 0 }),
+    base: process.env.VUE_APP_MODE === "uat" ? "/zgc" : "/",
+    routes: constantRoutes,
+  });
 
-const router = createRouter()
+const router = createRouter();
 
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter() {
-  const newRouter = createRouter()
-  router.matcher = newRouter.matcher // reset router
+  const newRouter = createRouter();
+  router.matcher = newRouter.matcher; // reset router
 }
 
-export default router
+export default router;
