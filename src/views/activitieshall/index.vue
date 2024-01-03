@@ -10,7 +10,11 @@
       >
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
         <i slot="suffix">
-          <img src="~img/projectManage/search.png" style="cursor: pointer" @click="handleSearchDataChange('actName', searchData.keyword)"/>
+          <img
+            src="~img/projectManage/search.png"
+            style="cursor: pointer"
+            @click="handleSearchDataChange('actName', searchData.keyword)"
+          />
         </i>
       </el-input>
       <div class="filter-box">
@@ -309,15 +313,10 @@ export default {
       this.loading = true;
       getActivityhome({ ...this.searchData, ...this.pageConfig })
         .then((res) => {
-          if (res.code == "0000") {
+          if (res.code == 0) {
             let listAll = [];
-            _.forEach(res.obj, (list, key) => {
-              listAll = [...listAll, ...list];
-              this.$set(this.listData, key, list);
-            });
-            this.listDataShow = listAll;
-            this.total = listAll.length;
-            console.log(this.listData);
+            this.listDataShow = res.rows;
+            this.total = res.total;
           } else {
             // this.$message.warning(res.msg);
           }

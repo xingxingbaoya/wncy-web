@@ -2,9 +2,9 @@ import request from '@/utils/request'
 
 export function getActivityhome(params) {
   return request({
-    url: 'hall/activity/home',
-    method: 'get',
-    params
+    url: 'bussiness/activityServer/getZgcActivityList',
+    method: 'post',
+    data: params
   })
 }
 
