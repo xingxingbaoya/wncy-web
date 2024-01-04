@@ -11,7 +11,7 @@
             >
               <div class="title">{{ item.name }}</div>
               <div class="nav-link" v-for="i in item.children" :key="i.key">
-                <el-link :underline="false">{{ i.name }}</el-link>
+                <el-link :underline="false" :href="i.url">{{ i.name }}</el-link>
               </div>
             </el-col>
           </el-row>
@@ -85,12 +85,12 @@ export default {
             {
               name: "公司介绍",
               key: 1,
-              url: "",
+              url: "/#companyintro",
             },
             {
               name: "平台服务",
               key: 2,
-              url: "",
+              url: "/#platformservices",
             },
           ],
         },
@@ -101,17 +101,17 @@ export default {
             {
               name: "发布项目",
               key: 1,
-              url: "",
+              url: "/projectmanage/publish",
             },
             {
               name: "项目清单",
               key: 2,
-              url: "",
+              url: "/projectmanage",
             },
             {
               name: "筛选项目",
               key: 3,
-              url: "",
+              url: "/projectmanage",
             },
             // {
             //   name: "项目详情",
@@ -127,7 +127,7 @@ export default {
             {
               name: "活动清单",
               key: 1,
-              url: "",
+              url: "/activitieshall",
             },
           //   {
           //     name: "活动详情",

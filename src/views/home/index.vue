@@ -3,7 +3,7 @@
     <div class="home-main">
       <img src="~img/home/banner.jpg" />
     </div>
-    <div class="home-companyintro">
+    <div class="home-companyintro" id="companyintro">
       <div class="theme-box">
         <span>平台介绍</span>
         <b></b>
@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div class="home-platformservices">
+    <div class="home-platformservices" id="platformservices">
       <div class="theme-box">
         <span>平台服务</span>
         <b class="hasBakpic"></b>
