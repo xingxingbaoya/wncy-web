@@ -543,7 +543,7 @@ export default {
   },
   mounted() {
     if (!getToken()) {
-      this.$router.push("/");
+      this.$router.push("/login");
     }
   },
 };
