@@ -44,7 +44,7 @@
                           :value="item.dictValue" />
                   </el-select>
               </div>
-              <div class="left-classify-item">
+              <div class="left-classify-item" id="projectList">
                 <div class="left-classify-item-title">中关村科技园区管理委员会241产业分类：</div>
                 <el-select v-model="searchData.zgckjy241" :popper-append-to-body="false" @change="value => handleSearchDataChange('zgckjy241', value)" 
                     placeholder="中关村科技园区管理委员会241产业分类">
@@ -175,7 +175,7 @@
                 </el-select>
               </div> -->
             </div>
-            <div class="left-project">
+            <div class="left-project" >
               <div
                 v-for="item in projectList"
                 class="left-project-item"

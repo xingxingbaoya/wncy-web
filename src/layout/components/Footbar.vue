@@ -106,7 +106,7 @@ export default {
             {
               name: "项目清单",
               key: 2,
-              url: "/projectmanage",
+              url: "/projectmanage#projectList",
             },
             {
               name: "筛选项目",
@@ -127,7 +127,7 @@ export default {
             {
               name: "活动清单",
               key: 1,
-              url: "/activitieshall",
+              url: "/activitieshall#activitiesList",
             },
           //   {
           //     name: "活动详情",

@@ -66,7 +66,7 @@
                 </div>
               </div>
             </div>
-            <div class="left-classify-item">
+            <div class="left-classify-item" id="activitiesList">
               <div class="left-classify-item-title">活动日期：</div>
               <div>
                 <span style="margin: 0 20px 0 10px">输入时间</span>
