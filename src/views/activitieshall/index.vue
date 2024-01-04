@@ -4,7 +4,7 @@
       <span class="search-text-cw">技术转移行业活动发布大厅</span>
 
       <el-input
-        placeholder="输入咨询关键词，进行搜索"
+        placeholder="输入咨询关键词进行搜索"
         class="activity-manage-main-search"
         v-model="searchData.keyword"
       >
