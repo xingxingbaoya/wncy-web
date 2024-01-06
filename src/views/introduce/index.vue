@@ -43,11 +43,12 @@
               </div>
               <div class="item-content-hover" v-if="itemIndex == index + 1">
                 <div class="item-bg-title">{{ item.typename || "" }}</div>
-                <div class="item-hover-time">{{ item.yuntime || "" }}</div>
+                <!-- <div class="item-hover-time">{{ item.yuntime || "" }}</div> -->
                 <div class="item-hover-title">{{ item.title || "" }}</div>
-                <div class="item-subtitle">大科学装置：{{ item.daxue || "" }}</div>
-                <div class="item-subtitle">交叉研究平台：{{ item.pingtai || "" }}</div>
-                <div class="item-subtitle">科教基础设施：{{ item.kejiao || "" }}</div>
+                <div class="item-hover-subtitle">大科学装置：{{ item.daxue || "" }}</div>
+                <div class="item-hover-subtitle">交叉研究平台：{{ item.pingtai || "" }}</div>
+                <div class="item-hover-subtitle">科教基础设施：{{ item.kejiao || "" }}</div>
+                <div class="item-hover-subtitle">科教基础设施运行时间：{{ item.yuntime || "" }}</div>
               </div>
             </div>
           </div>
@@ -683,6 +684,7 @@ export default {
 
   .item-content {
     padding: 30px;
+    padding-top: 35px;
 
     .item-title {
       font-size: 18px;
@@ -692,7 +694,7 @@ export default {
 
     .item-subtitle {
       font-size: 14px;
-      line-height: 28px;
+      line-height: 25px;
     }
   }
 
@@ -710,7 +712,8 @@ export default {
     }
 
     .item-hover-subtitle {
-      line-height: 28px;
+      font-size: 14px;
+      line-height:25px;
     }
   }
 }
