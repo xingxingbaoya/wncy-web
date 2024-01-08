@@ -223,6 +223,7 @@ export default {
   .head-left {
     width: pxToVW(192);
     display: flex;
+    cursor: pointer;
     img {
       width: 100%;
       object-fit: contain;
