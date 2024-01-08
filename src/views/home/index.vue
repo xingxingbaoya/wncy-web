@@ -53,11 +53,11 @@
         </div>
         <img src="~img/home/work-mode.png" />
         <div style="text-align: center; line-height: 70px">
-          中关村微纳服务工作模式
+          中关村微纳公司服务工作模式
         </div>
       </div>
     </div>
-    <div class="home-platformservices" id="platformservices">
+    <!-- <div class="home-platformservices" id="platformservices">
       <div class="theme-box">
         <span>平台服务</span>
         <b class="hasBakpic"></b>
@@ -123,7 +123,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
 
     <div class="home-freeregister">
       <div>打造国际一流的创新生态集成服务商</div>
@@ -500,7 +500,7 @@ export default {
           whiteIcon: companyinto1white,
           imgUrl: companyintropic1,
           introInfo:
-            "北京中关村微纳能源投资有限公司是一个科创服务平台，致力于为科学家、企业家和政府提供全面的科创服务。将各种创新要素聚集在一起，促进创新资源的共享和优化配置，构建一个有利于创新创业的生态系统。",
+            "ZGC NANO—怀柔区政府和中关村发展集团共建，怀柔科学城优势产业内“政产学研金服用”全创新要素资源超级代理人、超级联络人的市场化机制数字平台。",
           detail: "聚集创新要素",
         },
         {
@@ -510,7 +510,7 @@ export default {
           whiteIcon: companyinto2white,
           imgUrl: companyintropic2,
           introInfo:
-            "低碳技术领域（能源、材料、环境、装备、认证），以及空天、生物医药健康、信息智能、仪器传感领域，“基础设施-基础研究-应用研究-技术开发-成果转化-高精尖产业”等战略科技力量体系最完善创新链的对接。",
+            "低碳技术领域（能源、材料、环境、装备、认证），以及空天、生物医药健康、信息智能、仪器传感领域，怀柔科学城战略科技力量体系最完善创新链的产研对接服务。",
           detail: "聚集创新要素",
         },
         {
@@ -520,7 +520,7 @@ export default {
           whiteIcon: companyinto4white,
           imgUrl: companyintropic3,
           introInfo:
-            "公司与中科院物理所、化学所、半导体所、自动化所、纳米能源所、生物物理所、高能物理所、计算所等10多个中科院研究所以及国科大、华北电力大学、航天工程大学、北化大、北工大等高等院校的课题组和专家进行对接，储备大量优质科技成果项目。",
+            "汇聚怀柔科学城为依托的科技成果项目，提供平台发布、自行登记、跟踪服务。",
           detail: "聚集创新要素",
         },
         {
@@ -541,7 +541,7 @@ export default {
           whiteIcon: companyinto5white,
           imgUrl: companyintropic5,
           introInfo:
-            "集成对接政产学研金服用全要素资源”，做好科学家“经纪人”、企业家“经理人”、政府科创服务“合伙人”，实现“服务——一对一居间链接服务+投资——认股权投资绑定机制+空间——企业落地园区”的核心功能。",
+            "集聚目标产业内“政产学研金服用”全创新要素资源，提供产研对接全要素居间集成服务。",
           detail: "聚集创新要素",
         },
       ],
@@ -1176,7 +1176,7 @@ export default {
 }
 
 .home-workmode {
-  padding: 0 pxToVW(338) 160px;
+  padding: 112px pxToVW(338) 160px;
   display: flex;
   flex-direction: column;
   align-items: center;
