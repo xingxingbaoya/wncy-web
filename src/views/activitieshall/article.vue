@@ -20,9 +20,9 @@
               <div>活动类型：</div>
               <div>
                 {{
-                  activityWayDict.filter(
-                    (i) => i.defaultValue == item.actClassification
-                  )[0] || "未知"
+                  activityKindDict.filter(
+                    (i) => i.dictValue == item.actClassification
+                  )[0].dictLabel || "未知"
                 }}
               </div>
             </div>
