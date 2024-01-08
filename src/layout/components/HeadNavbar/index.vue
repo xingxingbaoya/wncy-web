@@ -6,12 +6,12 @@
     <div class="head-left" @click="$router.push('/')">
       <img
         v-if="isHome"
-        src="~img/logo.svg"
+        src="~img/logo.png"
         alt="中关村科技成果转化与技术交易综合服务平台"
       />
       <img
         v-else
-        src="~img/logo_block.svg"
+        src="~img/logo_back.png"
         alt="中关村科技成果转化与技术交易综合服务平台"
       />
     </div>
