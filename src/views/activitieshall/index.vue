@@ -315,9 +315,12 @@ export default {
       getActivityhome({ ...this.searchData, ...this.pageConfig })
         .then((res) => {
           if (res.code == 0) {
-            let listAll = [];
+            let listAll = []
             this.listDataShow = res.rows;
+
+           
             this.total = res.total;
+            this.$forceUpdate()
           } else {
             // this.$message.warning(res.msg);
           }
