@@ -4,10 +4,10 @@
       <img src="~img/home/banner.jpg" />
     </div>
     <div class="home-companyintro" id="companyintro">
-      <div class="theme-box">
+      <!-- <div class="theme-box">
         <span>平台介绍</span>
         <b></b>
-      </div>
+      </div> -->
       <div class="home-companyintro-content">
         <div class="home-companyintro-content-nav">
           <div
@@ -41,18 +41,19 @@
     </div>
     <div class="home-workmode">
       <div class="home-workmode-left">
-        <img src="~img/home/work-mode.png" />
-        <div style="text-align: center; line-height: 70px">
-          中关村微纳服务工作模式
+        <div class="theme-box">
+          <span>中关村微纳公司简介</span>
+          <b></b>
         </div>
-      </div>
-      <div class="home-workmode-right">
-        <div class="title">中关村微纳简介</div>
         <div class="content">
           中关村微纳，怀柔区政府和中关村发展集团组建合作的区市共建科创集成服务平台，是中发展在怀柔提供其“科服、投资、金融、园区、区域协同、国际链接”服务的总接口，作为怀柔科学城创新联合体牵头单位，从
           服务在怀30多家国家战略科技力量产研两侧技术供需对接微观需求入手，以密集产研对接吸纳贸通目标产业内“政产学研金介用”各级资源，做好科学家
           “经纪人”、企业家政府科创服务“合伙人"，通过
           “两库，两平台、一集成服务”，打造具备“服务+投资+园区”核心功能的区市共建科创服务平台。
+        </div>
+        <img src="~img/home/work-mode.png" />
+        <div style="text-align: center; line-height: 70px">
+          中关村微纳服务工作模式
         </div>
       </div>
     </div>
@@ -494,7 +495,7 @@ export default {
       companyintroList: [
         {
           id: 0,
-          title: "平台服务",
+          title: "平台简介",
           iconUrl: companyinto1,
           whiteIcon: companyinto1white,
           imgUrl: companyintropic1,
@@ -1175,28 +1176,22 @@ export default {
 }
 
 .home-workmode {
+  padding: 0 pxToVW(338) 160px;
   display: flex;
-  &-left {
-    flex: 1;
-    background-color: #f4f4f4;
-    padding: 164px 0 200px pxToVW(270);
-  }
-  &-right {
-    width: pxToVW(648);
-    padding: 164px pxToVW(270) 200px pxToVW(68);
-    background-color: #fff;
-    .title {
-      font-size: 34px;
-      font-weight: bold;
-      color: #17181c;
-      line-height: 74px;
-    }
-    .content {
-      font-size: 16px;
+  flex-direction: column;
+  align-items: center;
+
+  .content {
+    font-size: 16px;
+    margin-bottom: 50px;
       font-weight: 400;
       color: #494949;
       line-height: 42px;
     }
+  &-left {
+    background-color: #f4f4f4;
+    text-align: center;
+    // padding: 51px pxToVW(425) 160px;
   }
 }
 
