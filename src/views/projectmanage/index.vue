@@ -23,7 +23,7 @@
             <div class="left-classify">
               <div class="left-classify-item">
                 <div class="left-classify-item-title">所在院所：</div>
-                <el-select v-model="searchData.sponsor" :popper-append-to-body="false" placeholder="所在院所" style="width: 50%;" clearable  @change="handleSearchDataChange('sponsor', searchData.sponsor)">
+                <el-select v-model="searchData.sponsor" placeholder="所在院所" style="width: 50%;" clearable  @change="handleSearchDataChange('sponsor', searchData.sponsor)">
                     <el-option v-for="item in academyStateDict" :label="item.dictLabel" :key="item.dictValue"
                         :value="item.dictValue" />
                 </el-select>

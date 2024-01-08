@@ -22,7 +22,6 @@
               <el-form-item label="所在院所" prop="sponsor">
                 <el-select
                   v-model="formData.sponsor"
-                  :popper-append-to-body="false"
                   placeholder="项目类别"
                 >
                   <el-option
@@ -68,12 +67,10 @@
             <el-col :span="16">
               <el-form-item
                 label="合作意向"
-                :popper-append-to-body="false"
                 prop="cooperation"
               >
                 <el-select
                   v-model="formData.cooperation"
-                  :popper-append-to-body="false"
                   placeholder="合作意向"
                 >
                   <el-option
@@ -103,7 +100,6 @@
               <el-form-item label="十大高精尖产业" prop="top10hg">
                 <el-select
                   v-model="formData.top10hg"
-                  :popper-append-to-body="false"
                   placeholder="十大高精尖产业"
                 >
                   <el-option
@@ -119,7 +115,6 @@
               <el-form-item label="北京2411产业" prop="bj2441">
                 <el-select
                   v-model="formData.bj2441"
-                  :popper-append-to-body="false"
                   placeholder="北京2411产业"
                 >
                   <el-option
@@ -138,7 +133,6 @@
               >
                 <el-select
                   v-model="formData.zgckjy241"
-                  :popper-append-to-body="false"
                   placeholder="中关村科技园区管理委员会241产业分类"
                 >
                   <el-option
