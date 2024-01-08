@@ -97,7 +97,7 @@
                 <template v-else="project.status == 2">
                     <img src="~img/projectManage/tongguo.png"/>
                     <div class="status" style="color:#2ECB82 ;">审核通过</div>
-                    <div class="publish-btn" @click="doProjPublish" v-if="project.status != 1">发布类似节目</div>
+                    <div class="publish-btn" @click="doProjPublish" v-if="project.status != 1">发布类似项目</div>
                 </template>
                 <!-- <div>
                     <img src="~img/projectManage/fabu.png"/>

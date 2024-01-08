@@ -238,11 +238,15 @@ export default {
                 path: "/",
               });
             })
-            .finally(() => {
+            .catch((error) => {
+              this.$message.error(error.message);
+            })
+            .finally((obj) => {
               this.$refs?.CaptchaImage?.click();
               this.loading = false;
             });
         } else {
+          debugger;
           return false;
         }
       });
@@ -416,6 +420,9 @@ $light_gray: #eee;
       display: flex;
       align-items: center;
       padding: 0px 30px 0px 10px;
+    }
+    ::v-deep .el-input-group__prepend .svg-icon {
+      transform: translateX(-12px);
     }
     ::v-deep .el-input__inner {
       border: none;

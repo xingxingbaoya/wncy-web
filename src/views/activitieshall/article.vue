@@ -45,12 +45,13 @@
         <div class="play-right">
           <div class="play-right-title">热门活动</div>
           <div style="width: 100%">
-            <div
-              class="hot-list"
-              v-for="i in listDataShow"
-              :key="i.actId"
-            >
-              <img class="hot-item-img" height="60px" width="40%" :src="i.actCover" />
+            <div class="hot-list" v-for="i in listDataShow.slice(0, 10)" :key="i.actId">
+              <img
+                class="hot-item-img"
+                height="60px"
+                width="40%"
+                :src="i.actCover"
+              />
               <div class="hot-item-content">
                 <div class="hot-item-title">{{ i.actName }}</div>
                 <div class="hot-item-time">
@@ -136,7 +137,7 @@ export default {
     return {
       SignUpDialog: false,
       listDataShow: [],
-      listData:[],
+      listData: [],
       signUpForm: {
         signName: "",
         contactInfo: "",
@@ -193,18 +194,18 @@ export default {
       });
     },
     getHot() {
-      getActivityhome({ actStatus: "started", pageNum: 1, pageSize: 9 }).then(
-        (res) => {
-          if (res.code == "0000") {
-            let listAll = [];
-            _.forEach(res.obj, (list, key) => {
-              listAll = [...listAll, ...list];
-              this.$set(this.listData, key, list);
-            });
-            this.listDataShow = listAll;
+      getActivityhome({ ...this.searchData, ...this.pageConfig })
+        .then((res) => {
+          if (res.code == 0) {
+            this.listDataShow = res.rows;
+            this.total = res.total;
+          } else {
+            // this.$message.warning(res.msg);
           }
-        }
-      );
+        })
+        .finally(() => {
+          this.loading = false;
+        });
     },
     closeSignUpDialog() {
       this.SignUpDialog = false;
@@ -277,7 +278,7 @@ export default {
       overflow: hidden;
     }
     .article-left {
-      flex: 3;
+      width: 66%;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -294,7 +295,7 @@ export default {
     }
     .play-right {
       display: flex;
-      flex: 1;
+      width: 34%;
       background: #fff;
       flex-direction: column;
       padding: 20px;
@@ -313,14 +314,17 @@ export default {
       .hot-list {
         display: flex;
         margin-bottom: 10px;
+        height: 70px;
         .hot-item-img {
           flex: 2;
+          height: 100%;
         }
         .hot-item-content {
           flex: 3;
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          height: 100%;
           margin-left: 10px;
           .hot-item-title {
             overflow: hidden;
@@ -426,6 +430,17 @@ export default {
   font-size: 14px;
   padding: 10px 0;
   display: flex;
+  > div {
+    &:first-child {
+      width: 70px;
+    }
+    &:last-child {
+      width: calc(100% - 70px);
+    }
+  }
+  :deep img{
+    max-width: 100% !important;
+  }
 }
 
 .sign-log {

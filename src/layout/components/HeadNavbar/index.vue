@@ -34,7 +34,7 @@
     </el-menu>
     <div class="head-right">
       <temp v-show="isLogin" class="opera" :class="{ 'home-menu': isHome }">
-        <span class="regist-button" @click="goLogin">注册</span>
+        <span class="regist-button" @click="goRegister">注册</span>
         <el-button class="login-button" size="mini" round @click="goLogin"
           >登录</el-button
         >
@@ -43,7 +43,12 @@
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             <span class="name">{{ username }}</span>
-            <img src="@/assets/img/user_block.png" alt="" srcset="" />
+            <img
+              style="width: 60px; height: 60px; border-radius: 50%"
+              :src="avatar || ''"
+              alt=""
+              srcset=""
+            />
           </span>
           <el-dropdown-menu slot="dropdown" class="top_c">
             <el-dropdown-item command="gocenter">
@@ -104,6 +109,12 @@ export default {
     username() {
       return this.$store.getters.name || localStorage.getItem("userName");
     },
+    avatar() {
+      let userinfo = JSON.parse(
+        this.$store.getters.userinfo || localStorage.getItem("userinfo")
+      );
+      return userinfo?.avatar || "";
+    },
     isTransparent() {
       return this.$store.getters.isTransparentHead;
     },
@@ -112,6 +123,11 @@ export default {
     goLogin() {
       this.$router.push({
         path: "/login",
+      });
+    },
+    goRegister() {
+      this.$router.push({
+        path: "/register",
       });
     },
     async logout() {

@@ -18,12 +18,17 @@
             @click="activeIntro = item.id"
           >
             <div class="home-companyintro-content-nav-item-title">
-              <img :src="activeIntro == item.id ? item.whiteIcon : item.iconUrl" />{{ item.title }}
+              <img
+                :src="activeIntro == item.id ? item.whiteIcon : item.iconUrl"
+              />{{ item.title }}
             </div>
           </div>
         </div>
         <div class="home-companyintro-content-pic">
-          <img :src="companyintroList[activeIntro].imgUrl" style="width:100%;object-fit:contain"/>
+          <img
+            :src="companyintroList[activeIntro].imgUrl"
+            style="width: 100%; object-fit: contain"
+          />
           <!-- <div class="home-companyintro-content-pic-intro">
             <div>{{ companyintroList[activeIntro].introInfo }}</div>
             <div>{{ companyintroList[activeIntro].detail }}</div>
@@ -36,14 +41,18 @@
     </div>
     <div class="home-workmode">
       <div class="home-workmode-left">
-        <img src="~img/home/work-mode.png"/>
-        <div style="text-align: center;line-height: 70px;;">中关村微纳服务工作模式</div>
+        <img src="~img/home/work-mode.png" />
+        <div style="text-align: center; line-height: 70px">
+          中关村微纳服务工作模式
+        </div>
       </div>
       <div class="home-workmode-right">
         <div class="title">中关村微纳简介</div>
         <div class="content">
           中关村微纳，怀柔区政府和中关村发展集团组建合作的区市共建科创集成服务平台，是中发展在怀柔提供其“科服、投资、金融、园区、区域协同、国际链接”服务的总接口，作为怀柔科学城创新联合体牵头单位，从
-服务在怀30多家国家战略科技力量产研两侧技术供需对接微观需求入手，以密集产研对接吸纳贸通目标产业内“政产学研金介用”各级资源，做好科学家 “经纪人”、企业家政府科创服务“合伙人"，通过 “两库，两平台、一集成服务”，打造具备“服务+投资+园区”核心功能的区市共建科创服务平台。
+          服务在怀30多家国家战略科技力量产研两侧技术供需对接微观需求入手，以密集产研对接吸纳贸通目标产业内“政产学研金介用”各级资源，做好科学家
+          “经纪人”、企业家政府科创服务“合伙人"，通过
+          “两库，两平台、一集成服务”，打造具备“服务+投资+园区”核心功能的区市共建科创服务平台。
         </div>
       </div>
     </div>
@@ -98,14 +107,18 @@
         <b></b>
       </div>
       <div class="home-companies-oprate">
-        <img src="~img/home/companies-leftarrow.png"/>
-        <img src="~img/home/companies-rightarrow.png"/>
+        <img src="~img/home/companies-leftarrow.png" />
+        <img src="~img/home/companies-rightarrow.png" />
       </div>
       <div>
-        <img src="~img/home/companies.png" style="width:80vw"/>
+        <img src="~img/home/companies.png" style="width: 80vw" />
         <div class="home-companies-group">
-          <div v-for="(item,index) in companiesList" :key="index + 'companies'" class="home-companies-group-item">
-            <img :src="item"/>
+          <div
+            v-for="(item, index) in companiesList"
+            :key="index + 'companies'"
+            class="home-companies-group-item"
+          >
+            <img :src="item" />
           </div>
         </div>
       </div>
@@ -113,7 +126,7 @@
 
     <div class="home-freeregister">
       <div>打造国际一流的创新生态集成服务商</div>
-      <el-button round>免费注册</el-button>
+      <el-button round @click="registerUser">免费注册</el-button>
     </div>
   </el-main>
 </template>
@@ -165,27 +178,24 @@ import companyintropic3 from "@/assets/img/home/companyintro-pic3.png";
 import companyintropic4 from "@/assets/img/home/companyintro-pic4.png";
 import companyintropic5 from "@/assets/img/home/companyintro-pic5.png";
 
+import featurePic4 from "@/assets/img/home/feature-pic4.png";
+import featurePic6 from "@/assets/img/home/feature-pic6.png";
+import featurePic7 from "@/assets/img/home/feature-pic7.png";
+import featurePic8 from "@/assets/img/home/feature-pic8.png";
+import featurePic9 from "@/assets/img/home/feature-pic9.png";
 
-import featurePic4 from "@/assets/img/home/feature-pic4.png"
-import featurePic6 from "@/assets/img/home/feature-pic6.png"
-import featurePic7 from "@/assets/img/home/feature-pic7.png"
-import featurePic8 from "@/assets/img/home/feature-pic8.png"
-import featurePic9 from "@/assets/img/home/feature-pic9.png"
+import featureZiyuan from "@/assets/img/home/feature-ziyuan.png";
+import featurePipei from "@/assets/img/home/feature-pipei.png";
+import featureShichang from "@/assets/img/home/feature-shichang.png";
+import featureXin from "@/assets/img/home/feature-xin.png";
+import featureBen from "@/assets/img/home/feature-ben.png";
 
-import featureZiyuan from "@/assets/img/home/feature-ziyuan.png"
-import featurePipei from "@/assets/img/home/feature-pipei.png"
-import featureShichang from "@/assets/img/home/feature-shichang.png"
-import featureXin from "@/assets/img/home/feature-xin.png"
-import featureBen from "@/assets/img/home/feature-ben.png"
-
-import companies1 from "@/assets/img/home/companies-1.png"
-import companies2 from "@/assets/img/home/companies-2.png"
-import companies3 from "@/assets/img/home/companies-3.png"
-import companies4 from "@/assets/img/home/companies-4.png"
-import companies5 from "@/assets/img/home/companies-5.png"
-import companies6 from "@/assets/img/home/companies-6.png"
-
-
+import companies1 from "@/assets/img/home/companies-1.png";
+import companies2 from "@/assets/img/home/companies-2.png";
+import companies3 from "@/assets/img/home/companies-3.png";
+import companies4 from "@/assets/img/home/companies-4.png";
+import companies5 from "@/assets/img/home/companies-5.png";
+import companies6 from "@/assets/img/home/companies-6.png";
 export default {
   name: "Home",
   components: {
@@ -488,7 +498,8 @@ export default {
           iconUrl: companyinto1,
           whiteIcon: companyinto1white,
           imgUrl: companyintropic1,
-          introInfo: "北京中关村微纳能源投资有限公司是一个科创服务平台，致力于为科学家、企业家和政府提供全面的科创服务。将各种创新要素聚集在一起，促进创新资源的共享和优化配置，构建一个有利于创新创业的生态系统。",
+          introInfo:
+            "北京中关村微纳能源投资有限公司是一个科创服务平台，致力于为科学家、企业家和政府提供全面的科创服务。将各种创新要素聚集在一起，促进创新资源的共享和优化配置，构建一个有利于创新创业的生态系统。",
           detail: "聚集创新要素",
         },
         {
@@ -497,7 +508,8 @@ export default {
           iconUrl: companyinto2,
           whiteIcon: companyinto2white,
           imgUrl: companyintropic2,
-          introInfo: "低碳技术领域（能源、材料、环境、装备、认证），以及空天、生物医药健康、信息智能、仪器传感领域，“基础设施-基础研究-应用研究-技术开发-成果转化-高精尖产业”等战略科技力量体系最完善创新链的对接。",
+          introInfo:
+            "低碳技术领域（能源、材料、环境、装备、认证），以及空天、生物医药健康、信息智能、仪器传感领域，“基础设施-基础研究-应用研究-技术开发-成果转化-高精尖产业”等战略科技力量体系最完善创新链的对接。",
           detail: "聚集创新要素",
         },
         {
@@ -506,7 +518,8 @@ export default {
           iconUrl: companyinto4,
           whiteIcon: companyinto4white,
           imgUrl: companyintropic3,
-          introInfo: "公司与中科院物理所、化学所、半导体所、自动化所、纳米能源所、生物物理所、高能物理所、计算所等10多个中科院研究所以及国科大、华北电力大学、航天工程大学、北化大、北工大等高等院校的课题组和专家进行对接，储备大量优质科技成果项目。",
+          introInfo:
+            "公司与中科院物理所、化学所、半导体所、自动化所、纳米能源所、生物物理所、高能物理所、计算所等10多个中科院研究所以及国科大、华北电力大学、航天工程大学、北化大、北工大等高等院校的课题组和专家进行对接，储备大量优质科技成果项目。",
           detail: "聚集创新要素",
         },
         {
@@ -515,17 +528,19 @@ export default {
           iconUrl: companyinto3,
           whiteIcon: companyinto3white,
           imgUrl: companyintropic4,
-          introInfo: "储备中国电能、超智控信、巴音孟克、佳瑞达等公司的技术、融资、落地等具体需求30余项。与国家电投中国电能合作，为国家电投寻找最适用、最匹配的技术、装备和服务等解决方案。现有技术需求120项，其中常规需求90项，新兴产业需求30项 。",
+          introInfo:
+            "储备中国电能、超智控信、巴音孟克、佳瑞达等公司的技术、融资、落地等具体需求30余项。与国家电投中国电能合作，为国家电投寻找最适用、最匹配的技术、装备和服务等解决方案。现有技术需求120项，其中常规需求90项，新兴产业需求30项 。",
           detail: "聚集创新要素",
         },
-        
+
         {
           id: 4,
           title: "集成服务",
           iconUrl: companyinto5,
           whiteIcon: companyinto5white,
           imgUrl: companyintropic5,
-          introInfo: "集成对接政产学研金服用全要素资源”，做好科学家“经纪人”、企业家“经理人”、政府科创服务“合伙人”，实现“服务——一对一居间链接服务+投资——认股权投资绑定机制+空间——企业落地园区”的核心功能。",
+          introInfo:
+            "集成对接政产学研金服用全要素资源”，做好科学家“经纪人”、企业家“经理人”、政府科创服务“合伙人”，实现“服务——一对一居间链接服务+投资——认股权投资绑定机制+空间——企业落地园区”的核心功能。",
           detail: "聚集创新要素",
         },
       ],
@@ -573,7 +588,14 @@ export default {
         },
       ],
       activeFeature: 0,
-      companiesList: [companies1, companies2, companies3, companies4, companies5, companies6]
+      companiesList: [
+        companies1,
+        companies2,
+        companies3,
+        companies4,
+        companies5,
+        companies6,
+      ],
     };
   },
   computed: {
@@ -625,6 +647,13 @@ export default {
     // this.loadData()
   },
   methods: {
+    registerUser() {
+      if (getToken) {
+        this.$router.push("/personal/center?active=1");
+      } else {
+        this.$router.push("/register");
+      }
+    },
     loadData() {
       this.loading = true;
       this.$store
@@ -649,7 +678,6 @@ export default {
           "bj_2441_category",
           "t_activity_way",
           "t_activity_status",
-          
         ])
         .then(() => {
           this.loadHome();
@@ -1130,7 +1158,7 @@ export default {
 .home-main {
   position: relative;
   height: 100vh;
-  >img {
+  > img {
     width: 100%;
     height: 100%;
   }
@@ -1150,7 +1178,7 @@ export default {
   display: flex;
   &-left {
     flex: 1;
-    background-color: #F4F4F4;
+    background-color: #f4f4f4;
     padding: 164px 0 200px pxToVW(270);
   }
   &-right {
@@ -1160,7 +1188,7 @@ export default {
     .title {
       font-size: 34px;
       font-weight: bold;
-      color: #17181C;
+      color: #17181c;
       line-height: 74px;
     }
     .content {
@@ -1170,7 +1198,6 @@ export default {
       line-height: 42px;
     }
   }
-
 }
 
 .home-companyintro {
@@ -1311,7 +1338,7 @@ export default {
       height: 650px;
       position: relative;
       cursor: pointer;
-      >img {
+      > img {
         width: 100%;
       }
       .cover:not(.active) {
@@ -1340,7 +1367,7 @@ export default {
 }
 .home-companies {
   width: 100%;
-  margin:200px 0 164px;
+  margin: 200px 0 164px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1350,7 +1377,7 @@ export default {
     display: flex;
     justify-content: space-between;
     margin: 47px 0 60px;
-    >img {
+    > img {
       cursor: pointer;
       width: pxToVW(25);
       object-fit: contain;

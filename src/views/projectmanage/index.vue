@@ -1,9 +1,9 @@
 <template>
   <div class="project-manage">
     <div class="project-manage-main">
-      <div class="project-manage-main-theme">集结行业最优科技成果转化项目</div>
+      <div class="project-manage-main-theme">汇聚怀柔科学城为依托的科技成果项目</div>
       <div class="project-manage-main-attach">
-        技术持有者可自有发布行业顶尖成果
+        提供平台发布、自行登记、跟踪服务
       </div>
       <el-input
         placeholder="输入项目关键词进行搜索"
@@ -29,7 +29,7 @@
                 </el-select>
               </div>
               <div class="left-classify-item">
-                <div class="left-classify-item-title">十大高精尖产业：</div>
+                <div class="left-classify-item-title">北京十大高精尖产业：</div>
                 <el-select v-model="searchData.top10hg" :popper-append-to-body="false" @change="value => handleSearchDataChange('top10hg', value)" 
                     placeholder="十大高精尖产业">
                     <el-option v-for="item in topTenStateDict" :key="item.dictValue" :label="item.dictLabel"
@@ -45,7 +45,7 @@
                   </el-select>
               </div>
               <div class="left-classify-item" id="projectList">
-                <div class="left-classify-item-title">中关村科技园区管理委员会241产业分类：</div>
+                <div class="left-classify-item-title">中关村241产业：</div>
                 <el-select v-model="searchData.zgckjy241" :popper-append-to-body="false" @change="value => handleSearchDataChange('zgckjy241', value)" 
                     placeholder="中关村科技园区管理委员会241产业分类">
                     <el-option v-for="item in zgckjyStateDict" :key="item.dictValue" :label="item.dictLabel"
@@ -581,8 +581,9 @@ export default {
               .title {
                 font-size: 18px;
                 font-weight: 400;
-                color: #19191c;
+                color: #77addc;
                 margin-bottom: 30px;
+                
               }
               .attach {
                 font-size: 16px;

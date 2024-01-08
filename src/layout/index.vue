@@ -40,7 +40,7 @@
               popper-class="qrcode-pop"
             >
               <span class="contact"
-                >联系方式: <span class="mob">010-83453762</span></span
+                >联系方式: <span class="mob">186-1103-3326</span></span
               >
               <!-- &lt;!&ndash; <img class="qrcode"
                    :src="`${imgUrl}/test1.png`">&ndash;&gt; -->
@@ -219,8 +219,6 @@ export default {
   position: relative;
   height: 100%;
   width: 100%;
-  /*width: 1245px;*/
-  /*margin: 0 auto;*/
 }
 .drawer-bg {
   background: #000;

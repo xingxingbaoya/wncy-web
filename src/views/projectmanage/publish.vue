@@ -325,12 +325,12 @@
             人工协助发布
           </div>
           <img src="~img/projectManage/telephone.png" />
-          <div style="color: #999999; margin: 20px 0 8px">全国免长途电话</div>
+          <div style="color: #999999; margin: 20px 0 8px">  </div>
           <div style="font-size: 27px; font-weight: 800; color: #001196">
-            400-128-6666
+            186-1103-3326
           </div>
         </div>
-        <div class="project-wrap" style="padding-left: 0; padding-right: 0">
+        <!-- <div class="project-wrap" style="padding-left: 0; padding-right: 0">
           <div class="process">任务发布流程</div>
           <div class="process-gress">
             <img src="~img/projectManage/line.png" class="line" />
@@ -358,7 +358,7 @@
               />&nbsp;&nbsp;&nbsp;&nbsp;立即发布
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

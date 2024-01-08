@@ -59,7 +59,7 @@
       </div>
       <div class="foot_bottom">
         <div>官方运营机构</div>
-        <div>北京市海淀区北四环西路50号6层</div>
+        <div>北京市怀柔区北房镇幸福西街3号</div>
         <div class="vertical_line"></div>
         <div>
           Copyright c 2018-2021 weina.com 北京中关村微纳能源投资有限公司 京ICP备
@@ -78,24 +78,24 @@ export default {
   data: () => {
     return {
       navList: [
+        // {
+        //   name: "首页",
+        //   key: 1,
+        //   children: [
+        //     {
+        //       name: "公司介绍",
+        //       key: 1,
+        //       url: "/#companyintro",
+        //     },
+        //     {
+        //       name: "平台服务",
+        //       key: 2,
+        //       url: "/#platformservices",
+        //     },
+        //   ],
+        // },
         {
-          name: "首页",
-          key: 1,
-          children: [
-            {
-              name: "公司介绍",
-              key: 1,
-              url: "/#companyintro",
-            },
-            {
-              name: "平台服务",
-              key: 2,
-              url: "/#platformservices",
-            },
-          ],
-        },
-        {
-          name: "项目管理",
+          name: "科技成果",
           key: 2,
           children: [
             {
@@ -121,7 +121,7 @@ export default {
           ],
         },
         {
-          name: "活动展示",
+          name: "产研对接",
           key: 3,
           children: [
             {
@@ -129,16 +129,17 @@ export default {
               key: 1,
               url: "/activitieshall#activitiesList",
             },
-          //   {
-          //     name: "活动详情",
-          //     key: 2,
-          //     url: "",
-          //   },
-          //   {
-          //     name: "我要报名",
-          //     key: 3,
-          //     url: "",
-          //   },
+          ],
+        },
+        {
+          name: "企业需求",
+          key: 3,
+          children: [
+            {
+              name: "需求清单",
+              key: 1,
+              url: "/activitieshall#activitiesList",
+            },
           ],
         },
       ],
@@ -164,10 +165,9 @@ export default {
 }
 .footbar {
   padding: 0 calc((100% - 1380px) / 2);
-  height: 450px;
+  height: 470px;
   color: #ffffff;
   background: #191f2e;
-  overflow: hidden;
   .foot_top {
     display: flex;
     justify-content: space-between;

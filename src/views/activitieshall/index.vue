@@ -1,7 +1,7 @@
 <template>
   <el-main v-loading="false" style="background-color: #fff">
     <el-row class="search-area">
-      <span class="search-text-cw">技术转移行业活动发布大厅</span>
+      <span class="search-text-cw">产研对接活动发布大厅</span>
 
       <el-input
         placeholder="输入咨询关键词进行搜索"
@@ -27,7 +27,7 @@
               <div
                 v-for="tech in [
                   { dictLabel: '不限', dictValue: '' },
-                  ...activityKindDict,
+                  ...(activityKindDict || []),
                 ]"
                 :key="tech.key"
               >
@@ -51,7 +51,7 @@
               <div
                 v-for="tech in [
                   { dictLabel: '不限', dictValue: '' },
-                  ...activityStatusDict,
+                  ...(activityStatusDict || []),
                 ]"
                 :key="tech.dictValue"
               >
@@ -166,6 +166,7 @@ import "vue-video-player/src/custom-theme.css";
 import "videojs-contrib-hls";
 import dayjs from "dayjs";
 import common from "@/mixin/common";
+import { getRole, getToken, getUser, setRole } from "@/utils/auth";
 import {
   getActivityhome,
   getZgcActivityList,
