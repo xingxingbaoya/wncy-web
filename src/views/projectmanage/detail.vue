@@ -67,7 +67,7 @@
                         <span class="name">项目类别</span>  <span class="values">{{ project.typeDescription }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">合作意向</span>  <span class="values">{{ expire }}</span>
+                        <span class="name">合作意向</span>  <span class="values">{{ expire.join(',') }}</span>
                     </el-col>
                 </el-row>
                 <div class="project-info-theme">项目内容</div>
@@ -141,7 +141,7 @@ export default {
             ],
             academy: '',
             industry: '',
-            expire:'',
+            expire:[],
             industryKind: {
                 top10hg: '',
                 bj2441: '',
@@ -163,7 +163,10 @@ export default {
                     this.project=res.obj
                     console.log('qq', this.academyStateDict, this.project.sponsor)
                     this.academy = this.academyStateDict?.find(item => item.dictValue == this.project.sponsor).dictLabel || '无'
-                    this.expire = this.cooperationDict?.find(item => item.dictValue == this.project.cooperation).dictLabel || '无'
+                    this.cooperationDict.forEach(item => { 
+                        this.project.cooperation.includes(item.dictValue) && this.expire.push(item.dictLabel)
+                    });
+                    // this.expire = this.cooperationDict?.find(item => item.dictValue == this.project.cooperation).dictLabel || '无'
                     this.industryKind.top10hg = this.topTenStateDict?.find(item => item.dictValue == this.project.top10hg).dictLabel || '无'
                     this.industryKind.bj2441 = this.bjStateDict?.find(item => item.dictValue == this.project.bj2441).dictLabel || '无'
                     this.industryKind.zgckjy241 = this.zgckjyStateDict?.find(item => item.dictValue == this.project.zgckjy241).dictLabel || '无'

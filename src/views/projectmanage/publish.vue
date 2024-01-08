@@ -201,23 +201,23 @@
                 >
                   <el-button slot="default" type="primary">上传图片</el-button>
                   <span slot="tip" style="color: #c1bfc5"
-                    >&nbsp;&nbsp;最多添加5个图片，每个图片大小不超过2MB</span
+                    >&nbsp;&nbsp;建议尺寸200px*200px，支持jpg、jpeg、png格式，大小不超过2M</span
                   >
-                  <div slot="file" slot-scope="{ file }" class="img-wrapper">
+                  <div slot="file" slot-scope="{ file }" >
                     <img
                       class="el-upload-list__item-thumbnail"
                       :src="file.url"
                       alt=""
                     />
+                    <span>{{ file.name }}</span>
                     <span class="el-upload-list__item-actions">
-                      <span
+                      <!-- <span
                         class="el-upload-list__item-preview"
                         @click="handlePictureCardPreview(file)"
                       >
                         <i class="el-icon-zoom-in" />
-                      </span>
+                      </span> -->
                       <span
-                        v-if="!disabled"
                         class="el-upload-list__item-delete"
                         @click="handleRemove(file)"
                       >
@@ -617,13 +617,23 @@ export default {
         }
 
         .upload-wrap {
-          :deep(.el-upload-list__item-thumbnail) {
-            width: 18px;
-            height: 18px;
+          :deep(.el-upload-list--picture .el-upload-list__item) {
+            border: none;
+            >div {
+              height: 100%;
+              display: flex;
+              align-items: center;
+              color: #19191C;
+              
+            }
           }
-          :deep(.el-upload-list__item) {
-            height: 20px;
-          }
+          // :deep(.el-upload-list__item-thumbnail) {
+          //   width: 18px;
+          //   height: 18px;
+          // }
+          // :deep(.el-upload-list__item) {
+          //   height: 20px;
+          // }
         }
       }
     }
