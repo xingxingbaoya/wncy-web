@@ -163,6 +163,7 @@ export default {
                     this.project=res.obj
                     console.log('qq', this.academyStateDict, this.project.sponsor)
                     this.academy = this.academyStateDict?.find(item => item.dictValue == this.project.sponsor).dictLabel || '无'
+                    this.expire.length = 0
                     this.cooperationDict.forEach(item => { 
                         this.project.cooperation.includes(item.dictValue) && this.expire.push(item.dictLabel)
                     });

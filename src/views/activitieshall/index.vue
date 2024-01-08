@@ -331,8 +331,8 @@ export default {
     },
 
     handleSearchDataChange(type, value) {
-      if (["startTime", "endTime"].includes(type))
-        value = dayjs(value).format("YYYY-MM-DD HH:mm:ss");
+      if ("startTime"==type && value) value = dayjs(value).format("YYYY-MM-DD HH:mm:ss");
+      if("endTime" == type && value) value = dayjs(value).add(1, 'day').format("YYYY-MM-DD HH:mm:ss");
       this.searchData[type] = value;
       this.loadData();
     },

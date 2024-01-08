@@ -206,65 +206,6 @@ export const constantRoutes = [
     ],
   },
   {
-    path: "/projectmanage",
-    component: Layout,
-    children: [
-      {
-        path: "",
-        name: "Projectmanage",
-        component: () => import("@/views/projectmanage/index"),
-        meta: {
-          title: "科技成果",
-          activeMenu: "/projectmanage",
-          roles: [
-            "guest",
-            "user",
-            "enterprise",
-            "organization",
-            "expert",
-            "manager",
-          ],
-        },
-      },
-      {
-        path: "detail",
-        name: "Projectmanagedetail",
-        component: () => import("@/views/projectmanage/detail"),
-        hidden: true,
-        meta: {
-          title: "项目详情",
-          activeMenu: "/projectmanage",
-          roles: [
-            "guest",
-            "user",
-            "enterprise",
-            "organization",
-            "expert",
-            "manager",
-          ],
-        },
-      },
-      {
-        path: "publish",
-        name: "Projectmanagepublish",
-        component: () => import("@/views/projectmanage/publish"),
-        hidden: true,
-        meta: {
-          title: "项目发布",
-          activeMenu: "/projectmanage",
-          roles: [
-            "guest",
-            "user",
-            "enterprise",
-            "organization",
-            "expert",
-            "manager",
-          ],
-        },
-      },
-    ],
-  },
-  {
     path: "/activitieshall",
     component: Layout,
     children: [
@@ -323,6 +264,66 @@ export const constantRoutes = [
       },
     ],
   },
+  {
+    path: "/projectmanage",
+    component: Layout,
+    children: [
+      {
+        path: "",
+        name: "Projectmanage",
+        component: () => import("@/views/projectmanage/index"),
+        meta: {
+          title: "科技成果",
+          activeMenu: "/projectmanage",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
+      },
+      {
+        path: "detail",
+        name: "Projectmanagedetail",
+        component: () => import("@/views/projectmanage/detail"),
+        hidden: true,
+        meta: {
+          title: "项目详情",
+          activeMenu: "/projectmanage",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
+      },
+      {
+        path: "publish",
+        name: "Projectmanagepublish",
+        component: () => import("@/views/projectmanage/publish"),
+        hidden: true,
+        meta: {
+          title: "项目发布",
+          activeMenu: "/projectmanage",
+          roles: [
+            "guest",
+            "user",
+            "enterprise",
+            "organization",
+            "expert",
+            "manager",
+          ],
+        },
+      },
+    ],
+  },
+  
   {
     path: "/personal",
     component: Layout,

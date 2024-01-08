@@ -1,7 +1,7 @@
 <template>
   <el-main v-loading="loading">
     <div class="home-main">
-      <img src="~img/home/banner.jpg" />
+      <img src="~img/home/banner.png" />
     </div>
     <div class="home-companyintro" id="companyintro">
       <!-- <div class="theme-box">
@@ -46,10 +46,7 @@
           <b></b>
         </div>
         <div class="content">
-          中关村微纳，怀柔区政府和中关村发展集团组建合作的区市共建科创集成服务平台，是中发展在怀柔提供其“科服、投资、金融、园区、区域协同、国际链接”服务的总接口，作为怀柔科学城创新联合体牵头单位，从
-          服务在怀30多家国家战略科技力量产研两侧技术供需对接微观需求入手，以密集产研对接吸纳贸通目标产业内“政产学研金介用”各级资源，做好科学家
-          “经纪人”、企业家政府科创服务“合伙人"，通过
-          “两库，两平台、一集成服务”，打造具备“服务+投资+园区”核心功能的区市共建科创服务平台。
+          中关村微纳，怀柔区政府和中关村发展集团组建合作的区市共建科创集成服务平台，是中发展在怀柔提供其“科服、投资、金融、园区、区域协同、国际链接”服务的总接口，作为怀柔科学城创新联合体牵头单位，从服务在怀30多家国家战略科技力量产研两侧技术供需对接微观需求入手，以密集产研对接吸纳贯通目标产业内“政产学研金介用”各级资源，做好科学家“经纪人”、企业家“经理人”、政府科创服务“合伙人”，通过“两库、两平台、一集成服务”，打造具备“服务+投资+园区”核心功能的区市共建科创服务平台。
         </div>
         <img src="~img/home/work-mode.png" />
         <div style="text-align: center; line-height: 70px">
@@ -126,7 +123,7 @@
     </div> -->
 
     <div class="home-freeregister">
-      <div>打造国际一流的创新生态集成服务商</div>
+      <div>见微知著—立足怀柔科学城的产研对接居间集成服务平台</div>
       <el-button round @click="registerUser">免费注册</el-button>
     </div>
   </el-main>
@@ -1187,11 +1184,12 @@ export default {
       font-weight: 400;
       color: #494949;
       line-height: 42px;
+      text-align: justify;
+      text-indent: 32px;
+      
     }
   &-left {
-    background-color: #f4f4f4;
     text-align: center;
-    // padding: 51px pxToVW(425) 160px;
   }
 }
 
