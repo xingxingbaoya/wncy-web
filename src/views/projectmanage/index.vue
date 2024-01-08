@@ -23,157 +23,58 @@
             <div class="left-classify">
               <div class="left-classify-item">
                 <div class="left-classify-item-title">所在院所：</div>
-                <el-select v-model="searchData.sponsor" :popper-append-to-body="false" placeholder="所在院所" clearable  @change="handleSearchDataChange('sponsor', searchData.sponsor)">
+                <el-select v-model="searchData.sponsor" :popper-append-to-body="false" placeholder="所在院所" style="width: 50%;" clearable  @change="handleSearchDataChange('sponsor', searchData.sponsor)">
                     <el-option v-for="item in academyStateDict" :label="item.dictLabel" :key="item.dictValue"
                         :value="item.dictValue" />
                 </el-select>
               </div>
               <div class="left-classify-item">
                 <div class="left-classify-item-title">北京十大高精尖产业：</div>
-                <el-select v-model="searchData.top10hg" :popper-append-to-body="false" @change="value => handleSearchDataChange('top10hg', value)" 
+                <div class="left-classify-item-city">
+                <div
+                  v-for="(item, index) in [ infinit,...topTenStateDict]" :key="item"
+                  class="left-classify-item-option"
+                  id="itemOption"
+                  :class="searchData.top10hg == item.dictValue ? 'active' : ''"
+                  @click="handleSearchDataChange('top10hg', item.dictValue)"
+                >
+                  {{ item.dictLabel }}
+                </div>
+            </div>
+                <!-- <el-select v-model="searchData.top10hg" :popper-append-to-body="false" @change="value => handleSearchDataChange('top10hg', value)" filterable
                     placeholder="十大高精尖产业">
                     <el-option v-for="item in topTenStateDict" :key="item.dictValue" :label="item.dictLabel"
                         :value="item.dictValue" />
-                </el-select>
+                </el-select> -->
               </div>
               <div class="left-classify-item">
                 <div class="left-classify-item-title">北京2411产业：</div>
-                <el-select v-model="searchData.bj2441" :popper-append-to-body="false" @change="value => handleSearchDataChange('bj2441', value)" 
-                      placeholder="北京2411产业">
-                      <el-option v-for="item in bjStateDict" :key="item.dictValue" :label="item.dictLabel"
-                          :value="item.dictValue" />
-                  </el-select>
+                <div class="left-classify-item-city">
+                <div
+                  v-for="(item, index) in [ infinit,...bjStateDict]" :key="item"
+                  class="left-classify-item-option"
+                  id="itemOption"
+                  :class="searchData.bj2441 == item.dictValue ? 'active' : ''"
+                  @click="handleSearchDataChange('bj2441', item.dictValue)"
+                >
+                  {{ item.dictLabel }}
+                </div>
+            </div>
               </div>
               <div class="left-classify-item" id="projectList">
                 <div class="left-classify-item-title">中关村241产业：</div>
-                <el-select v-model="searchData.zgckjy241" :popper-append-to-body="false" @change="value => handleSearchDataChange('zgckjy241', value)" 
-                    placeholder="中关村科技园区管理委员会241产业分类">
-                    <el-option v-for="item in zgckjyStateDict" :key="item.dictValue" :label="item.dictLabel"
-                        :value="item.dictValue" />
-                </el-select>
-              </div>
-                <!-- <div class="left-classify-item-city">
-                
-                    <div
-                      v-for="(city, index) in [...topTenStateDict, ...bjStateDict, ...zgckjyStateDict]" :key="city"
-                      class="left-classify-item-option"
-                      :style="
-                        index > firstLineProvince
-                          ? 'display:none'
-                          : 'display:block'
-                      "
-                      id="cityOption"
-                      :class="searchData.province == city.dictValue ? 'active' : ''"
-                      @click="handleSearchDataChange('province', city.dictValue)"
-                    >
-                      {{ city.dictLabel }}
-                    </div>
-                </div>
-                <div
-                  
-                  class="left-classify-item-more"
-                >
-                  <template v-if="collapsed">
-                    <span @click="collapsed = !collapsed">{{ "更多" }} <i class="el-icon-arrow-up"></i></span>
-                  </template>
-                  <template v-else>
-                    <span @click="collapsed = !collapsed">{{ "收起" }} <i class="el-icon-arrow-down"></i></span>
-                  </template>
-
-                  <div class="more-options" :style="collapsed? 'display:none':'display:flex'">
-                    <div>
-                      <el-row>
-                        <el-col :span="12"
-                        v-for="(city, index) in [...topTenStateDict, ...bjStateDict, ...zgckjyStateDict]" :key="city"
-                         class="more-options-item"
-                          :style="
-                            index < firstLineProvince
-                              ? 'display:none'
-                              : 'display:block'
-                          "
-                          id="cityOption"
-                          :class="searchData.province == city.dictValue ? 'active' : ''"
-                          @click="handleSearchDataChange('province', city.dictValue)"
-                        >
-                          {{ city.dictLabel }}
-                        </el-col>
-                      </el-row>
-                    </div>
-                  
-                  </div>
-                </div>
-               -->
-              <!-- <div class="left-classify-item">
-                <div class="left-classify-item-title">技术来源：</div>
-                <div v-for="tech in techSourceDict" :key="tech">
-                  <div
-                    class="left-classify-item-option"
-                    :class="searchData.proNature == tech.id ? 'active' : ''"
-                    @click="handleSearchDataChange('proNature', tech.id)"
-                  >
-                    {{ tech.title }}
-                  </div>
-                </div>
-              </div> -->
-              <!-- <div class="left-classify-item">
-                <div class="left-classify-item-title">来 源 地：</div>
                 <div class="left-classify-item-city">
-                  <div v-for="(city, index) in cityList" :key="city">
-                    <div
-                      class="left-classify-item-option"
-                      :style="
-                        collapsed && index + 1 > firstLineProvince
-                          ? 'display:none'
-                          : 'display:block'
-                      "
-                      id="cityOption"
-                      :class="searchData.province == city.code ? 'active' : ''"
-                      @click="handleSearchDataChange('province', city.code)"
-                    >
-                      {{ city.name }}
-                    </div>
-                  </div>
-                </div>
                 <div
-                  @click="collapsed = !collapsed"
-                  class="left-classify-item-more"
+                  v-for="(item, index) in [ infinit,...zgckjyStateDict]" :key="item"
+                  class="left-classify-item-option"
+                  id="itemOption"
+                  :class="searchData.zgckjy241 == item.dictValue ? 'active' : ''"
+                  @click="handleSearchDataChange('zgckjy241', item.dictValue)"
                 >
-                  <template v-if="collapsed">
-                    {{ "更多" }} <i class="el-icon-arrow-up"></i>
-                  </template>
-                  <template v-else>
-                    {{ "收起" }} <i class="el-icon-arrow-down"></i>
-                  </template>
+                  {{ item.dictLabel }}
                 </div>
-              </div> -->
-              <!-- <div class="left-classify-item">
-                <div class="left-classify-item-title">其他要求：</div>
-                <span>是否挂牌：</span>
-                <el-select
-                  v-model="searchData.isListing"
-                  class="other"
-                  @change="
-                    (value) => handleSearchDataChange('isListing', value)
-                  "
-                >
-                  <el-option value="" label="不限" key="all"></el-option>
-                  <el-option value="0" label="是" key="0"></el-option>
-                  <el-option value="1" label="否" key="1"></el-option>
-                </el-select>
-
-                <span>项目地区：</span>
-                <el-select
-                  v-model="searchData.isNotNational"
-                  class="other"
-                  @change="
-                    (value) => handleSearchDataChange('isNotNational', value)
-                  "
-                >
-                  <el-option value="" label="不限" key="all"></el-option>
-                  <el-option value="0" label="国内项目" key="0"></el-option>
-                  <el-option value="1" label="国外项目" key="1"></el-option>
-                </el-select>
-              </div> -->
+            </div>
+              </div>
             </div>
             <div class="left-project" >
               <div
@@ -286,6 +187,7 @@ export default {
       // {id:1,title:'技术项目'},
       // {id:2,title:'专利项目'}
       // ],
+      infinit:{'dictValue':'',dictLabel: '不限'},
       techSourceDict: [
         { id: 0, title: "不限" },
         { id: 1, title: "企业" },
