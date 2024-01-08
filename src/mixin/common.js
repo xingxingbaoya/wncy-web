@@ -1,5 +1,5 @@
 import map from '@/assets/city/city_code.json'
-import moment from 'moment'
+// import moment from 'moment'
 export default {
   data() {
     return {
@@ -116,10 +116,10 @@ export default {
       return entry?.dictLabel
     },
 
-    formatTimeLine(value) {
-      if (!value) return '无'
-      return moment(value).format('MM-DD HH:ss')
-    },
+    // formatTimeLine(value) {
+    //   if (!value) return '无'
+    //   return moment(value).format('MM-DD HH:ss')
+    // },
     formatEmpty(value) {
       if (!value) return '无'
       if (value == '-') return '无'
