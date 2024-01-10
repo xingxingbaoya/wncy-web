@@ -24,7 +24,7 @@ const externals = {
     amd: "lodash",
     root: "_",
   },
-  // moment: "moment",
+  moment: "moment",
 };
 // cdn预加载的模块的地址
 const cdn = {
@@ -38,8 +38,8 @@ const cdn = {
     "https://cdn.staticfile.org/element-ui/2.15.3/index.min.js",
     "https://cdn.staticfile.org/axios/0.18.0/axios.min.js",
     "https://cdn.staticfile.org/lodash.js/4.17.21/lodash.min.js",
-    // "https://cdn.staticfile.org/moment.js/2.29.1/moment.min.js",
-    // "https://cdn.staticfile.org/moment.js/2.29.1/locale/zh-cn.min.js",
+    "https://cdn.staticfile.org/moment.js/2.29.1/moment.min.js",
+    "https://cdn.staticfile.org/moment.js/2.29.1/locale/zh-cn.min.js",
   ],
 };
 

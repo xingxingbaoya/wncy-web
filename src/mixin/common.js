@@ -1,5 +1,5 @@
 import map from '@/assets/city/city_code.json'
-// import moment from 'moment'
+import moment from 'moment'
 export default {
   data() {
     return {
