@@ -123,7 +123,7 @@
     </div> -->
 
     <div class="home-freeregister">
-      <div>见微知著—立足怀柔科学城的产研对接居间集成服务平台</div>
+      <div>ZGCNANO&nbsp;见微知著—立足怀柔科学城的产研对接居间集成服务平台</div>
       <el-button round @click="registerUser">免费注册</el-button>
     </div>
   </el-main>

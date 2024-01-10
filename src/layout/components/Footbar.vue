@@ -40,18 +40,7 @@
               />
 
               <div class="qr_code_1" style="margin-top: 4px">
-                <img width="100px" src="../../assets/img/foot_qr.png" alt="" />
-              </div>
-            </div>
-            <div style="text-align: center;margin-left: 50px;">
-              <img
-                width="28px"
-                height="33px"
-                src="../../assets/img/douyin.png"
-                alt=""
-              />
-              <div class="qr_code_2">
-                <img width="100px" src="../../assets/img/home/douyin-code.png" alt="" />
+                <img width="150px" src="../../assets/img/foot_qr.jpg" alt="" />
               </div>
             </div>
           </div>

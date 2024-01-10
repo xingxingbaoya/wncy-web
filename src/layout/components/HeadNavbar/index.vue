@@ -18,9 +18,9 @@
 
     <el-menu
       :default-active="activeMenu"
-      :text-color="variables.menuText"
       :unique-opened="false"
-      :active-text-color="variables.menuActiveText"
+      :text-color="isHome ? variables.menuText : '#000'"
+      :active-text-color="isHome ? variables.menuActiveText : '#516FD2'"
       :collapse-transition="false"
       mode="horizontal"
       class="home-menu"
@@ -168,19 +168,12 @@ export default {
   font-size: 30px;
 }
 .home-menu {
-  border-bottom: none !important;
-  background: transparent !important;
+  border-bottom: none;
+  background: transparent;
   :deep(.el-menu-item) {
     position: relative;
-    color: #fff !important;
+    color: #fff;
     padding: 0 pxToVW(32);
-
-    &:hover,
-    &.is-active {
-      border-radius: 0 !important;
-      color: #fff !important;
-      font-weight: 600;
-    }
   }
 
   :deep(.el-menu-item:hover:before, .el-menu-item.is-active:before) {

@@ -8,7 +8,7 @@
         <div class="article-left">
           <div class="play-title">{{ item.actName }}</div>
           <p class="play-status">
-            <span class="p-ft_cw">发布人： </span
+            <span class="p-ft_cw">发布时间： </span
             ><span class="mr20"> {{ item.createTime }}</span>
           </p>
           <div class="article-left-img">
@@ -45,7 +45,11 @@
         <div class="play-right">
           <div class="play-right-title">热门活动</div>
           <div style="width: 100%">
-            <div class="hot-list" v-for="i in listDataShow.slice(0, 10)" :key="i.actId">
+            <div
+              class="hot-list"
+              v-for="i in listDataShow.slice(0, 10)"
+              :key="i.actId"
+            >
               <img
                 class="hot-item-img"
                 height="60px"
@@ -60,6 +64,10 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="play-right" v-if="0">
+          <img src="~img/projectManage/tongguo.png" />
+          <div class="publish-btn" @click="doProjPublish">发布类似项目</div>
         </div>
       </div>
     </div>
@@ -438,7 +446,7 @@ export default {
       width: calc(100% - 70px);
     }
   }
-  :deep img{
+  :deep img {
     max-width: 100% !important;
   }
 }
