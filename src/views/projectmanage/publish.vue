@@ -97,10 +97,10 @@
 
           <el-row class="project-wrap">
             <el-col :span="16">
-              <el-form-item label="十大高精尖产业" prop="top10hg">
+              <el-form-item label="北京十大高精尖产业" prop="top10hg">
                 <el-select
                   v-model="formData.top10hg"
-                  placeholder="十大高精尖产业"
+                  placeholder="北京十大高精尖产业"
                 >
                   <el-option
                     v-for="item in topTenStateDict"
@@ -128,12 +128,12 @@
             </el-col>
             <el-col :span="16">
               <el-form-item
-                label="中关村科技园区管理委员会241产业分类"
+                label="中关村241产业"
                 prop="zgckjy241"
               >
                 <el-select
                   v-model="formData.zgckjy241"
-                  placeholder="中关村科技园区管理委员会241产业分类"
+                  placeholder="中关村241产业"
                 >
                   <el-option
                     v-for="item in zgckjyStateDict"

@@ -646,7 +646,8 @@ export default {
   },
   methods: {
     registerUser() {
-      if (getToken) {
+      
+      if (getToken()) {
         this.$router.push("/personal/center?active=1");
       } else {
         this.$router.push("/register");

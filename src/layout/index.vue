@@ -40,7 +40,7 @@
               popper-class="qrcode-pop"
             >
               <span class="contact"
-                >联系方式: <span class="mob">186-1103-3326</span></span
+                >联系方式: <span class="mob">400-888-8888</span></span
               >
               <!-- &lt;!&ndash; <img class="qrcode"
                    :src="`${imgUrl}/test1.png`">&ndash;&gt; -->
