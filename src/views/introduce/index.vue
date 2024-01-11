@@ -25,7 +25,7 @@
                 <img src="~/img/introduce/pic2.png" />
               </div>
               <div class="item-text">
-                <span>怀柔国家能源实验室（2025年本部启用）  </span>
+                <span>怀柔国家能源实验室（2025年本部启用） </span>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
               <div class="item-content" v-if="itemIndex != index + 1">
                 <div class="item-bg-title">{{ item.typename || "" }}</div>
                 <div class="item-title">{{ item.title || "" }}</div>
-                <div class="item-subtitle" v-if="active==0">{{ item.desc || "" }}</div>
+                <div class="item-subtitle" v-if="active == 0 && index < 4">{{ item.desc || "" }}</div>
                 <div class="item-subtitle" v-else>支持产业方向：{{ item.desc || "" }}</div>
               </div>
               <div class="item-content-hover" v-if="itemIndex == index + 1">
@@ -714,7 +714,7 @@ export default {
 
     .item-hover-subtitle {
       font-size: 14px;
-      line-height:25px;
+      line-height: 25px;
     }
   }
 }
