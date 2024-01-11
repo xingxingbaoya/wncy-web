@@ -75,7 +75,6 @@
                   type="date"
                   placeholder="开始"
                   size="mini"
-                  style="width: 140px"
                   @change="
                     handleSearchDataChange('startTime', searchData.startTime)
                   "
@@ -87,7 +86,6 @@
                   type="date"
                   placeholder="结束"
                   size="mini"
-                  style="width: 140px"
                   @change="
                     handleSearchDataChange('endTime', searchData.endTime)
                   "
@@ -893,6 +891,29 @@ export default {
     color: #19191c;
     font-size: 16px;
     font-weight: 400;
+  }
+}
+</style>
+<style lang="scss">
+.activity-manage-main-search {
+
+  .el-input__inner {
+    border-radius: 48px !important;
+    height: 48px !important;
+    line-height: 48px;
+  }
+  .el-input__prefix {
+    line-height: 48px;
+  }
+  .el-input__suffix {
+    line-height: 48px;
+    top: 4px;
+  }
+}
+.left-classify-item{
+  .el-date-editor.el-input, .el-date-editor.el-input__inner {
+   font-size: 16px;
+   width: 160px;
   }
 }
 </style>

@@ -472,6 +472,7 @@ $light_gray: #eee;
       background-color: #ffffff;
       position: relative;
       font-size: 18px;
+      width: 100px;
       &:before {
         position: absolute;
         left: 0;

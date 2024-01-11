@@ -330,9 +330,6 @@ export default {
     background-image: url("~img/projectManage/banner.png");
     background-size: 100%;
     background-repeat: no-repeat;
-    :deep(.el-input__suffix) {
-      top: 4px;
-    }
     &-theme {
       background: linear-gradient(0deg, #008aff 0.1220703125%, #001196 100%);
       -webkit-background-clip: text;
@@ -354,9 +351,13 @@ export default {
     &-search {
       margin-top: 60px;
       width: pxToVW(665);
+     height: 48px;
+     input {
+      height: 100%;
+     }
       :deep(.el-input__inner) {
-        border-radius: 48px;
-        height: 48px;
+        border-radius: 48px !important;
+        height: 48px !important;
         line-height: 48px;
       }
       :deep(.el-input__prefix) {
@@ -364,6 +365,7 @@ export default {
       }
       :deep(.el-input__suffix) {
         line-height: 48px;
+        top: 4px;
       }
     }
     &-group {
@@ -581,6 +583,23 @@ export default {
         }
       }
     }
+  }
+}
+</style>
+<style lang="scss">
+.project-manage-main-search {
+
+  .el-input__inner {
+    border-radius: 48px !important;
+    height: 48px !important;
+    line-height: 48px;
+  }
+  .el-input__prefix {
+    line-height: 48px;
+  }
+  .el-input__suffix {
+    line-height: 48px;
+    top: 4px;
   }
 }
 </style>
