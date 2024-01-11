@@ -34,7 +34,7 @@
                 <div
                   class="left-classify-item-option"
                   :class="
-                    searchData.actClassification == tech.dictValue
+                    searchData.actClassification.includes(tech.dictValue)
                       ? 'active'
                       : ''
                   "
@@ -118,7 +118,6 @@
             </div>
             <div class="timedanwei-cw">
               <div>活动时间：{{ o.startTime.substring(0, 16) }}</div>
-              <div>发布单位：{{ o.orgBelong }}</div>
             </div>
           </el-card>
         </el-col>
@@ -313,12 +312,11 @@ export default {
       getActivityhome({ ...this.searchData, ...this.pageConfig })
         .then((res) => {
           if (res.code == 0) {
-            let listAll = []
+            let listAll = [];
             this.listDataShow = res.rows;
 
-           
             this.total = res.total;
-            this.$forceUpdate()
+            this.$forceUpdate();
           } else {
             // this.$message.warning(res.msg);
           }
@@ -329,9 +327,21 @@ export default {
     },
 
     handleSearchDataChange(type, value) {
-      if ("startTime"==type && value) value = dayjs(value).format("YYYY-MM-DD HH:mm:ss");
-      if("endTime" == type && value) value = dayjs(value).add(1, 'day').format("YYYY-MM-DD HH:mm:ss");
-      this.searchData[type] = value;
+      if ("startTime" == type && value)
+        value = dayjs(value).format("YYYY-MM-DD HH:mm:ss");
+      if ("endTime" == type && value)
+        value = dayjs(value).add(1, "day").format("YYYY-MM-DD HH:mm:ss");
+      if (type == "actClassification") {
+        let arr = this.searchData[type].map((item) => item);
+        if (arr.includes(value)) {
+          let index = arr.findIndex(value);
+          this.searchData[type] = arr.splice(index, 1);
+        } else {
+          this.searchData[type] = arr.push(value, 1);
+        }
+      } else {
+        this.searchData[type] = value;
+      }
       this.loadData();
     },
 
@@ -896,7 +906,6 @@ export default {
 </style>
 <style lang="scss">
 .activity-manage-main-search {
-
   .el-input__inner {
     border-radius: 48px !important;
     height: 48px !important;
@@ -910,10 +919,11 @@ export default {
     top: 4px;
   }
 }
-.left-classify-item{
-  .el-date-editor.el-input, .el-date-editor.el-input__inner {
-   font-size: 16px;
-   width: 160px;
+.left-classify-item {
+  .el-date-editor.el-input,
+  .el-date-editor.el-input__inner {
+    font-size: 16px;
+    width: 160px;
   }
 }
 </style>

@@ -4,12 +4,14 @@
       <div class="header">
         <p class="title">我发布的项目</p>
         <div class="status">
-          <div>提交审核(<span style="color: red">0</span>)</div>
+          <!-- <div>提交审核(<span style="color: red">0</span>)</div>
           <div>审核通过(<span style="color: red">0</span>)</div>
-          <div>驳回(<span style="color: red">0</span>)</div>
+          <div>驳回(<span style="color: red">0</span>)</div> -->
         </div>
         <div class="handle">
-          <div class="btn">发布项目</div>
+          <div class="btn" @click="$router.push('/projectmanage/publish')">
+            发布项目
+          </div>
           <div @click="moreProject">更多</div>
         </div>
       </div>
@@ -73,9 +75,9 @@
       <div class="header">
         <p class="title">我报名的活动</p>
         <div class="status">
-          <div>提交审核(<span style="color: red">0</span>)</div>
+          <!-- <div>提交审核(<span style="color: red">0</span>)</div>
           <div>审核通过(<span style="color: red">0</span>)</div>
-          <div>驳回(<span style="color: red">0</span>)</div>
+          <div>驳回(<span style="color: red">0</span>)</div> -->
         </div>
         <div class="handle">
           <div @click="moreActivity">更多</div>

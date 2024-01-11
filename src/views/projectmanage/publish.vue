@@ -193,7 +193,7 @@
                   :auto-upload="false"
                   class="upload-wrap"
                 >
-                  <el-button slot="default" type="primary">上传图片</el-button>
+                  <el-button slot="default" type="primary">上传项目封面图片</el-button>
                   <span slot="tip" style="color: #c1bfc5"
                     >&nbsp;&nbsp;建议尺寸200px*200px，支持jpg、jpeg、png格式，大小不超过2M</span
                   >

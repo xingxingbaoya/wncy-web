@@ -13,34 +13,13 @@ const postcss = px2rem({
 });
 
 // cdn预加载的模块
-const externals = {
-  vue: "Vue", // 左侧vue是我们自己引入时候要用的，右侧是开发依赖库的主人定义的不能修改
-  vuex: "Vuex",
-  "vue-router": "VueRouter",
-  "element-ui": "ELEMENT",
-  axios: "axios",
-  lodash: {
-    commonjs: "lodash",
-    amd: "lodash",
-    root: "_",
-  },
-  moment: "moment",
-};
+const externals = {};
 // cdn预加载的模块的地址
 const cdn = {
   css: [
     "https://cdn.staticfile.org/element-ui/2.15.3/theme-chalk/index.min.css",
   ],
-  js: [
-    "https://cdn.staticfile.org/vue/2.6.10/vue.min.js",
-    "https://cdn.staticfile.org/vuex/3.1.0/vuex.min.js",
-    "https://cdn.staticfile.org/vue-router/3.0.4/vue-router.min.js",
-    "https://cdn.staticfile.org/element-ui/2.15.3/index.min.js",
-    "https://cdn.staticfile.org/axios/0.18.0/axios.min.js",
-    "https://cdn.staticfile.org/lodash.js/4.17.21/lodash.min.js",
-    "https://cdn.staticfile.org/moment.js/2.29.1/moment.min.js",
-    "https://cdn.staticfile.org/moment.js/2.29.1/locale/zh-cn.min.js",
-  ],
+  js: ["https://cdn.staticfile.org/moment.js/2.29.1/locale/zh-cn.min.js"],
 };
 
 function resolve(dir) {
@@ -79,7 +58,6 @@ module.exports = {
       //   ]
       // },
       scss: {
-
         // additionalData: `@import "~@/styles/index.scss";`,
         prependData: `
           $backgroundImgURL: '${process.env.VUE_APP_IMG_URL}';
@@ -87,24 +65,27 @@ module.exports = {
       },
     },
   },
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     // ...其他配置
 
-    const scssRule = config.module.rule('scss');
+    const scssRule = config.module.rule("scss");
     scssRule.uses.clear();
     scssRule
-      .use('vue-style-loader')
-      .loader('vue-style-loader')
+      .use("vue-style-loader")
+      .loader("vue-style-loader")
       .end()
-      .use('css-loader')
-      .loader('css-loader')
+      .use("css-loader")
+      .loader("css-loader")
       .end()
-      .use('sass-loader')
-      .loader('sass-loader')
+      .use("sass-loader")
+      .loader("sass-loader")
       .options({
         // 使用 sassOptions 的 additionalData 属性
         sassOptions: {
-          additionalData: `@import "${path.resolve(__dirname, 'src/styles/index.scss')}";`,
+          additionalData: `@import "${path.resolve(
+            __dirname,
+            "src/styles/index.scss"
+          )}";`,
         },
       });
   },
