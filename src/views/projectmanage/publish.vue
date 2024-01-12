@@ -20,10 +20,7 @@
             </el-col>
             <el-col :span="16">
               <el-form-item label="所在院所" prop="sponsor">
-                <el-select
-                  v-model="formData.sponsor"
-                  placeholder="项目类别"
-                >
+                <el-select v-model="formData.sponsor" placeholder="项目类别">
                   <el-option
                     v-for="item in academyStateDict"
                     :label="item.dictLabel"
@@ -35,7 +32,10 @@
             </el-col>
             <el-col :span="16">
               <el-form-item label="项目类别" prop="typeDescription">
-                <el-input v-model="formData.typeDescription" placeholder="项目类别" />
+                <el-input
+                  v-model="formData.typeDescription"
+                  placeholder="项目类别"
+                />
                 <!-- <el-select
                   v-model="formData.typeDescription"
                   :popper-append-to-body="false"
@@ -65,10 +65,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="16">
-              <el-form-item
-                label="合作意向"
-                prop="cooperation"
-              >
+              <el-form-item label="合作意向" prop="cooperation">
                 <el-select
                   v-model="formData.cooperation"
                   placeholder="合作意向"
@@ -113,10 +110,7 @@
             </el-col>
             <el-col :span="16">
               <el-form-item label="北京2411产业" prop="bj2441">
-                <el-select
-                  v-model="formData.bj2441"
-                  placeholder="北京2411产业"
-                >
+                <el-select v-model="formData.bj2441" placeholder="北京2411产业">
                   <el-option
                     v-for="item in bjStateDict"
                     :key="item.dictValue"
@@ -127,10 +121,7 @@
               </el-form-item>
             </el-col>
             <el-col :span="16">
-              <el-form-item
-                label="中关村241产业"
-                prop="zgckjy241"
-              >
+              <el-form-item label="中关村241产业" prop="zgckjy241">
                 <el-select
                   v-model="formData.zgckjy241"
                   placeholder="中关村241产业"
@@ -184,32 +175,67 @@
             <el-col>
               <el-form-item label=" " prop="pic_file" :class="isShowUpload">
                 <el-upload
-                  action="#"
-                  :limit="1"
+                  action="custom"
                   :file-list="pic_file_list"
                   :on-change="handleImgChange"
+                  :http-request="imgUpload"
                   list-type="picture"
+                  :limit="1"
                   :auto-upload="false"
                   class="upload-wrap"
                 >
-                  <el-button slot="default" type="primary">上传项目封面图片</el-button>
-                  <span slot="tip" style="color: #c1bfc5"
-                    >&nbsp;&nbsp;支持.jpg,.jpeg,.bmp,.png,.gif,.mp4,.mp3,.doc,.docx,.pdf,xlsx,xls格式，大小不超过20M</span
+                  <el-button size="small" slot="default" type="primary"
+                    >上传项目封面图片</el-button
                   >
-                  <div slot="file" slot-scope="{ file }" >
+                  <span slot="tip" style="color: #c1bfc5"
+                    >&nbsp;&nbsp;建议尺寸200px*200px，支持jpg、jpeg、png格式，大小不超过2M</span
+                  >
+                  <div slot="file" slot-scope="{ file }">
                     <img
                       class="el-upload-list__item-thumbnail"
                       :src="file.url"
                       alt=""
                     />
                     <span>{{ file.name }}</span>
-                    <p @click="handleRemove(file)">删除</p>
                   </div>
                 </el-upload>
               </el-form-item>
             </el-col>
           </el-row>
 
+          <el-row class="project-wrap">
+            <el-row>
+              <el-col
+                :span="3"
+                class="project-info-theme"
+                style="
+                  text-align: right;
+                  width: 138px;
+                  margin-right: 12px;
+                  font-weight: 600;
+                  color: #606266;
+                "
+                >项目附件</el-col
+              >
+              <el-col :span="20">
+                <el-upload
+                  class="upload-demo"
+                  :before-upload="beforeUpload"
+                  :on-preview="handlePreview"
+                  :on-remove="handleRemove"
+                  :before-remove="beforeRemove"
+                  :http-request="upload"
+                  :limit="1"
+                  :file-list="fileList"
+                >
+                  <el-button size="small" type="primary">点击上传</el-button>
+                  <div slot="tip" class="el-upload__tip">
+                    一次只能选取一个文件，且不超过20M
+                  </div>
+                </el-upload>
+              </el-col>
+            </el-row>
+          </el-row>
           <el-row class="project-wrap">
             <el-row>
               <el-col :span="10">
@@ -305,7 +331,7 @@
             人工协助发布
           </div>
           <img src="~img/projectManage/telephone.png" />
-          <div style="color: #999999; margin: 20px 0 8px">  </div>
+          <div style="color: #999999; margin: 20px 0 8px"></div>
           <div style="font-size: 27px; font-weight: 800; color: #001196">
             186-1103-3326
           </div>
@@ -397,6 +423,7 @@ export default {
         top10hg: "",
         bj2441: "",
         zgckjy241: "",
+        attachment_file: "",
         // createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
       },
 
@@ -485,19 +512,24 @@ export default {
   },
   methods: {
     handleImgChange(file) {
-      const isLt2M = file.size / 1024 / 1024 < 20;
+      const isIMG = file.raw.type.includes("image");
+      const isLt2M = file.size / 1024 / 1024 < 2;
       this.$refs.formDataRef.clearValidate("pic_file");
 
-      if (!isLt2M) {
-        this.pic_file_list.pop()
-        return this.$message.warning("上传图片大小不能超过 20MB!");
+      if (!isIMG) {
+        this.$message.warning("只能上传图片!");
+        if(pic_file_list.length> 1)
+        this.pic_file_list = this.pic_file_list.pop();
       }
-      this.formData.pic_file = file.raw;
-      console.log("封面", file.raw, this.formData.pic_file);
+      if (!isLt2M) {
+        this.$message.warning("上传图片大小不能超过 2MB!");
+        this.pic_file_list = this.pic_file_list.pop();
+      }
     },
+    imgUpload() {},
     handleRemove(file) {
-      this.formData.pic_file = '';
-      this.pic_file_list = []
+      this.formData.attachment_file = "";
+      this.pic_file_list = [];
     },
     doPublishProject() {
       this.$refs.formDataRef.validate(async (vali) => {
@@ -518,6 +550,37 @@ export default {
           console.log(error);
         }
       });
+    },
+    handleRemove(file, fileList) {
+      console.log(file, fileList);
+    },
+    handlePreview(file) {
+      console.log(file);
+    },
+    beforeRemove(file, fileList) {
+      return this.$confirm(`确定移除 ${file.name}？`);
+    },
+    beforeUpload(file) {
+      const isJPG = this.isAllowedFile(file.name);
+      const isLt20M = file.size / 1024 / 1024 < 20;
+
+      if (!isJPG) {
+        this.$message.error("上传格式不符合!");
+      }
+      if (!isLt20M) {
+        this.$message.error("上传文件大小不能超过 20MB!");
+      }
+      return isJPG && isLt20M;
+    },
+    async upload() {
+      try {
+        const formData = new FormData();
+        formData.append("file", file);
+        let res = await uploadFile(formData);
+        this.$message.success("上传成功");
+      } catch (error) {
+        this.$message.success("上传失败");
+      }
     },
   },
   mounted() {
@@ -598,12 +661,11 @@ export default {
         .upload-wrap {
           :deep(.el-upload-list--picture .el-upload-list__item) {
             border: none;
-            >div {
+            > div {
               height: 100%;
               display: flex;
               align-items: center;
-              color: #19191C;
-              
+              color: #19191c;
             }
           }
           // :deep(.el-upload-list__item-thumbnail) {

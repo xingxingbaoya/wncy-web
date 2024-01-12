@@ -31,42 +31,41 @@
         />
         <el-table-column prop="cooperation" label="所在院所" align="center">
           <template slot-scope="scope">
-            <span>{{ scope.row.cooperation | formatCooperation }}</span>
+            <span>{{ scope.row.academy }}</span>
           </template>
         </el-table-column>
 
-        <el-table-column label="产业分类" align="center">
+        <el-table-column prop="tradeStatus" label="项目类别" align="center">
           <template slot-scope="scope">
-            <span>{{ scope.row.industryone | formatIndustryOne }}</span>
-          </template>
-        </el-table-column>
-
-        <el-table-column prop="tradeStatus" label="项目类型" align="center">
-          <template slot-scope="scope">
-            <span>{{ scope.row.proPatentInfo | formatTech }}</span>
+            <span>{{ scope.row.typeDescription }}</span>
           </template>
         </el-table-column>
 
         <el-table-column label="合作意向" align="center">
           <template slot-scope="scope">
-            <span>{{
-              scope.row.faceFlag == "1" || scope.row.proIntentionPrice == 0
-                ? "面议"
-                : scope.row.proIntentionPrice
-            }}</span>
+            <span>{{ scope.row.expire ? scope.row.expire.join(',') : '无'}}</span>
           </template>
         </el-table-column>
 
-        <el-table-column prop="createTime" label="创建时间" align="center" />
+        <el-table-column
+          prop="createTime"
+          width="160px"
+          label="创建时间"
+          align="center"
+        />
 
         <el-table-column label="审核状态" align="center">
           <template slot-scope="scope">
             <span>{{ scope.row.status | formatAuth }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center">
+        <el-table-column label="操作" width="80px" align="center">
           <template slot-scope="scope">
-            <span @click="godetail(scope.row, 1)">查看详情</span>
+            <span
+              @click="godetail(scope.row, 1)"
+              style="cursor: pointer; color: blue"
+              >查看详情</span
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -122,7 +121,11 @@
         </el-table-column>
         <el-table-column label="操作" align="center">
           <template slot-scope="scope">
-            <span @click="godetail(scope.row, 2)">查看详情</span>
+            <span
+              @click="godetail(scope.row, 2)"
+              style="cursor: pointer; color: blue"
+              >查看详情</span
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -167,6 +170,17 @@ export default {
       getMyProjectList({ ...formpage, title: "" }).then((res) => {
         if (res.code == "0000") {
           this.tableData = res.rows;
+          this.tableData.forEach((item,index)=> {
+            this.tableData[index]['academy'] = this.academyStateDict?.find(
+                (o) => o.dictValue == item.sponsor
+              ).dictLabel 
+              this.tableData[index]['expire'] = []
+              this.cooperationDict.forEach((p) => {
+                  item.cooperation.split(',').includes(p.dictValue) &&
+                  this.tableData[index]['expire'].push(p.dictLabel);
+                });
+          })
+
         } else {
           this.$message.error(res.msg);
         }
@@ -183,12 +197,12 @@ export default {
         }
       });
     },
-    godetail({ actSignUpId, id }, type) {
+    godetail({ id }, type) {
       if (type == 1) {
         this.$router.push({
           path: "/personal/center/detail-project",
           query: {
-            actSignUpId,
+            id,
           },
         });
       } else {

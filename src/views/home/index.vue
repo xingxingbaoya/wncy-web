@@ -1,7 +1,21 @@
 <template>
   <el-main v-loading="loading">
     <div class="home-main">
-      <img src="~img/home/banner.png" />
+      <!-- <img src="~img/home/banner.png" /> -->
+      <el-carousel trigger="click" height="100vh" arrow="never">
+        <!-- <el-carousel-item v-for="item in 4" :key="item">
+          <h3 class="small">{{ item }}</h3>
+        </el-carousel-item> -->
+      <el-carousel-item>
+        <img src="~img/home/banner.png" style="width: 100%;height:100%;"/>
+      </el-carousel-item>
+      <el-carousel-item>
+        <img src="~img/home/banner.png" style="width: 100%;height:100%;" />
+      </el-carousel-item>
+      <el-carousel-item v-for="item in bannerList" :key="item.id">
+        <img :src="item.picUrl" style="width: 100%;height:100%;" />
+      </el-carousel-item>
+      </el-carousel>
     </div>
     <div class="home-companyintro" id="companyintro">
       <!-- <div class="theme-box">
@@ -1136,6 +1150,7 @@ export default {
 }
 
 .theme-box {
+
   width: 100%;
   text-align: center;
   font-size: 34px;
@@ -1158,9 +1173,15 @@ export default {
 .home-main {
   position: relative;
   height: 100vh;
-  > img {
-    width: 100%;
+  :deep(.el-carousel) {
     height: 100%;
+    .el-carousel__container {
+      height: 100%;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+    }
   }
   // &-title {
   //   font-size: 178px;
