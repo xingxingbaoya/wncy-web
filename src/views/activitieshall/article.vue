@@ -43,31 +43,33 @@
           </div>
         </div>
         <div class="play-right">
-          <div class="play-right-title">热门活动</div>
-          <div style="width: 100%">
-            <div
-              class="hot-list"
-              v-for="i in listDataShow.slice(0, 10)"
-              :key="i.actId"
-            >
-              <img
-                class="hot-item-img"
-                height="60px"
-                width="40%"
-                :src="i.actCover"
-              />
-              <div class="hot-item-content">
-                <div class="hot-item-title">{{ i.actName }}</div>
-                <div class="hot-item-time">
-                  {{ i.startTime.slice(0, 10) }}
+          <div class="play-right-list">
+            <div class="play-right-title">热门活动</div>
+            <div style="width: 100%">
+              <div
+                class="hot-list"
+                v-for="i in listDataShow.slice(0, 10)"
+                :key="i.actId"
+              >
+                <img
+                  class="hot-item-img"
+                  height="60px"
+                  width="40%"
+                  :src="i.actCover"
+                />
+                <div class="hot-item-content">
+                  <div class="hot-item-title">{{ i.actName }}</div>
+                  <div class="hot-item-time">
+                    {{ i.startTime.slice(0, 10) }}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="play-right" v-if="0">
+          <div class="play-right-signup" v-if="isSignUp == 1">
           <img src="~img/projectManage/tongguo.png" />
-          <div class="publish-btn" @click="doProjPublish">发布类似项目</div>
+            <div class="signup-btn" @click="signUp">立即报名</div>
+          </div>
         </div>
       </div>
     </div>
@@ -304,15 +306,38 @@ export default {
     .play-right {
       display: flex;
       width: 34%;
-      background: #fff;
       flex-direction: column;
-      padding: 20px;
       border-radius: 4px;
       max-height: 100%;
       height: fit-content;
       overflow-y: auto;
       flex-direction: column;
       align-items: center;
+      &-list {
+        width: 100%;
+        background-color: #fff;
+        padding: 20px;
+        margin-bottom: 20px;
+
+      }
+      &-signup {
+        padding: 68px pxToVW(98) 40px;
+        width: 100%;
+        background: #fff;
+        text-align: center;
+      }
+      .signup-btn {
+        width: pxToVW(275);
+        height: 50px;
+        background: #EFF7FF;
+        border: 1px solid #DFDFDF;
+        border-radius: 6px;
+        color: #2434AF;
+        font-size: 18px;
+        text-align: center;
+        line-height: 50px;
+        margin-top: 40px;
+      }
       .play-right-title {
         width: 100%;
         text-align: left;

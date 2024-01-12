@@ -64,6 +64,11 @@
             v-html="project.proIntroduct"
           ></span>
           <div class="project-info-theme">项目附件</div>
+          <template v-if="project.attachment.split('/').length">
+            <span>{{ project.attachment.split('/')[project.attachment.split('/').length - 1]}}</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: #2434AF;cursor: pointer;" @click="downFile">下载</a>
+          </template>
+          
           <el-row>
             <el-col :span="24">
               <el-upload
@@ -254,6 +259,9 @@ export default {
         return false; // 文件格式不合法
       }
     },
+    downFile() {
+      window.open(this.project.attachment)
+    }
   },
 };
 </script>
