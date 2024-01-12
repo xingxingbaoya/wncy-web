@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="play-right">
-          <div class="play-right-list">
+          <div class="play-right-list" v-if="item.signUpEnable != 1">
             <div class="play-right-title">热门活动</div>
             <div style="width: 100%">
               <div
@@ -66,9 +66,18 @@
               </div>
             </div>
           </div>
-          <div class="play-right-signup" v-if="isSignUp == 1">
-          <img src="~img/projectManage/tongguo.png" />
-            <div class="signup-btn" @click="signUp">立即报名</div>
+          <div class="play-right-signup" v-else>
+            <div style="margin-top: 10px; margin-bottom: 40px">
+              <img
+                width="103px"
+                src="@/assets/img/activityManage/baoming.png"
+                alt=""
+                srcset=""
+              />
+            </div>
+            <div class="play-right-btn">
+              <div class="libm" @click="signUp">立即报名</div>
+            </div>
           </div>
         </div>
       </div>
@@ -76,44 +85,36 @@
 
     <el-dialog
       :visible.sync="SignUpDialog"
-      custom-class="sign-log"
-      width="800px"
-      top="8vh"
+      width="600px"
+      top="100px"
       @close="closeSignUpDialog"
     >
       <el-row v-loading="loading">
-        <el-col :span="10" class="left-img">
-          <img :src="`${imgUrl}/login.png`" />
-        </el-col>
-        <el-col :span="14" class="right-form">
+        <el-col :span="24" class="right-form">
           <div class="right-head">
             <p class="right-title">请填写您的个人信息</p>
-            <p class="right-desc">Please fill in your personal information</p>
           </div>
           <el-form
+            class="activityForm"
             ref="signUpForm"
             :model="signUpForm"
             :rules="rules"
-            class="rform"
+            label-width="120px"
           >
-            <el-form-item prop="signName">
-              <el-input v-model="signUpForm.signName">
-                <template slot="prepend">姓名:</template>
+            <el-form-item prop="signName" label="姓名:">
+              <el-input v-model="signUpForm.signName" style="width: 400px">
               </el-input>
             </el-form-item>
-            <el-form-item prop="contactInfo">
-              <el-input v-model="signUpForm.contactInfo">
-                <template slot="prepend">手机号:</template>
+            <el-form-item prop="contactInfo" label="手机号:">
+              <el-input v-model="signUpForm.contactInfo" style="width: 400px">
               </el-input>
             </el-form-item>
-            <el-form-item prop="companyName">
-              <el-input v-model="signUpForm.companyName">
-                <template slot="prepend">公司名称:</template>
+            <el-form-item prop="companyName" label="公司名称:">
+              <el-input v-model="signUpForm.companyName" style="width: 400px">
               </el-input>
             </el-form-item>
-            <el-form-item prop="post">
-              <el-input v-model="signUpForm.post">
-                <template slot="prepend">职位:</template>
+            <el-form-item prop="post" label="职位:">
+              <el-input v-model="signUpForm.post" style="width: 400px">
               </el-input>
             </el-form-item>
           </el-form>
@@ -188,6 +189,7 @@ export default {
           signUpActivity({ ...this.signUpForm, actId })
             .then((res) => {
               if (res.code == "0000") {
+                this.loadData()
                 this.$message.success(res.msg);
               } else {
                 this.$message.warning(res.msg);
@@ -318,7 +320,6 @@ export default {
         background-color: #fff;
         padding: 20px;
         margin-bottom: 20px;
-
       }
       &-signup {
         padding: 68px pxToVW(98) 40px;
@@ -329,10 +330,10 @@ export default {
       .signup-btn {
         width: pxToVW(275);
         height: 50px;
-        background: #EFF7FF;
-        border: 1px solid #DFDFDF;
+        background: #eff7ff;
+        border: 1px solid #dfdfdf;
         border-radius: 6px;
-        color: #2434AF;
+        color: #2434af;
         font-size: 18px;
         text-align: center;
         line-height: 50px;
@@ -498,21 +499,20 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  align-items: center;
   padding: 30px 0 0;
 
   .right-head {
     width: 400px;
+    margin-bottom: 20px;
     .right-title {
-      font-size: 20px;
-      font-weight: 600;
+      font-size: 16px;
       color: #333333;
+      font-weight: 600;
       margin: 0;
       padding-bottom: 20px;
     }
     .right-desc {
       font-size: 12px;
-      font-weight: 500;
       color: #999999;
       margin: 0;
     }
@@ -523,6 +523,8 @@ export default {
   }
 
   .sub-layout {
+    width: 100%;
+    text-align: center;
     /*padding-top: 20px;*/
   }
 
@@ -536,8 +538,7 @@ export default {
     padding: 16px 20px;
   }
 }
-
-.el-form {
+.el-form:not(.activityForm) {
   margin-top: 30px;
   width: 400px;
   ::v-deep .el-input__inner {
