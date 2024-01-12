@@ -58,7 +58,7 @@
                 <div
                   class="left-classify-item-option"
                   :class="
-                    searchData.actStatus == tech.dictValue ? 'active' : ''
+                    searchData.actStatus.split(',').includes( tech.dictValue) ? 'active' : ''
                   "
                   @click="handleSearchDataChange('actStatus', tech.dictValue)"
                 >
@@ -196,7 +196,7 @@ export default {
       searchData: {
         keyword: "",
         actName: "",
-        actStatus: "",
+        actStatus: "started,notstart",
         actClassification: "",
         startTime: "",
         endTime: "",
@@ -339,7 +339,23 @@ export default {
         } else {
           this.searchData[type] = arr.push(value, 1);
         }
-      } else {
+        
+      } else if(type == 'actStatus') {
+        const l = this.searchData.actStatus.split(',')
+        if(value) {
+          this.searchData[type] == '' && (l.length = 0)
+          if(l.includes(value) ) {
+            const index = this.searchData.actStatus.indexOf(value)
+            l.splice(index, 1)
+          } else {
+            l.push(value)
+          }
+          this.searchData[type] = l.join(',')
+        } else {
+          this.searchData[type] = ''
+        }
+
+      }  else {
         this.searchData[type] = value;
       }
       this.loadData();

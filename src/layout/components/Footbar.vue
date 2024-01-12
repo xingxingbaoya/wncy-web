@@ -27,7 +27,7 @@
             />
             <div class="foot_right_connect_phone_item">
               <div class="foot_right_connect_phone_item_name">客户电话</div>
-              <div class="foot_right_connect_phone_item_num">400-888-8888</div>
+              <div class="foot_right_connect_phone_item_num">186-1103-3326</div>
             </div>
           </div>
           <div class="foot_right_connect_wx">

@@ -124,7 +124,9 @@
 
     <div class="home-freeregister">
       <div>ZGCNANO&nbsp;见微知著—立足怀柔科学城的产研对接居间集成服务平台</div>
-      <el-button round @click="registerUser">免费注册</el-button>
+      <template v-if="isLogin">
+        <el-button round @click="registerUser">免费注册</el-button>
+      </template>
     </div>
   </el-main>
 </template>
