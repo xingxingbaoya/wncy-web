@@ -11,7 +11,8 @@
             >
               <div class="title">{{ item.name }}</div>
               <div class="nav-link" v-for="i in item.children" :key="i.key">
-                <el-link :underline="false" :href="i.url">{{ i.name }}</el-link>
+                <div v-if="!i.url">{{ i.name }}</div>
+                <el-link  v-if="i.url" :underline="false" :href="i.url">{{ i.name }}</el-link>
               </div>
             </el-col>
           </el-row>
@@ -124,10 +125,66 @@ export default {
           name: "企业需求",
           key: 3,
           children: [
+          {
+              name: "发布需求",
+              key: 0,
+              url: "",
+            },
             {
               name: "需求清单",
               key: 1,
-              url: "/activitieshall#activitiesList",
+              url: "",
+            },
+            {
+              name: "筛选需求",
+              key: 2,
+              url: "",
+            },
+            {
+              name: "需求详情",
+              key: 3,
+              url: "",
+            }
+          ],
+        },
+        {
+          name: "集成服务",
+          key: 3,
+          children: [
+          {
+              name: "政",
+              key: 0,
+              url: "/services#zheng",
+            },
+            {
+              name: "产",
+              key: 1,
+              url: "/services#chan",
+            },
+            {
+              name: "学",
+              key: 2,
+              url: "/services#xue",
+            },
+            {
+              name: "研",
+              key: 3,
+              url: "/services#yan",
+            },
+            {
+              name: "金",
+              key: 4,
+              url: "/services#jin",
+            },
+            {
+              name: "服",
+              key: 5,
+              url: "/services#fu",
+            },
+            {
+              name: "用",
+              key: 6,
+              url: "/services#yong",
             },
           ],
         },

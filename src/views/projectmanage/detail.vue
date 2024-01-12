@@ -52,13 +52,13 @@
                         <span class="name">所在院所</span>  <span class="values">{{ academy }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">十大高精尖产业</span>  <span class="values">{{ industryKind.top10hg }}</span>
+                        <span class="name">北京十大高精尖产业</span>  <span class="values">{{ industryKind.top10hg }}</span>
                     </el-col>
                     <el-col :span="24">
                         <span class="name">北京2411产业</span>  <span class="values">{{ industryKind.bj2441 }}</span>
                     </el-col>
                     <el-col :span="24">
-                        <span class="name">中关村科技园区管理委员会241产业分类</span>  <span class="values">{{ industryKind.zgckjy241 }}</span>
+                        <span class="name">中关村241产业</span>  <span class="values">{{ industryKind.zgckjy241 }}</span>
                     </el-col>
                     <el-col :span="24">
                         <span class="name">应用场景</span>  <span class="values">{{ project.scenario }}</span>
@@ -70,9 +70,9 @@
                         <span class="name">合作意向</span>  <span class="values">{{ expire.join(',') }}</span>
                     </el-col>
                 </el-row>
-                <div class="project-info-theme">项目内容</div>
+                <div class="project-info-theme">项目简介</div>
                 <span style="line-height: 36px;margin-bottom: 55px;display: inline-block;" v-html="project.proIntroduct"></span>
-                <!-- <div class="project-info-theme">项目附件</div> -->
+                <div class="project-info-theme">项目附件</div>
                 <div class="project-info-theme">联系信息</div>
                 <el-row>
                     <el-col :span="24">

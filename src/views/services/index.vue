@@ -9,13 +9,13 @@
                 <img src="~img/services/zheng.png" />
             </div>
             <div class="box-text">
-                <div class="title">政</div>
+                <div class="title" id="zheng">政</div>
                 <div class="desc">政策支持的注册或实体落地园区，园区简介政策干货。政策支持的注册或实体落地园区，园区简介政策干货政策支持的注册或实体落地园区，园区简介政策干货政策支持的注册或实体落地园区，园区简介政策干货政策支持的注册或实体落地园区，园区简介政策干货政策支持的注册或实体落地园区，园区简介政策干货政策支持的注册或实体落地园区，园区简介政策干货政策支持的注册或实体落地园区，园区简介政策干货政策支持的注册或实体落地园区，园区简介政策干货政策支持的注册或实体落地园区。</div>
             </div>
         </div>
         <div class="service-box chanBg">
             <div class="box-text-left">
-                <div class="title">产</div>
+                <div class="title" id="chan">产</div>
                 <div class="desc">产研技术对接、产业链合作对接：可联系的企业列表-群内企业名称。产研技术对接、产业链合作对接：<br/>
 可联系的企业列表-群内企业名称产研技术对接、产业链合作对接：<br/>
 可联系的企业列表-群内企业名称产研技术对接、产业链合作对接：<br/>
@@ -30,13 +30,13 @@
                 <img src="~img/services/xue.png" />
             </div>
             <div class="box-text">
-                <div class="title">学</div>
+                <div class="title" id="xue">学</div>
                 <div class="desc">怀柔科学城参访与培训服务（资源列表）怀柔科学城参访与培训服务（资源列表）怀柔科学城参访与培训服务（资源列表）</div>
             </div>
         </div>
         <div class="service-box yanBg">
             <div class="box-text-left">
-                <div class="title">研</div>
+                <div class="title" id="yan">研</div>
                 <div class="desc">怀柔科学城及平台链接资源的技术转移、授权使用、技术开发等产研技术对接服务；列名称、可对接的人（平台用户联系方式）怀柔科学城及平台链接资源的技术转移、授权使用、技术开发等产研技术对接服务；列名称、可对接的人（平台用户联系方式）</div>
             </div>
             <div>
@@ -48,13 +48,13 @@
                 <img src="~img/services/jin.png" />
             </div>
             <div class="box-text">
-                <div class="title">金</div>
+                <div class="title" id="jin">金</div>
                 <div class="desc">投资、债权等服务：市区两级基金、中关村担保、中关村租赁等。投资、债权等服务：市区两级基金、中关村担保、中关村租赁等。投资、债权等服务：市区两级基金、中关村担保、中关村租赁等投资、债权等服务：市区两级基金、中关村担保、中关村租赁等</div>
             </div>
         </div>
         <div class="service-box fuBg">
             <div class="box-text-left">
-                <div class="title">服</div>
+                <div class="title" id="fu">服</div>
                 <div class="desc">知识产权、股权设计等。知识产权、股权设计等。知识产权、股权设计等知识产权、股权设计等。知识产权、股权设计等。知识产权、股权设计等</div>
             </div>
             <div>
@@ -66,7 +66,7 @@
                 <img src="~img/services/yong.png" />
             </div>
             <div class="box-text">
-                <div class="title">用</div>
+                <div class="title" id="yong">用</div>
                 <div class="desc">用户市场对接。用户市场对接。用户市场对接。用户市场对接。用户市场对接。用户市场对接。用户市场对接用户市场对接用户市场对接用户市场对接用户市场对接用户市场对接用户市场对接。用户市场对接用户市场对接</div>
             </div>
         </div>

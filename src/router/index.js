@@ -543,12 +543,13 @@ export const constantRoutes = [
     ],
   },
   {
-    path: "/demands",
+    path: "/",
     component: Layout,
     children: [
       {
         path: "",
-        component: () => import("@/views/services/index"),
+        name: "tempHome",
+        component: () => import("@/views/home/index"),
         meta: {
           title: "企业需求",
         },

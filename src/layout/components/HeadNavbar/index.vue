@@ -20,7 +20,7 @@
       :default-active="activeMenu"
       :unique-opened="false"
       :text-color="isHome ? variables.menuText : '#000'"
-      :active-text-color="isHome ? variables.menuActiveText : '#516FD2'"
+      :active-text-color="isHome ? variables.menuText : '#516FD2'"
       :collapse-transition="false"
       mode="horizontal"
       class="home-menu"
@@ -100,6 +100,9 @@ export default {
     },
     isHome() {
       return this.$route.name == "Home";
+    },
+    tempHome() {
+      return this.$route.name == "tempHome";
     },
     isLogin() {
       return (

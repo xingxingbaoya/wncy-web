@@ -185,17 +185,16 @@
               <el-form-item label=" " prop="pic_file" :class="isShowUpload">
                 <el-upload
                   action="#"
-                  :limit="5"
+                  :limit="1"
                   :file-list="pic_file_list"
                   :on-change="handleImgChange"
                   list-type="picture"
-                  multiple
                   :auto-upload="false"
                   class="upload-wrap"
                 >
                   <el-button slot="default" type="primary">上传项目封面图片</el-button>
                   <span slot="tip" style="color: #c1bfc5"
-                    >&nbsp;&nbsp;建议尺寸200px*200px，支持jpg、jpeg、png格式，大小不超过2M</span
+                    >&nbsp;&nbsp;支持.jpg,.jpeg,.bmp,.png,.gif,.mp4,.mp3,.doc,.docx,.pdf,xlsx,xls格式，大小不超过20M</span
                   >
                   <div slot="file" slot-scope="{ file }" >
                     <img
@@ -204,20 +203,7 @@
                       alt=""
                     />
                     <span>{{ file.name }}</span>
-                    <span class="el-upload-list__item-actions">
-                      <!-- <span
-                        class="el-upload-list__item-preview"
-                        @click="handlePictureCardPreview(file)"
-                      >
-                        <i class="el-icon-zoom-in" />
-                      </span> -->
-                      <span
-                        class="el-upload-list__item-delete"
-                        @click="handleRemove(file)"
-                      >
-                        <i class="el-icon-delete" />
-                      </span>
-                    </span>
+                    <p @click="handleRemove(file)">删除</p>
                   </div>
                 </el-upload>
               </el-form-item>
@@ -499,20 +485,19 @@ export default {
   },
   methods: {
     handleImgChange(file) {
-      const isIMG = file.raw.type.includes("image");
-      const isLt2M = file.size / 1024 / 1024 < 2;
+      const isLt2M = file.size / 1024 / 1024 < 20;
       this.$refs.formDataRef.clearValidate("pic_file");
 
-      if (!isIMG) {
-        // this.pic_file_list.pop()
-        return this.$message.warning("只能上传图片!");
-      }
       if (!isLt2M) {
-        // this.pic_file_list.pop()
-        return this.$message.warning("上传图片大小不能超过 2MB!");
+        this.pic_file_list.pop()
+        return this.$message.warning("上传图片大小不能超过 20MB!");
       }
       this.formData.pic_file = file.raw;
       console.log("封面", file.raw, this.formData.pic_file);
+    },
+    handleRemove(file) {
+      this.formData.pic_file = '';
+      this.pic_file_list = []
     },
     doPublishProject() {
       this.$refs.formDataRef.validate(async (vali) => {
