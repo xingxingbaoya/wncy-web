@@ -36,29 +36,8 @@
                   v-model="formData.typeDescription"
                   placeholder="项目类别"
                 />
-                <!-- <el-select
-                  v-model="formData.typeDescription"
-                  :popper-append-to-body="false"
-                  placeholder="项目分类"
-                >
-                  <el-option
-                    v-for="item in industryOneDict"
-                    :label="item.dictLabel"
-                    :key="item.dictValue"
-                    :value="item.dictValue"
-                  />
-                </el-select> -->
               </el-form-item>
             </el-col>
-            <!-- <el-col :span="16">
-                            <el-form-item label="技术类型" prop="proPatentInfo">
-                                <el-select v-model="formData.proPatentInfo" :popper-append-to-body="false"
-                                    placeholder="技术类型">
-                                    <el-option v-for="item in techTypeDict" :key="item.dictValue" :label="item.dictLabel"
-                                        :value="item.dictValue" />
-                                </el-select>
-                            </el-form-item>
-                        </el-col> -->
             <el-col :span="16">
               <el-form-item label="应用场景" prop="scenario">
                 <el-input v-model="formData.scenario" placeholder="应用场景" />
@@ -72,24 +51,13 @@
                 >
                   <el-option
                     v-for="item in cooperationDict"
+                    :key="item.dictValue"
                     :label="item.dictLabel"
                     :value="item.dictValue"
                   />
                 </el-select>
-                <!-- <el-checkbox-group v-model="formData.cooperation">
-                                    <el-checkbox-button v-for="item in cooperationDict" :label="item.dictLabel"
-                                        :key="item.dictLabel" :value="item.dictValue"></el-checkbox-button>
-                                </el-checkbox-group> -->
               </el-form-item>
             </el-col>
-            <!-- <el-col :span="16">
-                            <el-form-item label="技术来源" prop="proNature">
-                                <el-select v-model="formData.proNature" :popper-append-to-body="false" placeholder="技术来源">
-                                    <el-option v-for="item in proNatureDict" :label="item.dictLabel"
-                                        :value="item.dictValue" />
-                                </el-select>
-                            </el-form-item>
-                        </el-col> -->
           </el-row>
 
           <el-row class="project-wrap">
@@ -135,32 +103,6 @@
                 </el-select>
               </el-form-item>
             </el-col>
-
-            <!-- <el-col :span="10">
-
-                            <el-form-item label="意向资金(万)" prop="proIntentionPrice">
-                                <el-input v-model="formData.proIntentionPrice" placeholder="意向资金"
-                                    :disabled="formData.faceFlag == 1">
-
-                                </el-input>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="8">
-                            <el-form-item>
-                                <el-checkbox v-model="formData.faceFlag" true-label="1" false-label="0"
-                                    class="checkbox-price"
-                                    @change="() => { this.$refs.formDataRe.clearValidate('proIntentionPrice') }">面议</el-checkbox>
-                            </el-form-item>
-                        </el-col>
-                        <el-col :span="16">
-                            <el-form-item label="项目开发阶段" prop="proDevelopment">
-                                <el-select v-model="formData.proDevelopment" :popper-append-to-body="false"
-                                    placeholder="项目开发阶段">
-                                    <el-option v-for="item in developmentDict" :key="item.dictValue" :label="item.dictLabel"
-                                        :value="item.dictValue" />
-                                </el-select>
-                            </el-form-item>
-                        </el-col> -->
             <el-col :span="23">
               <el-form-item label="项目简介" prop="proIntroduct">
                 <el-input
@@ -173,22 +115,17 @@
               </el-form-item>
             </el-col>
             <el-col>
-              <el-form-item label=" " prop="pic_file" :class="isShowUpload">
+              <el-form-item label=" " prop="pic_file">
                 <el-upload
-                  action="custom"
+                  action="#"
                   :file-list="pic_file_list"
                   :on-change="handleImgChange"
-                  :http-request="imgUpload"
                   list-type="picture"
-                  :limit="1"
                   :auto-upload="false"
                   class="upload-wrap"
                 >
                   <el-button size="small" slot="default" type="primary"
                     >上传项目封面图片</el-button
-                  >
-                  <span slot="tip" style="color: #c1bfc5"
-                    >&nbsp;&nbsp;建议尺寸200px*200px，支持jpg、jpeg、png格式，大小不超过2M</span
                   >
                   <div slot="file" slot-scope="{ file }">
                     <img
@@ -197,6 +134,10 @@
                       alt=""
                     />
                     <span>{{ file.name }}</span>
+                  </div>
+
+                  <div slot="tip" class="el-upload__tip">
+                    建议尺寸200px*200px，支持jpg、jpeg、png格式，大小不超过2M
                   </div>
                 </el-upload>
               </el-form-item>
@@ -217,16 +158,13 @@
                 "
                 >项目附件</el-col
               >
-              <el-col :span="20">
+              <el-col :span="18">
                 <el-upload
+                  action="#"
                   class="upload-demo"
-                  :before-upload="beforeUpload"
-                  :on-preview="handlePreview"
-                  :on-remove="handleRemove"
-                  :before-remove="beforeRemove"
-                  :http-request="upload"
-                  :limit="1"
-                  :file-list="fileList"
+                  :on-change="fileChange"
+                  :file-list="file_list"
+                  :auto-upload="false"
                 >
                   <el-button size="small" type="primary">点击上传</el-button>
                   <div slot="tip" class="el-upload__tip">
@@ -254,59 +192,6 @@
                 </el-form-item>
               </el-col>
             </el-row>
-            <!-- <el-row>
-                            <el-col :span="10">
-                                <el-form-item label="邮箱" prop="email">
-                                    <el-input v-model="formData.email" placeholder="邮箱" />
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="10">
-                                <el-form-item label="所属单位名称" prop="company">
-                                    <el-input v-model="formData.company" placeholder="所属单位名称" />
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="12">
-                                <el-form-item label="来源地" prop="postalfulladdressType">
-                                    <el-radio-group v-model="formData.postalfulladdressType">
-                                        <el-radio :label="0">不限地域</el-radio>
-                                        <el-radio :label="1">设置优先地域</el-radio>
-                                    </el-radio-group>
-
-                                </el-form-item>
-                            </el-col>
-                            <template v-if="!!formData.postalfulladdressType">
-                                <el-col :span="8">
-                                    <el-form-item>
-                                        <el-select v-model="formData.postalfulladdress">
-                                            <el-option v-for="item in cityList" :key="item.code" :label="item.name"
-                                                :value="item.code" />
-                                        </el-select>
-                                    </el-form-item>
-                                </el-col>
-                            </template>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="10">
-                                <el-form-item label="职务" prop="position">
-                                    <el-input v-model="formData.position" placeholder="职务" />
-                                </el-form-item>
-                            </el-col>
-                        </el-row>
-                        <el-row>
-                            <el-col :span="12">
-                                <el-form-item label="是否挂牌" prop="isListing">
-                                    <el-radio-group v-model="formData.isListing">
-                                        <el-radio label="0">挂牌</el-radio>
-                                        <el-radio label="1">不挂牌</el-radio>
-                                    </el-radio-group>
-
-                                </el-form-item>
-                            </el-col>
-                        </el-row> -->
             <div style="text-align: center">
               <el-button
                 type="primary"
@@ -336,42 +221,12 @@
             186-1103-3326
           </div>
         </div>
-        <!-- <div class="project-wrap" style="padding-left: 0; padding-right: 0">
-          <div class="process">任务发布流程</div>
-          <div class="process-gress">
-            <img src="~img/projectManage/line.png" class="line" />
-            <div>
-              <img
-                src="~img/projectManage/process-1.png"
-              />&nbsp;&nbsp;&nbsp;&nbsp;提交任务需求
-            </div>
-
-            <div>
-              <img
-                src="~img/projectManage/process-2.png"
-              />&nbsp;&nbsp;&nbsp;&nbsp;选择合作方式
-            </div>
-
-            <div>
-              <img
-                src="~img/projectManage/process-3.png"
-              />&nbsp;&nbsp;&nbsp;&nbsp;输入联系人信息
-            </div>
-
-            <div>
-              <img
-                src="~img/projectManage/process-4.png"
-              />&nbsp;&nbsp;&nbsp;&nbsp;立即发布
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import city from "@/assets/city/city_code.json";
 import { addProjectDetail } from "@/api/projecthall";
 import common from "@/mixin/common";
 import { param2Form } from "@/utils";
@@ -381,79 +236,30 @@ import { getRole, getToken, getUser, setRole } from "@/utils/auth";
 export default {
   mixins: [common],
   data() {
-    const validateproIntentionPrice = (rule, value, callback) => {
-      if (value == "" && this.formData.faceFlag == 0) {
-        callback(new Error("请输入意向资金"));
-      } else {
-        callback();
-      }
-    };
     return {
       formData: {
         title: "",
-        fulladdress: "",
-        province: "",
-        city: "",
-        area: "",
-        isNotNational: "0",
-        proName: "",
-        industryone: "",
-        proIntroduct: "",
-        faceFlag: "0",
-        proPatentInfo: "0",
-        cooperation: "",
-        proIntentionPrice: "",
-        proDevelopment: "",
-        proPatentCategory: "",
-        proPatentNo: "",
-        patentOwner: "",
-        proGrantTime: "",
-        pic_file: "",
-        linkman: "",
-        phone: "",
-        email: "",
-        company: "",
-        postalfulladdressType: 0,
-        postalfulladdress: "",
-        position: "",
-        isListing: "0",
         sponsor: "",
         typeDescription: "",
         scenario: "",
+        cooperation: "",
         top10hg: "",
         bj2441: "",
         zgckjy241: "",
+        proIntroduct: "",
+        pic_file: "",
         attachment_file: "",
-        // createTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
+        linkman: "",
+        phone: "",
       },
 
       rules: {
         title: [{ required: true, message: "请输入项目名称", trigger: "blur" }],
-        proName: [
-          { required: true, message: "项目权属方不能为空", trigger: "blur" },
-        ],
-        industryone: [
-          { required: true, message: "项目分类不能为空", trigger: "blur" },
-        ],
-        proPatentInfo: [
-          { required: true, message: "技术类型不能为空", trigger: "blur" },
-        ],
         proNature: [
           { required: true, message: "技术来源不能为空", trigger: "blur" },
         ],
         cooperation: [
           { required: true, message: "请选择合作方式", trigger: "change" },
-        ],
-        proIntentionPrice: [
-          {
-            required: true,
-            validator: validateproIntentionPrice,
-            message: "请输入意向投入资金",
-            trigger: "blur",
-          },
-        ],
-        proDevelopment: [
-          { required: true, message: "请选择项目开发阶段", trigger: "change" },
         ],
         proIntroduct: [
           { required: true, message: "请输入项目描述", trigger: "blur" },
@@ -465,15 +271,6 @@ export default {
         email: [{ required: true, message: "请输入邮箱", trigger: "blur" }],
         company: [
           { required: true, message: "请输入所属单位名称", trigger: "blur" },
-        ],
-        postalfulladdress: [
-          { required: true, message: "请选择来源地", trigger: "change" },
-        ],
-        position: [
-          { required: true, message: "请输入职务", trigger: "change" },
-        ],
-        isListing: [
-          { required: true, message: "请选择是否挂牌", trigger: "change" },
         ],
         sponsor: [
           { required: true, message: "请选择所在院所", trigger: "change" },
@@ -494,39 +291,36 @@ export default {
         bj2441: [
           { required: true, message: "请选择北京2411产业", trigger: "change" },
         ],
-        zgckjy241: [
+        pic_file: [
           {
             required: true,
-            message: "请选择中关村科技园区管理委员会241产业分类",
+            message: "请选择封面文件",
             trigger: "change",
           },
         ],
       },
       pic_file_list: [],
+      file_list: [],
     };
-  },
-  computed: {
-    cityList() {
-      return [{ name: "不限", code: 0 }, ...city];
-    },
   },
   methods: {
     handleImgChange(file) {
-      const isIMG = file.raw.type.includes("image");
-      const isLt2M = file.size / 1024 / 1024 < 2;
-      this.$refs.formDataRef.clearValidate("pic_file");
-
-      if (!isIMG) {
-        this.$message.warning("只能上传图片!");
-        if(pic_file_list.length> 1)
-        this.pic_file_list = this.pic_file_list.pop();
-      }
-      if (!isLt2M) {
-        this.$message.warning("上传图片大小不能超过 2MB!");
-        this.pic_file_list = this.pic_file_list.pop();
+      if (file.raw) {
+        const isIMG = file.raw.type.includes("image");
+        const isLt2M = file.size / 1024 / 1024 < 2;
+        this.$refs.formDataRef.clearValidate("pic_file");
+        if (!isIMG) {
+          this.$message.warning("只能上传图片!");
+          return;
+        }
+        if (!isLt2M) {
+          this.$message.warning("上传图片大小不能超过 2MB!");
+          return;
+        }
+        this.pic_file_list = [file];
+        this.formData.pic_file = file.url;
       }
     },
-    imgUpload() {},
     handleRemove(file) {
       this.formData.attachment_file = "";
       this.pic_file_list = [];
@@ -537,7 +331,11 @@ export default {
           if (vali) {
             console.log("ppublish", this.formData);
             const res = await addProjectDetail(
-              param2Form({ ...this.formData })
+              param2Form({
+                ...this.formData,
+                attachment_file: this.file_list[0],
+                pic_file: this.pic_file_list[0]?.raw || "",
+              })
             );
             if (res.code == "0000") {
               this.$message.success("发布成功");
@@ -551,36 +349,48 @@ export default {
         }
       });
     },
-    handleRemove(file, fileList) {
-      console.log(file, fileList);
+
+    isAllowedFile(filename) {
+      // 获取文件扩展名
+      var fileExtension = filename.split(".").pop().toLowerCase();
+
+      // 允许的文件格式数组
+      var allowedFormats = [
+        "bmp",
+        "png",
+        "gif",
+        "jpg",
+        "jpeg",
+        "mp4",
+        "mp3",
+        "doc",
+        "docx",
+        "pdf",
+        "xlsx",
+        "xls",
+      ];
+
+      // 检查文件扩展名是否在允许的格式数组中
+      if (allowedFormats.indexOf(fileExtension) !== -1) {
+        return true; // 文件格式合法
+      } else {
+        return false; // 文件格式不合法
+      }
     },
-    handlePreview(file) {
-      console.log(file);
-    },
-    beforeRemove(file, fileList) {
-      return this.$confirm(`确定移除 ${file.name}？`);
-    },
-    beforeUpload(file) {
+    fileChange(file) {
       const isJPG = this.isAllowedFile(file.name);
       const isLt20M = file.size / 1024 / 1024 < 20;
 
       if (!isJPG) {
         this.$message.error("上传格式不符合!");
+        return;
       }
       if (!isLt20M) {
         this.$message.error("上传文件大小不能超过 20MB!");
+        return;
       }
-      return isJPG && isLt20M;
-    },
-    async upload() {
-      try {
-        const formData = new FormData();
-        formData.append("file", file);
-        let res = await uploadFile(formData);
-        this.$message.success("上传成功");
-      } catch (error) {
-        this.$message.success("上传失败");
-      }
+      this.file_list = [file.raw];
+      this.formData.attachment_file = URL.createObjectURL(file.raw);
     },
   },
   mounted() {

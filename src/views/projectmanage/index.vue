@@ -1,7 +1,9 @@
 <template>
   <div class="project-manage">
     <div class="project-manage-main">
-      <div class="project-manage-main-theme">汇聚怀柔科学城为依托的科技成果项目</div>
+      <div class="project-manage-main-theme">
+        汇聚怀柔科学城为依托的科技成果项目
+      </div>
       <div class="project-manage-main-attach">
         提供平台发布、自行登记、跟踪服务
       </div>
@@ -12,7 +14,11 @@
       >
         <i slot="prefix" class="el-input__icon el-icon-search"></i>
         <i slot="suffix">
-          <img @click="handleSearchDataChange('title', searchData.keyword)" src="~img/projectManage/search.png" style="cursor: pointer" />
+          <img
+            @click="handleSearchDataChange('title', searchData.keyword)"
+            src="~img/projectManage/search.png"
+            style="cursor: pointer"
+          />
         </i>
       </el-input>
       <div class="project-manage-main-group">
@@ -23,24 +29,39 @@
             <div class="left-classify">
               <div class="left-classify-item">
                 <div class="left-classify-item-title">所在院所：</div>
-                <el-select v-model="searchData.sponsor" placeholder="所在院所" style="width: 50%;" clearable  @change="handleSearchDataChange('sponsor', searchData.sponsor)">
-                    <el-option v-for="item in academyStateDict" :label="item.dictLabel" :key="item.dictValue"
-                        :value="item.dictValue" />
+                <el-select
+                  v-model="searchData.sponsor"
+                  placeholder="所在院所"
+                  style="width: 50%"
+                  clearable
+                  @change="
+                    handleSearchDataChange('sponsor', searchData.sponsor)
+                  "
+                >
+                  <el-option
+                    v-for="item in academyStateDict"
+                    :label="item.dictLabel"
+                    :key="item.dictValue"
+                    :value="item.dictValue"
+                  />
                 </el-select>
               </div>
               <div class="left-classify-item">
                 <div class="left-classify-item-title">北京十大高精尖产业：</div>
                 <div class="left-classify-item-city">
-                <div
-                  v-for="(item, index) in [ infinit,...topTenStateDict]" :key="item"
-                  class="left-classify-item-option"
-                  id="itemOption"
-                  :class="searchData.top10hg == item.dictValue ? 'active' : ''"
-                  @click="handleSearchDataChange('top10hg', item.dictValue)"
-                >
-                  {{ item.dictLabel }}
+                  <div
+                    v-for="(item, index) in [infinit, ...topTenStateDict]"
+                    :key="item"
+                    class="left-classify-item-option"
+                    id="itemOption"
+                    :class="
+                      searchData.top10hg == item.dictValue ? 'active' : ''
+                    "
+                    @click="handleSearchDataChange('top10hg', item.dictValue)"
+                  >
+                    {{ item.dictLabel }}
+                  </div>
                 </div>
-            </div>
                 <!-- <el-select v-model="searchData.top10hg" :popper-append-to-body="false" @change="value => handleSearchDataChange('top10hg', value)" filterable
                     placeholder="十大高精尖产业">
                     <el-option v-for="item in topTenStateDict" :key="item.dictValue" :label="item.dictLabel"
@@ -50,33 +71,37 @@
               <div class="left-classify-item">
                 <div class="left-classify-item-title">北京2411产业：</div>
                 <div class="left-classify-item-city">
-                <div
-                  v-for="(item, index) in [ infinit,...bjStateDict]" :key="item"
-                  class="left-classify-item-option"
-                  id="itemOption"
-                  :class="searchData.bj2441 == item.dictValue ? 'active' : ''"
-                  @click="handleSearchDataChange('bj2441', item.dictValue)"
-                >
-                  {{ item.dictLabel }}
+                  <div
+                    v-for="(item, index) in [infinit, ...bjStateDict]"
+                    :key="item"
+                    class="left-classify-item-option"
+                    id="itemOption"
+                    :class="searchData.bj2441 == item.dictValue ? 'active' : ''"
+                    @click="handleSearchDataChange('bj2441', item.dictValue)"
+                  >
+                    {{ item.dictLabel }}
+                  </div>
                 </div>
-            </div>
               </div>
               <div class="left-classify-item" id="projectList">
                 <div class="left-classify-item-title">中关村241产业：</div>
                 <div class="left-classify-item-city">
-                <div
-                  v-for="(item, index) in [ infinit,...zgckjyStateDict]" :key="item"
-                  class="left-classify-item-option"
-                  id="itemOption"
-                  :class="searchData.zgckjy241 == item.dictValue ? 'active' : ''"
-                  @click="handleSearchDataChange('zgckjy241', item.dictValue)"
-                >
-                  {{ item.dictLabel }}
+                  <div
+                    v-for="(item, index) in [infinit, ...zgckjyStateDict]"
+                    :key="item"
+                    class="left-classify-item-option"
+                    id="itemOption"
+                    :class="
+                      searchData.zgckjy241 == item.dictValue ? 'active' : ''
+                    "
+                    @click="handleSearchDataChange('zgckjy241', item.dictValue)"
+                  >
+                    {{ item.dictLabel }}
+                  </div>
                 </div>
-            </div>
               </div>
             </div>
-            <div class="left-project" >
+            <div class="left-project">
               <div
                 v-for="item in projectList"
                 class="left-project-item"
@@ -86,7 +111,9 @@
                 <div class="left-content">
                   <div class="title">{{ item.title }}</div>
                   <div class="attach">
-                    <span class="attach-address">{{ item.academy || '无' }}</span>
+                    <span class="attach-address">{{
+                      item.academy || "无"
+                    }}</span>
                     <!-- <img src="~img/projectManage/address.png" />
                     <span class="attach-address"
                       >{{ item.provinceName }} {{ item.cityName }}
@@ -109,7 +136,8 @@
 
             <div class="pagination-box">
               <div class="pagination-box-currentpage" key="1">
-                {{ pageConfig.pageNum }} / {{ pageConfig.total }}
+                {{ pageConfig.pageNum }} /
+                {{ Math.ceil(pageConfig.total / pageConfig.pageSize) }}
               </div>
               <el-pagination
                 :current-page="pageConfig.pageNum"
@@ -142,13 +170,16 @@
                 style="width: 100%"
               />
               <div class="right-fab-content">
-                <el-button type="primary" style="width: 100%"
-                  @click.prevent="toPublishPage">立即发布</el-button
+                <el-button
+                  type="primary"
+                  style="width: 100%"
+                  @click.prevent="toPublishPage"
+                  >立即发布</el-button
                 >
               </div>
             </div>
             <div class="right-select">
-              <img src="~img/projectManage/selectwn.png" style="width: 100%;" />
+              <img src="~img/projectManage/selectwn.png" style="width: 100%" />
               <div class="right-select-content">
                 <div
                   v-for="item in extractInfo"
@@ -187,7 +218,7 @@ export default {
       // {id:1,title:'技术项目'},
       // {id:2,title:'专利项目'}
       // ],
-      infinit:{'dictValue':'',dictLabel: '不限'},
+      infinit: { dictValue: "", dictLabel: "不限" },
       techSourceDict: [
         { id: 0, title: "不限" },
         { id: 1, title: "企业" },
@@ -196,7 +227,7 @@ export default {
         { id: 4, title: "协会团体" },
         { id: 5, title: "个人" },
       ],
-      projectList:[],
+      projectList: [],
       pageConfig: {
         pageNum: 1,
         pageSize: 20,
@@ -204,7 +235,7 @@ export default {
       },
       pageValue: 1,
       extractInfo: [
-      {
+        {
           title: "资源共享",
           detail: "免费发布与推广项目，资源信息在线共享",
           icons: ziyuan,
@@ -214,42 +245,46 @@ export default {
           detail: "政产学研金服用”全方位专业服务支持",
           icons: lindai,
         },
-        { title: "合作共赢", detail: "多方参与、利益分享、合作共赢", icons: heizuo },
+        {
+          title: "合作共赢",
+          detail: "多方参与、利益分享、合作共赢",
+          icons: heizuo,
+        },
       ],
       searchData: {
-        keyword: '',
-        fulladdress: '',
-        province: '',
-        city: '',
-        area: '',
-        isNotNational: '',
-        proName: '',
-        industryone: '',
-        proIntroduct: '',
-        faceFlag: '',
-        proPatentInfo: '',
-        cooperation: '',
-        proIntentionPrice: '',
-        proDevelopment: '',
-        proPatentCategory: '',
-        proPatentNo: '',
-        patentOwner: '',
-        proGrantTime: '',
-        pic_file: '',
-        linkman: '',
-        phone: '',
-        email: '',
-        company: '',
-        postalfulladdressType: '',
-        postalfulladdress: '',
-        position: '',
-        isListing: '',
-        sponsor: '',
-        typeDescription: '',
-        scenario: '',
-        top10hg: '',
-        bj2441: '',
-        zgckjy241: '',
+        keyword: "",
+        fulladdress: "",
+        province: "",
+        city: "",
+        area: "",
+        isNotNational: "",
+        proName: "",
+        industryone: "",
+        proIntroduct: "",
+        faceFlag: "",
+        proPatentInfo: "",
+        cooperation: "",
+        proIntentionPrice: "",
+        proDevelopment: "",
+        proPatentCategory: "",
+        proPatentNo: "",
+        patentOwner: "",
+        proGrantTime: "",
+        pic_file: "",
+        linkman: "",
+        phone: "",
+        email: "",
+        company: "",
+        postalfulladdressType: "",
+        postalfulladdress: "",
+        position: "",
+        isListing: "",
+        sponsor: "",
+        typeDescription: "",
+        scenario: "",
+        top10hg: "",
+        bj2441: "",
+        zgckjy241: "",
       },
       firstLineProvince: 34,
       collapsed: true,
@@ -260,7 +295,7 @@ export default {
       return [{ name: "全部", code: 0 }, ...city];
     },
     // proList() {
-    //   return 
+    //   return
     // }
   },
   created() {
@@ -268,7 +303,7 @@ export default {
   },
   methods: {
     toPublishPage() {
-      this.$router.push('/projectmanage/publish')
+      this.$router.push("/projectmanage/publish");
     },
     loadData() {
       this.loading = true;
@@ -276,11 +311,12 @@ export default {
         .then((res) => {
           if (res.code == "0000") {
             this.projectList = res.rows;
-            this.projectList.forEach((item, index) =>  {
-              this.projectList[index].academy = this.academyStateDict?.find(p => p.dictValue == item.sponsor).dictLabel
-            })
-            console.log('1234',this.projectList)
-            this.pageConfig.total = res.total
+            this.pageConfig.total = res.total;
+            this.projectList.forEach((item, index) => {
+              this.projectList[index].academy = this.academyStateDict?.find(
+                (p) => p.dictValue == item.sponsor
+              )?.dictLabel;
+            });
           } else {
             this.$message.error(res.msg);
           }
@@ -351,10 +387,10 @@ export default {
     &-search {
       margin-top: 60px;
       width: pxToVW(665);
-     height: 48px;
-     input {
-      height: 100%;
-     }
+      height: 48px;
+      input {
+        height: 100%;
+      }
       :deep(.el-input__inner) {
         border-radius: 48px !important;
         height: 48px !important;
@@ -382,7 +418,10 @@ export default {
             padding: 36px 28px;
             background-color: #fff;
             border-radius: 16px;
-            :deep(.el-select-dropdown.is-multiple .el-select-dropdown__item.selected) {
+            :deep(
+                .el-select-dropdown.is-multiple
+                  .el-select-dropdown__item.selected
+              ) {
               color: #2434af;
             }
             &-item {
@@ -443,12 +482,12 @@ export default {
                   width: pxToVW(455);
                   height: 318px;
                   overflow: hidden;
-                  background: #FFFFFF;
-                  border: 1px solid #E4E7ED;
-                  box-shadow: 0px 0px 57px 0px rgba(218,219,228,0.3);
+                  background: #ffffff;
+                  border: 1px solid #e4e7ed;
+                  box-shadow: 0px 0px 57px 0px rgba(218, 219, 228, 0.3);
                   border-radius: 6px;
                   padding: 26px pxToVW(38);
-                  >div {
+                  > div {
                     height: 100%;
                     overflow-y: auto;
                   }
@@ -465,7 +504,6 @@ export default {
                       color: #ec4646;
                     }
                   }
-
                 }
               }
             }
@@ -487,7 +525,6 @@ export default {
                 font-weight: 400;
                 color: #77addc;
                 margin-bottom: 30px;
-                
               }
               .attach {
                 font-size: 16px;
@@ -588,7 +625,6 @@ export default {
 </style>
 <style lang="scss">
 .project-manage-main-search {
-
   .el-input__inner {
     border-radius: 48px !important;
     height: 48px !important;

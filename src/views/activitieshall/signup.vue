@@ -58,9 +58,13 @@
       @close="closeSignUpDialog"
     >
       <el-row v-loading="loading">
-        <el-col :span="24" class="right-form">
+        <el-col :span="10" class="left-img">
+          <img :src="`${imgUrl}/login.png`" />
+        </el-col>
+        <el-col :span="14" class="right-form">
           <div class="right-head">
-            <p class="right-title">请填写报名信息</p>
+            <p class="right-title">请填写您的个人信息</p>
+            <p class="right-desc">Please fill in your personal information</p>
           </div>
           <el-form
             ref="signUpForm"

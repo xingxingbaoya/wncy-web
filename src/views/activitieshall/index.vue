@@ -127,7 +127,7 @@
       </el-row>
       <div class="pagination-box">
         <div class="pagination-box-currentpage" key="1">
-          {{ pageConfig.pageNum }} / {{ total }}
+          {{ pageConfig.pageNum }} / {{ Math.ceil(total / pageConfig.pageSize) }}
         </div>
         <el-pagination
           :current-page="pageConfig.pageNum"
@@ -330,7 +330,7 @@ export default {
       if ("startTime" == type && value)
         value = dayjs(value).format("YYYY-MM-DD HH:mm:ss");
       if ("endTime" == type && value)
-        value = dayjs(value).add(1, "day").format("YYYY-MM-DD HH:mm:ss");
+        value = dayjs(value).format("YYYY-MM-DD HH:mm:ss");
       if (type == "actClassification") {
         let arr = this.searchData[type].map((item) => item);
         if (arr.includes(value)) {

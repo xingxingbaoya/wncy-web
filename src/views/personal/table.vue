@@ -43,7 +43,9 @@
 
         <el-table-column label="合作意向" align="center">
           <template slot-scope="scope">
-            <span>{{ scope.row.expire ? scope.row.expire.join(',') : '无'}}</span>
+            <span>{{
+              scope.row.expire ? scope.row.expire.join(",") : "无"
+            }}</span>
           </template>
         </el-table-column>
 
@@ -170,17 +172,14 @@ export default {
       getMyProjectList({ ...formpage, title: "" }).then((res) => {
         if (res.code == "0000") {
           this.tableData = res.rows;
-          this.tableData.forEach((item,index)=> {
-            this.tableData[index]['academy'] = this.academyStateDict?.find(
-                (o) => o.dictValue == item.sponsor
-              ).dictLabel 
-              this.tableData[index]['expire'] = []
-              this.cooperationDict.forEach((p) => {
-                  item.cooperation.split(',').includes(p.dictValue) &&
-                  this.tableData[index]['expire'].push(p.dictLabel);
-                });
-          })
-
+          this.tableData.forEach((item, index) => {
+            this.tableData[index]["academy"] = "";
+            this.tableData[index]["expire"] = [];
+            this.cooperationDict.forEach((p) => {
+              item.cooperation.split(",").includes(p.dictValue) &&
+                this.tableData[index]["expire"].push(p.dictLabel);
+            });
+          });
         } else {
           this.$message.error(res.msg);
         }

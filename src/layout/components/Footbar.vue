@@ -211,7 +211,7 @@ export default {
 }
 .footbar {
   padding: 0 calc((100% - 1380px) / 2);
-  height: 550px;
+  height: 600px;
   color: #ffffff;
   background: #191f2e;
   .foot_top {

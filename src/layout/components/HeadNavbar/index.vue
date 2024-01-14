@@ -188,12 +188,11 @@ export default {
   width: 100%;
   position: fixed;
   top: 0;
-  z-index: 9999;
+  z-index: 999;
   display: flex;
   align-items: center;
   padding: 0 pxToVW(180);
   background: #fff;
-  z-index: 9999;
 
   :deep .el-menu-item {
     color: #000 !important;

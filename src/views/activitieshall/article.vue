@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="play-right">
-          <div class="play-right-list" v-if="item.signUpEnable != 1">
+          <div class="play-right-list">
             <div class="play-right-title">热门活动</div>
             <div style="width: 100%">
               <div
@@ -66,7 +66,7 @@
               </div>
             </div>
           </div>
-          <div class="play-right-signup" v-else>
+          <div class="play-right-signup" v-if="item.signUpEnable == 1">
             <div style="margin-top: 10px; margin-bottom: 40px">
               <img
                 width="103px"
@@ -85,36 +85,44 @@
 
     <el-dialog
       :visible.sync="SignUpDialog"
-      width="600px"
-      top="100px"
+      custom-class="sign-log"
+      width="800px"
+      top="120px"
       @close="closeSignUpDialog"
     >
       <el-row v-loading="loading">
-        <el-col :span="24" class="right-form">
+        <el-col :span="10" class="left-img">
+          <img :src="`${imgUrl}/login.png`" />
+        </el-col>
+        <el-col :span="14" class="right-form">
           <div class="right-head">
             <p class="right-title">请填写您的个人信息</p>
+            <p class="right-desc">Please fill in your personal information</p>
           </div>
           <el-form
-            class="activityForm"
             ref="signUpForm"
             :model="signUpForm"
             :rules="rules"
-            label-width="120px"
+            class="rform"
           >
-            <el-form-item prop="signName" label="姓名:">
-              <el-input v-model="signUpForm.signName" style="width: 400px">
+            <el-form-item prop="signName">
+              <el-input v-model="signUpForm.signName">
+                <template slot="prepend">姓名:</template>
               </el-input>
             </el-form-item>
-            <el-form-item prop="contactInfo" label="手机号:">
-              <el-input v-model="signUpForm.contactInfo" style="width: 400px">
+            <el-form-item prop="contactInfo">
+              <el-input v-model="signUpForm.contactInfo">
+                <template slot="prepend">手机号:</template>
               </el-input>
             </el-form-item>
-            <el-form-item prop="companyName" label="公司名称:">
-              <el-input v-model="signUpForm.companyName" style="width: 400px">
+            <el-form-item prop="companyName">
+              <el-input v-model="signUpForm.companyName">
+                <template slot="prepend">公司名称:</template>
               </el-input>
             </el-form-item>
-            <el-form-item prop="post" label="职位:">
-              <el-input v-model="signUpForm.post" style="width: 400px">
+            <el-form-item prop="post">
+              <el-input v-model="signUpForm.post">
+                <template slot="prepend">职位:</template>
               </el-input>
             </el-form-item>
           </el-form>
@@ -137,7 +145,7 @@
 import common from "@/mixin/common";
 import {
   getActivityDetail,
-  getActivityhome,
+  getTopFlagActivityList,
   signUpActivity,
 } from "@/api/activitieshall";
 
@@ -189,7 +197,7 @@ export default {
           signUpActivity({ ...this.signUpForm, actId })
             .then((res) => {
               if (res.code == "0000") {
-                this.loadData()
+                this.loadData();
                 this.$message.success(res.msg);
               } else {
                 this.$message.warning(res.msg);
@@ -206,11 +214,10 @@ export default {
       });
     },
     getHot() {
-      getActivityhome({ ...this.searchData, ...this.pageConfig })
+      getTopFlagActivityList()
         .then((res) => {
-          if (res.code == 0) {
-            this.listDataShow = res.rows;
-            this.total = res.total;
+          if (res.code == "0000") {
+            this.listDataShow = res.obj;
           } else {
             // this.$message.warning(res.msg);
           }
@@ -499,20 +506,21 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   padding: 30px 0 0;
 
   .right-head {
     width: 400px;
-    margin-bottom: 20px;
     .right-title {
-      font-size: 16px;
-      color: #333333;
+      font-size: 20px;
       font-weight: 600;
+      color: #333333;
       margin: 0;
       padding-bottom: 20px;
     }
     .right-desc {
       font-size: 12px;
+      font-weight: 500;
       color: #999999;
       margin: 0;
     }
@@ -523,8 +531,6 @@ export default {
   }
 
   .sub-layout {
-    width: 100%;
-    text-align: center;
     /*padding-top: 20px;*/
   }
 
