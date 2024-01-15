@@ -173,7 +173,9 @@ export default {
         if (res.code == "0000") {
           this.tableData = res.rows;
           this.tableData.forEach((item, index) => {
-            this.tableData[index]["academy"] = "";
+            this.tableData[index]["academy"] =
+                this.academyStateDict?.find((o) => o.dictValue == item.sponsor)
+                  ?.dictLabel || "-";
             this.tableData[index]["expire"] = [];
             this.cooperationDict.forEach((p) => {
               item.cooperation.split(",").includes(p.dictValue) &&
@@ -196,7 +198,7 @@ export default {
         }
       });
     },
-    godetail({ id }, type) {
+    godetail({ actSignUpId, id }, type) {
       if (type == 1) {
         this.$router.push({
           path: "/personal/center/detail-project",
@@ -208,7 +210,7 @@ export default {
         this.$router.push({
           path: "/personal/center/detail-activit",
           query: {
-            id,
+            actSignUpId,
           },
         });
       }

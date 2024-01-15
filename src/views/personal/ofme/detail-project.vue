@@ -63,9 +63,13 @@
                   margin-bottom: 55px;
                   display: inline-block;
                 "
-                v-html="project.proIntroduct"
+                v-html="form2.proIntroduct"
               ></span>
               <div class="project-info-theme">项目附件</div>
+              <template v-if="form2.attachment.split('/').length">
+                <span>{{ form2.attachment.split('/')[form2.attachment.split('/').length - 1]}}</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: #2434AF;cursor: pointer;" @click="downFile">下载</a>
+              </template>
               <div class="project-info-theme">联系信息</div>
               <el-row>
                 <el-col :span="24">
@@ -160,6 +164,10 @@ export default {
         top10hg: "",
         bj2441: "",
         zgckjy241: "",
+        scenario: "",
+        typeDescription: "",
+        attachment: "",
+        proIntroduct: ""
       },
 
       academy: "",
@@ -198,15 +206,15 @@ export default {
             this.industryKind.top10hg =
               this.topTenStateDict?.find(
                 (item) => item.dictValue == this.form2.top10hg
-              ).dictLabel || "无";
+              )?.dictLabel || "无";
             this.industryKind.bj2441 =
               this.bjStateDict?.find(
                 (item) => item.dictValue == this.form2.bj2441
-              ).dictLabel || "无";
+              )?.dictLabel || "无";
             this.industryKind.zgckjy241 =
               this.zgckjyStateDict?.find(
                 (item) => item.dictValue == this.form2.zgckjy241
-              ).dictLabel || "无";
+              )?.dictLabel || "无";
           } else {
             this.$message.error(res.msg);
           }
@@ -254,6 +262,9 @@ export default {
         })
         .catch(() => {});
     },
+    downFile() {
+      window.open(this.project.attachment)
+    }
   },
 };
 </script>
@@ -445,6 +456,7 @@ export default {
           border-left: 7px solid #2434af;
           padding-left: 12px;
           margin-bottom: 30px;
+          margin-top: 30px;
         }
 
         .el-row {

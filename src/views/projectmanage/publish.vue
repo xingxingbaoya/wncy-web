@@ -291,6 +291,9 @@ export default {
         bj2441: [
           { required: true, message: "请选择北京2411产业", trigger: "change" },
         ],
+        zgckjy241: [
+        { required: true, message: "请选择中关村241产业", trigger: "change" },
+        ],
         pic_file: [
           {
             required: true,
@@ -368,6 +371,7 @@ export default {
         "pdf",
         "xlsx",
         "xls",
+        "pptx",
       ];
 
       // 检查文件扩展名是否在允许的格式数组中
