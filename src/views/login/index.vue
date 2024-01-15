@@ -239,14 +239,13 @@ export default {
               });
             })
             .catch((error) => {
-              this.$message.error(error.message);
+              this.$message.error(error);
             })
             .finally((obj) => {
               this.$refs?.CaptchaImage?.click();
               this.loading = false;
             });
         } else {
-          debugger;
           return false;
         }
       });

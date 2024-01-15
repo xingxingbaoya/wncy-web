@@ -217,7 +217,7 @@ export default {
       getTopFlagActivityList()
         .then((res) => {
           if (res.code == "0000") {
-            this.listDataShow = res.obj;
+            this.listDataShow = res.obj || [];
           } else {
             // this.$message.warning(res.msg);
           }

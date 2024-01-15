@@ -292,7 +292,7 @@ export default {
           { required: true, message: "请选择北京2411产业", trigger: "change" },
         ],
         zgckjy241: [
-        { required: true, message: "请选择中关村241产业", trigger: "change" },
+          { required: true, message: "请选择中关村241产业", trigger: "change" },
         ],
         pic_file: [
           {
@@ -387,14 +387,16 @@ export default {
 
       if (!isJPG) {
         this.$message.error("上传格式不符合!");
-        return;
-      }
-      if (!isLt20M) {
+        this.file_list = [file.raw];
+        this.file_list = this.file_list.filter((item) => item.name != file.name);
+      } else if (!isLt20M) {
         this.$message.error("上传文件大小不能超过 20MB!");
-        return;
+        this.$nextTick(()=>{})
+        this.file_list = this.file_list.filter((item) => item.name != file.name);
+      } else {
+        this.file_list = [file.raw];
+        this.formData.attachment_file = URL.createObjectURL(file.raw);
       }
-      this.file_list = [file.raw];
-      this.formData.attachment_file = URL.createObjectURL(file.raw);
     },
   },
   mounted() {

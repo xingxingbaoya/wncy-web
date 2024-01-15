@@ -504,8 +504,8 @@ $light_gray: #eee;
 
     .phone-code {
       //margin-bottom: 2px !important;
-      :deep .el-input {
-        padding-right: 80px;
+      ::v-deep .el-form-item__content .el-input {
+        padding-right: 80px !important;
       }
     }
 
