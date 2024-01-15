@@ -51,9 +51,9 @@ service.interceptors.response.use(
     if (res.state == "SUCCESS") {
       return res;
     }
-    // if the custom code is not 20000, it is judged as an error.
-    if (res.code != "0000") {
-      // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+    if(res.code == "0001" || res.code == "0000") {
+      return res
+    } else {
       if (res.code == 410 || res.code == 401) {
         if (localStorage.getItem("zgc_token")) {
           MessageBox.confirm("登录失效,请重新登录", "提示", {
@@ -75,15 +75,40 @@ service.interceptors.response.use(
           router.push(`/`);
         }
       }
-      // Message({
-      //   message: res.msg || '没有msg',
-      //   type: 'warning',
-      //   duration: 5 * 1000
-      // })
-      return Promise.reject(new Error(res.msg || "没有msg"));
-    } else {
-      return res;
     }
+    // if the custom code is not 20000, it is judged as an error.
+    // if (res.code != "0000" ) {
+    //   // 50008: Illegal token; 50012: Other clients logged in; 50014: Token expired;
+    //   if (res.code == 410 || res.code == 401) {
+    //     if (localStorage.getItem("zgc_token")) {
+    //       MessageBox.confirm("登录失效,请重新登录", "提示", {
+    //         confirmButtonText: "去登录",
+    //         cancelButtonText: "取消",
+    //         showClose: false,
+    //         type: "warning",
+    //       })
+    //         .then(() => {
+    //           store.dispatch("user/resetToken").then(() => {
+    //             const redirect = location.hash.slice(1);
+    //             router.push(`/login?redirect=${redirect}`);
+    //           });
+    //         })
+    //         .catch(() => {
+    //           router.push(`/`);
+    //         });
+    //     } else {
+    //       router.push(`/`);
+    //     }
+    //   }
+    //   // Message({
+    //   //   message: res.msg || '没有msg',
+    //   //   type: 'warning',
+    //   //   duration: 5 * 1000
+    //   // })
+    //   return Promise.reject(new Error(res.msg || "没有msg"));
+    // } else {
+    //   return res;
+    // }
   },
   (error) => {
     console.log("err" + error.code, error.message); // for debug
