@@ -9,11 +9,19 @@
               v-for="item in navList"
               :key="item.key"
             >
-              <div class="title">{{ item.name }}</div>
+            <div class="title">{{ item.name }}</div>
+            <template v-if="item.key < 4">
               <div class="nav-link" v-for="i in item.children" :key="i.key">
                 <div v-if="!i.url">{{ i.name }}</div>
                 <el-link  v-if="i.url" :underline="false" :href="i.url">{{ i.name }}</el-link>
               </div>
+            </template>
+            <template v-else>
+              <div class="nav-link-service" v-for="i in item.children" :key="i.key" :style="i.key % 2 == 0? 'width:25%' : 'width:70%'">
+                <div v-if="!i.url">{{ i.name }}</div>
+                <el-link  v-if="i.url" :underline="false" :href="i.url">{{ i.name }}</el-link>
+              </div>
+            </template>
             </el-col>
           </el-row>
         </div>
@@ -115,7 +123,12 @@ export default {
           key: 3,
           children: [
             {
-              name: "活动清单",
+              name: "活动类型",
+              key: 1,
+              url: "/activitieshall#activitiesList",
+            },
+            {
+              name: "活动状态",
               key: 1,
               url: "/activitieshall#activitiesList",
             },
@@ -140,16 +153,11 @@ export default {
               key: 2,
               url: "",
             },
-            {
-              name: "需求详情",
-              key: 3,
-              url: "",
-            }
           ],
         },
         {
           name: "集成服务",
-          key: 3,
+          key: 4,
           children: [
           {
               name: "政",
@@ -250,6 +258,15 @@ export default {
       line-height: 32px;
       margin-bottom: 10px;
       user-select: none;
+      .el-link {
+        color: #ffffff;
+      }
+    }
+    .nav-link-service {
+      font-size: 16px;
+      display: inline-block;
+      margin-bottom: 10px;
+
       .el-link {
         color: #ffffff;
       }

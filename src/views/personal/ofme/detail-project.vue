@@ -263,7 +263,7 @@ export default {
         .catch(() => {});
     },
     downFile() {
-      window.open(this.project.attachment)
+      window.open(this.form2.attachment)
     }
   },
 };

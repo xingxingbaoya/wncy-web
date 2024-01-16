@@ -2,7 +2,7 @@
     <el-main v-loading="loading">
         <div class="service-banner">
             <div class="banner-title">集成服务</div>
-            <div class="banner-subtitle">聚焦共性技术服务、综合科技服务、数智信息服务</div>
+            <div class="banner-subtitle">集聚目标产业内“政产学研金服用“全创新要素</div>
         </div>
         <div class="service-box">
             <div>

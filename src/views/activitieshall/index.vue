@@ -482,6 +482,12 @@ export default {
       this.loadData();
     },
   },
+  mounted(){
+    const a = localStorage.getItem('dic-top_10_hg_category')
+    if(a == undefined) {
+      this.$router.push('/')
+    }
+  }
 };
 </script>
 

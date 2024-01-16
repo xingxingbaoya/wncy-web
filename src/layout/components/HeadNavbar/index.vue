@@ -44,11 +44,13 @@
           <span class="el-dropdown-link">
             <span class="name">{{ username }}</span>
             <img
+              v-if="avatar"
               style="width: 60px; height: 60px; border-radius: 50%"
               :src="avatar || ''"
               alt=""
               srcset=""
             />
+          <svg-icon v-else icon-class="avatar" class-name="avatar" style="width: 60px; height: 60px;"/>
           </span>
           <el-dropdown-menu slot="dropdown" class="top_c">
             <el-dropdown-item command="gocenter">
