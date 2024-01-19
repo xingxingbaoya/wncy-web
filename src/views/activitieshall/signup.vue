@@ -28,7 +28,8 @@
               <div>{{ item.actWay }}</div>
             </div>
             <div class="text-content">
-              <div>活动预告：</div>
+              <!-- <div>活动预告：</div> -->
+              <div></div>
               <div v-html="item.actDetail"></div>
             </div>
           </div>

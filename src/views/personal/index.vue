@@ -36,12 +36,12 @@
         <div class="bot" v-if="active == 1 || !active">
           <p class="bot-title">与我相关</p>
           <el-collapse v-model="activeNames" accordion @change="handleChange">
-            <el-collapse-item title="项目大厅" name="1">
+            <el-collapse-item title="科技成果" name="1">
               <router-link to="/personal/center/search-project" tag="p"
                 >我发布的项目</router-link
               >
             </el-collapse-item>
-            <el-collapse-item title="活动大厅" name="3">
+            <el-collapse-item title="产研对接" name="3">
               <router-link to="/personal/center/search-activit" tag="p"
                 >我报名的活动</router-link
               >

@@ -309,19 +309,24 @@ export default {
   methods: {
     handleImgChange(file) {
       if (file.raw) {
+        this.pic_file_list = [file];
         const isIMG = file.raw.type.includes("image");
         const isLt2M = file.size / 1024 / 1024 < 2;
         this.$refs.formDataRef.clearValidate("pic_file");
         if (!isIMG) {
           this.$message.warning("只能上传图片!");
+          this.pic_file_list = this.pic_file_list.filter(
+            (item) => item.name != file.name
+          );
           return;
-        }
-        if (!isLt2M) {
+        } else if (!isLt2M) {
           this.$message.warning("上传图片大小不能超过 2MB!");
-          return;
+          this.pic_file_list = this.pic_file_list.filter(
+            (item) => item.name != file.name
+          );
+        } else {
+          this.formData.pic_file = file.url;
         }
-        this.pic_file_list = [file];
-        this.formData.pic_file = file.url;
       }
     },
     handleRemove(file) {
@@ -385,16 +390,18 @@ export default {
       const isJPG = this.isAllowedFile(file.name);
       const isLt20M = file.size / 1024 / 1024 < 20;
 
+      this.file_list = [file.raw];
       if (!isJPG) {
         this.$message.error("上传格式不符合!");
-        this.file_list = [file.raw];
-        this.file_list = this.file_list.filter((item) => item.name != file.name);
+        this.file_list = this.file_list.filter(
+          (item) => item.name != file.name
+        );
       } else if (!isLt20M) {
         this.$message.error("上传文件大小不能超过 20MB!");
-        this.$nextTick(()=>{})
-        this.file_list = this.file_list.filter((item) => item.name != file.name);
+        this.file_list = this.file_list.filter(
+          (item) => item.name != file.name
+        );
       } else {
-        this.file_list = [file.raw];
         this.formData.attachment_file = URL.createObjectURL(file.raw);
       }
     },

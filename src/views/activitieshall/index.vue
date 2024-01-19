@@ -34,7 +34,7 @@
                 <div
                   class="left-classify-item-option"
                   :class="
-                    searchData.actClassification.includes(tech.dictValue)
+                    searchData.actClassification == tech.dictValue
                       ? 'active'
                       : ''
                   "
@@ -58,7 +58,9 @@
                 <div
                   class="left-classify-item-option"
                   :class="
-                    searchData.actStatus.split(',').includes( tech.dictValue) ? 'active' : ''
+                    searchData.actStatus.split(',').includes(tech.dictValue)
+                      ? 'active'
+                      : ''
                   "
                   @click="handleSearchDataChange('actStatus', tech.dictValue)"
                 >
@@ -127,7 +129,8 @@
       </el-row>
       <div class="pagination-box">
         <div class="pagination-box-currentpage" key="1">
-          {{ pageConfig.pageNum }} / {{ Math.ceil(total / pageConfig.pageSize) }}
+          {{ pageConfig.pageNum }} /
+          {{ Math.ceil(total / pageConfig.pageSize) }}
         </div>
         <el-pagination
           :current-page="pageConfig.pageNum"
@@ -196,7 +199,7 @@ export default {
       searchData: {
         keyword: "",
         actName: "",
-        actStatus: "started,notstart",
+        actStatus: "started, notstart",
         actClassification: "",
         startTime: "",
         endTime: "",
@@ -331,31 +334,21 @@ export default {
         value = dayjs(value).format("YYYY-MM-DD HH:mm:ss");
       if ("endTime" == type && value)
         value = dayjs(value).format("YYYY-MM-DD HH:mm:ss");
-      if (type == "actClassification") {
-        let arr = this.searchData[type].map((item) => item);
-        if (arr.includes(value)) {
-          let index = arr.findIndex(value);
-          this.searchData[type] = arr.splice(index, 1);
-        } else {
-          this.searchData[type] = arr.push(value, 1);
-        }
-        
-      } else if(type == 'actStatus') {
-        const l = this.searchData.actStatus.split(',')
-        if(value) {
-          this.searchData[type] == '' && (l.length = 0)
-          if(l.includes(value) ) {
-            const index = this.searchData.actStatus.indexOf(value)
-            l.splice(index, 1)
+      if (type == "actStatus") {
+        const l = this.searchData.actStatus.split(",");
+        if (value) {
+          this.searchData[type] == "" && (l.length = 0);
+          if (l.includes(value)) {
+            const index = this.searchData.actStatus.indexOf(value);
+            l.splice(index, 1);
           } else {
-            l.push(value)
+            l.push(value);
           }
-          this.searchData[type] = l.join(',')
+          this.searchData[type] = l.join(",");
         } else {
-          this.searchData[type] = ''
+          this.searchData[type] = "";
         }
-
-      }  else {
+      } else {
         this.searchData[type] = value;
       }
       this.loadData();
@@ -363,30 +356,7 @@ export default {
 
     loadDataZXDT(num, item, index) {
       this.loading = true;
-      let params = {};
-      //论坛
-      if (num == 1) {
-        this.searchData.actStatus = item.s;
-        this.searchData.actClassification = "ssb";
-        this.statusLT.forEach((item, i) => {
-          item.check = i == index ? true : false;
-        });
-      } else if (num == 2) {
-        //成果
-        this.searchData.actStatus = item.s;
-        this.searchData.actClassification = "release";
-        this.statusCG.forEach((item, i) => {
-          item.check = i == index ? true : false;
-        });
-      } else if (num == 3) {
-        //路演
-        this.searchData.actStatus = item.s;
-        this.searchData.actClassification = "launch";
-        this.statusLY.forEach((item, i) => {
-          item.check = i == index ? true : false;
-        });
-      }
-      params = num ? this.searchData : params;
+      let params = this.searchData;
       getActivityhome(params)
         .then((res) => {
           if (res.code == "0") {
@@ -482,12 +452,12 @@ export default {
       this.loadData();
     },
   },
-  mounted(){
-    const a = localStorage.getItem('dic-top_10_hg_category')
-    if(a == undefined) {
-      this.$router.push('/')
+  mounted() {
+    const a = localStorage.getItem("dic-top_10_hg_category");
+    if (a == undefined) {
+      location.reload();
     }
-  }
+  },
 };
 </script>
 
@@ -732,7 +702,7 @@ export default {
     background: transparent;
     position: absolute;
     bottom: -100px;
-    z-index: 999;
+    z-index: 50;
     .filter-box-content {
       background: #fff;
       // box-shadow: 0px 20px 46px 20px #d8e0f0;

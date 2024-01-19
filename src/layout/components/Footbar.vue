@@ -9,19 +9,30 @@
               v-for="item in navList"
               :key="item.key"
             >
-            <div class="title">{{ item.name }}</div>
-            <template v-if="item.key < 4">
-              <div class="nav-link" v-for="i in item.children" :key="i.key">
-                <div v-if="!i.url">{{ i.name }}</div>
-                <el-link  v-if="i.url" :underline="false" :href="i.url">{{ i.name }}</el-link>
-              </div>
-            </template>
-            <template v-else>
-              <div class="nav-link-service" v-for="i in item.children" :key="i.key" :style="i.key % 2 == 0? 'width:25%' : 'width:70%'">
-                <div v-if="!i.url">{{ i.name }}</div>
-                <el-link  v-if="i.url" :underline="false" :href="i.url">{{ i.name }}</el-link>
-              </div>
-            </template>
+              <div class="title">{{ item.name }}</div>
+              <template v-if="item.key < 4">
+                <div class="nav-link" v-for="i in item.children" :key="i.key">
+                  <div v-if="!i.url">{{ i.name }}</div>
+                  <el-link v-if="i.url" :underline="false" :href="i.url">{{
+                    i.name
+                  }}</el-link>
+                </div>
+              </template>
+              <template v-else>
+                <div style="width: 60px; overflow: hidden; white-space: wrap;">
+                  <div
+                    class="nav-link-service"
+                    v-for="i in item.children"
+                    :key="i.key"
+                    style="text-align: center;gir"
+                  >
+                    <div style="text-align: center;" v-if="!i.url">{{ i.name }}</div>
+                    <el-link v-if="i.url" :underline="false" :href="i.url">{{
+                      i.name
+                    }}</el-link>
+                  </div>
+                </div>
+              </template>
             </el-col>
           </el-row>
         </div>
@@ -40,7 +51,7 @@
             </div>
           </div>
           <div class="foot_right_connect_wx">
-            <div style="text-align: center;margin-left: 50px;">
+            <div style="text-align: center; margin-left: 50px">
               <img
                 width="35px"
                 height="29px"
@@ -138,7 +149,7 @@ export default {
           name: "企业需求",
           key: 3,
           children: [
-          {
+            {
               name: "发布需求",
               key: 0,
               url: "",
@@ -159,7 +170,7 @@ export default {
           name: "集成服务",
           key: 4,
           children: [
-          {
+            {
               name: "政",
               key: 0,
               url: "/services#zheng",
@@ -228,10 +239,10 @@ export default {
   }
   .foot_bottom {
     margin-top: 20px;
-    &>div{
+    & > div {
       line-height: 32px;
     }
-    .vertical_line{
+    .vertical_line {
       height: 2px;
       background: #ffffff;
       width: 100%;
@@ -277,7 +288,7 @@ export default {
       width: 1px;
       background: #ffffff;
       position: absolute;
-      right: 10%;
+      right: 4%;
       height: 60%;
       top: 10px;
     }

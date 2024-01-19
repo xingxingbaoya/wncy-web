@@ -207,7 +207,7 @@ import lindai from "@/assets/img/projectManage/lindai.png";
 import ziyuan from "@/assets/img/projectManage/ziyuan.png";
 import city from "@/assets/city/city_code.json";
 import { getProjectList } from "@/api/projecthall";
-import { getStatistics } from "@/api/home"
+import { getStatistics } from "@/api/home";
 import common from "@/mixin/common";
 
 export default {
@@ -343,27 +343,25 @@ export default {
     },
     async browser() {
       try {
-        await getStatistics({"pageType":"project"})
+        await getStatistics({ pageType: "project" });
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
-
+    },
   },
- 
+
   mounted() {
-    const a = localStorage.getItem('dic-top_10_hg_category')
-    if(a == undefined) {
-      this.$router.push('/')
+    const a = localStorage.getItem("dic-top_10_hg_category");
+    if (a == undefined) {
+      location.reload();
     }
-    this.browser()
+    this.browser();
     setTimeout(() => {
       const cityoption = document.querySelectorAll("#cityOption");
       const list = Array.from(cityoption).map((item) => item.offsetTop);
       this.firstLineProvince = list.lastIndexOf(list[0]);
       console.log(list, this.firstLineProvince);
     }, 500);
-    
   },
 };
 </script>

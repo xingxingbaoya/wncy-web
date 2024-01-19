@@ -1,5 +1,5 @@
 <template>
-  <el-main v-loading="loading">
+  <el-main>
     <div class="home-main">
       <!-- <img src="~img/home/banner.png" /> -->
       <el-carousel trigger="click" height="100vh" arrow="never">
@@ -649,7 +649,7 @@ export default {
     if (!_.isEmpty(getToken()) && this.$store.getters.isPerfect == "0") {
       this.isPerfectVisible = true;
     }
-    // this.loadData()
+    this.loadData()
   },
   methods: {
     registerUser() {
@@ -661,35 +661,35 @@ export default {
     },
     loadData() {
       this.loading = true;
-      this.$store
-        .dispatch("dict/getDic", [
-          "p_industry_one",
-          "p_nature",
-          "p_tech_type",
-          "p_cooperation",
-          "p_patent_category",
-          "p_development",
-          "t_activity_kind",
-          "u_company_type",
-          "u_institutional_nature",
-          "u_degree",
-          "bbs_manuscript_status",
-          "policy_type",
-          "support_ind",
-          "policy_state",
-          "project_academy",
-          "top_10_hg_category",
-          "zgckjy_241_category",
-          "bj_2441_category",
-          "t_activity_way",
-          "t_activity_status",
-        ])
-        .then(() => {
+      // this.$store
+      //   .dispatch("dict/getDic", [
+      //     "p_industry_one",
+      //     "p_nature",
+      //     "p_tech_type",
+      //     "p_cooperation",
+      //     "p_patent_category",
+      //     "p_development",
+      //     "t_activity_kind",
+      //     "u_company_type",
+      //     "u_institutional_nature",
+      //     "u_degree",
+      //     "bbs_manuscript_status",
+      //     "policy_type",
+      //     "support_ind",
+      //     "policy_state",
+      //     "project_academy",
+      //     "top_10_hg_category",
+      //     "zgckjy_241_category",
+      //     "bj_2441_category",
+      //     "t_activity_way",
+      //     "t_activity_status",
+      //   ])
+        // .then(() => {
           this.loadHome();
-        })
-        .finally(() => {
-          this.loading = false;
-        });
+        // })
+        // .finally(() => {
+        //   this.loading = false;
+        // });
     },
     loadHome() {
       getBanners()

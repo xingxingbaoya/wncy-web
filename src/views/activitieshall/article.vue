@@ -31,7 +31,7 @@
               <div>{{ item.actWay }}</div>
             </div>
             <div class="text-content">
-              <div style="text-wrap: nowrap">活动预告：</div>
+              <div style="text-wrap: nowrap"></div>
               <div v-html="item.actDetail"></div>
             </div>
           </div>
