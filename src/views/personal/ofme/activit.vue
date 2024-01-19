@@ -2,7 +2,7 @@
   <el-main class="m-layout">
     <el-row class="search-area">
       <el-input v-model="actName" placeholder="请输入关键字进行搜索" class="input-search">
-        <el-button slot="append">搜索</el-button>
+        <el-button slot="append" @click="loadData()">搜索</el-button>
       </el-input>
 
       <el-row class="c-bottom">

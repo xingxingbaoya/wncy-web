@@ -343,7 +343,7 @@ export default {
           this.form = _.merge(this.form, _.pick(this.item, _.keys(this.form)));
           this.form.fulladdress = [province, city, area];
           this.imageUrl = this.item.avatar;
-          this.pic_file = this.item.avatar;
+          this.form.pic_file = this.item.avatar;
           this.form.password = "";
         })
         .finally(() => {
@@ -408,6 +408,7 @@ export default {
             .then((res) => {
               if (res.code == "0000") {
                 this.$message.success(res.msg);
+                this.loadData();
                 this.gocenter();
               } else {
                 this.$message.warning(res.msg);

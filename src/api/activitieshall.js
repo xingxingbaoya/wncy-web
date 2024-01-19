@@ -32,11 +32,11 @@ export function getActivityList(params) {
   });
 }
 
-export function getMySingUpInfo(data) {
+export function getMySingUpInfo(params) {
   return request({
     url: "hall/activity/singUpInfo",
     method: "get",
-    data,
+    params,
   });
 }
 
