@@ -189,17 +189,10 @@ export default {
       //   { id: 2, title: "成果发布", key: "release" },
       //   { id: 2, title: "项目路演", key: "launch" },
       // ],
-
-      // activityStatusDict: [
-      //   { id: 0, title: "不限", key: "" },
-      //   { id: 1, title: "已开始", key: "started" },
-      //   { id: 2, title: "未开始", key: "notstart" },
-      //   { id: 3, title: "已结束", key: "end" },
-      // ],
       searchData: {
         keyword: "",
         actName: "",
-        actStatus: "started, notstart",
+        actStatus: "notstart,started",
         actClassification: "",
         startTime: "",
         endTime: "",

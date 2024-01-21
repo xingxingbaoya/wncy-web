@@ -33,24 +33,29 @@
       />
     </el-menu>
     <div class="head-right">
-      <temp v-show="isLogin" class="opera" :class="{ 'home-menu': isHome }">
+      <div v-show="isLogin" class="opera" :class="{ 'home-menu': isHome }">
         <span class="regist-button" @click="goRegister">注册</span>
         <el-button class="login-button" size="mini" round @click="goLogin"
           >登录</el-button
         >
-      </temp>
+      </div>
       <div v-show="!isLogin" class="opera" :class="{ 'home-menu': isHome }">
         <el-dropdown @command="handleCommand">
           <span class="el-dropdown-link">
             <span class="name">{{ username }}</span>
             <img
-              v-if="avatar"
+              v-if="item.avatar"
               style="width: 60px; height: 60px; border-radius: 50%"
-              :src="avatar || ''"
+              :src="item.avatar || ''"
               alt=""
               srcset=""
             />
-          <svg-icon v-else icon-class="avatar" class-name="avatar" style="width: 60px; height: 60px;"/>
+            <svg-icon
+              v-else
+              icon-class="avatar"
+              class-name="avatar"
+              style="width: 60px; height: 60px"
+            />
           </span>
           <el-dropdown-menu slot="dropdown" class="top_c">
             <el-dropdown-item command="gocenter">
@@ -77,11 +82,18 @@ import SidebarItem from "./SidebarItem";
 import variables from "@/styles/variables.scss";
 import common from "@/mixin/common";
 import { getToken } from "@/utils/auth";
+import { mapGetters } from "vuex";
 
 export default {
   components: { SidebarItem, Logo },
   mixins: [common],
+  data() {
+    return {
+      // avatar: "",
+    };
+  },
   computed: {
+    ...mapGetters(["item"]),
     routes() {
       return this.$router.options.routes;
     },
@@ -114,16 +126,11 @@ export default {
     username() {
       return this.$store.getters.name || localStorage.getItem("userName");
     },
-    avatar() {
-      let userinfo = JSON.parse(
-        this.$store.getters.userinfo || localStorage.getItem("userinfo")
-      );
-      return userinfo?.avatar || "";
-    },
     isTransparent() {
       return this.$store.getters.isTransparentHead;
     },
   },
+  watch: {},
   methods: {
     goLogin() {
       this.$router.push({

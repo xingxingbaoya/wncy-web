@@ -68,7 +68,7 @@
               <div class="project-info-theme">项目附件</div>
               <template v-if="form2.attachment.split('/').length">
                 <span>{{ form2.attachment.split('/')[form2.attachment.split('/').length - 1]}}</span>
-                &nbsp;&nbsp;&nbsp;&nbsp;<a style="color: #2434AF;cursor: pointer;" @click="downFile">下载</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;<a v-if="form2.attachment" style="color: #2434AF;cursor: pointer;" @click="downFile">下载</a>
               </template>
               <div class="project-info-theme">联系信息</div>
               <el-row>

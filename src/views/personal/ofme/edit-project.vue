@@ -179,6 +179,7 @@
                         action="#"
                         class="upload-demo"
                         :on-change="fileChange"
+                        :on-remove="fileRemove"
                         :file-list="file_list"
                         :auto-upload="false"
                       >
@@ -418,10 +419,10 @@ export default {
       this.loading = true;
       let params = { ...this.formData };
       if (!this.file_list[0]?.isUrl) {
-        params.attachment_file = this.file_list[0];
+        params.attachment_file = this.file_list[0] || undefined;
       }
       if (!this.pic_file_list[0]?.isUrl) {
-        params.pic_file = this.pic_file_list[0]?.raw || "";
+        params.pic_file = this.pic_file_list[0]?.raw || undefined;
       }
       delete params.createTime
       editProjectDetail(param2Form(params))
@@ -433,7 +434,7 @@ export default {
                 this.$router.push({
                   path: "/personal/center/detail-project",
                   query: {
-                    id,
+                    id: this.$route.query.id,
                   },
                 });
               },
@@ -476,6 +477,7 @@ export default {
       }
     },
     fileChange(file) {
+      debugger
       const isJPG = this.isAllowedFile(file.name);
       const isLt20M = file.size / 1024 / 1024 < 20;
 
@@ -496,6 +498,10 @@ export default {
         this.formData.attachment_file = URL.createObjectURL(file.raw);
       }
     },
+    fileRemove(){
+      this.formData.attachment = ''
+      this.file_list = []
+    }
   },
   mounted() {
     if (!getToken()) {

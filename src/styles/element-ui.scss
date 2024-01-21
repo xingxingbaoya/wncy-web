@@ -57,7 +57,11 @@
 }
 
 .el-main {
-  padding: 0;
+  padding: 0 !important;
+}
+
+.el-menu.el-menu--horizontal{
+  border: none !important;
 }
 
 .el-date-table td.end-date span, .el-date-table td.start-date span {

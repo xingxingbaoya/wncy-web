@@ -16,7 +16,7 @@
 
               <el-col :span="11" :offset="2">
                 <el-form-item label="活动状态" prop="industryOne">
-                  <span>{{ item.actStatus == 'started'?"已开启":"已结束" }}</span>
+                  <span>{{  activeStatus }}</span>
                 </el-form-item>
               </el-col>
 
@@ -77,6 +77,11 @@ export default {
       item: {
 
       }
+    }
+  },
+  computed: {
+    activeStatus(){
+      return this.activityStatusDict.find(p => p.dictValue == this.item.actStatus)?.dictLabel || ''
     }
   },
   methods: {

@@ -2,19 +2,24 @@
   <el-main class="m-layout">
     <el-row class="search-area">
       <el-input v-model="actName" placeholder="请输入关键字进行搜索" class="input-search">
-        <el-button slot="append" @click="loadData()">搜索</el-button>
+        <el-button slot="append" @click="loadData">搜索</el-button>
       </el-input>
 
       <el-row class="c-bottom">
-        <el-col v-for="item in listData" :span="6">
+        <el-col v-for="(item, index) in listData" :key="item.name" :span="6">
           <el-card :body-style="{ padding: '0px' }" class="inner_card" :class="clearMargin(index)" shadow="hover" @click.native="godetail(item)">
             <img v-real-img="item.actCover" :src="`${imgUrl}/activity1.jpg`" class="image">
             <el-tag effect="plain" type="info" size="small" class="status">
-              {{ item.actStatus == 'started'?"已开始":"已结束" }}
+              {{ activityStatusDict.find(p => p.dictValue == item.actStatus).dictLabel  }}
             </el-tag>
             <div style="padding: 13px 13px 0 13px;">
               <span class="inner-title">{{ item.actName }}</span>
-              <p class="inner-desc">活动状态: {{ item.actStatus == 'started'?"已开启":"已结束" }}</p>
+              <template v-if="activityStatusDict.find(p => p.dictValue == item.actStatus)">
+                <p class="inner-desc">活动状态: {{ activityStatusDict.find(p => p.dictValue == item.actStatus).dictLabel  }}</p>
+              </template>
+              <template v-else>
+                <p class="inner-desc">活动状态: {{ '' }}</p>
+              </template>
               <p class="inner-desc">{{ item.actIntroduction }}</p>
             </div>
           </el-card>
@@ -49,10 +54,12 @@ export default {
   mixins: [common],
   data() {
     return {
-
       actName: '',
-      listData: []
+      listData: [],
     }
+  },
+  mounted(){
+    console.log('activityStatusDict', this.activityStatusDict);
   },
   methods: {
     loadData() {
@@ -63,6 +70,7 @@ export default {
       getMySingUpInfo({ ...formpage, actName: this.actName }).then(res => {
         if (res.code == '0000') {
           this.listData = res.rows
+          debugger
           this.$set(this.pager, 'total', res.total)
         } else {
           this.$message.error(res.msg)
@@ -89,26 +97,28 @@ export default {
 <style scoped lang="scss">
 .search-area {
   margin-bottom: 30px;
+  padding: 10px;
 }
 .m-layout {
   padding: 18px;
 }
 .input-search {
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   ::v-deep .el-input__inner {
-    height: 56px;
-    font-size: 18px;
-    border-color: #516FD2;
+    height: 40px;
+    font-size: 14px;
+    border-color: #516fd2;
     border-width: 2px;
     border-right: none;
   }
 
-  ::v-deep .el-button{
+  ::v-deep .el-button {
     width: 143px;
-    height: 56px;
-    background: #516FD2;
-    font-size: 18px;
-    color: #FFFFFF;
+    height: 40px;
+    background: #516fd2;
+    font-size: 14px;
+    color: #ffffff;
+    border-radius: 0 4px 4px 0;
   }
 }
 

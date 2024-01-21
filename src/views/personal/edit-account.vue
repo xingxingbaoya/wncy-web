@@ -339,9 +339,7 @@ export default {
         .dispatch("user/getInfo")
         .then((res) => {
           this.item = res;
-          const { province, city, area } = res;
           this.form = _.merge(this.form, _.pick(this.item, _.keys(this.form)));
-          this.form.fulladdress = [province, city, area];
           this.imageUrl = this.item.avatar;
           this.form.pic_file = this.item.avatar;
           this.form.password = "";
