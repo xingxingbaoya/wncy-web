@@ -1,12 +1,17 @@
 <template>
   <el-main v-loading="loading">
     <div class="banner-main">
-      <img src="~img/introduce/banner.png" />
+      <img src="~img/introduce/banner.jpg" />
     </div>
     <div class="main-content">
       <div class="main-nav">
         <div class="nav-left">
-          <div :class="active == index ? 'nav-left-item active' : 'nav-left-item'" v-for="(item, index) in navList" :key="index" @click="changeTab(index)">
+          <div
+            :class="active == index ? 'nav-left-item active' : 'nav-left-item'"
+            v-for="(item, index) in navList"
+            :key="index"
+            @click="changeTab(index)"
+          >
             <span>{{ item.title || "--" }}</span>
           </div>
         </div>
@@ -31,7 +36,11 @@
           </div>
           <div class="nav-content-float" v-if="active < 3">
             <div
-              :class="itemIndex == index + 1 ? 'nav-content-item line-color item-active' : 'nav-content-item line-color'"
+              :class="
+                itemIndex == index + 1
+                  ? 'nav-content-item line-color item-active'
+                  : 'nav-content-item line-color'
+              "
               v-for="(item, index) in navList[active].itemList"
               :key="index"
               @click="changeItem(index)"
@@ -39,23 +48,39 @@
               <div class="item-content" v-if="itemIndex != index + 1">
                 <div class="item-bg-title">{{ item.typename || "" }}</div>
                 <div class="item-title">{{ item.title || "" }}</div>
-                <div class="item-subtitle" v-if="active == 0 && index < 4">{{ item.desc || "" }}</div>
-                <div class="item-subtitle" v-else>支持产业方向：{{ item.desc || "" }}</div>
+                <div class="item-subtitle" v-if="active == 0 && index < 4">
+                  {{ item.desc || "" }}
+                </div>
+                <div class="item-subtitle" v-else>
+                  支持产业方向：{{ item.desc || "" }}
+                </div>
               </div>
               <div class="item-content-hover" v-if="itemIndex == index + 1">
                 <div class="item-bg-title">{{ item.typename || "" }}</div>
                 <!-- <div class="item-hover-time">{{ item.yuntime || "" }}</div> -->
                 <div class="item-hover-title">{{ item.title || "" }}</div>
-                <div class="item-hover-subtitle">大科学装置：{{ item.daxue || "" }}</div>
-                <div class="item-hover-subtitle">交叉研究平台：{{ item.pingtai || "" }}</div>
-                <div class="item-hover-subtitle">科教基础设施：{{ item.kejiao || "" }}</div>
-                <div class="item-hover-subtitle">科教基础设施运行时间：{{ item.yuntime || "" }}</div>
+                <div class="item-hover-subtitle">
+                  大科学装置：{{ item.daxue || "" }}
+                </div>
+                <div class="item-hover-subtitle">
+                  交叉研究平台：{{ item.pingtai || "" }}
+                </div>
+                <div class="item-hover-subtitle">
+                  科教基础设施：{{ item.kejiao || "" }}
+                </div>
+                <div class="item-hover-subtitle">
+                  科教基础设施运行时间：{{ item.yuntime || "" }}
+                </div>
               </div>
             </div>
           </div>
           <div class="nav-content-full" v-if="active > 2">
             <div
-              :class="itemIndex != index + 1 ? 'nav-content-item nav-content-item-full line-color' : 'nav-content-item nav-content-item-full line-color item-active'"
+              :class="
+                itemIndex != index + 1
+                  ? 'nav-content-item nav-content-item-full line-color'
+                  : 'nav-content-item nav-content-item-full line-color item-active'
+              "
               v-for="(item, index) in navList[active].itemList"
               :key="index"
               @click="changeItem(index)"
@@ -71,6 +96,23 @@
                 <div class="item-hover-subtitle">{{ item.desc || "" }}</div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align: center">
+      <div class="home-workmode">
+        <div class="home-workmode-left">
+          <div class="theme-box">
+            <span>中关村微纳公司简介</span>
+            <b></b>
+          </div>
+          <div class="content">
+            中关村微纳，怀柔区政府和中关村发展集团组建合作的区市共建科创集成服务平台，是中发展在怀柔提供其“科服、投资、金融、园区、区域协同、国际链接”服务的总接口，作为怀柔科学城创新联合体牵头单位，从服务在怀30多家国家战略科技力量产研两侧技术供需对接微观需求入手，以密集产研对接吸纳贯通目标产业内“政产学研金服用”各级资源，做好科学家“经纪人”、企业家“经理人”、政府科创服务“合伙人”，通过“两库、两平台、一集成服务”，打造具备“服务+投资+园区”核心功能的区市共建科创服务平台。
+          </div>
+          <img src="~img/home/work-mode.png" />
+          <div style="text-align: center; line-height: 70px">
+            中关村微纳公司服务工作模式
           </div>
         </div>
       </div>
@@ -145,7 +187,8 @@ export default {
               title: "中国科学院国家空间科学中心",
               desc: "空间探索、太空安全、航天与航空",
               daxue: "空间环境地基综合监测网（子午工程二期",
-              pingtai: "空间科学卫星系列及有效载荷研制测试保障平台、国际子午圈大科学计划总部",
+              pingtai:
+                "空间科学卫星系列及有效载荷研制测试保障平台、国际子午圈大科学计划总部",
               kejiao: "",
               yuntime: "2014年6月",
             },
@@ -213,7 +256,8 @@ export default {
               title: "中国科学院高能物理研究所",
               desc: "生命健康、新材料、高端装备",
               daxue: "高能同步辐射光源",
-              pingtai: "高能同步辐射光源配套综合实验楼和用户服务楼、先进光源技术研发与测试平台",
+              pingtai:
+                "高能同步辐射光源配套综合实验楼和用户服务楼、先进光源技术研发与测试平台",
               kejiao: "",
               yuntime: "2025年",
             },
@@ -250,7 +294,8 @@ export default {
               desc: "人工智能",
               daxue: "",
               pingtai: "",
-              kejiao: "脑认知功能图谱与类脑智能交叉研究平台（与生物物理研究所共建）",
+              kejiao:
+                "脑认知功能图谱与类脑智能交叉研究平台（与生物物理研究所共建）",
               yuntime: "2023年12月",
             },
             {
@@ -268,7 +313,8 @@ export default {
               desc: "高端装备、高端仪器",
               daxue: "",
               pingtai: "",
-              kejiao: "大科学装置用高功率高可靠速调管研制平台、太赫兹科学技术中心平台",
+              kejiao:
+                "大科学装置用高功率高可靠速调管研制平台、太赫兹科学技术中心平台",
               yuntime: "2023年3月",
             },
             {
@@ -312,7 +358,8 @@ export default {
               title: "北京大学科研平台",
               desc: "新材料、生命健康、高端仪器",
               daxue: "同13",
-              pingtai: "轻元素量子材料交叉平台、北京激光加速创新中心、分子影像与医学诊疗探针创新平台",
+              pingtai:
+                "轻元素量子材料交叉平台、北京激光加速创新中心、分子影像与医学诊疗探针创新平台",
               kejiao: "",
               yuntime: "2022年10月",
             },
@@ -558,6 +605,45 @@ export default {
 <style scoped lang="scss">
 @function pxToVW($px) {
   @return ($px/1920) * 100vw;
+}
+.theme-box {
+  width: 100%;
+  text-align: center;
+  font-size: 34px;
+  font-weight: bold;
+  color: #18181c;
+  margin-bottom: 48px;
+  span {
+    display: block;
+  }
+  b {
+    display: inline-block;
+    width: pxToVW(74);
+    height: 2px;
+    background: #2434af;
+  }
+  .hasBakpic {
+    background: #fff;
+  }
+}
+.home-workmode {
+  padding: 112px pxToVW(338) 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .content {
+    font-size: 16px;
+    margin-bottom: 50px;
+    font-weight: 400;
+    color: #494949;
+    line-height: 42px;
+    text-align: justify;
+    text-indent: 32px;
+  }
+  &-left {
+    text-align: center;
+  }
 }
 
 .banner-main {

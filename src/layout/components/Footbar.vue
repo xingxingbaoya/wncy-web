@@ -68,10 +68,10 @@
       </div>
       <div class="foot_bottom">
         <div>官方运营机构</div>
-        <div>北京市怀柔区北房镇幸福西街3号</div>
+        <div>北京中关村微纳能源投资有限公司</div>
         <div class="vertical_line"></div>
         <div>
-          Copyright c 2018-2021 weina.com 北京中关村微纳能源投资有限公司 京ICP备
+          Copyright c 2018-2021 北京市怀柔区北房镇幸福西街3号 weina.com  京ICP备
           15018214号
         </div>
       </div>
@@ -262,7 +262,7 @@ export default {
     flex: 3.5;
     position: relative;
     .nav-link {
-      font-size: 16px;
+      font-size: 14px;
       font-family: Source Han Sans CN;
       font-weight: 400;
       color: #ffffff;

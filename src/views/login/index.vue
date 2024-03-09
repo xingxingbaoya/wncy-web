@@ -48,8 +48,7 @@
                 </el-col>
 
                 <el-col :span="24" class="clause">
-                  <el-form-item />
-                  <el-form-item />
+                  <el-form-item class="clause"> </el-form-item>
                 </el-col>
               </el-row>
               <el-row>

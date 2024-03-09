@@ -89,8 +89,14 @@
                 <el-checkbox v-model="isAgreed"
                   >我已阅读同意<span
                     class="clause-text"
+                    style="color: blue"
                     @click="dialogVisible = true"
-                    >《相关服务条款》</span
+                    >《使用须知》</span
+                  >和<span
+                    class="clause-text"
+                    style="color: blue"
+                    @click="dialogVisible1 = true"
+                    >《用户协议》</span
                   ></el-checkbox
                 >
               </el-form-item>
@@ -115,15 +121,22 @@
     <el-dialog
       :visible.sync="dialogVisible"
       custom-class="dialog-layout"
+      title="用户须知"
       top="10vh"
     >
-      <iframe
-        v-if="dialogVisible"
-        :src="url"
-        frameborder="0"
-        scrolling="no"
-        class="iframe-layout"
-      />
+      <div style="overflow-y: auto; height: 100%">
+        <notice />
+      </div>
+    </el-dialog>
+    <el-dialog
+      :visible.sync="dialogVisible1"
+      custom-class="dialog-layout"
+      title="用户协议"
+      top="10vh"
+    >
+      <div style="overflow-y: auto; height: 100%; max-height: 600px;">
+        <agreement />
+      </div>
     </el-dialog>
   </el-main>
 </template>
@@ -134,10 +147,13 @@ import { sendValidateCode } from "@/api/register";
 import common from "@/mixin/common";
 import { validatePassword, validateUsername } from "@/utils";
 import { generateCaptcha } from "@/api/user";
+import agreement from "./user-agreement.vue";
+import notice from "./user-notice.vue";
 
 export default {
   name: "Register",
   mixins: [common],
+  components: { agreement, notice },
   data() {
     return {
       loginForm1: {
@@ -219,6 +235,7 @@ export default {
         children: "city",
       },
       dialogVisible: false,
+      dialogVisible1: false,
     };
   },
   computed: {

@@ -64,9 +64,9 @@ export const constantRoutes = [
     children: [
       {
         path: "",
+        title: "首页",
         name: "Home",
         component: () => import("@/views/home/index"),
-        hidden: true,
         meta: {
           title: "首页",
           activeMenu: "/",
@@ -214,7 +214,7 @@ export const constantRoutes = [
         name: "Activitieshall",
         component: () => import("@/views/activitieshall/index"),
         meta: {
-          title: "产研对接",
+          title: "产研活动",
           activeMenu: "/activitieshall",
           roles: [
             "guest",

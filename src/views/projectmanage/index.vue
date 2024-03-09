@@ -243,7 +243,7 @@ export default {
         },
         {
           title: "专业服务",
-          detail: "政产学研金服用”全方位专业服务支持",
+          detail: "“政产学研金服用”全方位专业服务支持",
           icons: lindai,
         },
         {

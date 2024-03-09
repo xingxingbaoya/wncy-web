@@ -8,11 +8,7 @@
       </el-carousel-item>
       </el-carousel>
     </div>
-    <div class="home-companyintro" id="companyintro">
-      <!-- <div class="theme-box">
-        <span>平台介绍</span>
-        <b></b>
-      </div> -->
+    <!-- <div class="home-companyintro" id="companyintro">
       <div class="home-companyintro-content">
         <div class="home-companyintro-content-nav">
           <div
@@ -34,17 +30,17 @@
             :src="companyintroList[activeIntro].imgUrl"
             style="width: 100%; object-fit: contain"
           />
-          <!-- <div class="home-companyintro-content-pic-intro">
+          <div class="home-companyintro-content-pic-intro">
             <div>{{ companyintroList[activeIntro].introInfo }}</div>
             <div>{{ companyintroList[activeIntro].detail }}</div>
-          </div> -->
+          </div>
         </div>
       </div>
       <div class="home-companyintro-detail">
         {{ companyintroList[activeIntro].introInfo }}
       </div>
-    </div>
-    <div class="home-workmode">
+    </div> -->
+    <!-- <div class="home-workmode">
       <div class="home-workmode-left">
         <div class="theme-box">
           <span>中关村微纳公司简介</span>
@@ -58,7 +54,7 @@
           中关村微纳公司服务工作模式
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- <div class="home-platformservices" id="platformservices">
       <div class="theme-box">
         <span>平台服务</span>
@@ -127,12 +123,12 @@
       </div>
     </div> -->
 
-    <div class="home-freeregister">
+    <!-- <div class="home-freeregister">
       <div>ZGCNANO&nbsp;见微知著—立足怀柔科学城的产研对接居间集成服务平台</div>
       <template v-if="isLogin">
         <el-button round @click="registerUser">免费注册</el-button>
       </template>
-    </div>
+    </div> -->
   </el-main>
 </template>
 
