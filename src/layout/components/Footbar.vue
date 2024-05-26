@@ -70,9 +70,8 @@
         <div>官方运营机构</div>
         <div>北京中关村微纳能源投资有限公司</div>
         <div class="vertical_line"></div>
-        <div>
-          Copyright c 2018-2021 北京市怀柔区北房镇幸福西街3号 weina.com  京ICP备
-          15018214号
+        <div style="display: flex; align-items: center;">
+          Copyright © 2018-2021 北京市怀柔区北房镇幸福西街3号 zgcnano.com  <img width="16px" style="margin-left: 10px;" src="../../assets/img/guohui.png" />京ICP备2024047584号
         </div>
       </div>
     </div>
